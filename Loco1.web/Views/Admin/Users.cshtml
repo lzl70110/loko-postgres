@@ -1,0 +1,51 @@
+﻿@model List<Loco1.ViewModels.UserWithRolesVm>
+@using Loco1.Web.Resources;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
+ 
+@{
+    ViewData["Title"] = L["Users"];
+    }
+
+<h2>@L["Users"]</h2>
+
+@if (TempData["StatusMessage"] != null)
+    {
+    <div class="alert alert-success">@TempData["StatusMessage"]</div>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th>@L["Email"]</th>
+            <th>@L["Roles"]</th>
+            <th style="width: 160px;"></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var u in Model)
+            {
+                <tr>
+                <td>@u.Email</td>
+                    <td>
+                    @if (u.Roles?.Any() == true)
+                        {
+                        @string.Join(", ", u.Roles.Select(r => L[r]))
+                        }
+                    else
+                        {
+                        <span class="text-muted">@L["No roles"]</span>
+                        }
+                    </td>
+                    <td>
+                    <!-- English: navigate to EditRoles for this user -->
+                        <a asp-controller="Admin"
+                           asp-action="EditRoles"
+                           asp-route-id="@u.Id"
+                           class="btn btn-primary btn-sm">
+                        @L["Edit roles"]
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

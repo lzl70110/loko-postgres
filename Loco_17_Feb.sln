@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		node.json = node.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.ViewModels", "Loco1.ViewModels\Loco1.ViewModels.csproj", "{585D8C84-1497-4866-A1EF-B4B76D25BB40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{2A8226EF-AB89-4C73-9999-3586EC366878}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A8226EF-AB89-4C73-9999-3586EC366878}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A8226EF-AB89-4C73-9999-3586EC366878}.Release|Any CPU.Build.0 = Release|Any CPU
+		{585D8C84-1497-4866-A1EF-B4B76D25BB40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{585D8C84-1497-4866-A1EF-B4B76D25BB40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{585D8C84-1497-4866-A1EF-B4B76D25BB40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{585D8C84-1497-4866-A1EF-B4B76D25BB40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,26 +1,15 @@
 ﻿@using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Http.Extensions
-@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
 
 @{
-    // Get current culture
-    var currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+    var feature = Context.Features.Get<IRequestCultureFeature>();
+    var current = feature?.RequestCulture.Culture?.Name ?? "bg-BG";
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
 
-    // Build return URL for language switching
-    var returnUrl = Context.Request.GetEncodedPathAndQuery();
+    string active(string c) => string.Equals(current, c, StringComparison.OrdinalIgnoreCase) ? "fw-bold" : "";
     }
-
-<div class="text-end">
-    <!-- Simple language switch links -->
-    <a href="/Language/SetCulture?culture=bg-BG&returnUrl=@returnUrl"
-       class="@(currentCulture == "bg-BG" ? "fw-bold" : "")">
-        BG
-    </a>
-    |
-    <a href="/Language/SetCulture?culture=en-US&returnUrl=@returnUrl"
-       class="@(currentCulture == "en-US" ? "fw-bold" : "")">
-        EN
-    </a>
-</div>
-
-<!-- Comment: Minimal language switcher for SharedResource-only mode -->
+    <div class="d-flex align-items-center gap-2">
+    <a class="nav-link p-0 @active("bg-BG")" asp-controller="Language" asp-action="SetLanguage" asp-route-culture="bg-BG" asp-route-returnUrl="@returnUrl">BG</a>
+    <span class="text-muted">|</span>
+    <a class="nav-link p-0 @active("en-US")" asp-controller="Language" asp-action="SetLanguage" asp-route-culture="en-US" asp-route-returnUrl="@returnUrl">EN</a>
+    </div>

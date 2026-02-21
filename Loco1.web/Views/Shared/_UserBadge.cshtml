@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@inject UserManager<IdentityUser> UserManager
+
+@functions {
+    public async Task<string> ResolveRoleAsync(ClaimsPrincipal user)
+        {
+        var u = await UserManager.GetUserAsync(user);
+        if (u is null) return string.Empty;
+        var roles = await UserManager.GetRolesAsync(u);
+        if (roles.Contains("Owner")) return "owner";
+        if (roles.Contains("Admin")) return "admin";
+        if (roles.Contains("User")) return "user";
+        return "user";
+        }
+    public async Task<string> ResolveEmailAsync(ClaimsPrincipal user)
+        {
+        var u = await UserManager.GetUserAsync(user);
+        return u?.Email ?? u?.UserName ?? "";
+        }
+    }
+    @{
+    var role = await ResolveRoleAsync(User);
+    var email = await ResolveEmailAsync(User);
+    }
+<span class="navbar-text">@role&nbsp;—&nbsp;@email</span>

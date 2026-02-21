@@ -10,7 +10,7 @@ namespace Loco1.Data.Models
     // Work/shift record for a locomotive (no fuel here; fuel is separate for reporting)
     public class ShiftWork : AuditEntity
         {
-        public int Id { get; set; }
+     
 
         // FK to Locomotive
         [Required]

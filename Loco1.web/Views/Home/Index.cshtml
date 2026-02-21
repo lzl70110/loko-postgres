@@ -1,8 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Loco1.Web.Resources
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{
+    ViewData["Title"] = L["Home"];
+    }
+
+    <div class="p-4 p-md-5 mb-4 bg-light rounded-3">
+        <div class="container py-4">
+        <h1 class="display-4">@L["Welcome"]</h1>
+            <p class="lead mb-0">
+            @L["Learn about building Web apps with ASP.NET Core"]
+            </p>
+        </div>
+    </div>

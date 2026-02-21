@@ -1,8 +1,12 @@
 ﻿using Loco1.Data;
+using Loco1.Service.Abstractions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Globalization;
+using Loco1.Service;
+
+
 
 namespace Loco1.Web
     {
@@ -31,6 +35,8 @@ namespace Loco1.Web
                 .AddControllersWithViews()
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
+
+            builder.Services.AddScoped<IUserRoleService, UserRoleService>(); // Admin role management service
 
             // Razor Pages support (required for Identity UI)
             builder.Services.AddRazorPages();
