@@ -1,0 +1,296 @@
+# SUMMARY
+- Root: C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\Loco1.web\
+- ScanTimeUtc: 2026-02-18T19:05:54.2704842Z
+- OS: Win32NT 10.0.26100.0 (Microsoft Windows 10.0.26100)
+- .NET SDKs (from dotnet --info): 8.0.124; 9.0.311; 10.0.103
+- Solution files: 0
+- Projects: 1
+- Total files: 110 | Total size: 7,84 MB
+- Code lines: .css=43 113; .js=31 315; .cs=1 023; .cshtml=456; .txt=340; .resx=303; .json=75; .csproj=30; .map=23; .md=22; (noext)=22; .user=18; .ico=1
+
+# SOLUTIONS
+(none)
+
+# PROJECTS (.csproj)
+- ..\Loco1.Web.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 8.0.23
+    - Microsoft.AspNetCore.Identity.EntityFrameworkCore 8.0.23
+    - Microsoft.AspNetCore.Identity.UI 8.0.23
+    - Microsoft.EntityFrameworkCore.Sqlite 8.0.23
+    - Microsoft.EntityFrameworkCore.SqlServer 8.0.23
+    - Microsoft.EntityFrameworkCore.Tools 8.0.23
+    - Microsoft.VisualStudio.Web.CodeGeneration.Design 8.0.23
+  - ProjectReferences:
+    - ..\GCommon\GCommon.csproj
+    - ..\Loco1.Data\Loco1.Data.csproj
+
+# DIRECTORY TREE (clean)
+C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\Loco1.web\
+├── appsettings.Development.json
+├── appsettings.json
+├── Loco1.Web.csproj
+├── Loco1.Web.csproj.user
+├── Program.cs
+├── tree_report.txt
+├── Areas
+│   ├── Admin
+│   └── Identity
+│       ├── Data
+│       └── Pages
+│           ├── _ValidationScriptsPartial.cshtml
+│           ├── _ViewImports.cshtml
+│           ├── _ViewStart.cshtml
+│           └── Account
+│               ├── AccessDenied.cshtml
+│               ├── AccessDenied.cshtml.cs
+│               ├── Lockout.cshtml
+│               ├── Lockout.cshtml.cs
+│               ├── Login.cshtml
+│               ├── Login.cshtml.cs
+│               ├── Logout.cshtml
+│               ├── Logout.cshtml.cs
+│               ├── Register.cshtml
+│               ├── Register.cshtml.cs
+│               ├── RegisterConfirmation.cshtml
+│               ├── RegisterConfirmation.cshtml.cs
+│               ├── _ViewImports.cshtml
+│               └── Manage
+│                   ├── ChangePassword.cshtml
+│                   ├── ChangePassword.cshtml.cs
+│                   ├── Index.cshtml
+│                   ├── Index.cshtml.cs
+│                   ├── ManageNavPages.cs
+│                   ├── PersonalData.cshtml
+│                   ├── PersonalData.cshtml.cs
+│                   ├── _ManageNav.cshtml
+│                   └── _ViewImports.cshtml
+├── Controllers
+│   └── HomeController.cs
+├── Models
+│   └── ErrorViewModel.cs
+├── Properties
+│   ├── launchSettings.json
+│   ├── serviceDependencies.json
+│   ├── serviceDependencies.local.json
+│   └── serviceDependencies.local.json.user
+├── Resources
+│   ├── SharedResource.bg-BG.resx
+│   ├── SharedResource.cs
+│   ├── SharedResource.en-US.resx
+│   └── SharedResource.resx
+├── Views
+│   ├── _ViewImports.cshtml
+│   ├── _ViewStart.cshtml
+│   ├── Home
+│   │   ├── Index.cshtml
+│   │   └── Privacy.cshtml
+│   └── Shared
+│       ├── Error.cshtml
+│       ├── _Layout.cshtml
+│       ├── _Layout.cshtml.css
+│       ├── _LoginPartial.cshtml
+│       └── _ValidationScriptsPartial.cshtml
+└── wwwroot
+    ├── favicon.ico
+    ├── css
+    │   └── site.css
+    ├── js
+    │   └── site.js
+    └── lib
+        ├── bootstrap
+        │   ├── LICENSE
+        │   └── dist
+        │       ├── css
+        │       │   ├── bootstrap-grid.css
+        │       │   ├── bootstrap-grid.css.map
+        │       │   ├── bootstrap-grid.min.css
+        │       │   ├── bootstrap-grid.min.css.map
+        │       │   ├── bootstrap-grid.rtl.css
+        │       │   ├── bootstrap-grid.rtl.css.map
+        │       │   ├── bootstrap-grid.rtl.min.css
+        │       │   ├── bootstrap-grid.rtl.min.css.map
+        │       │   ├── bootstrap-reboot.css
+        │       │   ├── bootstrap-reboot.css.map
+        │       │   ├── bootstrap-reboot.min.css
+        │       │   ├── bootstrap-reboot.min.css.map
+        │       │   ├── bootstrap-reboot.rtl.css
+        │       │   ├── bootstrap-reboot.rtl.css.map
+        │       │   ├── bootstrap-reboot.rtl.min.css
+        │       │   ├── bootstrap-reboot.rtl.min.css.map
+        │       │   ├── bootstrap-utilities.css
+        │       │   ├── bootstrap-utilities.css.map
+        │       │   ├── bootstrap-utilities.min.css
+        │       │   ├── bootstrap-utilities.min.css.map
+        │       │   ├── bootstrap-utilities.rtl.css
+        │       │   ├── bootstrap-utilities.rtl.css.map
+        │       │   ├── bootstrap-utilities.rtl.min.css
+        │       │   ├── bootstrap-utilities.rtl.min.css.map
+        │       │   ├── bootstrap.css
+        │       │   ├── bootstrap.css.map
+        │       │   ├── bootstrap.min.css
+        │       │   ├── bootstrap.min.css.map
+        │       │   ├── bootstrap.rtl.css
+        │       │   ├── bootstrap.rtl.css.map
+        │       │   ├── bootstrap.rtl.min.css
+        │       │   └── bootstrap.rtl.min.css.map
+        │       └── js
+        │           ├── bootstrap.bundle.js
+        │           ├── bootstrap.bundle.js.map
+        │           ├── bootstrap.bundle.min.js
+        │           ├── bootstrap.bundle.min.js.map
+        │           ├── bootstrap.esm.js
+        │           ├── bootstrap.esm.js.map
+        │           ├── bootstrap.esm.min.js
+        │           ├── bootstrap.esm.min.js.map
+        │           ├── bootstrap.js
+        │           ├── bootstrap.js.map
+        │           ├── bootstrap.min.js
+        │           └── bootstrap.min.js.map
+        ├── jquery
+        │   ├── LICENSE.txt
+        │   └── dist
+        │       ├── jquery.js
+        │       ├── jquery.min.js
+        │       └── jquery.min.map
+        ├── jquery-validation
+        │   ├── LICENSE.md
+        │   └── dist
+        │       ├── additional-methods.js
+        │       ├── additional-methods.min.js
+        │       ├── jquery.validate.js
+        │       └── jquery.validate.min.js
+        └── jquery-validation-unobtrusive
+            ├── jquery.validate.unobtrusive.js
+            ├── jquery.validate.unobtrusive.min.js
+            └── LICENSE.txt
+
+# IMPORTANT FILES (first lines)
+- ..\Program.cs (first 80 lines)
+using Loco1.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+using Microsoft.Extensions.Options;
+using System.Globalization;
+
+namespace Loco1.web
+    {
+    public class Program
+        {
+        public static void Main(string[] args)
+            {
+            var builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container.
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            builder.Services.AddDbContext<LocoDbContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+            // Localization services
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+            builder.Services
+                .AddControllersWithViews()
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization();
+            // End of localization services
+
+            // Identity services
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<LocoDbContext>();
+            builder.Services.AddControllersWithViews();
+
+            CultureInfo[] supportedCultures = new[]
+                {
+                    new CultureInfo("bg-BG"),
+                    new CultureInfo("en-US")
+                };
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new("bg-BG");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+            //End of localization services
+
+            //
+            var app = builder.Build();
+
+            // Localization middleware Loading the localization options from the DI container
+            var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+                {
+                app.UseMigrationsEndPoint();
+                }
+            else
+                {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+                }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.MapRazorPages();
+
+
+- AppDbContext.cs: (not found)
+- LocoDbContext.cs: (not found)
+- ..\appsettings.json (full content)
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=.;Database=Loco1 ;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=false",
+    "LocoDbContextConnection": "Server=(localdb)\\mssqllocaldb;Database=Loco1.Web;Trusted_Connection=True;MultipleActiveResultSets=true"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+
+# MIGRATIONS
+(none)
+
+# LOCALIZATION
+- SharedResource.resx: found
+- SharedResource.bg-BG.resx: found
+- SharedResource.en-US.resx: found
+- Program.cs: AddLocalization() present: yes
+
+# EXCLUSIONS
+- Excluded folders/files: bin, obj, .git, node_modules
+
+# RAW METRICS
+- .css=43 113 lines
+- .js=31 315 lines
+- .cs=1 023 lines
+- .cshtml=456 lines
+- .txt=340 lines
+- .resx=303 lines
+- .json=75 lines
+- .csproj=30 lines
+- .map=23 lines
+- .md=22 lines
+- (noext)=22 lines
+- .user=18 lines
+- .ico=1 lines
+

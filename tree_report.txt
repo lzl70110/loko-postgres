@@ -1,0 +1,504 @@
+# SUMMARY
+- Root: C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
+- ScanTimeUtc: 2026-02-21T06:21:57.3562347Z
+- OS: Win32NT 10.0.26100.0 (Microsoft Windows 10.0.26100)
+- .NET SDKs (from dotnet --info): 8.0.124; 9.0.311; 10.0.103
+- Solution files: 1
+- Projects: 6
+- Total files: 171 | Total size: 16,15 MB
+- Code lines: .css=43 113; .js=31 315; .db=22 825; .cs=3 311; .txt=1 352; (noext)=1 102; .config=974; .v2=797; .cshtml=483; .json=446; .resx=303; .csproj=110; .suo=104; .ps1=74; .sln=53; .bat=26; .map=23; .user=22; .md=22; .ico=1; .vsidx=0; .db-shm=0; .db-wal=0
+
+# SOLUTIONS
+- ..\Loco_17_Feb.sln
+  - Projects in .sln:
+    - Loco1.web\Loco1.Web.csproj
+    - Data
+    - Loco1.Data\Loco1.Data.csproj
+    - GCommon\GCommon.csproj
+    - Loco1.Service\Loco1.Service.csproj
+    - Solution Items
+
+# PROJECTS (.csproj)
+- ..\GCommon\GCommon.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - Npgsql 10.0.1
+    - Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite 10.0.0
+  - ProjectReferences:
+    - (none)
+
+- ..\Loco1.Data.Models\Loco1.Data.Models.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - (none)
+  - ProjectReferences:
+    - ..\GCommon\GCommon.csproj
+
+- ..\Loco1.Data\Loco1.Data.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - Microsoft.AspNetCore.Identity.EntityFrameworkCore 8.0.23
+    - Microsoft.EntityFrameworkCore 8.0.23
+    - Microsoft.EntityFrameworkCore.SqlServer 8.0.23
+    - Microsoft.EntityFrameworkCore.SqlServer.Abstractions 8.0.23
+    - Npgsql 10.0.1
+    - Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite 10.0.0
+  - ProjectReferences:
+    - ..\GCommon\GCommon.csproj
+
+- ..\Loco1.Service\Loco1.Service.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - Npgsql 10.0.1
+    - Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite 10.0.0
+  - ProjectReferences:
+    - ..\GCommon\GCommon.csproj
+    - ..\Loco1.Data\Loco1.Data.csproj
+
+- ..\Loco1.Services\Loco1.Services.csproj
+  - TargetFramework: net8.0
+  - OutputType: Exe
+  - PackageReferences:
+    - (none)
+  - ProjectReferences:
+    - (none)
+
+- ..\Loco1.web\Loco1.Web.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 8.0.23
+    - Microsoft.AspNetCore.Identity.EntityFrameworkCore 8.0.23
+    - Microsoft.AspNetCore.Identity.UI 8.0.23
+    - Microsoft.EntityFrameworkCore.Sqlite 8.0.23
+    - Microsoft.EntityFrameworkCore.SqlServer 8.0.23
+    - Microsoft.EntityFrameworkCore.Tools 8.0.23
+    - Microsoft.VisualStudio.Web.CodeGeneration.Design 8.0.23
+    - Npgsql 10.0.1
+    - Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite 10.0.0
+  - ProjectReferences:
+    - ..\GCommon\GCommon.csproj
+    - ..\Loco1.Data\Loco1.Data.csproj
+
+# DIRECTORY TREE (clean)
+C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
+├── Loco_17_Feb.sln
+├── node.json
+├── nodes.json.txt
+├── Pack-Loco.ps1
+├── PackLoco.Bat
+├── solution_tree.txt
+├── tree_report.txt
+├── .vs
+│   ├── Loco_17_Feb
+│   │   ├── config
+│   │   │   └── applicationhost.config
+│   │   ├── copilot-chat
+│   │   │   └── 0f52aac3
+│   │   │       └── sessions
+│   │   │           └── e416c8f7-0efa-4bd5-a178-577ac2383f5d
+│   │   ├── CopilotIndices
+│   │   │   ├── 17.14.1584.41681
+│   │   │   │   ├── CodeChunks.db
+│   │   │   │   └── SemanticSymbols.db
+│   │   │   ├── 17.14.1593.33849
+│   │   │   │   ├── CodeChunks.db
+│   │   │   │   └── SemanticSymbols.db
+│   │   │   └── 18.4.84.18506
+│   │   │       ├── CodeChunks.db
+│   │   │       ├── CodeChunks.db-shm
+│   │   │       ├── CodeChunks.db-wal
+│   │   │       ├── SemanticSymbols.db
+│   │   │       ├── SemanticSymbols.db-shm
+│   │   │       └── SemanticSymbols.db-wal
+│   │   ├── DesignTimeBuild
+│   │   │   └── .dtbcache.v2
+│   │   ├── FileContentIndex
+│   │   │   └── 8bd81ba8-44c2-45e7-86d6-b44f7e983860.vsidx
+│   │   ├── v17
+│   │   │   ├── .futdcache.v2
+│   │   │   ├── .suo
+│   │   │   ├── DocumentLayout.backup.json
+│   │   │   └── DocumentLayout.json
+│   │   └── v18
+│   │       ├── .futdcache.v2
+│   │       ├── .suo
+│   │       ├── DocumentLayout.backup.json
+│   │       ├── DocumentLayout.json
+│   │       └── ResourceExplorer
+│   │           └── settings.json
+│   ├── ProjectEvaluation
+│   └── sd
+│       └── 4ac8f850-cd6c-4d9b-a1af-55b53fdde000
+├── GCommon
+│   ├── EntityValidationConstants.cs
+│   ├── GCommon.csproj
+│   └── Enum
+│       ├── AuditAction.cs
+│       ├── LocomotiveType.cs
+│       ├── MeasuringUnits.cs
+│       └── Shift.cs
+├── Loco1.Data
+│   ├── Loco1.Data.csproj
+│   ├── Configuration
+│   │   ├── FuelConfiguration.cs
+│   │   ├── LocomotiveConfiguration.cs
+│   │   └── ShiftWorkConfiguration.cs
+│   ├── Data
+│   │   ├── LocoDbContext.cs
+│   │   └── Migrations
+│   │       ├── 00000000000000_CreateIdentitySchema.cs
+│   │       ├── 00000000000000_CreateIdentitySchema.Designer.cs
+│   │       ├── 20260218201739_AddAuditLog.cs
+│   │       ├── 20260218201739_AddAuditLog.Designer.cs
+│   │       └── ApplicationDbContextModelSnapshot.cs
+│   └── Models
+│       ├── AuditEntity.cs
+│       ├── AuditLog.cs
+│       ├── Fuel.cs
+│       ├── Locomotive.cs
+│       ├── PlannedRepairSet.cs
+│       ├── ShiftWork.cs
+│       └── ValuesEntity.cs
+├── Loco1.Data.Models
+│   └── Loco1.Data.Models.csproj
+├── Loco1.Service
+│   ├── AuditLogService.cs
+│   ├── Loco1.Service.csproj
+│   └── tree_report.txt
+├── Loco1.Services
+│   ├── Loco1.Services.csproj
+│   └── Program.cs
+└── Loco1.web
+    ├── appsettings.Development.json
+    ├── appsettings.json
+    ├── Loco1.Web.csproj
+    ├── Loco1.Web.csproj.user
+    ├── Program.cs
+    ├── tree_report.txt
+    ├── Areas
+    │   ├── Admin
+    │   └── Identity
+    │       ├── Data
+    │       └── Pages
+    │           ├── _ValidationScriptsPartial.cshtml
+    │           ├── _ViewImports.cshtml
+    │           ├── _ViewStart.cshtml
+    │           └── Account
+    │               ├── AccessDenied.cshtml
+    │               ├── AccessDenied.cshtml.cs
+    │               ├── Lockout.cshtml
+    │               ├── Lockout.cshtml.cs
+    │               ├── Login.cshtml
+    │               ├── Login.cshtml.cs
+    │               ├── Logout.cshtml
+    │               ├── Logout.cshtml.cs
+    │               ├── Register.cshtml
+    │               ├── Register.cshtml.cs
+    │               ├── RegisterConfirmation.cshtml
+    │               ├── RegisterConfirmation.cshtml.cs
+    │               ├── _ViewImports.cshtml
+    │               └── Manage
+    │                   ├── ChangePassword.cshtml
+    │                   ├── ChangePassword.cshtml.cs
+    │                   ├── Index.cshtml
+    │                   ├── Index.cshtml.cs
+    │                   ├── ManageNavPages.cs
+    │                   ├── PersonalData.cshtml
+    │                   ├── PersonalData.cshtml.cs
+    │                   ├── _ManageNav.cshtml
+    │                   └── _ViewImports.cshtml
+    ├── Controllers
+    │   ├── HomeController.cs
+    │   └── LanguageController.cs
+    ├── Models
+    │   └── ErrorViewModel.cs
+    ├── Properties
+    │   ├── launchSettings.json
+    │   ├── serviceDependencies.json
+    │   ├── serviceDependencies.local.json
+    │   └── serviceDependencies.local.json.user
+    ├── Resources
+    │   ├── SharedResource.bg-BG.resx
+    │   ├── SharedResource.cs
+    │   ├── SharedResource.en-US.resx
+    │   └── SharedResource.resx
+    ├── Views
+    │   ├── _ViewImports.cshtml
+    │   ├── _ViewStart.cshtml
+    │   ├── Home
+    │   │   ├── Index.cshtml
+    │   │   └── Privacy.cshtml
+    │   └── Shared
+    │       ├── Error.cshtml
+    │       ├── _LanguageSwitcher.cshtml
+    │       ├── _Layout.cshtml
+    │       ├── _Layout.cshtml.css
+    │       ├── _LoginPartial.cshtml
+    │       └── _ValidationScriptsPartial.cshtml
+    └── wwwroot
+        ├── favicon.ico
+        ├── css
+        │   └── site.css
+        ├── js
+        │   └── site.js
+        └── lib
+            ├── bootstrap
+            │   ├── LICENSE
+            │   └── dist
+            │       ├── css
+            │       │   ├── bootstrap-grid.css
+            │       │   ├── bootstrap-grid.css.map
+            │       │   ├── bootstrap-grid.min.css
+            │       │   ├── bootstrap-grid.min.css.map
+            │       │   ├── bootstrap-grid.rtl.css
+            │       │   ├── bootstrap-grid.rtl.css.map
+            │       │   ├── bootstrap-grid.rtl.min.css
+            │       │   ├── bootstrap-grid.rtl.min.css.map
+            │       │   ├── bootstrap-reboot.css
+            │       │   ├── bootstrap-reboot.css.map
+            │       │   ├── bootstrap-reboot.min.css
+            │       │   ├── bootstrap-reboot.min.css.map
+            │       │   ├── bootstrap-reboot.rtl.css
+            │       │   ├── bootstrap-reboot.rtl.css.map
+            │       │   ├── bootstrap-reboot.rtl.min.css
+            │       │   ├── bootstrap-reboot.rtl.min.css.map
+            │       │   ├── bootstrap-utilities.css
+            │       │   ├── bootstrap-utilities.css.map
+            │       │   ├── bootstrap-utilities.min.css
+            │       │   ├── bootstrap-utilities.min.css.map
+            │       │   ├── bootstrap-utilities.rtl.css
+            │       │   ├── bootstrap-utilities.rtl.css.map
+            │       │   ├── bootstrap-utilities.rtl.min.css
+            │       │   ├── bootstrap-utilities.rtl.min.css.map
+            │       │   ├── bootstrap.css
+            │       │   ├── bootstrap.css.map
+            │       │   ├── bootstrap.min.css
+            │       │   ├── bootstrap.min.css.map
+            │       │   ├── bootstrap.rtl.css
+            │       │   ├── bootstrap.rtl.css.map
+            │       │   ├── bootstrap.rtl.min.css
+            │       │   └── bootstrap.rtl.min.css.map
+            │       └── js
+            │           ├── bootstrap.bundle.js
+            │           ├── bootstrap.bundle.js.map
+            │           ├── bootstrap.bundle.min.js
+            │           ├── bootstrap.bundle.min.js.map
+            │           ├── bootstrap.esm.js
+            │           ├── bootstrap.esm.js.map
+            │           ├── bootstrap.esm.min.js
+            │           ├── bootstrap.esm.min.js.map
+            │           ├── bootstrap.js
+            │           ├── bootstrap.js.map
+            │           ├── bootstrap.min.js
+            │           └── bootstrap.min.js.map
+            ├── jquery
+            │   ├── LICENSE.txt
+            │   └── dist
+            │       ├── jquery.js
+            │       ├── jquery.min.js
+            │       └── jquery.min.map
+            ├── jquery-validation
+            │   ├── LICENSE.md
+            │   └── dist
+            │       ├── additional-methods.js
+            │       ├── additional-methods.min.js
+            │       ├── jquery.validate.js
+            │       └── jquery.validate.min.js
+            └── jquery-validation-unobtrusive
+                ├── jquery.validate.unobtrusive.js
+                ├── jquery.validate.unobtrusive.min.js
+                └── LICENSE.txt
+
+# IMPORTANT FILES (first lines)
+- ..\Loco1.web\Program.cs (first 80 lines)
+using Loco1.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Globalization;
+
+namespace Loco1.Web
+    {
+    public class Program
+        {
+        public static void Main(string[] args)
+            {
+            // Required for older DateTime compatibility in PostgreSQL
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+            var builder = WebApplication.CreateBuilder(args);
+
+            // Connection string (PostgreSQL)
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+                ?? throw new InvalidOperationException("DefaultConnection not found.");
+
+            // EF Core + PostgreSQL provider
+            builder.Services.AddDbContext<LocoDbContext>(options =>
+                options.UseNpgsql(connectionString));
+
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+            // Localization (SharedResource-only mode)
+            builder.Services.AddLocalization();
+            builder.Services
+                .AddControllersWithViews()
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization();
+
+            // Razor Pages support (required for Identity UI)
+            builder.Services.AddRazorPages();
+
+            // Identity
+            builder.Services
+                .AddDefaultIdentity<IdentityUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = true;
+                })
+                .AddEntityFrameworkStores<LocoDbContext>();
+
+            // Supported cultures
+            CultureInfo[] supportedCultures =
+            {
+                new CultureInfo("bg-BG"),
+                new CultureInfo("en-US")
+            };
+
+            // Localization options
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new("bg-BG");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+
+            var app = builder.Build();
+
+            // Use localization
+            var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
+
+            // Pipeline
+            if (app.Environment.IsDevelopment())
+                {
+                app.UseMigrationsEndPoint();
+                }
+            else
+                {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+                }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+
+- ..\Loco1.Services\Program.cs (first 80 lines)
+namespace Loco1.Services;
+
+internal class Program
+    {
+    static void Main(string[] args)
+        {
+        Console.WriteLine("Hello, World!");
+        }
+    }
+
+- AppDbContext.cs: (not found)
+- ..\Loco1.Data\Data\LocoDbContext.cs (first 120 lines)
+using Loco1.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+namespace Loco1.Data
+    {
+    // Note: We type the IdentityDbContext with IdentityUser (optional but clearer)
+    
+    public class LocoDbContext : IdentityDbContext<IdentityUser>
+        {
+       
+        public LocoDbContext(DbContextOptions<LocoDbContext> options)
+            : base(options)
+            {
+            }
+
+        // Domain sets
+        public DbSet<Locomotive> Locomotives { get; set; } = null!;
+        public DbSet<Fuel> Fuels { get; set; } = null!;
+        public DbSet<ShiftWork> ShiftWorks { get; set; } = null!;
+
+        // Audit
+        public DbSet<AuditLog> AuditLogs { get; set; } = null!;
+        
+        protected override void OnModelCreating(ModelBuilder builder)
+            {
+            base.OnModelCreating(builder); // Keep Identity defaults
+
+            // Apply IEntityTypeConfiguration<> from this assembly
+            builder.ApplyConfigurationsFromAssembly(typeof(LocoDbContext).Assembly);
+            }
+        }
+    }
+
+- ..\Loco1.web\appsettings.json (full content)
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=.;Database=Loco1 ;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=false",
+    "LocoDbContextConnection": "Server=(localdb)\\mssqllocaldb;Database=Loco1.Web;Trusted_Connection=True;MultipleActiveResultSets=true"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+
+# MIGRATIONS
+- ..\Loco1.Data\Data\Migrations
+  - 00000000000000_CreateIdentitySchema.cs (SHA1: A898F9478FC39F32439F176A12876E42EDD93E71, Size: 9,51 KB)
+  - 00000000000000_CreateIdentitySchema.Designer.cs (SHA1: 8E01B6F341AE0DF75C969BCF80691D0A0A18F0C7, Size: 10,51 KB)
+  - 20260218201739_AddAuditLog.cs (SHA1: 87106C2C835D967A380045416DC970863A20CC64, Size: 8,84 KB)
+  - 20260218201739_AddAuditLog.Designer.cs (SHA1: 1CDD17C466A92469D4C07E486D0DD9C1A19385EE, Size: 19,68 KB)
+  - ApplicationDbContextModelSnapshot.cs (SHA1: 98B5D8C7CC757A26809E89D748E40122DCD9F8AA, Size: 19,59 KB)
+
+# LOCALIZATION
+- SharedResource.resx: found
+- SharedResource.bg-BG.resx: found
+- SharedResource.en-US.resx: found
+- Program.cs: AddLocalization() present: yes
+
+# EXCLUSIONS
+- Excluded folders/files: bin, obj, .git, node_modules
+
+# RAW METRICS
+- .css=43 113 lines
+- .js=31 315 lines
+- .db=22 825 lines
+- .cs=3 311 lines
+- .txt=1 352 lines
+- (noext)=1 102 lines
+- .config=974 lines
+- .v2=797 lines
+- .cshtml=483 lines
+- .json=446 lines
+- .resx=303 lines
+- .csproj=110 lines
+- .suo=104 lines
+- .ps1=74 lines
+- .sln=53 lines
+- .bat=26 lines
+- .map=23 lines
+- .user=22 lines
+- .md=22 lines
+- .ico=1 lines
+- .vsidx=0 lines
+- .db-shm=0 lines
+- .db-wal=0 lines
+

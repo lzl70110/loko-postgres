@@ -1,0 +1,50 @@
+# SUMMARY
+- Root: C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\Loco1.Service\
+- ScanTimeUtc: 2026-02-18T18:01:23.1323377Z
+- OS: Win32NT 10.0.26100.0 (Microsoft Windows 10.0.26100)
+- .NET SDKs (from dotnet --info): 8.0.124; 9.0.311; 10.0.103
+- Solution files: 0
+- Projects: 1
+- Total files: 2 | Total size: 2,35 KB
+- Code lines: .cs=70; .csproj=14
+
+# SOLUTIONS
+(none)
+
+# PROJECTS (.csproj)
+- ..\Loco1.Service.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - (none)
+  - ProjectReferences:
+    - ..\GCommon\GCommon.csproj
+    - ..\Loco1.Data\Loco1.Data.csproj
+
+# DIRECTORY TREE (clean)
+C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\Loco1.Service\
+├── AuditLogService.cs
+└── Loco1.Service.csproj
+
+# IMPORTANT FILES (first lines)
+- Program.cs: (not found)
+- AppDbContext.cs: (not found)
+- LocoDbContext.cs: (not found)
+- appsettings.json: (not found)
+
+# MIGRATIONS
+(none)
+
+# LOCALIZATION
+- SharedResource.resx: not found
+- SharedResource.bg-BG.resx: not found
+- SharedResource.en-US.resx: not found
+- Program.cs: AddLocalization() present: no
+
+# EXCLUSIONS
+- Excluded folders/files: bin, obj, .git
+
+# RAW METRICS
+- .cs=70 lines
+- .csproj=14 lines
+
