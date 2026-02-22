@@ -1,31 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<OutputType>Exe</OutputType>
+		<!-- EN: ensure web app produces an executable -->
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>aspnet-Loco1.web-ffcc835e-1194-457d-8262-7606d7031807</UserSecretsId>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-Loco1.web-ffcc835e-1194-457d-8262-7606d7031807</UserSecretsId>
-  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.23" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.23" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.23" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.23" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.23" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.*" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.23" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.23" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.23" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.23" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.23" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.*" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Admin\" />
-    <Folder Include="Areas\Identity\Data\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\GCommon\GCommon.csproj" />
-    <ProjectReference Include="..\Loco1.Data\Loco1.Data.csproj" />
-    <ProjectReference Include="..\Loco1.Service\Loco1.Service.csproj" />
-    <ProjectReference Include="..\Loco1.ViewModels\Loco1.ViewModels.csproj" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\GCommon\GCommon.csproj" />
+		<ProjectReference Include="..\Loco1.Data\Loco1.Data.csproj" />
+		<ProjectReference Include="..\Loco1.Service\Loco1.Service.csproj" />
+		<ProjectReference Include="..\Loco1.ViewModels\Loco1.ViewModels.csproj" />
+	</ItemGroup>
 </Project>
