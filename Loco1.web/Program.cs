@@ -2,12 +2,13 @@
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-using Loco1.Data;                    // EN: DbContext
-using Loco1.Service;                 // EN: Services implementation
-using Loco1.Service.Abstractions;    // EN: Service contracts
+using Loco1.Data;                 // EN: DbContext
+using Loco1.Service;              // EN: Services implementation
+using Loco1.Service.Abstractions; // EN: Service contracts
 
 namespace Loco1.Web
     {
@@ -15,14 +16,16 @@ namespace Loco1.Web
         {
         public static void Main(string[] args)
             {
-            // EN: Keep legacy timestamp behavior in Npgsql (safe during transitions)
+            // EN: Keep legacy timestamp behavior in Npgsql (harmless compatibility switch)
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // EN: Host on a fixed HTTP port for easy local run (change if needed)
-            // Note: If you start via IIS Express, launchSettings.json controls the port.
-            builder.WebHost.UseUrls("http://localhost:5088");
+            // EN: Local dev port only; on Render/Cloud $PORT is injected (ASPNETCORE_URLS).
+            if (builder.Environment.IsDevelopment())
+                {
+                builder.WebHost.UseUrls("http://localhost:5088");
+                }
 
             // ------------------ Configuration & DbContext ------------------
 
@@ -32,24 +35,26 @@ namespace Loco1.Web
                 ?? builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("ConnectionStrings:DefaultConnection not found.");
 
-            // EN: Normalize rare "server=tcp://host:port" to Npgsql format
+            // EN: Normalize rare 'server=tcp://host:port' to Npgsql format
             if (connStr.Contains("tcp://", StringComparison.OrdinalIgnoreCase))
                 {
-                connStr = Regex.Replace(connStr, @"(?i)server\s*=\s*tcp://([^:;]+):(\d+)", "Host=$1;Port=$2");
+                connStr = Regex.Replace(
+                    connStr,
+                    @"(?i)server\s*=\s*tcp://([^:;]+):(\d+)",
+                    "Host=$1;Port=$2");
                 }
 
-            // EN: Log sanitized connection string (mask password)
+            // EN: Log sanitized connection string (mask password in logs)
             var sanitized = Regex.Replace(connStr, "(?i)password\\s*=\\s*[^;]*", "Password=***");
             Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
 
-            // EN: Single DbContext registration (IMPORTANT: keep only this one)
+            // EN: Single DbContext registration (keep only this one)
             builder.Services.AddDbContext<LocoDbContext>(opt => opt.UseNpgsql(connStr));
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             // ------------------ MVC + Localization ------------------
 
-            // EN: Localization (SharedResource-only mode)
             builder.Services.AddLocalization();
             builder.Services
                 .AddControllersWithViews()
@@ -60,7 +65,7 @@ namespace Loco1.Web
             builder.Services
                 .AddDefaultIdentity<IdentityUser>(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = false;  // dev
+                    options.SignIn.RequireConfirmedAccount = false;  // dev only
                     options.Password.RequiredLength = 1;
                     options.Password.RequireDigit = false;
                     options.Password.RequireNonAlphanumeric = false;
@@ -73,17 +78,14 @@ namespace Loco1.Web
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<LocoDbContext>();
 
-            // EN: DI services
-            builder.Services.AddScoped<IUserRoleService, UserRoleService>();
-
-            // EN: Razor Pages (Identity UI)
-            builder.Services.AddRazorPages();
+            builder.Services.AddScoped<IUserRoleService, UserRoleService>(); // EN: DI for roles admin
+            builder.Services.AddRazorPages();                                // EN: Identity UI
 
             // EN: Supported cultures
-            CultureInfo[] supportedCultures =
+            var supportedCultures = new[]
             {
-                new("bg-BG"),
-                new("en-US")
+                new CultureInfo("bg-BG"),
+                new CultureInfo("en-US")
             };
 
             builder.Services.Configure<RequestLocalizationOptions>(options =>
@@ -93,11 +95,20 @@ namespace Loco1.Web
                 options.SupportedUICultures = supportedCultures;
             });
 
+            // EN: Trust reverse proxy headers (Render/NGINX/any proxy)
+            builder.Services.Configure<ForwardedHeadersOptions>(opts =>
+            {
+                opts.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                // EN: In cloud we don't know proxy IPs; clear to accept all
+                opts.KnownNetworks.Clear();
+                opts.KnownProxies.Clear();
+            });
+
             var app = builder.Build();
 
             // ------------------ DB Migrate -> Seed ------------------
 
-            // EN: Apply EF Core migrations first, then seed roles/admin
+            // EN: Apply EF migrations first, then seed roles/admin
             using (var scope = app.Services.CreateScope())
                 {
                 var services = scope.ServiceProvider;
@@ -111,6 +122,9 @@ namespace Loco1.Web
 
             // ------------------ Middleware pipeline ------------------
 
+            // EN: Forwarded headers (respect X-Forwarded-* from proxy)
+            app.UseForwardedHeaders();
+
             // EN: Localization
             var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
@@ -118,7 +132,7 @@ namespace Loco1.Web
             if (app.Environment.IsDevelopment())
                 {
                 app.UseMigrationsEndPoint();
-                // app.UseHttpsRedirection(); // EN: enable if you have a trusted dev HTTPS cert
+                // app.UseHttpsRedirection(); // enable if you trust Dev HTTPS cert
                 }
             else
                 {
@@ -141,6 +155,9 @@ namespace Loco1.Web
 
             // EN: Razor Pages for Identity UI
             app.MapRazorPages();
+
+            // EN: Simple health endpoint for cloud checks
+            app.MapGet("/healthz", () => Results.Ok("OK"));
 
             app.Run();
             }
