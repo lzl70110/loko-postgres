@@ -50,8 +50,8 @@ namespace Loco1.Web
                     "Host=$1;Port=$2");
                 }
 
-            // EN: Log sanitized connection string (mask password)
-            var sanitized = Regex.Replace(connStr, "(?i)password\s*=\s*[^;]*", "Password=***");
+            // EN: Log sanitized connection string (mask password) – verbatim regex to avoid CS1009
+            var sanitized = Regex.Replace(connStr, @"(?i)password\s*=\s*[^;]*", "Password=***");
             Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
 
             // EN: Single DbContext registration (keep only this one)
