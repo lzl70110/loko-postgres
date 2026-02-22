@@ -14,9 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Service", "Loco1.Service\Loco1.Service.csproj", "{2A8226EF-AB89-4C73-9999-3586EC366878}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{69E44422-FF29-411B-9448-6FCCF491B73B}"
-	ProjectSection(SolutionItems) = preProject
-		node.json = node.json
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.ViewModels", "Loco1.ViewModels\Loco1.ViewModels.csproj", "{585D8C84-1497-4866-A1EF-B4B76D25BB40}"
 EndProject
