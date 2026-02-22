@@ -1,5 +1,5 @@
 ﻿@model List<Loco1.ViewModels.UserWithRolesVm>
-@using Loco1.Web.Resources;
+@using Loco1.Localizer
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
  
 @{
@@ -42,7 +42,7 @@
                            asp-action="EditRoles"
                            asp-route-id="@u.Id"
                            class="btn btn-primary btn-sm">
-                        @L["Edit roles"]
+                        @L["Edit Roles"]
                         </a>
                     </td>
                 </tr>

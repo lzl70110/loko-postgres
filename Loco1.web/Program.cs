@@ -1,15 +1,13 @@
 ﻿using System.Globalization;
+using Loco1.Localizer;             // EN: For shared localization resources
 using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Logging;
-
 using Loco1.Data;                 // EN: DbContext
 using Loco1.Service;              // EN: Services implementation
 using Loco1.Service.Abstractions; // EN: Service contracts
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Loco1.Web
     {
@@ -61,11 +59,16 @@ namespace Loco1.Web
 
             // ------------------ MVC + Localization ------------------
 
-            builder.Services.AddLocalization();
+
             builder.Services
                 .AddControllersWithViews()
                 .AddViewLocalization()
-                .AddDataAnnotationsLocalization();
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(SharedResource));
+                });
+
 
             // EN: Identity + Roles (dev-friendly policy)
             builder.Services

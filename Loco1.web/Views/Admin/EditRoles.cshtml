@@ -1,39 +1,57 @@
-﻿
-@using Loco1.Web.Resources
+﻿@using Loco1.Localizer
 @using Loco1.Service
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 @model Loco1.ViewModels.EditUserRolesVm
+
 @{
     ViewData["Title"] = L["Edit Roles"].Value;
+    // EN: current role = first selected (single-role policy)
+    var currentRole = Model.SelectedRoles?.FirstOrDefault() ?? "";
     }
 
 <h2>@L["Edit Roles"]</h2>
 <p><strong>@L["User"]:</strong> @Model.Email</p>
 
-<!-- English: proper form tag helper with method and antiforgery -->
-    <form asp-controller="Admin" asp-action="EditRoles" method="post">
+<!-- EN: show model-level errors coming from the service -->
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<!-- EN: proper form tag with id, action and method -->
+    <form id="edit-roles-form" asp-controller="Admin" asp-action="EditRoles" method="post">
     @Html.AntiForgeryToken()
-    <input asp-for="UserId"
-           type="hidden" />
+    <input asp-for="UserId" type="hidden" />
 
         <div class="mb-3">
         <label class="form-label">@L["Roles"]</label>
             <div class="row">
             @if (Model.AvailableRoles?.Any() == true)
                 {
-                @foreach (var role in Model.AvailableRoles)
+                foreach (var role in Model.AvailableRoles)
                     {
                     var isChecked = Model.SelectedRoles?.Contains(role) == true;
+                    var isOwnerRole = string.Equals(role, "Owner", StringComparison.OrdinalIgnoreCase);
+                    var makeDisabled = isOwnerRole && isChecked; // EN: UX only; server enforces too
+
+                    // EN: safe id in case a role contains whitespace (Owner/Admin/User are fine)
+                    var roleId = "role_" + new string(role.Select(ch => char.IsWhiteSpace(ch) ? '_' : ch).ToArray());
 
                         <div class="col-12 col-md-6 mb-2">
                             <div class="form-check">
-                            <!-- English: bind to SelectedRoles (array-like) -->
-                            <input class="form-check-input"
-                                   type="checkbox"
+                            <!-- EN: RADIO = single selection -->
+                            <input id="@roleId"
+                                   class="form-check-input"
+                                   type="radio"
                                    name="SelectedRoles"
                                    value="@role"
-                            @(isChecked ? "checked" : null) />
-                            <label class="form-check-label">@L[role]</label>
+                            @(isChecked ? "checked" : "")
+                            @(makeDisabled ? "disabled" : "") />
+
+                            <label class="form-check-label" for="@roleId">@L[role]</label>
+
+                            @* EN: Small hint for the Owner case *@
+                            @if (isOwnerRole && isChecked)
+                                {
+                                <small class="text-muted ms-2">(@L["Owner cannot be removed here"])</small>
+                                }
                             </div>
                         </div>
                     }
@@ -49,8 +67,102 @@
 
         <div class="d-flex gap-2">
         <button type="submit" class="btn btn-success">@L["Save"]</button>
-            <a asp-controller="Admin" asp-action="Users" class="btn btn-secondary">
+
+            <a asp-controller="Admin"
+               asp-action="Users"
+               class="btn btn-secondary">
             @L["Back"]
             </a>
         </div>
     </form>
+
+<!-- ===================== CONFIRMATION MODAL ===================== -->
+    <div class="modal fade" id="confirmRoleChangeModal" tabindex="-1" aria-labelledby="confirmRoleChangeLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h6 class="modal-title" id="confirmRoleChangeLabel">@L["Confirm"]</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label='@L["Back"]'></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">
+                    <span id="confirmRoleChangeText"></span>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@L["Back"]</button>
+                <button type="button" id="confirmRoleChangeOkBtn" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
+        (function () {
+            // EN: prevent double submit loop
+            let confirmed = false;
+
+            const form    = document.getElementById('edit-roles-form');
+            if (!form) { console.error('[EditRoles] form not found'); return; }
+
+            const modalEl = document.getElementById('confirmRoleChangeModal');
+            const textEl  = document.getElementById('confirmRoleChangeText');
+            const okBtn   = document.getElementById('confirmRoleChangeOkBtn');
+
+            // EN: Bootstrap modal instance (fallback to native confirm if missing)
+            const modal   = (window.bootstrap && modalEl) ? new bootstrap.Modal(modalEl) : null;
+
+            // EN: serialize C# values to valid JS (avoid HTML encoding with Html.Raw)
+            const currentRole      = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(currentRole));
+            const txtConfirmChange = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["Confirm role change?"].Value));
+            const txtFrom          = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["From"].Value));
+            const txtTo            = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["To"].Value));
+            const txtPleaseSelect  = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["Please select a role."].Value));
+
+            form.addEventListener('submit', function (e) {
+                if (confirmed) { confirmed = false; return; }
+                e.preventDefault();
+
+                // EN: get selected radio button (single role)
+                const selected = form.querySelector('input[name="SelectedRoles"]:checked');
+                if (!selected) {
+                    const summary = document.querySelector('[asp-validation-summary]') || document.querySelector('.text-danger');
+                    if (summary) summary.textContent = txtPleaseSelect;
+                    return;
+                }
+
+                const desiredRole = selected.value;
+
+                // EN: submit immediately if same as current
+                if (currentRole && desiredRole && currentRole.toLowerCase() === desiredRole.toLowerCase()) {
+                    confirmed = true;
+                    form.submit();
+                    return;
+                }
+
+                const message = `${txtConfirmChange} ${txtFrom}: ${currentRole || '—'}  ${txtTo}: ${desiredRole}`;
+
+                if (modal) {
+                    textEl.textContent = message;
+                    modal.show();
+
+                    // EN: one-time OK handler
+                    const onOk = function () {
+                        okBtn.removeEventListener('click', onOk);
+                        confirmed = true;
+                        modal.hide();
+                        form.submit();
+                    };
+                    okBtn.addEventListener('click', onOk);
+                } else {
+                    // EN: native confirm fallback
+                    if (confirm(message)) {
+                        confirmed = true;
+                        form.submit();
+                    }
+                }
+            });
+        })();
+        </script>
+    }

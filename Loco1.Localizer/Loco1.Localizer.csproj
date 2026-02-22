@@ -11,10 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GCommon\GCommon.csproj" />
-    <ProjectReference Include="..\Loco1.Data\Loco1.Data.csproj" />
-    <ProjectReference Include="..\Loco1.Localizer\Loco1.Localizer.csproj" />
-    <ProjectReference Include="..\Loco1.ViewModels\Loco1.ViewModels.csproj" />
+    <EmbeddedResource Update="Resources\SharedResource.bg-BG.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\SharedResource.en-US.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

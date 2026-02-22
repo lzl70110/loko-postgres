@@ -1,4 +1,4 @@
-﻿@using Loco1.Web.Resources
+﻿@using Loco1.Localizer
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
@@ -15,7 +15,7 @@
     <link rel="icon" href="data:image/svg+xml,
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
     <text y='.9em' font-size='90'>🚂</text>
-    </svg>">
+    </svg>'">
 
     <!-- CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -34,7 +34,7 @@
                     <a class="navbar-brand fw-bold text-primary"
                        asp-controller="Home"
                        asp-action="Index">
-                    🚂 Loco1
+                    🚂
                     </a>
 
                 <!-- Right Side -->
@@ -119,11 +119,14 @@
                             @{
                             var adminEnabled =
                                 Configuration.GetValue<bool?>("Features:Admin") ?? true;
+
+                            // EN: Allow Owner + Admin (not only Admin)
+                            var canSeeAdmin = adminEnabled
+                                              && SignInManager.IsSignedIn(User)
+                                              && (User.IsInRole("Admin") || User.IsInRole("Owner"));
                             }
 
-                        @if (adminEnabled &&
-                                                     SignInManager.IsSignedIn(User) &&
-                                                     User.IsInRole("Admin"))
+                        @if (canSeeAdmin)
                             {
                                 <div class="list-group-item text-uppercase small fw-semibold text-muted">
                                 @L["Admin"]

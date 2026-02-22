@@ -2,79 +2,90 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Loco1.Web.Infrastructure
     {
-    // English: Seed roles and two users (Admin + User). Idempotent.
+    // English: Seed roles and three users (Owner + Admin + User). Idempotent.
     public static class DataSeeder
         {
         public static async Task SeedAsync(IServiceProvider services)
             {
+            var logger = services.GetRequiredService<ILoggerFactory>().CreateLogger("DataSeeder"); // EN: structured logs
             var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            var config = services.GetRequiredService<IConfiguration>(); // EN: allow secrets/ENV overrides
 
-            const string adminRole = "Admin";
-            const string userRole = "User";
+            // EN: allow overrides from appsettings/ENV (Seed:*), fallback to dev defaults
+            var ownerEmail = config["Seed:Owner:Email"] ?? "lzl70110@gmail.com";
+            var adminEmail = config["Seed:Admin:Email"] ?? "lzl@test.test";
+            var userEmail = config["Seed:User:Email"] ?? "test@test.test";
+            var defaultPwd = config["Seed:DefaultPassword"] ?? "testtest"; // EN: dev only
 
             // 1) Ensure roles
-            if (!await roleManager.RoleExistsAsync(adminRole))
-                await roleManager.CreateAsync(new IdentityRole(adminRole));
-            if (!await roleManager.RoleExistsAsync(userRole))
-                await roleManager.CreateAsync(new IdentityRole(userRole));
-
-            // Common weak dev password per your request
-            const string devPassword = "testtest";
-
-            // 2) Ensure Admin
-            const string adminEmail = "lzl@test.test";
-            const string adminUserName = "lzl@test.test";
-
-            var admin = await userManager.FindByEmailAsync(adminEmail);
-            if (admin is null)
+            foreach (var roleName in new[] { "Owner", "Admin", "User" })
                 {
-                admin = new IdentityUser
-                    {
-                    UserName = adminUserName,
-                    Email = adminEmail,
-                    EmailConfirmed = true // dev: skip email confirmation
-                    };
-
-                var createAdmin = await userManager.CreateAsync(admin, devPassword);
-                if (!createAdmin.Succeeded)
-                    {
-                    var errors = string.Join("; ", createAdmin.Errors.Select(e => $"{e.Code}:{e.Description}"));
-                    throw new InvalidOperationException($"Failed to create admin user: {errors}");
-                    }
+                await EnsureRoleAsync(roleManager, roleName); // EN: idempotent role creation
                 }
 
-            if (!await userManager.IsInRoleAsync(admin, adminRole))
-                await userManager.AddToRoleAsync(admin, adminRole);
+            // 2) Ensure users + role assignment
+            var owner = await EnsureUserAsync(userManager, ownerEmail, defaultPwd);
+            await EnsureUserInRoleAsync(userManager, owner, "Owner");
 
-            // 3) Ensure basic User
-            const string userEmail = "test@test.test";
-            const string userUserName = "test@test.test";
+            var admin = await EnsureUserAsync(userManager, adminEmail, defaultPwd);
+            await EnsureUserInRoleAsync(userManager, admin, "Admin");
 
-            var basic = await userManager.FindByEmailAsync(userEmail);
-            if (basic is null)
+            var basic = await EnsureUserAsync(userManager, userEmail, defaultPwd);
+            await EnsureUserInRoleAsync(userManager, basic, "User");
+
+            logger.LogInformation("Seed completed. Owner={Owner}, Admin={Admin}, User={User}",
+                ownerEmail, adminEmail, userEmail); // EN: final info
+            }
+
+        // EN: create role if it doesn't exist
+        private static async Task EnsureRoleAsync(RoleManager<IdentityRole> roleManager, string roleName)
+            {
+            if (!await roleManager.RoleExistsAsync(roleName))
                 {
-                basic = new IdentityUser
-                    {
-                    UserName = userUserName,
-                    Email = userEmail,
-                    EmailConfirmed = true // dev: skip email confirmation
-                    };
-
-                var createUser = await userManager.CreateAsync(basic, devPassword);
-                if (!createUser.Succeeded)
-                    {
-                    var errors = string.Join("; ", createUser.Errors.Select(e => $"{e.Code}:{e.Description}"));
-                    throw new InvalidOperationException($"Failed to create basic user: {errors}");
-                    }
+                var create = await roleManager.CreateAsync(new IdentityRole(roleName));
+                if (!create.Succeeded)
+                    throw new InvalidOperationException("Failed to create role " + roleName + ": " +
+                        string.Join("; ", create.Errors.Select(e => $"{e.Code}:{e.Description}")));
                 }
+            }
 
-            if (!await userManager.IsInRoleAsync(basic, userRole))
-                await userManager.AddToRoleAsync(basic, userRole);
+        // EN: create user if not exists (dev-friendly defaults)
+        private static async Task<IdentityUser> EnsureUserAsync(UserManager<IdentityUser> userManager, string email, string password)
+            {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user is null)
+                {
+                user = new IdentityUser
+                    {
+                    UserName = email,
+                    Email = email,
+                    EmailConfirmed = true // EN: dev: skip email confirmation
+                    };
+                var create = await userManager.CreateAsync(user, password);
+                if (!create.Succeeded)
+                    throw new InvalidOperationException("Failed to create user " + email + ": " +
+                        string.Join("; ", create.Errors.Select(e => $"{e.Code}:{e.Description}")));
+                }
+            return user;
+            }
+
+        // EN: ensure user is in a role
+        private static async Task EnsureUserInRoleAsync(UserManager<IdentityUser> userManager, IdentityUser user, string role)
+            {
+            if (!await userManager.IsInRoleAsync(user, role))
+                {
+                var add = await userManager.AddToRoleAsync(user, role);
+                if (!add.Succeeded)
+                    throw new InvalidOperationException($"Failed to add {user.Email} to role {role}: " +
+                        string.Join("; ", add.Errors.Select(e => $"{e.Code}:{e.Description}")));
+                }
             }
         }
     }

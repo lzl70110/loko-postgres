@@ -1,47 +1,32 @@
-﻿using Loco1.Web.Resources;
-using Loco1.ViewModels;                           // <-- VM са в отделния проект
+﻿using Loco1.Localizer;
+using Loco1.Service.Abstractions;                // <-- use your service contract
+using Loco1.ViewModels;                           // <-- VMs are in separate project
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;              // ToListAsync
 using Microsoft.Extensions.Localization;
 
 namespace Loco1.Web.Controllers
     {
-    [Authorize(Roles = "Admin")]
+    // EN: Allow both Owner and Admin to access admin area
+    [Authorize(Roles = "Owner,Admin")]
     public class AdminController : Controller
         {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IStringLocalizer<SharedResource> _localizer;
+        private readonly IUserRoleService _userRoleService;                 // EN: thin controller -> delegate to service
+        private readonly IStringLocalizer<SharedResource> L;
 
         public AdminController(
-            UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager,
+            IUserRoleService userRoleService,
             IStringLocalizer<SharedResource> localizer)
             {
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _localizer = localizer;
+            _userRoleService = userRoleService;
+            L = localizer;
             }
 
         // GET: /Admin/Users
         public async Task<IActionResult> Users()
             {
-            var users = await _userManager.Users.ToListAsync();
-
-            var model = new List<UserWithRolesVm>(users.Count);
-            foreach (var u in users)
-                {
-                var roles = await _userManager.GetRolesAsync(u);
-                model.Add(new UserWithRolesVm
-                    {
-                    Id = u.Id,
-                    Email = u.Email ?? u.UserName ?? "(no email)",
-                    Roles = roles.ToList()
-                    });
-                }
-
+            // EN: pull ready view-models from the service
+            var model = await _userRoleService.GetAllUsersWithRolesAsync();
             return View(model); // Views/Admin/Users.cshtml
             }
 
@@ -51,19 +36,8 @@ namespace Loco1.Web.Controllers
             {
             if (string.IsNullOrWhiteSpace(id)) return BadRequest();
 
-            var user = await _userManager.FindByIdAsync(id);
-            if (user is null) return NotFound();
-
-            var allRoles = await _roleManager.Roles.Select(r => r.Name!).OrderBy(n => n).ToListAsync();
-            var userRoles = await _userManager.GetRolesAsync(user);
-
-            var vm = new EditUserRolesVm
-                {
-                UserId = user.Id,
-                Email = user.Email ?? user.UserName ?? "(no email)",
-                AvailableRoles = allRoles,
-                SelectedRoles = userRoles.ToList()
-                };
+            var vm = await _userRoleService.GetEditModelAsync(id);
+            if (vm is null) return NotFound();
 
             return View(vm); // Views/Admin/EditRoles.cshtml
             }
@@ -75,41 +49,26 @@ namespace Loco1.Web.Controllers
             {
             if (!ModelState.IsValid) return View(vm);
 
-            var user = await _userManager.FindByIdAsync(vm.UserId);
-            if (user is null) return NotFound();
-
-            vm.SelectedRoles ??= new List<string>();
-            var current = await _userManager.GetRolesAsync(user);
-
-            // Remove roles no longer selected
-            var toRemove = current.Where(r => !vm.SelectedRoles.Contains(r)).ToList();
-            if (toRemove.Any())
+            // EN: service enforces guard rails (no Owner removal, keep at least one Admin)
+            var (ok, error) = await _userRoleService.UpdateRolesAsync(vm);
+            if (!ok)
                 {
-                var removeRes = await _userManager.RemoveFromRolesAsync(user, toRemove);
-                if (!removeRes.Succeeded)
+                // EN: show localized error + rebuild the VM lists
+                ModelState.AddModelError(string.Empty, L[error ?? "Role update failed."]);
+
+                var rebuilt = await _userRoleService.GetEditModelAsync(vm.UserId);
+                if (rebuilt is not null)
                     {
-                    ModelState.AddModelError(string.Empty, _localizer["Failed to remove some roles."]);
-                    return View(vm);
+                    // EN: keep submitted selection so the user sees their choices
+                    rebuilt.SelectedRoles = vm.SelectedRoles ?? new List<string>();
+                    return View(rebuilt);
                     }
+                return View(vm);
                 }
+            
 
-            // Add newly selected roles (ensure they exist)
-            var toAdd = vm.SelectedRoles.Where(r => !current.Contains(r)).ToList();
-            if (toAdd.Any())
-                {
-                foreach (var role in toAdd)
-                    if (!await _roleManager.RoleExistsAsync(role))
-                        await _roleManager.CreateAsync(new IdentityRole(role));
-
-                var addRes = await _userManager.AddToRolesAsync(user, toAdd);
-                if (!addRes.Succeeded)
-                    {
-                    ModelState.AddModelError(string.Empty, _localizer["Failed to add some roles."]);
-                    return View(vm);
-                    }
-                }
-
-            TempData["StatusMessage"] = _localizer["Roles updated."];
+            TempData["StatusMessage"] = L["Roles updated."];
+            
             return RedirectToAction(nameof(Users));
             }
         }
