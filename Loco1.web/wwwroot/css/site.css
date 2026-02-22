@@ -20,3 +20,72 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Footer look */
+.app-footer {
+    background: #111;
+    color: #ddd;
+}
+
+    .app-footer strong {
+        color: #fff;
+    }
+
+/* Rotator for Footer */
+.rotator {
+    display: inline-block;
+    position: relative;
+    min-height: 1.4em;
+    white-space: nowrap;
+}
+
+.rotator__item {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    animation: rotator-fade 12s infinite;
+}
+
+    .rotator__item:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .rotator__item:nth-child(2) {
+        animation-delay: 4s;
+    }
+
+    .rotator__item:nth-child(3) {
+        animation-delay: 8s;
+    }
+
+@keyframes rotator-fade {
+    0% {
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    38% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .rotator__item {
+        position: static;
+        display: block;
+        opacity: 1;
+        animation: none;
+    }
+}
