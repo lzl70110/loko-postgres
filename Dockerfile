@@ -21,13 +21,10 @@ RUN dotnet publish Loco1.web/Loco1.Web.csproj -c Release -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 
-# Render provides $PORT; bind to it
-ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
-
-# Optional: set culture if needed
-# ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+# (Optional) Keep ICU globalization enabled (useful for bg-BG)
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 
 COPY --from=build /app/publish .
 
-# If assembly name differs, change Loco1.Web.dll accordingly
+# EN: Program.cs binds to $PORT; no need to set ASPNETCORE_URLS here.
 ENTRYPOINT ["dotnet", "Loco1.Web.dll"]

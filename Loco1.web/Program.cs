@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 
 using Loco1.Data;                 // EN: DbContext
 using Loco1.Service;              // EN: Services implementation
@@ -14,15 +15,20 @@ namespace Loco1.Web
     {
     public class Program
         {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
             {
             // EN: Keep legacy timestamp behavior in Npgsql (harmless compatibility switch)
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // EN: Local dev port only; on Render/Cloud $PORT is injected (ASPNETCORE_URLS).
-            if (builder.Environment.IsDevelopment())
+            // EN: Bind to Render's $PORT in containers; fallback to local dev port.
+            var port = Environment.GetEnvironmentVariable("PORT");
+            if (!string.IsNullOrEmpty(port))
+                {
+                builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+                }
+            else if (builder.Environment.IsDevelopment())
                 {
                 builder.WebHost.UseUrls("http://localhost:5088");
                 }
@@ -44,8 +50,8 @@ namespace Loco1.Web
                     "Host=$1;Port=$2");
                 }
 
-            // EN: Log sanitized connection string (mask password in logs)
-            var sanitized = Regex.Replace(connStr, "(?i)password\\s*=\\s*[^;]*", "Password=***");
+            // EN: Log sanitized connection string (mask password)
+            var sanitized = Regex.Replace(connStr, "(?i)password\s*=\s*[^;]*", "Password=***");
             Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
 
             // EN: Single DbContext registration (keep only this one)
@@ -61,7 +67,7 @@ namespace Loco1.Web
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
 
-            // EN: Identity + Roles (dev-friendly password policy)
+            // EN: Identity + Roles (dev-friendly policy)
             builder.Services
                 .AddDefaultIdentity<IdentityUser>(options =>
                 {
@@ -107,22 +113,31 @@ namespace Loco1.Web
             var app = builder.Build();
 
             // ------------------ DB Migrate -> Seed ------------------
-
-            // EN: Apply EF migrations first, then seed roles/admin
             using (var scope = app.Services.CreateScope())
                 {
                 var services = scope.ServiceProvider;
+                var logger = services.GetRequiredService<ILogger<Program>>();
 
-                var db = services.GetRequiredService<LocoDbContext>();
-                db.Database.Migrate(); // EN: create/update schema
+                try
+                    {
+                    var db = services.GetRequiredService<LocoDbContext>();
+                    await db.Database.MigrateAsync(); // EN: create/update schema
 
-                // EN: Seed initial data (roles, admin user, etc.)
-                Loco1.Web.Infrastructure.DataSeeder.SeedAsync(services).GetAwaiter().GetResult();
+                    // EN: Seed initial data (roles, admin user, etc.)
+                    await Loco1.Web.Infrastructure.DataSeeder.SeedAsync(services);
+
+                    logger.LogInformation("Startup DB migrate/seed completed.");
+                    }
+                catch (Exception ex)
+                    {
+                    // EN: Log full details so we see root cause in Render logs
+                    logger.LogCritical(ex, "Startup failure during migrate/seed.");
+                    throw;
+                    }
                 }
 
             // ------------------ Middleware pipeline ------------------
 
-            // EN: Forwarded headers (respect X-Forwarded-* from proxy)
             app.UseForwardedHeaders();
 
             // EN: Localization
@@ -159,7 +174,7 @@ namespace Loco1.Web
             // EN: Simple health endpoint for cloud checks
             app.MapGet("/healthz", () => Results.Ok("OK"));
 
-            app.Run();
+            await app.RunAsync();
             }
         }
     }
