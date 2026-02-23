@@ -1,12 +1,12 @@
 # SUMMARY
 - Root: C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
-- ScanTimeUtc: 2026-02-22T10:49:14.6328683Z
+- ScanTimeUtc: 2026-02-22T21:41:32.3053637Z
 - OS: Win32NT 10.0.26100.0 (Microsoft Windows 10.0.26100)
 - .NET SDKs (from dotnet --info): 8.0.124; 9.0.311; 10.0.103
 - Solution files: 1
-- Projects: 7
-- Total files: 195 | Total size: 14,18 MB
-- Code lines: .css=43 113; .db=38 969; .js=31 315; .sqlite=6 819; .bin=3 764; .cs=3 538; (noext)=1 451; .txt=1 423; .config=974; .v2=908; .cshtml=711; .json=508; .gitignore=364; .resx=287; .suo=145; .csproj=112; .ps1=74; .gitattributes=63; .sln=59; .user=58; .pubxml=41; .bat=26; .wsuo=26; .md=23; .map=23; .ico=1; .vsidx=0
+- Projects: 8
+- Total files: 203 | Total size: 14,38 MB
+- Code lines: .css=43 182; .js=31 315; .db=24 132; .sqlite=6 819; .bin=3 764; .cs=3 575; (noext)=2 508; .txt=1 092; .config=974; .cshtml=839; .v2=536; .json=523; .resx=519; .gitignore=364; .suo=139; .csproj=135; .ps1=74; .gitattributes=63; .sln=62; .user=50; .pubxml=41; .bat=26; .wsuo=26; .md=23; .map=23; .ico=1; .vsidx=0; .db-shm=0; .db-wal=0
 
 # SOLUTIONS
 - ..\Loco_17_Feb.sln
@@ -18,6 +18,7 @@
     - Loco1.Service\Loco1.Service.csproj
     - Solution Items
     - Loco1.ViewModels\Loco1.ViewModels.csproj
+    - Loco1.Localizer\Loco1.Localizer.csproj
 
 # PROJECTS (.csproj)
 - ..\GCommon\GCommon.csproj
@@ -47,14 +48,23 @@
   - ProjectReferences:
     - ..\GCommon\GCommon.csproj
 
+- ..\Loco1.Localizer\Loco1.Localizer.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - Microsoft.Extensions.Localization 8.0.23
+  - ProjectReferences:
+    - (none)
+
 - ..\Loco1.Service\Loco1.Service.csproj
   - TargetFramework: net8.0
   - OutputType: Library
   - PackageReferences:
-    - (none)
+    - Microsoft.Extensions.Localization 8.0.23
   - ProjectReferences:
     - ..\GCommon\GCommon.csproj
     - ..\Loco1.Data\Loco1.Data.csproj
+    - ..\Loco1.Localizer\Loco1.Localizer.csproj
     - ..\Loco1.ViewModels\Loco1.ViewModels.csproj
 
 - ..\Loco1.Services\Loco1.Services.csproj
@@ -76,7 +86,7 @@
 
 - ..\Loco1.web\Loco1.Web.csproj
   - TargetFramework: net8.0
-  - OutputType: Library
+  - OutputType: Exe
   - PackageReferences:
     - Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 8.0.23
     - Microsoft.AspNetCore.Identity.EntityFrameworkCore 8.0.23
@@ -87,6 +97,7 @@
   - ProjectReferences:
     - ..\GCommon\GCommon.csproj
     - ..\Loco1.Data\Loco1.Data.csproj
+    - ..\Loco1.Localizer\Loco1.Localizer.csproj
     - ..\Loco1.Service\Loco1.Service.csproj
     - ..\Loco1.ViewModels\Loco1.ViewModels.csproj
 
@@ -94,6 +105,8 @@
 C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 ├── .gitattributes
 ├── .gitignore
+├── Dockerfile
+├── Dockerfile.txt
 ├── Loco_17_Feb.sln
 ├── node.json
 ├── nodes.json.txt
@@ -113,6 +126,8 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   │   │   └── 0f52aac3
 │   │   │       └── sessions
 │   │   │           ├── 3b828516-8c05-42cb-91fa-0502c4d875a3
+│   │   │           ├── 592b5908-63ea-44c1-a543-e3bf6d8b1013
+│   │   │           ├── 63980e76-1b9c-4a2c-9276-60e487bb7bd0
 │   │   │           └── e416c8f7-0efa-4bd5-a178-577ac2383f5d
 │   │   ├── CopilotIndices
 │   │   │   ├── 17.14.1584.41681
@@ -123,11 +138,17 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   │   │   │   └── SemanticSymbols.db
 │   │   │   └── 18.4.84.18506
 │   │   │       ├── CodeChunks.db
-│   │   │       └── SemanticSymbols.db
+│   │   │       ├── CodeChunks.db-shm
+│   │   │       ├── CodeChunks.db-wal
+│   │   │       ├── SemanticSymbols.db
+│   │   │       ├── SemanticSymbols.db-shm
+│   │   │       └── SemanticSymbols.db-wal
 │   │   ├── DesignTimeBuild
 │   │   │   └── .dtbcache.v2
 │   │   ├── FileContentIndex
-│   │   │   └── 30fe11a7-7afd-42db-b10b-56a08036b5e6.vsidx
+│   │   │   ├── 177ca5b5-4a3a-4aae-be5f-05674995091c.vsidx
+│   │   │   ├── 747e56d5-cb0a-4fb5-b0b5-7a35757fd93b.vsidx
+│   │   │   └── aa3b700b-7dba-4680-b599-a91bc3bc8bdb.vsidx
 │   │   ├── v17
 │   │   │   ├── .futdcache.v2
 │   │   │   ├── .suo
@@ -185,10 +206,16 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │       └── ValuesEntity.cs
 ├── Loco1.Data.Models
 │   └── Loco1.Data.Models.csproj
+├── Loco1.Localizer
+│   ├── Loco1.Localizer.csproj
+│   └── Resources
+│       ├── SharedResource.bg-BG.resx
+│       ├── SharedResource.cs
+│       ├── SharedResource.en-US.resx
+│       └── SharedResource.resx
 ├── Loco1.Service
 │   ├── AuditLogService.cs
 │   ├── Loco1.Service.csproj
-│   ├── tree_report.txt
 │   ├── UserRoleService.cs
 │   └── Abstractions
 │       └── IUserRoleService.cs
@@ -203,11 +230,9 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 └── Loco1.web
     ├── appsettings.Development.json
     ├── appsettings.json
-    ├── Dockerfile.txt
     ├── Loco1.Web.csproj
     ├── Loco1.Web.csproj.user
     ├── Program.cs
-    ├── tree_report.txt
     ├── Areas
     │   ├── Admin
     │   └── Identity
@@ -256,11 +281,6 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
     │       ├── FolderProfile.pubxml.user
     │       ├── FolderProfile1.pubxml
     │       └── FolderProfile1.pubxml.user
-    ├── Resources
-    │   ├── SharedResource.bg-BG.resx
-    │   ├── SharedResource.cs
-    │   ├── SharedResource.en-US.resx
-    │   └── SharedResource.resx
     ├── Views
     │   ├── _ViewImports.cshtml
     │   ├── _ViewStart.cshtml
@@ -358,27 +378,36 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 
-using Loco1.Data;                    // EN: DbContext
-using Loco1.Service;                 // EN: Services implementation
-using Loco1.Service.Abstractions;    // EN: Service contracts
+using Loco1.Data;                 // EN: DbContext
+using Loco1.Service;              // EN: Services implementation
+using Loco1.Service.Abstractions; // EN: Service contracts
 
 namespace Loco1.Web
     {
     public class Program
         {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
             {
-            // EN: Keep legacy timestamp behavior in Npgsql (safe during transitions)
+            // EN: Keep legacy timestamp behavior in Npgsql (harmless compatibility switch)
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // EN: Host on a fixed HTTP port for easy local run (change if needed)
-            // Note: If you start via IIS Express, launchSettings.json controls the port.
-            builder.WebHost.UseUrls("http://localhost:5088");
+            // EN: Bind to Render's $PORT in containers; fallback to local dev port.
+            var port = Environment.GetEnvironmentVariable("PORT");
+            if (!string.IsNullOrEmpty(port))
+                {
+                builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+                }
+            else if (builder.Environment.IsDevelopment())
+                {
+                builder.WebHost.UseUrls("http://localhost:5088");
+                }
 
             // ------------------ Configuration & DbContext ------------------
 
@@ -388,52 +417,43 @@ namespace Loco1.Web
                 ?? builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("ConnectionStrings:DefaultConnection not found.");
 
-            // EN: Normalize rare "server=tcp://host:port" to Npgsql format
+            // EN: Normalize rare 'server=tcp://host:port' to Npgsql format
             if (connStr.Contains("tcp://", StringComparison.OrdinalIgnoreCase))
                 {
-                connStr = Regex.Replace(connStr, @"(?i)server\s*=\s*tcp://([^:;]+):(\d+)", "Host=$1;Port=$2");
+                connStr = Regex.Replace(
+                    connStr,
+                    @"(?i)server\s*=\s*tcp://([^:;]+):(\d+)",
+                    "Host=$1;Port=$2");
                 }
 
-            // EN: Log sanitized connection string (mask password)
-            var sanitized = Regex.Replace(connStr, "(?i)password\\s*=\\s*[^;]*", "Password=***");
+            // EN: Log sanitized connection string (mask password) – verbatim regex to avoid CS1009
+            var sanitized = Regex.Replace(connStr, @"(?i)password\s*=\s*[^;]*", "Password=***");
             Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
 
-            // EN: Single DbContext registration (IMPORTANT: keep only this one)
+            // EN: Single DbContext registration (keep only this one)
             builder.Services.AddDbContext<LocoDbContext>(opt => opt.UseNpgsql(connStr));
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             // ------------------ MVC + Localization ------------------
 
-            // EN: Localization (SharedResource-only mode)
             builder.Services.AddLocalization();
             builder.Services
                 .AddControllersWithViews()
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
 
-            // EN: Identity + Roles (dev-friendly password policy)
+            // EN: Identity + Roles (dev-friendly policy)
             builder.Services
                 .AddDefaultIdentity<IdentityUser>(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = false;  // dev
+                    options.SignIn.RequireConfirmedAccount = false;  // dev only
                     options.Password.RequiredLength = 1;
                     options.Password.RequireDigit = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequiredUniqueChars = 0;
-                    options.User.RequireUniqueEmail = false;
-                    options.Lockout.AllowedForNewUsers = false;
-                })
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<LocoDbContext>();
-
-            // EN: DI services
-            builder.Services.AddScoped<IUserRoleService, UserRoleService>();
-
-            // EN: Razor Pages (Identity UI)
-            builder.Services.AddRazorPages();
 
 - ..\Loco1.Services\Program.cs (first 80 lines)
 namespace Loco1.Services;
@@ -517,26 +537,26 @@ namespace Loco1.Data
 - Excluded folders/files: bin, obj, .git, node_modules
 
 # RAW METRICS
-- .css=43 113 lines
-- .db=38 969 lines
+- .css=43 182 lines
 - .js=31 315 lines
+- .db=24 132 lines
 - .sqlite=6 819 lines
 - .bin=3 764 lines
-- .cs=3 538 lines
-- (noext)=1 451 lines
-- .txt=1 423 lines
+- .cs=3 575 lines
+- (noext)=2 508 lines
+- .txt=1 092 lines
 - .config=974 lines
-- .v2=908 lines
-- .cshtml=711 lines
-- .json=508 lines
+- .cshtml=839 lines
+- .v2=536 lines
+- .json=523 lines
+- .resx=519 lines
 - .gitignore=364 lines
-- .resx=287 lines
-- .suo=145 lines
-- .csproj=112 lines
+- .suo=139 lines
+- .csproj=135 lines
 - .ps1=74 lines
 - .gitattributes=63 lines
-- .sln=59 lines
-- .user=58 lines
+- .sln=62 lines
+- .user=50 lines
 - .pubxml=41 lines
 - .bat=26 lines
 - .wsuo=26 lines
@@ -544,4 +564,6 @@ namespace Loco1.Data
 - .map=23 lines
 - .ico=1 lines
 - .vsidx=0 lines
+- .db-shm=0 lines
+- .db-wal=0 lines
 

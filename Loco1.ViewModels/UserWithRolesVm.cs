@@ -2,6 +2,7 @@
 namespace Loco1.ViewModels
     {
     // English: simple projection for the users list
+
     public class UserWithRolesVm
         {
         public string Id { get; set; } = default!;
@@ -9,5 +10,6 @@ namespace Loco1.ViewModels
         public List<string> Roles { get; set; } = new();
         }
 
-    
+
+
     }

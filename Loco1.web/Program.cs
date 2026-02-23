@@ -1,15 +1,16 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
+
+using Loco1.Localizer;             // SharedResource
+using Loco1.Data;                  // DbContext
+using Loco1.Data.Models;           // ApplicationUser
+using Loco1.Service;               // Services implementation
+using Loco1.Service.Abstractions;  // Service contracts
+
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Logging;
-
-using Loco1.Data;                 // EN: DbContext
-using Loco1.Service;              // EN: Services implementation
-using Loco1.Service.Abstractions; // EN: Service contracts
 
 namespace Loco1.Web
     {
@@ -17,12 +18,14 @@ namespace Loco1.Web
         {
         public static async Task Main(string[] args)
             {
-            // EN: Keep legacy timestamp behavior in Npgsql (harmless compatibility switch)
+            // EN: Keep legacy timestamp behavior in Npgsql
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // EN: Bind to Render's $PORT in containers; fallback to local dev port.
+            // ---------------------------------------------------------
+            //  BIND PORT (Render / Dev)
+            // ---------------------------------------------------------
             var port = Environment.GetEnvironmentVariable("PORT");
             if (!string.IsNullOrEmpty(port))
                 {
@@ -33,15 +36,14 @@ namespace Loco1.Web
                 builder.WebHost.UseUrls("http://localhost:5088");
                 }
 
-            // ------------------ Configuration & DbContext ------------------
-
-            // EN: Read connection string; ENV overrides appsettings
+            // ---------------------------------------------------------
+            //  CONNECTION STRING
+            // ---------------------------------------------------------
             var connStr =
                 Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
                 ?? builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("ConnectionStrings:DefaultConnection not found.");
 
-            // EN: Normalize rare 'server=tcp://host:port' to Npgsql format
             if (connStr.Contains("tcp://", StringComparison.OrdinalIgnoreCase))
                 {
                 connStr = Regex.Replace(
@@ -50,28 +52,33 @@ namespace Loco1.Web
                     "Host=$1;Port=$2");
                 }
 
-            // EN: Log sanitized connection string (mask password) – verbatim regex to avoid CS1009
             var sanitized = Regex.Replace(connStr, @"(?i)password\s*=\s*[^;]*", "Password=***");
             Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
 
-            // EN: Single DbContext registration (keep only this one)
             builder.Services.AddDbContext<LocoDbContext>(opt => opt.UseNpgsql(connStr));
-
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            // ------------------ MVC + Localization ------------------
-
+            // ---------------------------------------------------------
+            //  MVC + LOCALIZATION
+            // ---------------------------------------------------------
             builder.Services.AddLocalization();
+
             builder.Services
                 .AddControllersWithViews()
                 .AddViewLocalization()
-                .AddDataAnnotationsLocalization();
-
-            // EN: Identity + Roles (dev-friendly policy)
-            builder.Services
-                .AddDefaultIdentity<IdentityUser>(options =>
+                .AddDataAnnotationsLocalization(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = false;  // dev only
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(SharedResource));
+                });
+
+            // ---------------------------------------------------------
+            //  IDENTITY (ApplicationUser)
+            // ---------------------------------------------------------
+            builder.Services
+                .AddDefaultIdentity<ApplicationUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
                     options.Password.RequiredLength = 1;
                     options.Password.RequireDigit = false;
                     options.Password.RequireNonAlphanumeric = false;
@@ -84,10 +91,12 @@ namespace Loco1.Web
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<LocoDbContext>();
 
-            builder.Services.AddScoped<IUserRoleService, UserRoleService>(); // EN: DI for roles admin
-            builder.Services.AddRazorPages();                                // EN: Identity UI
+            builder.Services.AddScoped<IUserRoleService, UserRoleService>();
+            builder.Services.AddRazorPages(); // Identity UI
 
-            // EN: Supported cultures
+            // ---------------------------------------------------------
+            //  CULTURES
+            // ---------------------------------------------------------
             var supportedCultures = new[]
             {
                 new CultureInfo("bg-BG"),
@@ -101,18 +110,21 @@ namespace Loco1.Web
                 options.SupportedUICultures = supportedCultures;
             });
 
-            // EN: Trust reverse proxy headers (Render/NGINX/any proxy)
+            // ---------------------------------------------------------
+            //  FORWARDED HEADERS
+            // ---------------------------------------------------------
             builder.Services.Configure<ForwardedHeadersOptions>(opts =>
             {
                 opts.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-                // EN: In cloud we don't know proxy IPs; clear to accept all
                 opts.KnownNetworks.Clear();
                 opts.KnownProxies.Clear();
             });
 
             var app = builder.Build();
 
-            // ------------------ DB Migrate -> Seed ------------------
+            // ---------------------------------------------------------
+            //  MIGRATIONS + DATA SEED
+            // ---------------------------------------------------------
             using (var scope = app.Services.CreateScope())
                 {
                 var services = scope.ServiceProvider;
@@ -121,33 +133,30 @@ namespace Loco1.Web
                 try
                     {
                     var db = services.GetRequiredService<LocoDbContext>();
-                    await db.Database.MigrateAsync(); // EN: create/update schema
+                    await db.Database.MigrateAsync();
 
-                    // EN: Seed initial data (roles, admin user, etc.)
                     await Loco1.Web.Infrastructure.DataSeeder.SeedAsync(services);
 
                     logger.LogInformation("Startup DB migrate/seed completed.");
                     }
                 catch (Exception ex)
                     {
-                    // EN: Log full details so we see root cause in Render logs
                     logger.LogCritical(ex, "Startup failure during migrate/seed.");
                     throw;
                     }
                 }
 
-            // ------------------ Middleware pipeline ------------------
-
+            // ---------------------------------------------------------
+            //  MIDDLEWARE PIPELINE
+            // ---------------------------------------------------------
             app.UseForwardedHeaders();
 
-            // EN: Localization
             var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
 
             if (app.Environment.IsDevelopment())
                 {
                 app.UseMigrationsEndPoint();
-                // app.UseHttpsRedirection(); // enable if you trust Dev HTTPS cert
                 }
             else
                 {
@@ -157,21 +166,17 @@ namespace Loco1.Web
                 }
 
             app.UseStaticFiles();
-
             app.UseRouting();
 
-            app.UseAuthentication();   // EN: must be before Authorization
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            // EN: Default MVC route
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            // EN: Razor Pages for Identity UI
             app.MapRazorPages();
 
-            // EN: Simple health endpoint for cloud checks
             app.MapGet("/healthz", () => Results.Ok("OK"));
 
             await app.RunAsync();

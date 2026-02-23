@@ -7,7 +7,7 @@ namespace Loco1.Data
     {
     // Note: We type the IdentityDbContext with IdentityUser (optional but clearer)
     
-    public class LocoDbContext : IdentityDbContext<IdentityUser>
+    public class LocoDbContext : IdentityDbContext<ApplicationUser>
         {
        
         public LocoDbContext(DbContextOptions<LocoDbContext> options)

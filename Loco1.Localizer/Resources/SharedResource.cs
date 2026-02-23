@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Localization;
 
-namespace Loco1.Web.Resources
+namespace Loco1.Localizer
     {
     // Marker class for SharedResource-only localization
     public class SharedResource { }

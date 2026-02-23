@@ -118,15 +118,63 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Header_AppName" xml:space="preserve">
-    <value />
+    <value>Локо</value>
   </data>
   <data name="Footer_R1" xml:space="preserve">
-    <value />
+    <value>Дизайн и изработка: Любомир Чекански ® 2026</value>
   </data>
   <data name="Footer_R2" xml:space="preserve">
-    <value />
+    <value>Създадено с ❤️ от Любомир Чекански ® 2026</value>
   </data>
   <data name="Footer_R3" xml:space="preserve">
-    <value />
+    <value>Проект Loco · Любомир Чекански ® 2026</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>От</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>На</value>
+  </data>
+  <data name="PleaseSelectRole" xml:space="preserve">
+    <value>Моля, изберете роля</value>
+  </data>
+  <data name="NoRolesAvailable" xml:space="preserve">
+    <value>Няма налични роли</value>
+  </data>
+  <data name="EditRolesTitle" xml:space="preserve">
+    <value>Редакция на роли</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Потребител</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Роли</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Запис</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Потвърждение</value>
+  </data>
+  <data name="ConfirmRoleChange" xml:space="preserve">
+    <value>Потвърждавате ли смяна на роля?</value>
+  </data>
+  <data name="Roles updated." xml:space="preserve">
+    <value>Ролите са обновени.</value>
+  </data>
+  <data name="User not found." xml:space="preserve">
+    <value>Потребителят не е намерен.</value>
+  </data>
+  <data name="Role.Owner" xml:space="preserve">
+    <value>Собственик</value>
+  </data>
+  <data name="Role.Admin" xml:space="preserve">
+    <value>Администратор</value>
+  </data>
+  <data name="Role.User" xml:space="preserve">
+    <value>Потребител</value>
   </data>
 </root>

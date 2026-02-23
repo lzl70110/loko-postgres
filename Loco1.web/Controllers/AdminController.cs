@@ -1,71 +1,44 @@
-﻿using Loco1.Web.Resources;
-using Loco1.ViewModels;                           // <-- VM са в отделния проект
+﻿using Loco1.Localizer;
+using Loco1.Service.Abstractions;
+using Loco1.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;              // ToListAsync
 using Microsoft.Extensions.Localization;
 
 namespace Loco1.Web.Controllers
     {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Owner,Admin")]
     public class AdminController : Controller
         {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IStringLocalizer<SharedResource> _localizer;
+        private readonly IUserRoleService _userRoleService;
+        private readonly IStringLocalizer<SharedResource> L;
 
-        public AdminController(
-            UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager,
-            IStringLocalizer<SharedResource> localizer)
+        public AdminController(IUserRoleService userRoleService,
+                               IStringLocalizer<SharedResource> localizer)
             {
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _localizer = localizer;
+            _userRoleService = userRoleService;
+            L = localizer;
             }
 
         // GET: /Admin/Users
         public async Task<IActionResult> Users()
             {
-            var users = await _userManager.Users.ToListAsync();
-
-            var model = new List<UserWithRolesVm>(users.Count);
-            foreach (var u in users)
-                {
-                var roles = await _userManager.GetRolesAsync(u);
-                model.Add(new UserWithRolesVm
-                    {
-                    Id = u.Id,
-                    Email = u.Email ?? u.UserName ?? "(no email)",
-                    Roles = roles.ToList()
-                    });
-                }
-
-            return View(model); // Views/Admin/Users.cshtml
+            var model = await _userRoleService.GetAllUsersWithRolesAsync();
+            return View(model);
             }
 
         // GET: /Admin/EditRoles/{id}
         [HttpGet]
         public async Task<IActionResult> EditRoles(string id)
             {
-            if (string.IsNullOrWhiteSpace(id)) return BadRequest();
+            if (string.IsNullOrWhiteSpace(id))
+                return BadRequest();
 
-            var user = await _userManager.FindByIdAsync(id);
-            if (user is null) return NotFound();
+            var vm = await _userRoleService.GetEditModelAsync(id);
+            if (vm == null)
+                return NotFound();
 
-            var allRoles = await _roleManager.Roles.Select(r => r.Name!).OrderBy(n => n).ToListAsync();
-            var userRoles = await _userManager.GetRolesAsync(user);
-
-            var vm = new EditUserRolesVm
-                {
-                UserId = user.Id,
-                Email = user.Email ?? user.UserName ?? "(no email)",
-                AvailableRoles = allRoles,
-                SelectedRoles = userRoles.ToList()
-                };
-
-            return View(vm); // Views/Admin/EditRoles.cshtml
+            return View(vm);
             }
 
         // POST: /Admin/EditRoles
@@ -73,43 +46,86 @@ namespace Loco1.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditRoles(EditUserRolesVm vm)
             {
-            if (!ModelState.IsValid) return View(vm);
-
-            var user = await _userManager.FindByIdAsync(vm.UserId);
-            if (user is null) return NotFound();
-
-            vm.SelectedRoles ??= new List<string>();
-            var current = await _userManager.GetRolesAsync(user);
-
-            // Remove roles no longer selected
-            var toRemove = current.Where(r => !vm.SelectedRoles.Contains(r)).ToList();
-            if (toRemove.Any())
+            if (!ModelState.IsValid)
                 {
-                var removeRes = await _userManager.RemoveFromRolesAsync(user, toRemove);
-                if (!removeRes.Succeeded)
+                // Never return raw vm (it doesn't contain Email/AvailableRoles)
+                var rebuilt = await _userRoleService.GetEditModelAsync(vm.UserId);
+                if (rebuilt != null)
                     {
-                    ModelState.AddModelError(string.Empty, _localizer["Failed to remove some roles."]);
-                    return View(vm);
+                    rebuilt.SelectedRoles = vm.SelectedRoles ?? new List<string>();
+                    return View(rebuilt);
                     }
+                return RedirectToAction(nameof(Users));
                 }
 
-            // Add newly selected roles (ensure they exist)
-            var toAdd = vm.SelectedRoles.Where(r => !current.Contains(r)).ToList();
-            if (toAdd.Any())
-                {
-                foreach (var role in toAdd)
-                    if (!await _roleManager.RoleExistsAsync(role))
-                        await _roleManager.CreateAsync(new IdentityRole(role));
+            var (ok, errorKey) = await _userRoleService.UpdateRolesAsync(vm);
 
-                var addRes = await _userManager.AddToRolesAsync(user, toAdd);
-                if (!addRes.Succeeded)
+            if (!ok)
+                {
+                var msg = L[errorKey ?? "Role update failed."].Value;
+                ModelState.AddModelError(string.Empty, msg);
+
+                var rebuilt = await _userRoleService.GetEditModelAsync(vm.UserId);
+                if (rebuilt != null)
                     {
-                    ModelState.AddModelError(string.Empty, _localizer["Failed to add some roles."]);
-                    return View(vm);
+                    rebuilt.SelectedRoles = vm.SelectedRoles ?? new List<string>();
+                    return View(rebuilt);
                     }
+                return RedirectToAction(nameof(Users));
                 }
 
-            TempData["StatusMessage"] = _localizer["Roles updated."];
+            TempData["StatusMessage"] = L["Roles updated."].Value;
+            return RedirectToAction(nameof(Users));
+            }
+
+        // POST: /Admin/DeactivateUser/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeactivateUser(string id)
+            {
+            if (string.IsNullOrWhiteSpace(id))
+                {
+                TempData["StatusMessage"] = L["Invalid request."].Value;
+                return RedirectToAction(nameof(Users));
+                }
+
+            var currentUserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (currentUserId == id)
+                {
+                TempData["StatusMessage"] = L["You cannot deactivate yourself."].Value;
+                return RedirectToAction(nameof(Users));
+                }
+
+            var (ok, errorKey) = await _userRoleService.DeactivateUserAsync(id);
+            if (!ok)
+                {
+                TempData["StatusMessage"] = L[errorKey ?? "Delete failed."].Value;
+                return RedirectToAction(nameof(Users));
+                }
+
+            TempData["StatusMessage"] = L["User deactivated."].Value;
+            return RedirectToAction(nameof(Users));
+            }
+
+        // POST: /Admin/RestoreUser/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreUser(string id)
+            {
+            if (string.IsNullOrWhiteSpace(id))
+                {
+                TempData["StatusMessage"] = L["Invalid request."].Value;
+                return RedirectToAction(nameof(Users));
+                }
+
+            var (ok, errorKey) = await _userRoleService.RestoreUserAsync(id);
+            if (!ok)
+                {
+                TempData["StatusMessage"] = L[errorKey ?? "Restore failed."].Value;
+                return RedirectToAction(nameof(Users));
+                }
+
+            TempData["StatusMessage"] = L["User restored."].Value;
             return RedirectToAction(nameof(Users));
             }
         }
