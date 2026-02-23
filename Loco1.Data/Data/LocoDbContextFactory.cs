@@ -10,7 +10,7 @@ namespace Loco1.Data
             {
             // Use the same connection string you have in appsettings for dev
             var connectionString =
-                "Host=localhost;Port=5432;Database=loco_db;Username=loco_user;Password=701109;Include Error Detail=true;Pooling=true;Maximum Pool Size=50";
+                "Host=localhost;Port=5432;Database=loco_db;Username=loco_user;Password=L1ubo197o;Include Error Detail=true;Pooling=true;Maximum Pool Size=50";
 
             var options = new DbContextOptionsBuilder<LocoDbContext>()
                 .UseNpgsql(connectionString)

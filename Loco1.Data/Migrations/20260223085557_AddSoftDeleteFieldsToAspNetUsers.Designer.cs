@@ -3,6 +3,7 @@ using System;
 using Loco1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Loco1.Data.Migrations
 {
     [DbContext(typeof(LocoDbContext))]
-    partial class LocoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260223085557_AddSoftDeleteFieldsToAspNetUsers")]
+    partial class AddSoftDeleteFieldsToAspNetUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
