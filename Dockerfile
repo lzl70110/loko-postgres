@@ -10,7 +10,7 @@ COPY Loco1.Data.Models/*.csproj Loco1.Data.Models/
 COPY Loco1.Service/*.csproj Loco1.Service/
 COPY Loco1.ViewModels/*.csproj Loco1.ViewModels/
 COPY GCommon/*.csproj GCommon/
-
+COPY Loco1.Localizer/*.csproj Loco1.Localizer/
 RUN dotnet restore
 
 # Copy the remaining source and publish the web app
