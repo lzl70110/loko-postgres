@@ -177,4 +177,10 @@
   <data name="Role.User" xml:space="preserve">
     <value>Потребител</value>
   </data>
+  <data name="Deactivate" xml:space="preserve">
+    <value> Деактивирай</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Действия</value>
+  </data>
 </root>

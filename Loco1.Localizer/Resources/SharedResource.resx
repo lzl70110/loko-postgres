@@ -177,4 +177,10 @@
   <data name="Role.User" xml:space="preserve">
     <value>  </value>
   </data>
+  <data name="Deactivate" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value />
+  </data>
 </root>
