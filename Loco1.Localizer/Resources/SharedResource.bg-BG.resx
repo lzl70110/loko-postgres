@@ -129,47 +129,26 @@
   <data name="Footer_R3" xml:space="preserve">
     <value>Проект Loco · Любомир Чекански ® 2026</value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>Начало</value>
+  <data name="From" xml:space="preserve">
+    <value>От</value>
   </data>
-  <data name="Privacy" xml:space="preserve">
-    <value>Поверителност</value>
+  <data name="To" xml:space="preserve">
+    <value>На</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Вход</value>
+  <data name="PleaseSelectRole" xml:space="preserve">
+    <value>Моля, изберете роля</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Изход</value>
+  <data name="NoRolesAvailable" xml:space="preserve">
+    <value>Няма налични роли</value>
   </data>
-  <data name="Register" xml:space="preserve">
-    <value>Регистрация</value>
-  </data>
-  <data name="Admin" xml:space="preserve">
-    <value>Администратор</value>
-  </data>
-  <data name="Users" xml:space="preserve">
-    <value>Потребители</value>
-  </data>
-  <data name="owner" xml:space="preserve">
-    <value>собственик</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Имейл</value>
-  </data>
-  <data name="Roles" xml:space="preserve">
-    <value>Роли</value>
-  </data>
-  <data name="No roles" xml:space="preserve">
-    <value>Няма роли</value>
-  </data>
-  <data name="Edit Roles" xml:space="preserve">
+  <data name="EditRolesTitle" xml:space="preserve">
     <value>Редакция на роли</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Потребител</value>
   </data>
-  <data name="No roles available" xml:space="preserve">
-    <value>Няма налични роли</value>
+  <data name="Roles" xml:space="preserve">
+    <value>Роли</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Запис</value>
@@ -177,40 +156,25 @@
   <data name="Back" xml:space="preserve">
     <value>Назад</value>
   </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Потвърждение</value>
+  </data>
+  <data name="ConfirmRoleChange" xml:space="preserve">
+    <value>Потвърждавате ли смяна на роля?</value>
+  </data>
   <data name="Roles updated." xml:space="preserve">
     <value>Ролите са обновени.</value>
-  </data>
-  <data name="Failed to remove some roles." xml:space="preserve">
-    <value>Някои роли не бяха премахнати.</value>
-  </data>
-  <data name="Failed to add some roles." xml:space="preserve">
-    <value>Някои роли не бяха добавени.</value>
-  </data>
-  <data name="Failed to update roles: {0}" xml:space="preserve">
-    <value>Неуспешно обновяване на роли: {0}</value>
-  </data>
-  <data name="Cannot remove Owner role." xml:space="preserve">
-    <value>Ролята Owner не може да бъде премахната.</value>
-  </data>
-  <data name="Cannot remove the last admin." xml:space="preserve">
-    <value>Не може да премахнете последния администратор.</value>
-  </data>
-  <data name="Role update failed." xml:space="preserve">
-    <value>Неуспешно обновяване на ролите.</value>
-  </data>
-  <data name="Invalid request." xml:space="preserve">
-    <value>Невалидна заявка.</value>
   </data>
   <data name="User not found." xml:space="preserve">
     <value>Потребителят не е намерен.</value>
   </data>
-  <data name="Owner cannot be removed here" xml:space="preserve">
-    <value>Ролята Собственик не може да се премахне тук</value>
+  <data name="Role.Owner" xml:space="preserve">
+    <value>Собственик</value>
   </data>
-  <data name="Welcome" xml:space="preserve">
-    <value>Добре дошли</value>
+  <data name="Role.Admin" xml:space="preserve">
+    <value>Администратор</value>
   </data>
-  <data name="Learn about building Web apps with ASP.NET Core" xml:space="preserve">
-    <value>Уроци за разработка на уеб приложения с ASP.NET Core</value>
+  <data name="Role.User" xml:space="preserve">
+    <value>Потребител</value>
   </data>
 </root>

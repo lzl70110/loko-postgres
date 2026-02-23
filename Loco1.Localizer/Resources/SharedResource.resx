@@ -129,4 +129,52 @@
   <data name="Footer_R3" xml:space="preserve">
     <value />
   </data>
+  <data name="From" xml:space="preserve">
+    <value />
+  </data>
+  <data name="To" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PleaseSelectRole" xml:space="preserve">
+    <value />
+  </data>
+  <data name="NoRolesAvailable" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EditRolesTitle" xml:space="preserve">
+    <value>  </value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>  </value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>  </value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>  </value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>      </value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>  </value>
+  </data>
+  <data name="ConfirmRoleChange" xml:space="preserve">
+    <value>  </value>
+  </data>
+  <data name="Roles updated." xml:space="preserve">
+    <value>  </value>
+  </data>
+  <data name="User not found." xml:space="preserve">
+    <value>  </value>
+  </data>
+  <data name="Role.Owner" xml:space="preserve">
+    <value>  </value>
+  </data>
+  <data name="Role.Admin" xml:space="preserve">
+    <value>   </value>
+  </data>
+  <data name="Role.User" xml:space="preserve">
+    <value>  </value>
+  </data>
 </root>
