@@ -48,7 +48,6 @@ namespace Loco1.Web.Controllers
             {
             if (!ModelState.IsValid)
                 {
-                // Never return raw vm (it doesn't contain Email/AvailableRoles)
                 var rebuilt = await _userRoleService.GetEditModelAsync(vm.UserId);
                 if (rebuilt != null)
                     {

@@ -25,7 +25,16 @@ namespace Loco1.Data.Models
 
         public int EntityId { get; set; }
 
-        
+        [Required]
+        [MaxLength(CreatedByMaxLength)]
+        public string CreatedBy { get; set; } = null!;
+
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public string? ModifiedBy { get; set; } 
+
+        public DateTime? ModifiedAt { get; set; }
+
         public DateTime Timestamp { get; set; } = DateTime.UtcNow;
 
         public virtual Locomotive? Locomotive { get; set; }

@@ -4,7 +4,7 @@ namespace Loco1.Data.Models
     {
     public class ApplicationUser : IdentityUser
         {
-        // EN: Soft-delete support (full restore needs the originals)
+        // Soft-delete flag; original fields allow full restore if reactivated
         public bool IsDeactivated { get; set; }
 
         public string? OriginalEmail { get; set; }
