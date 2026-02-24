@@ -1,172 +1,165 @@
-﻿@using Loco1.Localizer
+﻿@using Loco1.Data.Models
 @using Microsoft.AspNetCore.Identity
-@using Loco1.Data.Models
+@using System.Globalization
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 @inject SignInManager<ApplicationUser> SignInManager
 @inject IConfiguration Configuration
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Loco1</title>
+    <title>@ViewData["Title"] - @L["Header_AppName"]</title>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml"
-          href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚂%3C/text%3E%3C/svg%3E">
-
-    <!-- CSS -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%F0%9F%9A%82%3C/svg%3E" type="image/svg+xml">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Loco1.web.styles.css" asp-append-version="true" />
-    </head>
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/Loco1.web.styles.css" />
 
-    <body>
+    <style>
+        .loco-navbar { min-height: 58px; }
+        .loco-brand { display: flex; align-items: center; gap: .5rem; font-weight: 600; }
+        .loco-nav-right { display: flex; align-items: center; gap: .5rem; }
+        .loco-actions { display: flex; align-items: center; gap: .5rem; }
+        .loco-lang { margin-left: .5rem; }
+        .loco-navbar .btn { padding: .25rem .55rem; }
+        .loco-navbar .btn.btn-primary { padding: .27rem .64rem; }
+        .loco-badge { margin-right: .25rem; }
 
-    <!-- ================= HEADER ================= -->
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
-                <div class="container-fluid">
+        .sidebar-nav .list-group-item { padding-top: .65rem; padding-bottom: .65rem; display: flex; align-items: center; gap: .5rem; }
+        .sidebar-nav .list-group-item + .list-group-item { border-top: 1px solid rgba(0,0,0,.06); }
+        .sidebar-nav .list-group-item-action { transition: background-color .15s ease, padding-left .15s ease; }
+        .sidebar-nav .list-group-item-action:hover { background-color: #f7f9fc; padding-left: 1.1rem; }
+        .sidebar-nav .section-title { background: #fafafa; letter-spacing: .02em; font-size: 0.75rem; }
+        .sidebar-subitem { padding-left: 1.5rem; font-size: 0.9rem; }
+        #status-message { transition: opacity .8s ease; }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm loco-navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand loco-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="fs-4">🚂</span>
+                    <span class="d-none d-md-inline ms-1">@L["Header_AppName"]</span>
+                </a>
 
-                <!-- Brand -->
-                    <a class="navbar-brand fw-bold text-primary"
-                       asp-controller="Home"
-                       asp-action="Index">
-                    🚂
-                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                <!-- Right Side -->
-                    <div class="ms-auto d-flex align-items-center">
-
+                <div class="ms-auto loco-nav-right d-none d-lg-flex">
                     @if (SignInManager.IsSignedIn(User))
-                        {
-                            <div class="me-3">
-                            <partial name="_UserBadge" />
-                            </div>
-
-                            <form asp-area="Identity"
-                              asp-page="/Account/Logout"
-                              asp-route-returnUrl="@Url.Action("Index","Home")"
-                              method="post"
-                              class="me-3">
-                                <button type="submit"
-                                    class="btn btn-sm btn-outline-danger">
-                                @L["Logout"]
+                    {
+                        <div class="loco-actions">
+                            <div class="loco-badge"><partial name="_UserBadge" /></div>
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index","Home")" method="post">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-box-arrow-right"></i> <span>@L["Logout"]</span>
                                 </button>
                             </form>
-                        }
-                    else
-                        {
-                            <a class="btn btn-sm btn-outline-primary me-2"
-                               asp-area="Identity"
-                               asp-page="/Account/Login">
-                            @L["Login"]
-                            </a>
-
-                            <a class="btn btn-sm btn-primary me-3"
-                               asp-area="Identity"
-                               asp-page="/Account/Register">
-                            @L["Register"]
-                            </a>
-                        }
-
-                        <div>
-                        @await Html.PartialAsync("_LanguageSwitcher")
                         </div>
+                    }
+                    else
+                    {
+                        <div class="loco-actions">
+                            <a class="btn btn-sm btn-outline-primary" asp-area="Identity" asp-page="/Account/Login">
+                                <i class="bi bi-box-arrow-in-right"></i> <span>@L["LoginButton"]</span>
+                            </a>
+                            <a class="btn btn-sm btn-primary" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="bi bi-person-plus-fill"></i> <span>@L["RegisterButton"]</span>
+                            </a>
+                        </div>
+                    }
 
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-    <!-- ================= STATUS MESSAGE ================= -->
-    @if (TempData["StatusMessage"] is string status && !string.IsNullOrWhiteSpace(status))
-        {
-            <div class="container mt-3">
-                <div class="alert alert-success alert-dismissible fade show">
-                @status
-                    <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert">
-                    </button>
+                    <div class="loco-lang">@await Html.PartialAsync("_LanguageSwitcher")</div>
                 </div>
             </div>
-        }
+        </nav>
+    </header>
 
-    <!-- ================= MAIN CONTENT ================= -->
-        <div class="container my-4">
-            <div class="row">
-
-            <!-- Sidebar -->
-                <aside class="col-12 col-lg-3 mb-4">
-                    <div class="card shadow-sm">
-                        <div class="list-group list-group-flush">
-
-                            <a class="list-group-item list-group-item-action"
-                               asp-controller="Home"
-                               asp-action="Index">
-                            @L["Home"]
-                            </a>
-
-                            <a class="list-group-item list-group-item-action"
-                               asp-controller="Home"
-                               asp-action="Privacy">
-                            @L["Privacy"]
-                            </a>
-
-                            @{
-                            var adminEnabled =
-                                Configuration.GetValue<bool?>("Features:Admin") ?? true;
-
-                            var canSeeAdmin = adminEnabled
-                                              && SignInManager.IsSignedIn(User)
-                                              && (User.IsInRole("Admin") || User.IsInRole("Owner"));
-                            }
-
-                        @if (canSeeAdmin)
-                            {
-                                <div class="list-group-item text-uppercase small fw-semibold text-muted">
-                                @L["Admin"]
-                                </div>
-
-                                <a class="list-group-item list-group-item-action"
-                                   asp-controller="Admin"
-                                   asp-action="Users">
-                                @L["Users"]
-                                </a>
-                            }
-
-                        </div>
-                    </div>
-                </aside>
-
-            <!-- Page Body -->
-                <main class="col-12 col-lg-9">
-                @RenderBody()
-                </main>
-
+    <!-- Mobile Sidebar -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="mobileSidebarLabel">@L["Header_AppName"]</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <div class="list-group list-group-flush sidebar-nav">
+                <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-house-door-fill"></i> @L["Home"]
+                </a>
+                <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="Privacy">
+                    <i class="bi bi-shield-lock-fill"></i> @L["Privacy_Title"]
+                </a>
+                @await Html.PartialAsync("_AdminSidebar")
             </div>
         </div>
+    </div>
 
-    <!-- ================= FOOTER ================= -->
-        <footer class="border-top text-muted py-3 mt-4">
-            <div class="container text-center small">
+    <!-- STATUS MESSAGE -->
+    @if (TempData["StatusMessage"] is string status && !string.IsNullOrWhiteSpace(status))
+    {
+        <div class="container mt-3">
+            <div id="status-message" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                @status
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    }
 
-                <span class="rotator d-block">
+    <!-- MAIN CONTENT -->
+    <div class="container my-4">
+        <div class="row">
+            <!-- Desktop Sidebar -->
+            <aside class="col-12 col-lg-3 mb-4 d-none d-lg-block">
+                <div class="card shadow-sm">
+                    <div class="list-group list-group-flush sidebar-nav">
+                        <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="bi bi-house-door-fill"></i> @L["Home"]
+                        </a>
+                        <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="Privacy">
+                            <i class="bi bi-shield-lock-fill"></i> @L["Privacy_Title"]
+                        </a>
+                        @await Html.PartialAsync("_AdminSidebar")
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Page Body -->
+            <main class="col-12 col-lg-9">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-top text-muted py-3 mt-4">
+        <div class="container text-center small">
+            <span class="rotator d-block">
                 <span class="rotator__item">@L["Footer_R1"]</span>
                 <span class="rotator__item">@L["Footer_R2"]</span>
                 <span class="rotator__item">@L["Footer_R3"]</span>
-                </span>
+            </span>
+        </div>
+    </footer>
 
-            </div>
-        </footer>
-
-    <!-- JS -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/site.js"></script>
+    <script>
+        // Hide status messages after 3s
+        setTimeout(() => {
+            const el = document.getElementById('status-message');
+            if (!el) return;
+            el.style.opacity = "0";
+            setTimeout(() => { if (el && el.parentElement) el.parentElement.removeChild(el); }, 800);
+        }, 3000);
+    </script>
 
-    </body>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
 </html>
