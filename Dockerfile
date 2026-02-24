@@ -14,7 +14,6 @@ COPY Loco1.Services/*.csproj Loco1.Services/
 COPY Loco1.ViewModels/*.csproj Loco1.ViewModels/
 COPY Loco1.Localizer/*.csproj Loco1.Localizer/
 COPY GCommon/*.csproj GCommon/
-
 # Restore
 RUN dotnet restore
 
