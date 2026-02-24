@@ -291,8 +291,14 @@
   <data name="Please select a role." xml:space="preserve">
     <value>Моля, изберете роля.</value>
   </data>
-  <data name="Admin" xml:space="preserve">
+  <data name="ADMIN" xml:space="preserve">
     <value>Администратор</value>
+  </data>
+  <data name="ADMIN1" xml:space="preserve">
+    <value>Администратор</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>СОБСТВЕНИК</value>
   </data>
   <data name="PleaseSelectRole" xml:space="preserve">
     <value>Моля, изберете роля</value>
@@ -300,7 +306,19 @@
   <data name="Roles updated." xml:space="preserve">
     <value>Ролите са обновени.</value>
   </data>
-  <data name="Owner" xml:space="preserve">
-    <value>СОБСТВЕНИК</value>
+  <data name="WorkSection" xml:space="preserve">
+    <value>Експлоатация</value>
+  </data>
+  <data name="ShiftWork" xml:space="preserve">
+    <value>Работа в смяна</value>
+  </data>
+  <data name="Repairs" xml:space="preserve">
+    <value>Ремонти</value>
+  </data>
+  <data name="PlanedRepairs" xml:space="preserve">
+    <value>Планови ремонти</value>
+  </data>
+  <data name="Locomotives" xml:space="preserve">
+    <value>Локомотиви</value>
   </data>
 </root>

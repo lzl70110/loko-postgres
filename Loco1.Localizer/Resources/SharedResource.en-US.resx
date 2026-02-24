@@ -291,8 +291,14 @@
   <data name="Please select a role." xml:space="preserve">
     <value>Please select a role.</value>
   </data>
-  <data name="Admin" xml:space="preserve">
+  <data name="ADMIN" xml:space="preserve">
     <value>Admin</value>
+  </data>
+  <data name="ADMIN1" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Owner</value>
   </data>
   <data name="PleaseSelectRole" xml:space="preserve">
     <value>Please select a role.</value>
@@ -300,7 +306,19 @@
   <data name="Roles updated." xml:space="preserve">
     <value>Roles updated.</value>
   </data>
-  <data name="Owner" xml:space="preserve">
-    <value>Owner</value>
+  <data name="WorkSection" xml:space="preserve">
+    <value>Driving</value>
+  </data>
+  <data name="ShiftWork" xml:space="preserve">
+    <value> ShiftWork</value>
+  </data>
+  <data name="Repairs" xml:space="preserve">
+    <value>Repairs</value>
+  </data>
+  <data name="PlanedRepairs" xml:space="preserve">
+    <value>Planed Repairs</value>
+  </data>
+  <data name="Locomotives" xml:space="preserve">
+    <value>Locomotives</value>
   </data>
 </root>

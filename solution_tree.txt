@@ -1,12 +1,12 @@
 # SUMMARY
 - Root: C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
-- ScanTimeUtc: 2026-02-24T12:22:06.8336327Z
+- ScanTimeUtc: 2026-02-24T18:23:54.0966157Z
 - OS: Win32NT 10.0.26100.0 (Microsoft Windows 10.0.26100)
 - .NET SDKs (from dotnet --info): 8.0.124; 9.0.311; 10.0.103
 - Solution files: 1
 - Projects: 8
-- Total files: 198 | Total size: 23,38 MB
-- Code lines: .css=43 182; .js=31 315; .db=28 099; .sqlite=6 819; .cs=3 633; (noext)=2 513; .txt=1 897; .config=974; .resx=912; .cshtml=802; .json=608; .v2=531; .gitignore=364; .suo=208; .csproj=139; .ps1=74; .sln=65; .gitattributes=63; .user=51; .pubxml=30; .bat=26; .wsuo=26; .md=23; .map=23; .ico=1; .vsidx=0; .db-shm=0; .db-wal=0
+- Total files: 198 | Total size: 23,37 MB
+- Code lines: .css=43 182; .js=31 315; .db=28 099; .sqlite=6 889; .cs=3 633; (noext)=2 513; .txt=1 892; .config=974; .resx=912; .cshtml=822; .v2=531; .gitignore=364; .json=310; .suo=180; .csproj=139; .ps1=74; .sln=65; .gitattributes=63; .user=51; .pubxml=30; .bat=26; .wsuo=26; .md=23; .map=23; .ico=1; .vsidx=0; .db-shm=0; .db-wal=0
 
 # SOLUTIONS
 - ..\Loco_17_Feb.sln
@@ -145,11 +145,11 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   │   ├── DesignTimeBuild
 │   │   │   └── .dtbcache.v2
 │   │   ├── FileContentIndex
-│   │   │   ├── 0dbdc0db-13a1-40f2-9d60-ecd15fa16593.vsidx
-│   │   │   ├── 36877411-c661-453e-ade5-0c0d29c94b65.vsidx
-│   │   │   ├── a1c72ec4-dfa6-45fd-94a3-1fad1e970d48.vsidx
-│   │   │   ├── bcf1eb6e-9408-49f4-9b7e-58a83f409422.vsidx
-│   │   │   └── c9c270f9-fc05-45dc-831d-aab34a03d60d.vsidx
+│   │   │   ├── 0f413f42-8338-4601-ac2e-5a85ecc0733a.vsidx
+│   │   │   ├── 2af25470-b1d8-46f7-b4e8-9331f0570f95.vsidx
+│   │   │   ├── 7ba295c2-c479-417b-bee2-8bb2717ac48d.vsidx
+│   │   │   ├── 90c4bbac-ea0f-41ac-82f3-6d0fc58a87e6.vsidx
+│   │   │   └── c5479789-a1ba-4274-8bf5-b5909917f413.vsidx
 │   │   ├── v17
 │   │   │   ├── .futdcache.v2
 │   │   │   ├── .suo
@@ -535,17 +535,17 @@ namespace Loco1.Data
 - .css=43 182 lines
 - .js=31 315 lines
 - .db=28 099 lines
-- .sqlite=6 819 lines
+- .sqlite=6 889 lines
 - .cs=3 633 lines
 - (noext)=2 513 lines
-- .txt=1 897 lines
+- .txt=1 892 lines
 - .config=974 lines
 - .resx=912 lines
-- .cshtml=802 lines
-- .json=608 lines
+- .cshtml=822 lines
 - .v2=531 lines
 - .gitignore=364 lines
-- .suo=208 lines
+- .json=310 lines
+- .suo=180 lines
 - .csproj=139 lines
 - .ps1=74 lines
 - .sln=65 lines
