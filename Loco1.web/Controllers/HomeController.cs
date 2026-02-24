@@ -1,32 +1,29 @@
-using System.Diagnostics;
-using Loco1.web.Models;
+﻿using System.Diagnostics;
+using Loco1.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Loco1.web.Controllers
-{
-    public class HomeController : Controller
+namespace Loco1.Web.Controllers
     {
+    public class HomeController : Controller
+        {
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
-        {
+            {
             _logger = logger;
-        }
+            }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        public IActionResult Privacy() => View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            {
+            return View(new web.Models.ErrorViewModel
+                {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+                });
+            }
         }
     }
-}

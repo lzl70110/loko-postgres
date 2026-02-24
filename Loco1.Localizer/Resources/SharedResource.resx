@@ -118,69 +118,183 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Header_AppName" xml:space="preserve">
-    <value />
+    <value>Loco</value>
   </data>
   <data name="Footer_R1" xml:space="preserve">
-    <value />
+    <value>Design &amp; Build by Lyubomir Chekanski ® 2026</value>
   </data>
   <data name="Footer_R2" xml:space="preserve">
-    <value />
+    <value>Created with ❤️ by Lyubomir Chekanski ® 2026</value>
   </data>
   <data name="Footer_R3" xml:space="preserve">
-    <value />
+    <value>Loco Project · Lyubomir Chekanski ® 2026</value>
   </data>
   <data name="From" xml:space="preserve">
-    <value />
+    <value>From</value>
   </data>
   <data name="To" xml:space="preserve">
-    <value />
+    <value>To</value>
   </data>
-  <data name="PleaseSelectRole" xml:space="preserve">
-    <value />
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
   </data>
-  <data name="NoRolesAvailable" xml:space="preserve">
-    <value />
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
   </data>
-  <data name="EditRolesTitle" xml:space="preserve">
-    <value>  </value>
+  <data name="WelcomeSubtitle" xml:space="preserve">
+    <value>Locomotive management system — Loco</value>
   </data>
-  <data name="User" xml:space="preserve">
-    <value>  </value>
+  <data name="Privacy_Title" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Privacy_P1" xml:space="preserve">
+    <value>This system is intended for internal use only. No personal information is shared with third parties.</value>
+  </data>
+  <data name="Privacy_P2" xml:space="preserve">
+    <value>The application stores only the data required for authentication, authorization, and operational functionality. Access is restricted to authorized personnel.</value>
+  </data>
+  <data name="Privacy_P3" xml:space="preserve">
+    <value>If you have questions about how data is handled or stored, contact your system administrator.</value>
+  </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Error_Message" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
+  </data>
+  <data name="Error_RequestId" xml:space="preserve">
+    <value>Request ID</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="LoginButton" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>Invalid login attempt.</value>
+  </data>
+  <data name="LockoutTitle" xml:space="preserve">
+    <value>Locked out</value>
+  </data>
+  <data name="LockoutMessage" xml:space="preserve">
+    <value>This account has been locked out. Please try again later.</value>
+  </data>
+  <data name="AccessDeniedTitle" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="AccessDeniedMessage" xml:space="preserve">
+    <value>You do not have access to this resource.</value>
+  </data>
+  <data name="RegisterTitle" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="RegisterButton" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
   </data>
   <data name="Roles" xml:space="preserve">
-    <value>  </value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>  </value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>      </value>
-  </data>
-  <data name="Confirm" xml:space="preserve">
-    <value>  </value>
-  </data>
-  <data name="ConfirmRoleChange" xml:space="preserve">
-    <value>  </value>
-  </data>
-  <data name="Roles updated." xml:space="preserve">
-    <value>  </value>
-  </data>
-  <data name="User not found." xml:space="preserve">
-    <value>  </value>
-  </data>
-  <data name="Role.Owner" xml:space="preserve">
-    <value>  </value>
-  </data>
-  <data name="Role.Admin" xml:space="preserve">
-    <value>   </value>
-  </data>
-  <data name="Role.User" xml:space="preserve">
-    <value>  </value>
-  </data>
-  <data name="Deactivate" xml:space="preserve">
-    <value> </value>
+    <value>Roles</value>
   </data>
   <data name="Actions" xml:space="preserve">
-    <value />
+    <value>Actions</value>
+  </data>
+  <data name="Edit roles" xml:space="preserve">
+    <value>Edit roles</value>
+  </data>
+  <data name="Deactivate" xml:space="preserve">
+    <value>Deactivate</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Are you sure?" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="Restore this user?" xml:space="preserve">
+    <value>Restore this user?</value>
+  </data>
+  <data name="EditRolesTitle" xml:space="preserve">
+    <value>Edit roles</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="ConfirmRoleChange" xml:space="preserve">
+    <value>Confirm role change?</value>
+  </data>
+  <data name="NoRolesAvailable" xml:space="preserve">
+    <value>No roles available</value>
+  </data>
+  <data name="Owner cannot be removed here" xml:space="preserve">
+    <value>Owner cannot be changed here</value>
+  </data>
+  <data name="Role.Owner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Role.Admin" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="Role.User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="PR_TP1" xml:space="preserve">
+    <value>TP-1</value>
+  </data>
+  <data name="PR_TP2" xml:space="preserve">
+    <value>TP-2</value>
+  </data>
+  <data name="PR_MPR" xml:space="preserve">
+    <value>MPR</value>
+  </data>
+  <data name="User deactivated." xml:space="preserve">
+    <value>User has been deactivated.</value>
+  </data>
+  <data name="User restored." xml:space="preserve">
+    <value>User has been restored.</value>
+  </data>
+  <data name="Invalid request." xml:space="preserve">
+    <value>Invalid request.</value>
+  </data>
+  <data name="Delete failed." xml:space="preserve">
+    <value>Deactivation failed.</value>
+  </data>
+  <data name="Restore failed." xml:space="preserve">
+    <value>Restore failed.</value>
+  </data>
+  <data name="Cannot remove the last admin." xml:space="preserve">
+    <value>Cannot remove the last administrator.</value>
+  </data>
+  <data name="User not found." xml:space="preserve">
+    <value>User not found.</value>
+  </data>
+  <data name="You cannot deactivate yourself." xml:space="preserve">
+    <value>You cannot deactivate your own account.</value>
+  </data>
+  <data name="Please select a role." xml:space="preserve">
+    <value>Please select a role.</value>
+  </data>
+  <data name="ADMIN" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Owner</value>
   </data>
 </root>

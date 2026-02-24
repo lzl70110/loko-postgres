@@ -9,6 +9,7 @@ using Loco1.Service.Abstractions;  // Service contracts
 
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;     // <-- required for RequestLocalizationOptions / RequestCulture
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -18,7 +19,7 @@ namespace Loco1.Web
         {
         public static async Task Main(string[] args)
             {
-            // EN: Keep legacy timestamp behavior in Npgsql
+            // Keep legacy timestamp behavior in Npgsql (compatibility switch)
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             var builder = WebApplication.CreateBuilder(args);
@@ -44,6 +45,7 @@ namespace Loco1.Web
                 ?? builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("ConnectionStrings:DefaultConnection not found.");
 
+            // Normalize rare 'server=tcp://host:port' into Npgsql format
             if (connStr.Contains("tcp://", StringComparison.OrdinalIgnoreCase))
                 {
                 connStr = Regex.Replace(
@@ -52,6 +54,7 @@ namespace Loco1.Web
                     "Host=$1;Port=$2");
                 }
 
+            // Log sanitized connection string (mask password)
             var sanitized = Regex.Replace(connStr, @"(?i)password\s*=\s*[^;]*", "Password=***");
             Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
 
@@ -78,6 +81,7 @@ namespace Loco1.Web
             builder.Services
                 .AddDefaultIdentity<ApplicationUser>(options =>
                 {
+                    // Dev-friendly; tighten for production
                     options.SignIn.RequireConfirmedAccount = false;
                     options.Password.RequiredLength = 1;
                     options.Password.RequireDigit = false;
@@ -105,9 +109,18 @@ namespace Loco1.Web
 
             builder.Services.Configure<RequestLocalizationOptions>(options =>
             {
-                options.DefaultRequestCulture = new("bg-BG");
+                options.DefaultRequestCulture = new RequestCulture("bg-BG");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
+
+                // Prefer culture from cookie when user switches language explicitly
+                var cookieProvider = new CookieRequestCultureProvider
+                    {
+                    CookieName = ".Loco.Culture"
+                    };
+
+                // Make cookie the first provider (then query string, then Accept-Language)
+                options.RequestCultureProviders.Insert(0, cookieProvider);
             });
 
             // ---------------------------------------------------------
@@ -136,7 +149,6 @@ namespace Loco1.Web
                     await db.Database.MigrateAsync();
 
                     await Loco1.Web.Infrastructure.DataSeeder.SeedAsync(services);
-
                     logger.LogInformation("Startup DB migrate/seed completed.");
                     }
                 catch (Exception ex)
@@ -147,7 +159,7 @@ namespace Loco1.Web
                 }
 
             // ---------------------------------------------------------
-            //  MIDDLEWARE PIPELINE
+            //  MIDDLEWARE PIPELINE (order matters)
             // ---------------------------------------------------------
             app.UseForwardedHeaders();
 

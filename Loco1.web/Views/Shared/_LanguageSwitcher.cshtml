@@ -2,14 +2,39 @@
 @using Microsoft.AspNetCore.Http.Extensions
 
 @{
+    // ---------------------------------------------------------
+    //  CONTEXT: current culture & return URL
+    // ---------------------------------------------------------
     var feature = Context.Features.Get<IRequestCultureFeature>();
     var current = feature?.RequestCulture.Culture?.Name ?? "bg-BG";
+
+    // Preserve current path and query as returnUrl
     var returnUrl = Context.Request.Path + Context.Request.QueryString;
 
-    string active(string c) => string.Equals(current, c, StringComparison.OrdinalIgnoreCase) ? "fw-bold" : "";
+    // Helper to mark active link
+    string Active(string c) => string.Equals(current, c, StringComparison.OrdinalIgnoreCase) ? "fw-bold" : "";
     }
-    <div class="d-flex align-items-center gap-2">
-    <a class="nav-link p-0 @active("bg-BG")" asp-controller="Language" asp-action="SetLanguage" asp-route-culture="bg-BG" asp-route-returnUrl="@returnUrl">BG</a>
+
+<!-- -------------------------------------------------------
+     LANGUAGE SWITCHER
+     -------------------------------------------------------
+     Uses LanguageController.SetLanguage to set cookie and redirect back. -->
+<div class="d-flex align-items-center gap-2">
+    <a class="nav-link p-0 @Active("bg-BG")"
+       asp-controller="Language"
+       asp-action="SetLanguage"
+       asp-route-culture="bg-BG"
+       asp-route-returnUrl="@returnUrl">
+        BG
+    </a>
+
     <span class="text-muted">|</span>
-    <a class="nav-link p-0 @active("en-US")" asp-controller="Language" asp-action="SetLanguage" asp-route-culture="en-US" asp-route-returnUrl="@returnUrl">EN</a>
-    </div>
+
+    <a class="nav-link p-0 @Active("en-US")"
+       asp-controller="Language"
+       asp-action="SetLanguage"
+       asp-route-culture="en-US"
+       asp-route-returnUrl="@returnUrl">
+        EN
+    </a>
+</div>
