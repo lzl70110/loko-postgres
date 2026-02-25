@@ -1,12 +1,12 @@
 # SUMMARY
 - Root: C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
-- ScanTimeUtc: 2026-02-22T21:41:32.3053637Z
+- ScanTimeUtc: 2026-02-25T11:57:14.3706966Z
 - OS: Win32NT 10.0.26100.0 (Microsoft Windows 10.0.26100)
 - .NET SDKs (from dotnet --info): 8.0.124; 9.0.311; 10.0.103
 - Solution files: 1
 - Projects: 8
-- Total files: 203 | Total size: 14,38 MB
-- Code lines: .css=43 182; .js=31 315; .db=24 132; .sqlite=6 819; .bin=3 764; .cs=3 575; (noext)=2 508; .txt=1 092; .config=974; .cshtml=839; .v2=536; .json=523; .resx=519; .gitignore=364; .suo=139; .csproj=135; .ps1=74; .gitattributes=63; .sln=62; .user=50; .pubxml=41; .bat=26; .wsuo=26; .md=23; .map=23; .ico=1; .vsidx=0; .db-shm=0; .db-wal=0
+- Total files: 210 | Total size: 15,84 MB
+- Code lines: .css=43 133; .db=42 689; .js=31 315; .sqlite=6 886; .cs=4 515; .txt=3 216; (noext)=2 512; .resx=1 062; .cshtml=975; .config=974; .v2=500; .json=478; .gitignore=364; .suo=310; .csproj=144; .ps1=74; .sln=65; .gitattributes=63; .user=51; .pubxml=30; .bat=26; .wsuo=26; .md=23; .map=23; .ico=1; .vsidx=0; .db-shm=0; .db-wal=0
 
 # SOLUTIONS
 - ..\Loco_17_Feb.sln
@@ -42,9 +42,11 @@
   - OutputType: Library
   - PackageReferences:
     - Microsoft.AspNetCore.Identity.EntityFrameworkCore 8.0.23
+    - Microsoft.Bcl.AsyncInterfaces 8.0.0
     - Microsoft.EntityFrameworkCore 8.0.23
-    - Npgsql.EntityFrameworkCore.PostgreSQL 8.*
-    - Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite 8.*
+    - Microsoft.EntityFrameworkCore.Tools 8.0.23 (PrivateAssets=all)
+    - Npgsql.EntityFrameworkCore.PostgreSQL 8.0.11
+    - Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite 8.0.11
   - ProjectReferences:
     - ..\GCommon\GCommon.csproj
 
@@ -60,6 +62,7 @@
   - TargetFramework: net8.0
   - OutputType: Library
   - PackageReferences:
+    - Microsoft.EntityFrameworkCore.Design 8.0.23 (PrivateAssets=all)
     - Microsoft.Extensions.Localization 8.0.23
   - ProjectReferences:
     - ..\GCommon\GCommon.csproj
@@ -106,13 +109,11 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 ├── .gitattributes
 ├── .gitignore
 ├── Dockerfile
-├── Dockerfile.txt
 ├── Loco_17_Feb.sln
-├── node.json
-├── nodes.json.txt
 ├── Pack-Loco.ps1
 ├── PackLoco.Bat
 ├── README.md
+├── solution_tree.txt
 ├── tree_report.txt
 ├── .github
 │   └── workflows
@@ -136,7 +137,10 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   │   │   ├── 17.14.1593.33849
 │   │   │   │   ├── CodeChunks.db
 │   │   │   │   └── SemanticSymbols.db
-│   │   │   └── 18.4.84.18506
+│   │   │   ├── 18.4.84.18506
+│   │   │   │   ├── CodeChunks.db
+│   │   │   │   └── SemanticSymbols.db
+│   │   │   └── 18.4.89.4080
 │   │   │       ├── CodeChunks.db
 │   │   │       ├── CodeChunks.db-shm
 │   │   │       ├── CodeChunks.db-wal
@@ -146,14 +150,19 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   │   ├── DesignTimeBuild
 │   │   │   └── .dtbcache.v2
 │   │   ├── FileContentIndex
-│   │   │   ├── 177ca5b5-4a3a-4aae-be5f-05674995091c.vsidx
-│   │   │   ├── 747e56d5-cb0a-4fb5-b0b5-7a35757fd93b.vsidx
-│   │   │   └── aa3b700b-7dba-4680-b599-a91bc3bc8bdb.vsidx
+│   │   │   ├── 0bebcde7-4af9-49e6-ab74-94f116941af3.vsidx
+│   │   │   ├── 51ff1a23-1080-4d3a-ac83-6e7a8b91abd3.vsidx
+│   │   │   ├── 5981559d-f303-4b78-b79b-87ee32ed4a1b.vsidx
+│   │   │   ├── eb0a6b2b-5383-45d4-a23d-77f8dfbedbd6.vsidx
+│   │   │   └── ffde79c4-32f1-4c55-b562-dc5b6fbb9784.vsidx
 │   │   ├── v17
 │   │   │   ├── .futdcache.v2
 │   │   │   ├── .suo
 │   │   │   ├── DocumentLayout.backup.json
-│   │   │   └── DocumentLayout.json
+│   │   │   ├── DocumentLayout.json
+│   │   │   ├── HierarchyCache.v1.txt
+│   │   │   └── ResourceExplorer
+│   │   │       └── settings.json
 │   │   └── v18
 │   │       ├── .futdcache.v2
 │   │       ├── .suo
@@ -164,24 +173,18 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   │       └── ResourceExplorer
 │   │           └── settings.json
 │   ├── ProjectEvaluation
-│   │   ├── loco_17_feb.metadata.v10.bin
-│   │   ├── loco_17_feb.projects.v10.bin
-│   │   └── loco_17_feb.strings.v10.bin
 │   └── sd
 │       └── 4ac8f850-cd6c-4d9b-a1af-55b53fdde000
 ├── GCommon
+│   ├── AppRoles.cs
 │   ├── EntityValidationConstants.cs
 │   ├── GCommon.csproj
 │   ├── GCommon.csproj.user
-│   ├── Enum
-│   │   ├── AuditAction.cs
-│   │   ├── LocomotiveType.cs
-│   │   ├── MeasuringUnits.cs
-│   │   └── Shift.cs
-│   └── Properties
-│       └── PublishProfiles
-│           ├── FolderProfile.pubxml
-│           └── FolderProfile.pubxml.user
+│   └── Enum
+│       ├── AuditAction.cs
+│       ├── LocomotiveType.cs
+│       ├── MeasuringUnits.cs
+│       └── Shift.cs
 ├── Loco1.Data
 │   ├── Loco1.Data.csproj
 │   ├── Configuration
@@ -191,12 +194,17 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   │   └── ShiftWorkConfiguration.cs
 │   ├── Data
 │   │   ├── LocoDbContext.cs
-│   │   └── LocoDbContextFactory.cs
+│   │   ├── LocoDbContextFactory.cs
+│   │   └── Roles.json
 │   ├── Migrations
-│   │   ├── 20260221074826_Initial_Pg.cs
-│   │   ├── 20260221074826_Initial_Pg.Designer.cs
+│   │   ├── 20260224115150_InitialMigration.cs
+│   │   ├── 20260224115150_InitialMigration.Designer.cs
+│   │   ├── 20260225105015_AddFirstLastNameToUsers.cs
+│   │   ├── 20260225105015_AddFirstLastNameToUsers.Designer.cs
+│   │   ├── AddFirstAndLastNameToUsers.cs
 │   │   └── LocoDbContextModelSnapshot.cs
 │   └── Models
+│       ├── ApplicationUser.cs
 │       ├── AuditEntity.cs
 │       ├── AuditLog.cs
 │       ├── Fuel.cs
@@ -208,6 +216,7 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   └── Loco1.Data.Models.csproj
 ├── Loco1.Localizer
 │   ├── Loco1.Localizer.csproj
+│   ├── Loco1.Localizer.csproj.user
 │   └── Resources
 │       ├── SharedResource.bg-BG.resx
 │       ├── SharedResource.cs
@@ -218,6 +227,7 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   ├── Loco1.Service.csproj
 │   ├── UserRoleService.cs
 │   └── Abstractions
+│       ├── IAuditLogService.cs
 │       └── IUserRoleService.cs
 ├── Loco1.Services
 │   ├── Loco1.Services.csproj
@@ -226,6 +236,7 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   ├── EditUserRolesVm.cs
 │   ├── ErrorViewModel.cs
 │   ├── Loco1.ViewModels.csproj
+│   ├── RoleWithPermissionsVm.cs
 │   └── UserWithRolesVm.cs
 └── Loco1.web
     ├── appsettings.Development.json
@@ -252,8 +263,6 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
     │               ├── Logout.cshtml.cs
     │               ├── Register.cshtml
     │               ├── Register.cshtml.cs
-    │               ├── RegisterConfirmation.cshtml
-    │               ├── RegisterConfirmation.cshtml.cs
     │               ├── _ViewImports.cshtml
     │               └── Manage
     │                   ├── ChangePassword.cshtml
@@ -261,8 +270,6 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
     │                   ├── Index.cshtml
     │                   ├── Index.cshtml.cs
     │                   ├── ManageNavPages.cs
-    │                   ├── PersonalData.cshtml
-    │                   ├── PersonalData.cshtml.cs
     │                   ├── _ManageNav.cshtml
     │                   └── _ViewImports.cshtml
     ├── Controllers
@@ -270,7 +277,8 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
     │   ├── HomeController.cs
     │   └── LanguageController.cs
     ├── Infrastructure
-    │   └── DataSeeder.cs
+    │   ├── DataSeeder.cs
+    │   └── HierarchicalRolesSeeder.cs
     ├── Properties
     │   ├── launchSettings.json
     │   ├── serviceDependencies.json
@@ -285,6 +293,7 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
     │   ├── _ViewImports.cshtml
     │   ├── _ViewStart.cshtml
     │   ├── Admin
+    │   │   ├── AdminRolesPartial.cshtml
     │   │   ├── EditRoles.cshtml
     │   │   └── Users.cshtml
     │   ├── Home
@@ -292,6 +301,7 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
     │   │   └── Privacy.cshtml
     │   └── Shared
     │       ├── Error.cshtml
+    │       ├── _AdminSidebar.cshtml
     │       ├── _LanguageSwitcher.cshtml
     │       ├── _Layout.cshtml
     │       ├── _Layout.cshtml.css
@@ -376,16 +386,18 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 - ..\Loco1.web\Program.cs (first 80 lines)
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
+
+using Loco1.Localizer;             // SharedResource
+using Loco1.Data;                  // DbContext
+using Loco1.Data.Models;           // ApplicationUser
+using Loco1.Service;               // Services implementation
+using Loco1.Service.Abstractions;  // Service contracts
+
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;     // <-- required for RequestLocalizationOptions / RequestCulture
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Logging;
-
-using Loco1.Data;                 // EN: DbContext
-using Loco1.Service;              // EN: Services implementation
-using Loco1.Service.Abstractions; // EN: Service contracts
 
 namespace Loco1.Web
     {
@@ -393,12 +405,14 @@ namespace Loco1.Web
         {
         public static async Task Main(string[] args)
             {
-            // EN: Keep legacy timestamp behavior in Npgsql (harmless compatibility switch)
+            // Keep legacy timestamp behavior in Npgsql (compatibility switch)
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // EN: Bind to Render's $PORT in containers; fallback to local dev port.
+            // ---------------------------------------------------------
+            //  BIND PORT (Render / Dev)
+            // ---------------------------------------------------------
             var port = Environment.GetEnvironmentVariable("PORT");
             if (!string.IsNullOrEmpty(port))
                 {
@@ -409,15 +423,15 @@ namespace Loco1.Web
                 builder.WebHost.UseUrls("http://localhost:5088");
                 }
 
-            // ------------------ Configuration & DbContext ------------------
-
-            // EN: Read connection string; ENV overrides appsettings
+            // ---------------------------------------------------------
+            //  CONNECTION STRING
+            // ---------------------------------------------------------
             var connStr =
                 Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
                 ?? builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("ConnectionStrings:DefaultConnection not found.");
 
-            // EN: Normalize rare 'server=tcp://host:port' to Npgsql format
+            // Normalize rare 'server=tcp://host:port' into Npgsql format
             if (connStr.Contains("tcp://", StringComparison.OrdinalIgnoreCase))
                 {
                 connStr = Regex.Replace(
@@ -426,34 +440,30 @@ namespace Loco1.Web
                     "Host=$1;Port=$2");
                 }
 
-            // EN: Log sanitized connection string (mask password) – verbatim regex to avoid CS1009
+            // Log sanitized connection string (mask password)
             var sanitized = Regex.Replace(connStr, @"(?i)password\s*=\s*[^;]*", "Password=***");
             Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
 
-            // EN: Single DbContext registration (keep only this one)
             builder.Services.AddDbContext<LocoDbContext>(opt => opt.UseNpgsql(connStr));
-
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            // ------------------ MVC + Localization ------------------
-
+            // ---------------------------------------------------------
+            //  MVC + LOCALIZATION
+            // ---------------------------------------------------------
             builder.Services.AddLocalization();
+
             builder.Services
                 .AddControllersWithViews()
                 .AddViewLocalization()
-                .AddDataAnnotationsLocalization();
-
-            // EN: Identity + Roles (dev-friendly policy)
-            builder.Services
-                .AddDefaultIdentity<IdentityUser>(options =>
+                .AddDataAnnotationsLocalization(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = false;  // dev only
-                    options.Password.RequiredLength = 1;
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequiredUniqueChars = 0;
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(SharedResource));
+                });
+
+            // ---------------------------------------------------------
+            //  IDENTITY (ApplicationUser)
+            // ---------------------------------------------------------
 
 - ..\Loco1.Services\Program.cs (first 80 lines)
 namespace Loco1.Services;
@@ -477,7 +487,7 @@ namespace Loco1.Data
     {
     // Note: We type the IdentityDbContext with IdentityUser (optional but clearer)
     
-    public class LocoDbContext : IdentityDbContext<IdentityUser>
+    public class LocoDbContext : IdentityDbContext<ApplicationUser>
         {
        
         public LocoDbContext(DbContextOptions<LocoDbContext> options)
@@ -508,6 +518,24 @@ namespace Loco1.Data
   "ConnectionStrings": {
     "DefaultConnection": "Host=localhost;Port=5432;Database=loco_db;Username=loco_user;Password=__SET_IN_SECRETS__;Include Error Detail=true;Pooling=true;Maximum Pool Size=50"
   },
+  "Seed": {
+    "Owner": {
+      "Email": "lzl70110@gmail.com",
+      "FirstName": "Любомир",
+      "LastName": "Чекански"
+    },
+    "Admin": {
+      "Email": "lzl@test.test",
+      "FirstName": "Админ",
+      "LastName": "Тестов"
+    },
+    "User": {
+      "Email": "test@test.test",
+      "FirstName": "Тест",
+      "LastName": "Потребител"
+    },
+    "DefaultPassword": "testtest"
+  },
   "Logging": {
     "LogLevel": {
       "Default": "Information",
@@ -515,13 +543,16 @@ namespace Loco1.Data
     }
   },
   "AllowedHosts": "*"
-} 
+}
 
 # MIGRATIONS
 - ..\Loco1.Data\Migrations
-  - 20260221074826_Initial_Pg.cs (SHA1: 4A9A44A3DACD2CBDEA9C1F2E3856DFB34CEA4A68, Size: 19,73 KB)
-  - 20260221074826_Initial_Pg.Designer.cs (SHA1: 1DFA4A98199E765BB819A072D86C033B1464CBD1, Size: 20,73 KB)
-  - LocoDbContextModelSnapshot.cs (SHA1: 0C45651BD51CF5C4A1D0B6AD43126DD93531EF3B, Size: 20,63 KB)
+  - 20260224115150_InitialMigration.cs (SHA1: 966DF9B07A71312C7ACA2C596875CA5F7CC05622, Size: 20,46 KB)
+  - 20260224115150_InitialMigration.Designer.cs (SHA1: 09436A3826F7851D69B2D89470F610296FD4CE72, Size: 21,62 KB)
+  - 20260225105015_AddFirstLastNameToUsers.cs (SHA1: 9308B76B1288C1FFF707D2000AB4947458DBE861, Size: 1,05 KB)
+  - 20260225105015_AddFirstLastNameToUsers.Designer.cs (SHA1: 77FA3417C748F82CE66EC9EBD2035FBD967A1D80, Size: 21,83 KB)
+  - AddFirstAndLastNameToUsers.cs (SHA1: A2A367B9BFBE2FA8B91DBC20D5DFDF8852DAB8FB, Size: 957 B)
+  - LocoDbContextModelSnapshot.cs (SHA1: 4C7D18315106ED8D278D7137EE335C115239C94F, Size: 21,71 KB)
 
 # LOCALIZATION
 - SharedResource.resx: found
@@ -537,27 +568,26 @@ namespace Loco1.Data
 - Excluded folders/files: bin, obj, .git, node_modules
 
 # RAW METRICS
-- .css=43 182 lines
+- .css=43 133 lines
+- .db=42 689 lines
 - .js=31 315 lines
-- .db=24 132 lines
-- .sqlite=6 819 lines
-- .bin=3 764 lines
-- .cs=3 575 lines
-- (noext)=2 508 lines
-- .txt=1 092 lines
+- .sqlite=6 886 lines
+- .cs=4 515 lines
+- .txt=3 216 lines
+- (noext)=2 512 lines
+- .resx=1 062 lines
+- .cshtml=975 lines
 - .config=974 lines
-- .cshtml=839 lines
-- .v2=536 lines
-- .json=523 lines
-- .resx=519 lines
+- .v2=500 lines
+- .json=478 lines
 - .gitignore=364 lines
-- .suo=139 lines
-- .csproj=135 lines
+- .suo=310 lines
+- .csproj=144 lines
 - .ps1=74 lines
+- .sln=65 lines
 - .gitattributes=63 lines
-- .sln=62 lines
-- .user=50 lines
-- .pubxml=41 lines
+- .user=51 lines
+- .pubxml=30 lines
 - .bat=26 lines
 - .wsuo=26 lines
 - .md=23 lines

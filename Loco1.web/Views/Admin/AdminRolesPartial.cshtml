@@ -1,0 +1,143 @@
+﻿@using System.Text.Json;
+@model List<Loco1.ViewModels.RoleWithPermissionsVm>
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
+
+<div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>@L["AdminRolesTitle"]</span>
+        <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#addRoleForm">
+            <i class="bi bi-plus-lg"></i> @L["AddRole"]
+        </button>
+    </div>
+
+    <!-- Add Role Form (collapsed by default) -->
+    <div class="collapse" id="addRoleForm">
+        <div class="card-body">
+            <form method="post" asp-action="CreateRole">
+                <div class="mb-2">
+                    <label class="form-label">@L["RoleName"]</label>
+                    <input type="text" class="form-control" name="Name" required />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">@L["RoleDisplayName"]</label>
+                    <input type="text" class="form-control" name="DisplayName" required />
+                </div>
+                <button type="submit" class="btn btn-sm btn-success">@L["Save"]</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Existing Roles -->
+    <ul class="list-group list-group-flush">
+        @foreach (var role in Model)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>@role.DisplayName (@role.Name)</span>
+                <div>
+                    <button class="btn btn-sm btn-outline-secondary me-1" data-bs-toggle="collapse" data-bs-target="#permissions-@role.Name">
+                        @L["Permissions"]
+                    </button>
+                    <form method="post" asp-action="DeleteRole" class="d-inline">
+                        <input type="hidden" name="roleName" value="@role.Name" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger">@L["Delete"]</button>
+                    </form>
+                </div>
+
+                <!-- Permissions list (collapsed) -->
+                <div class="collapse mt-2 w-100" id="permissions-@role.Name">
+                    <div class="card card-body p-2">
+                        <form method="post" asp-action="UpdateRolePermissions">
+                            <input type="hidden" name="RoleName" value="@role.Name" />
+                            @foreach (var perm in role.AllPermissions)
+                            {
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="SelectedPermissions" value="@perm.Key" @(role.AssignedPermissions.Contains(perm.Key) ? "checked" : "") />
+                                    <label class="form-check-label">@perm.Value</label>
+                                </div>
+                            }
+                            <button type="submit" class="btn btn-sm btn-success mt-2">@L["Save"]</button>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+<!-- 🔹 Modal за потвърждение на промяна на роли -->
+<div class="modal fade" id="confirmRoleChangeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">@L["Confirm"]</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <pre id="confirmRoleChangeText" class="mb-0"></pre>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    @L["Back"]
+                </button>
+                <button type="button" id="confirmRoleChangeOkBtn" class="btn btn-primary">
+                    OK
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+(function () {
+    
+    const form = document.getElementById("edit-roles-form");
+    if (!form) return;
+
+    const data = @Html.Raw(JsonSerializer.Serialize(new {
+        currentRole = Model.FirstOrDefault()?.Name ?? "",
+        confirm = L["ConfirmRoleChange"]?.Value ?? "",
+        from = L["From"]?.Value ?? "",
+        to = L["To"]?.Value ?? "",
+        select = L["PleaseSelectRole"]?.Value ?? "",
+        ownerLocked = L["OwnerCannotBeChanged"]?.Value ?? ""
+    }));
+
+    const modalEl = document.getElementById("confirmRoleChangeModal");
+    const modal = new bootstrap.Modal(modalEl);
+    const textEl = document.getElementById("confirmRoleChangeText");
+    const okBtn = document.getElementById("confirmRoleChangeOkBtn");
+    let confirmed = false;
+
+    form.addEventListener("submit", function (e) {
+        if (confirmed) { confirmed = false; return; }
+        const selected = form.querySelector("input[name='SelectedRoles']:checked");
+        if (!selected) { e.preventDefault(); alert(data.select); return; }
+
+        const newRole = selected.value;
+        if (data.currentRole?.toLowerCase() === "owner" && newRole.toLowerCase() !== "owner") {
+            e.preventDefault(); alert(data.ownerLocked); return;
+        }
+        if (data.currentRole?.toLowerCase() === newRole.toLowerCase()) return;
+
+        e.preventDefault();
+        textEl.textContent =
+            data.confirm + "\n\n" +
+            data.from + ": " + (data.currentRole || "-") + "\n" +
+            data.to + ": " + newRole;
+        modal.show();
+    });
+
+    okBtn.addEventListener("click", function () {
+        confirmed = true;
+        modal.hide();
+        form.submit();
+    });
+
+})();
+</script>
+}

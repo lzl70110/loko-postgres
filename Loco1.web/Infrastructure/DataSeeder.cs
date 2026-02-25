@@ -1,22 +1,12 @@
-﻿using Loco1.Data.Models;                  // ApplicationUser
+﻿using GCommon;                         // AppRoles
+using Loco1.Data.Models;               // ApplicationUser
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;      // for FirstOrDefaultAsync / AsNoTracking
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Loco1.Web.Infrastructure
     {
     public static class DataSeeder
         {
-        private static class Roles
-            {
-            public const string Owner = "Owner";
-            public const string Admin = "Admin";
-            public const string User = "User";
-            public static readonly string[] All = { Owner, Admin, User };
-            }
-
         public static async Task SeedAsync(IServiceProvider services)
             {
             var logger = services.GetRequiredService<ILoggerFactory>().CreateLogger("DataSeeder");
@@ -24,40 +14,56 @@ namespace Loco1.Web.Infrastructure
             var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
             var config = services.GetRequiredService<IConfiguration>();
 
-            // read seed settings (dev-safe defaults)
-            var ownerEmail = config["Seed:Owner:Email"] ?? "lzl70110@gmail.com";
-            var adminEmail = config["Seed:Admin:Email"] ?? "lzl@test.test";
-            var userEmail = config["Seed:User:Email"] ?? "test@test.test";
-            var defaultPwd = config["Seed:DefaultPassword"] ?? "testtest"; // dev only
-
-            // 1) ensure roles
-            foreach (var roleName in Roles.All)
+            // 1️⃣ Ensure roles
+            foreach (var roleName in AppRoles.All)
                 await EnsureRoleAsync(roleManager, roleName);
 
-            // 2) ensure users and role membership (idempotent)
-            var owner = await EnsureUserAsync(userManager, ownerEmail, defaultPwd);
-            await EnsureUserInRoleAsync(userManager, owner, Roles.Owner);
+            // 2️⃣ Seed users from configuration
+            var seedUsers = new[]
+            {
+                new
+                {
+                    Email = config["Seed:Owner:Email"],
+                    FirstName = config["Seed:Owner:FirstName"],
+                    LastName = config["Seed:Owner:LastName"],
+                    Role = AppRoles.Owner
+                },
+                new
+                {
+                    Email = config["Seed:Admin:Email"],
+                    FirstName = config["Seed:Admin:FirstName"],
+                    LastName = config["Seed:Admin:LastName"],
+                    Role = AppRoles.Admin
+                },
+                new
+                {
+                    Email = config["Seed:User:Email"],
+                    FirstName = config["Seed:User:FirstName"],
+                    LastName = config["Seed:User:LastName"],
+                    Role = AppRoles.User
+                }
+            };
 
-            var admin = await EnsureUserAsync(userManager, adminEmail, defaultPwd);
-            await EnsureUserInRoleAsync(userManager, admin, Roles.Admin);
+            var defaultPwd = config["Seed:DefaultPassword"] ?? "testtest"; // dev only
 
-            var basic = await EnsureUserAsync(userManager, userEmail, defaultPwd);
-            await EnsureUserInRoleAsync(userManager, basic, Roles.User);
+            foreach (var u in seedUsers)
+                {
+                if (string.IsNullOrWhiteSpace(u.Email)) continue;
 
-            // 3) self-healing: assign 'User' to accounts without roles
-            //    (helps for older registrations with 0 roles)
+                var user = await EnsureUserAsync(userManager, u.Email, defaultPwd, u.FirstName, u.LastName);
+                await EnsureUserInRoleAsync(userManager, user, u.Role);
+                }
+
+            // 3️⃣ Self-healing: assign 'User' role to accounts without roles
             var allUsers = await userManager.Users.AsNoTracking().ToListAsync();
             foreach (var u in allUsers)
                 {
                 var roles = await userManager.GetRolesAsync(u);
                 if (roles == null || roles.Count == 0)
-                    {
-                    await userManager.AddToRoleAsync(u, Roles.User);
-                    }
+                    await userManager.AddToRoleAsync(u, AppRoles.User);
                 }
 
-            logger.LogInformation("Seed completed. Owner={Owner}, Admin={Admin}, User={User}",
-                ownerEmail, adminEmail, userEmail);
+            logger.LogInformation("Seed completed. Roles ensured: {Roles}", string.Join(", ", AppRoles.All));
             }
 
         private static async Task EnsureRoleAsync(RoleManager<IdentityRole> roleManager, string roleName)
@@ -74,9 +80,10 @@ namespace Loco1.Web.Infrastructure
         private static async Task<ApplicationUser> EnsureUserAsync(
             UserManager<ApplicationUser> userManager,
             string email,
-            string password)
+            string password,
+            string? firstName = null,
+            string? lastName = null)
             {
-            // try exact email; if anonymized previously, try by OriginalEmail
             var user = await userManager.FindByEmailAsync(email)
                        ?? await userManager.Users.FirstOrDefaultAsync(u => u.OriginalEmail == email);
 
@@ -86,7 +93,9 @@ namespace Loco1.Web.Infrastructure
                     {
                     UserName = email,
                     Email = email,
-                    EmailConfirmed = true,   // dev: skip email confirmation
+                    FirstName = firstName,
+                    LastName = lastName,
+                    EmailConfirmed = true,
                     IsDeactivated = false
                     };
 
@@ -97,7 +106,7 @@ namespace Loco1.Web.Infrastructure
                 }
             else
                 {
-                // ensure basic flags are sane after restore/older states
+                // Ensure flags are sane
                 if (user.IsDeactivated)
                     {
                     await userManager.SetLockoutEnabledAsync(user, false);
@@ -115,7 +124,6 @@ namespace Loco1.Web.Infrastructure
             ApplicationUser user,
             string role)
             {
-            // skip owner assignment downgrades here; this is only additive
             if (!await userManager.IsInRoleAsync(user, role))
                 {
                 var add = await userManager.AddToRoleAsync(user, role);

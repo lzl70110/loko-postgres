@@ -165,7 +165,7 @@
   <data name="Error_RequestId" xml:space="preserve">
     <value>Request ID</value>
   </data>
-  <data name="LoginTitle" xml:space="preserve">
+  <data name="Login.Title" xml:space="preserve">
     <value>Log in</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
@@ -294,9 +294,6 @@
   <data name="ADMIN" xml:space="preserve">
     <value>Admin</value>
   </data>
-  <data name="ADMIN1" xml:space="preserve">
-    <value>Admin</value>
-  </data>
   <data name="Owner" xml:space="preserve">
     <value>Owner</value>
   </data>
@@ -320,5 +317,38 @@
   </data>
   <data name="Locomotives" xml:space="preserve">
     <value>Locomotives</value>
+  </data>
+  <data name="AdminRolesTitle" xml:space="preserve">
+    <value>Roles Management</value>
+  </data>
+  <data name="AddRole" xml:space="preserve">
+    <value>Add Role</value>
+  </data>
+  <data name="RoleName" xml:space="preserve">
+    <value>Role Name  </value>
+  </data>
+  <data name="RoleDisplayName" xml:space="preserve">
+    <value>Display Name </value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Role.RailTransportManager" xml:space="preserve">
+    <value>Rail Transport Manager</value>
+  </data>
+  <data name="Role.LocomotiveTransportManager" xml:space="preserve">
+    <value>Locomotive Transport Manager</value>
+  </data>
+  <data name="Role.DieselLocomotiveRepairManager" xml:space="preserve">
+    <value>Diesel Locomotives Repair Manager</value>
+  </data>
+  <data name="Role.DieselLocomotiveRepairSupervisor" xml:space="preserve">
+    <value>Diesel Locomotives Repair Supervisor</value>
+  </data>
+  <data name="Role.LocomotivesDriversManager" xml:space="preserve">
+    <value>Locomotives Drivers Manager</value>
   </data>
 </root>

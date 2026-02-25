@@ -1,91 +1,100 @@
-html {
-  font-size: 14px;
+/* =========================
+   Navbar & Branding
+   ========================= */
+
+.loco-navbar {
+    min-height: 58px; /* minimum height for navbar */
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.loco-brand {
+    display: flex;
+    align-items: center; /* vertically center icon and text */
+    gap: .5rem; /* spacing between icon and text */
+    font-weight: 600; /* slightly bolder text */
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.loco-nav-right {
+    display: flex;
+    align-items: center;
+    gap: .5rem; /* spacing between buttons/icons */
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.loco-actions {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
 }
 
-body {
-  margin-bottom: 60px;
+.loco-lang {
+    margin-left: .5rem; /* small margin from other items */
 }
 
-/* Footer look */
-.app-footer {
-    background: #111;
-    color: #ddd;
+.loco-navbar .btn {
+    padding: .25rem .55rem; /* general button padding */
 }
 
-    .app-footer strong {
-        color: #fff;
+    .loco-navbar .btn.btn-primary {
+        padding: .27rem .64rem; /* slightly different padding for primary buttons */
     }
 
-/* Rotator for Footer */
+.loco-badge {
+    margin-right: .25rem; /* spacing between badge and button */
+}
+/* ============================
+   Footer Rotator Animation
+   ============================ */
+
 .rotator {
     display: inline-block;
     position: relative;
-    min-height: 1.4em;
-    white-space: nowrap;
+    height: 1.2em;
+    overflow: hidden;
+    vertical-align: middle;
 }
 
 .rotator__item {
     position: absolute;
-    inset: 0;
+    left: 0;
+    width: 100%;
     opacity: 0;
-    animation: rotator-fade 12s infinite;
+    animation: rotatorFade 9s infinite;
 }
 
+    /* Each item fades in for 3 seconds */
     .rotator__item:nth-child(1) {
         animation-delay: 0s;
     }
 
     .rotator__item:nth-child(2) {
-        animation-delay: 4s;
+        animation-delay: 3s;
     }
 
     .rotator__item:nth-child(3) {
-        animation-delay: 8s;
+        animation-delay: 6s;
     }
 
-@keyframes rotator-fade {
+@keyframes rotatorFade {
     0% {
         opacity: 0;
+        transform: translateY(100%);
     }
 
-    8% {
+    5% {
         opacity: 1;
+        transform: translateY(0);
+    }
+
+    25% {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     30% {
-        opacity: 1;
-    }
-
-    38% {
         opacity: 0;
+        transform: translateY(-100%);
     }
 
     100% {
         opacity: 0;
-    }
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .rotator__item {
-        position: static;
-        display: block;
-        opacity: 1;
-        animation: none;
     }
 }

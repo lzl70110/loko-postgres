@@ -7,6 +7,9 @@ using Loco1.Data.Models;           // ApplicationUser
 using Loco1.Service;               // Services implementation
 using Loco1.Service.Abstractions;  // Service contracts
 
+using GCommon;
+using Loco1.Web.Infrastructure;
+
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;     // <-- required for RequestLocalizationOptions / RequestCulture
@@ -133,7 +136,20 @@ namespace Loco1.Web
                 opts.KnownProxies.Clear();
             });
 
+
             var app = builder.Build();
+
+            builder.Services.AddPermissionPolicies(
+                // existing
+                Perm.Repairs_View, Perm.Repairs_Add, Perm.Repairs_Edit,
+                Perm.Expl_View, Perm.Expl_Add, Perm.Expl_Edit,
+                Perm.Users_View, Perm.Users_Edit,
+                Perm.Roles_View, Perm.Roles_Edit,
+
+                // ✅ new Locomotives
+                Perm.Loco_View, Perm.Loco_Add, Perm.Loco_Edit, Perm.Loco_Delete
+            );
+
 
             // ---------------------------------------------------------
             //  MIGRATIONS + DATA SEED
@@ -190,6 +206,22 @@ namespace Loco1.Web
             app.MapRazorPages();
 
             app.MapGet("/healthz", () => Results.Ok("OK"));
+
+            //++++++++++++++++++++++++++++++++++++++++++++
+            using (var scope = app.Services.CreateScope())
+                {
+                var services = scope.ServiceProvider;
+                try
+                    {
+                    await Loco1.Web.Infrastructure.DataSeeder.SeedAsync(services);
+                    Console.WriteLine("✅ Seed ran successfully.");
+                    }
+                catch (Exception ex)
+                    {
+                    Console.WriteLine("❌ Seed failed: " + ex.Message);
+                    }
+                }
+            //++++++++++++++++++++++++++++++++++++++++++++
 
             await app.RunAsync();
             }

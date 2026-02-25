@@ -9,5 +9,10 @@ namespace Loco1.Data.Models
 
         public string? OriginalEmail { get; set; }
         public string? OriginalUserName { get; set; }
+
+        // New properties for full names
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
         }
     }

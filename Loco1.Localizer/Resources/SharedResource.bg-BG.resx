@@ -165,7 +165,7 @@
   <data name="Error_RequestId" xml:space="preserve">
     <value>Идентификатор на заявката</value>
   </data>
-  <data name="LoginTitle" xml:space="preserve">
+  <data name="Login.Title" xml:space="preserve">
     <value>Вход в системата</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
@@ -294,9 +294,6 @@
   <data name="ADMIN" xml:space="preserve">
     <value>Администратор</value>
   </data>
-  <data name="ADMIN1" xml:space="preserve">
-    <value>Администратор</value>
-  </data>
   <data name="Owner" xml:space="preserve">
     <value>СОБСТВЕНИК</value>
   </data>
@@ -320,5 +317,38 @@
   </data>
   <data name="Locomotives" xml:space="preserve">
     <value>Локомотиви</value>
+  </data>
+  <data name="AdminRolesTitle" xml:space="preserve">
+    <value> Създаване на роли</value>
+  </data>
+  <data name="AddRole" xml:space="preserve">
+    <value>Добави роля</value>
+  </data>
+  <data name="RoleName" xml:space="preserve">
+    <value>Роля</value>
+  </data>
+  <data name="RoleDisplayName" xml:space="preserve">
+    <value>Име на ролята</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>Разрешения</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Парола</value>
+  </data>
+  <data name="Role.RailTransportManager" xml:space="preserve">
+    <value>Началник ж.п. транспорт</value>
+  </data>
+  <data name="Role.LocomotiveTransportManager" xml:space="preserve">
+    <value>Началник на Експлоатацията</value>
+  </data>
+  <data name="Role.DieselLocomotiveRepairManager" xml:space="preserve">
+    <value>Началник Дизелово депо-ремонт</value>
+  </data>
+  <data name="Role.DieselLocomotiveRepairSupervisor" xml:space="preserve">
+    <value>Ръководител смяна Дизелово депо-ремонт</value>
+  </data>
+  <data name="Role.LocomotivesDriversManager" xml:space="preserve">
+    <value>Деломайстор</value>
   </data>
 </root>

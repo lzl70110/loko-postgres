@@ -1,13 +1,15 @@
-﻿@using Loco1.Localizer
+﻿@model Loco1.ViewModels.EditUserRolesVm
+@using Loco1
+@using Loco1.GCommon;
 @using System.Text.Json
+@using static Loco1.GCommon.EntityValidationConstants
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
-@model Loco1.ViewModels.EditUserRolesVm
+
 
 @{
     ViewData["Title"] = L["EditRolesTitle"];
 
     var currentRole = Model.SelectedRoles?.FirstOrDefault() ?? "";
-
     var jsData = JsonSerializer.Serialize(new
         {
         currentRole = currentRole ?? "",
@@ -15,7 +17,8 @@
         from = L["From"]?.Value ?? "",
         to = L["To"]?.Value ?? "",
         select = L["PleaseSelectRole"]?.Value ?? "",
-        ownerLocked = L["OwnerCannotBeChanged"]?.Value ?? ""
+        ownerLocked = L["OwnerCannotBeChanged"]?.Value ?? "",
+        ownerKey = Roles.Owner
         });
     }
 
@@ -24,136 +27,100 @@
 
 <div asp-validation-summary="All" class="text-danger"></div>
 
-<form id="edit-roles-form" asp-controller="Admin" asp-action="EditRoles" method="post">
+    <form id="edit-roles-form" asp-controller="Admin" asp-action="EditRoles" method="post">
     @Html.AntiForgeryToken()
     <input asp-for="UserId" type="hidden" />
 
-    <div class="mb-3">
+        <div class="mb-3">
         <label class="form-label">@L["Roles"]</label>
-
-        <div class="row">
+            <div class="row">
             @foreach (var role in Model.AvailableRoles ?? Enumerable.Empty<string>())
                 {
                 var isChecked = Model.SelectedRoles?.Contains(role) == true;
-                var isOwner = role.Equals("Owner", StringComparison.OrdinalIgnoreCase);
+                var isOwner = role.Equals(Roles.Owner, StringComparison.OrdinalIgnoreCase);
                 var roleId = $"role_{role.Replace(" ", "_")}";
-
                 var loc = L[$"Role.{role}"];
                 var roleLabel = loc.ResourceNotFound ? role : loc.Value;
 
-                <div class="col-12 col-md-6 mb-2">
-                    <div class="form-check">
+                    <div class="col-12 col-md-6 mb-2">
+                        <div class="form-check">
                         <input id="@roleId"
                                class="form-check-input"
                                type="radio"
                                name="SelectedRoles"
                                value="@role"
-                               @(isChecked ? "checked" : null)
-                               @(isOwner && !isChecked ? "disabled" : null) />
-
-                        <label class="form-check-label" for="@roleId">
-                            @roleLabel
-                        </label>
+                        @(isChecked ? "checked" : null)
+                        @(isOwner && !isChecked ? "disabled" : null) />
+                        <label class="form-check-label" for="@roleId">@roleLabel</label>
 
                         @if (isOwner && isChecked)
                             {
-                            <small class="text-muted ms-2">
-                                @L["OwnerCannotBeChanged"]
-                            </small>
+                            <small class="text-muted ms-2">@L["OwnerCannotBeChanged"]</small>
                             }
+                        </div>
                     </div>
-                </div>
                 }
+            </div>
         </div>
-    </div>
 
-    <div class="d-flex gap-2">
+        <div class="d-flex gap-2">
         <button type="submit" class="btn btn-success">@L["Save"]</button>
-        <a asp-controller="Admin" asp-action="Users" class="btn btn-secondary">
-            @L["Back"]
-        </a>
-    </div>
-</form>
+        <a asp-controller="Admin" asp-action="Users" class="btn btn-secondary">@L["Back"]</a>
+        </div>
+    </form>
 
-<!-- Bootstrap 5 Modal -->
-<div class="modal fade" id="confirmRoleChangeModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <div class="modal-header">
+<!-- Modal -->
+    <div class="modal fade" id="confirmRoleChangeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
                 <h5 class="modal-title">@L["Confirm"]</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body">
+                </div>
+                <div class="modal-body">
                 <pre id="confirmRoleChangeText" class="mb-0"></pre>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@L["Back"]</button>
+                <button type="button" id="confirmRoleChangeOkBtn" class="btn btn-primary">OK</button>
+                </div>
             </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    @L["Back"]
-                </button>
-                <button type="button" id="confirmRoleChangeOkBtn" class="btn btn-primary">
-                    OK
-                </button>
-            </div>
-
         </div>
     </div>
-</div>
 
     @section Scripts {
-    <script>
+        <script>
         (function () {
-
             const form = document.getElementById("edit-roles-form");
             if (!form) return;
 
             const data = @Html.Raw(jsData);
-
             const modalEl = document.getElementById("confirmRoleChangeModal");
             const modal = new bootstrap.Modal(modalEl);
-
             const textEl = document.getElementById("confirmRoleChangeText");
             const okBtn = document.getElementById("confirmRoleChangeOkBtn");
 
             let confirmed = false;
 
             form.addEventListener("submit", function (e) {
-
-                if (confirmed) {
-                    confirmed = false;
-                    return;
-                }
+                if (confirmed) { confirmed = false; return; }
 
                 const selected = form.querySelector("input[name='SelectedRoles']:checked");
-                if (!selected) {
-                    e.preventDefault();
-                    alert(data.select);
-                    return;
-                }
+                if (!selected) { e.preventDefault(); alert(data.select); return; }
 
                 const newRole = selected.value;
+                const ownerKey = data.ownerKey;
 
-                // Owner protection
-                if (data.currentRole?.toLowerCase() === "owner" &&
-                    newRole.toLowerCase() !== "owner") {
+                if (data.currentRole?.toLowerCase() === ownerKey.toLowerCase() && newRole.toLowerCase() !== ownerKey.toLowerCase()) {
                     e.preventDefault();
                     alert(data.ownerLocked);
                     return;
                 }
 
-                // No change → submit directly
-                if (data.currentRole?.toLowerCase() === newRole.toLowerCase())
-                    return;
+                if (data.currentRole?.toLowerCase() === newRole.toLowerCase()) return;
 
                 e.preventDefault();
-
-                textEl.textContent =
-                    data.confirm + "\n\n" +
-                    data.from + ": " + (data.currentRole || "-") + "\n" +
-                    data.to + ": " + newRole;
-
+                textEl.textContent = `${data.confirm}\n\n${data.from}: ${data.currentRole || "-"}\n${data.to}: ${newRole}`;
                 modal.show();
             });
 
@@ -162,7 +129,6 @@
                 modal.hide();
                 form.submit();
             });
-
         })();
-    </script>
+        </script>
     }

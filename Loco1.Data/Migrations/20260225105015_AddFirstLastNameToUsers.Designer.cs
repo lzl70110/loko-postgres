@@ -3,6 +3,7 @@ using System;
 using Loco1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Loco1.Data.Migrations
 {
     [DbContext(typeof(LocoDbContext))]
-    partial class LocoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260225105015_AddFirstLastNameToUsers")]
+    partial class AddFirstLastNameToUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +36,6 @@ namespace Loco1.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -118,7 +118,7 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("character varying(32)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -140,7 +140,7 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
@@ -151,7 +151,7 @@ namespace Loco1.Data.Migrations
                     b.Property<DateTime>("Timestamp")
                         .ValueGeneratedOnAdd()
                         .HasPrecision(3)
-                        .HasColumnType("timestamp(3) with time zone")
+                        .HasColumnType("timestamp(3) without time zone")
                         .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("User")
@@ -187,7 +187,7 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("character varying(10)");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<decimal>("EndValue")
                         .HasColumnType("decimal(9,2)");
@@ -203,7 +203,7 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("character varying(10)");
 
                     b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Note")
                         .HasMaxLength(1000)
@@ -213,7 +213,7 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("decimal(9,2)");
 
                     b.Property<DateTime>("RecordedOn")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<decimal>("StartValue")
                         .HasColumnType("decimal(9,2)");
@@ -244,7 +244,7 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("character varying(10)");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("FuelCapacity")
                         .HasColumnType("integer");
@@ -256,10 +256,10 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastAxleMeasurementDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("LastPlannedRepairDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("LastPlannedRepairType")
                         .HasColumnType("text");
@@ -272,7 +272,7 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("character varying(10)");
 
                     b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Note")
                         .HasMaxLength(1000)
@@ -315,7 +315,7 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("character varying(10)");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<decimal>("EngineHoursUsed")
                         .HasColumnType("numeric");
@@ -334,7 +334,7 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("character varying(10)");
 
                     b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Note")
                         .HasMaxLength(1000)
@@ -344,7 +344,7 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("ShiftDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 

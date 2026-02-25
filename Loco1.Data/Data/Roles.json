@@ -1,0 +1,34 @@
+[
+  {
+    "Key": "Owner",
+    "DisplayName": "Owner"
+  },
+  {
+    "Key": "Admin",
+    "DisplayName": "Administrator"
+  },
+  {
+    "Key": "RailTransportManager",
+    "DisplayName": "Rail Transport Manager"
+  },
+  {
+    "Key": "LocomotiveTransportManager",
+    "DisplayName": "Locomotive Transport Manager"
+  },
+  {
+    "Key": "DieselLocomotiveRepairManager",
+    "DisplayName": "Diesel Locomotives Repair Manager"
+  },
+  {
+    "Key": "DieselLocomotiveRepairSupervisor",
+    "DisplayName": "Diesel Locomotives Repair Supervisor"
+  },
+  {
+    "Key": "LocomotivesDriversManager",
+    "DisplayName": "Locomotives Drivers Manager"
+  },
+  {
+    "Key": "User",
+    "DisplayName": "User"
+  }
+]

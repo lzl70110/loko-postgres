@@ -1,4 +1,5 @@
-﻿using Loco1.Service.Abstractions;
+﻿using GCommon;                         // AppRoles (canonical names)
+using Loco1.Service.Abstractions;
 using Loco1.ViewModels;
 using Loco1.Data.Models;
 using Loco1.Localizer;
@@ -6,6 +7,10 @@ using Loco1.Localizer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Loco1.Service
     {
@@ -15,8 +20,24 @@ namespace Loco1.Service
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IStringLocalizer<SharedResource> L;
 
-        private const string RoleOwner = "Owner";
-        private const string RoleAdmin = "Admin";
+        // Use canonical names from AppRoles
+        private const string RoleOwner = AppRoles.Owner;
+        private const string RoleAdmin = AppRoles.Admin;
+
+        // Explicit hierarchy (highest -> lowest) for UI ordering
+        // NOTE: Keep this in sync with your intended business order.
+        private static readonly string[] RoleHierarchy =
+        {
+            AppRoles.Owner,
+            AppRoles.Admin,
+            AppRoles.RailTransportManager,
+            AppRoles.LocomotiveTransportManager,
+            AppRoles.DieselLocomotiveRepairManager,
+            AppRoles.DieselLocomotiveRepairSupervisor,
+            AppRoles.LocomotivesDriversManager,
+            AppRoles.User
+        };
+        // Note: Added explicit hierarchy for stable non-alphabetical ordering.
 
         public UserRoleService(
             UserManager<ApplicationUser> userManager,
@@ -27,6 +48,13 @@ namespace Loco1.Service
             _roleManager = roleManager;
             L = localizer;
             }
+
+        // Utility: order roles by hierarchy (fallback by name for safety)
+        private static IEnumerable<string> OrderByHierarchy(IEnumerable<string> roles)
+            => roles
+                .OrderBy(r => Array.IndexOf(RoleHierarchy, r))
+                .ThenBy(r => r, StringComparer.Ordinal);
+        // Note: Central method that enforces hierarchy in one place.
 
         // ===== QUERY =====
         public async Task<List<UserWithRolesVm>> GetAllUsersWithRolesAsync()
@@ -42,7 +70,7 @@ namespace Loco1.Service
                     {
                     Id = u.Id,
                     Email = u.Email ?? u.UserName ?? "(no email)",
-                    Roles = roles.ToList(),
+                    Roles = roles.ToList(),      // keep canonical names; labeling happens in the View
                     IsDeactivated = u.IsDeactivated
                     });
                 }
@@ -59,10 +87,23 @@ namespace Loco1.Service
             if (user is null)
                 return null;
 
-            var allRoles = await _roleManager.Roles
+            // Get existing DB roles
+            var existingDbRoleNames = await _roleManager.Roles
                 .Select(r => r.Name!)
-                .OrderBy(n => n)
                 .ToListAsync();
+
+            // Only canonical roles that exist in DB
+            var available = AppRoles.All
+                .Where(r => existingDbRoleNames.Contains(r))
+                .ToList();
+
+            // Hide Owner from list unless the user is already Owner
+            var userIsOwner = await _userManager.IsInRoleAsync(user, RoleOwner);
+            if (!userIsOwner)
+                available = available.Where(r => !r.Equals(RoleOwner, StringComparison.Ordinal)).ToList();
+
+            // Order by business hierarchy (not alphabetical)
+            available = OrderByHierarchy(available).ToList();
 
             var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -70,24 +111,29 @@ namespace Loco1.Service
                 {
                 UserId = user.Id,
                 Email = user.Email ?? user.UserName ?? "(no email)",
-                AvailableRoles = allRoles,
-                SelectedRoles = userRoles.Take(1).ToList()
+                AvailableRoles = available,             // already hierarchical
+                SelectedRoles = userRoles.Take(1).ToList() // single-role model -> keep first
                 };
+            // Note: AvailableRoles now respects hierarchy and hides 'Owner' for non-owners.
             }
 
         // ===== UPDATE ROLES =====
         public async Task<(bool Ok, string? Error)> UpdateRolesAsync(EditUserRolesVm vm)
             {
             if (vm == null || string.IsNullOrWhiteSpace(vm.UserId))
-                return (false, "Invalid request.");
+                return (false, L["Invalid request."]); // localized
 
             var user = await _userManager.FindByIdAsync(vm.UserId);
             if (user == null)
-                return (false, "User not found.");
+                return (false, L["User not found."]); // localized
 
             var desiredRole = vm.SelectedRoles?.FirstOrDefault()?.Trim();
             if (string.IsNullOrWhiteSpace(desiredRole))
-                return (false, "Please select a role.");
+                return (false, L["Please select a role."]); // localized
+
+            // Only allow canonical roles
+            if (!AppRoles.All.Contains(desiredRole))
+                return (false, L["Invalid request."]); // safety
 
             var roles = await _userManager.GetRolesAsync(user);
 
@@ -95,10 +141,10 @@ namespace Loco1.Service
             var willBeOwner = desiredRole.Equals(RoleOwner, StringComparison.OrdinalIgnoreCase);
 
             if (isOwnerNow && !willBeOwner)
-                return (false, "Cannot remove Owner role.");
+                return (false, L["Owner cannot be changed here"]); // localized
 
             if (!isOwnerNow && willBeOwner)
-                return (false, "Owner cannot be assigned.");
+                return (false, L["Owner cannot be changed here"]); // localized
 
             var isAdminNow = roles.Any(r => r.Equals(RoleAdmin, StringComparison.OrdinalIgnoreCase));
             var willBeAdmin = desiredRole.Equals(RoleAdmin, StringComparison.OrdinalIgnoreCase);
@@ -107,19 +153,18 @@ namespace Loco1.Service
                 {
                 var adminCount = (await _userManager.GetUsersInRoleAsync(RoleAdmin)).Count;
                 if (adminCount <= 1)
-                    return (false, "Cannot remove the last admin.");
+                    return (false, L["Cannot remove the last administrator."]); // localized
                 }
 
+            // Role must already exist (seed responsibility). Avoid auto-creation here to keep DB clean.
             if (!await _roleManager.RoleExistsAsync(desiredRole))
-                {
-                var create = await _roleManager.CreateAsync(new IdentityRole(desiredRole));
-                if (!create.Succeeded)
-                    return (false, "Failed to ensure default role.");
-                }
+                return (false, L["No roles available"]); // localized generic message
 
+            // If user already has exactly that single role -> no-op
             if (roles.Count == 1 && roles.Any(r => r.Equals(desiredRole, StringComparison.OrdinalIgnoreCase)))
                 return (true, null);
 
+            // Remove all other roles
             var toRemove = roles.Where(r => !r.Equals(desiredRole, StringComparison.OrdinalIgnoreCase)).ToList();
             if (toRemove.Any())
                 {
@@ -128,8 +173,8 @@ namespace Loco1.Service
                     return (false, string.Join("; ", rem.Errors.Select(e => e.Description)));
                 }
 
+            // Add the desired role if missing
             roles = await _userManager.GetRolesAsync(user);
-
             if (!roles.Any(r => r.Equals(desiredRole, StringComparison.OrdinalIgnoreCase)))
                 {
                 var add = await _userManager.AddToRoleAsync(user, desiredRole);
@@ -138,6 +183,7 @@ namespace Loco1.Service
                 }
 
             return (true, null);
+            // Note: Localized messages; only canonical roles allowed; Owner cannot be modified/assigned.
             }
 
         // ===== DEACTIVATE (SOFT DELETE) =====
@@ -151,17 +197,16 @@ namespace Loco1.Service
         public async Task<(bool Ok, string? Error)> RestoreUserAsync(string userId)
             {
             if (string.IsNullOrWhiteSpace(userId))
-                return (false, "Invalid request.");
+                return (false, L["Invalid request."]); // localized
 
             var user = await _userManager.FindByIdAsync(userId);
             if (user is null)
-                return (false, "User not found.");
+                return (false, L["User not found."]); // localized
 
             // restore email
             if (!string.IsNullOrWhiteSpace(user.OriginalEmail))
                 {
                 var restoredEmail = await MakeUniqueEmail(user.OriginalEmail);
-
                 user.Email = restoredEmail;
                 user.NormalizedEmail = restoredEmail.ToUpperInvariant();
                 }
@@ -193,20 +238,20 @@ namespace Loco1.Service
         public async Task<(bool Ok, string? Error)> DeleteUserSafeAsync(string userId, bool hardDelete)
             {
             if (string.IsNullOrWhiteSpace(userId))
-                return (false, "Invalid request.");
+                return (false, L["Invalid request."]); // localized
 
             var user = await _userManager.FindByIdAsync(userId);
             if (user is null)
-                return (false, "User not found.");
+                return (false, L["User not found."]); // localized
 
             if (await _userManager.IsInRoleAsync(user, RoleOwner))
-                return (false, "Owner cannot be deleted.");
+                return (false, L["Owner cannot be changed here"]); // no delete for Owner
 
             if (await _userManager.IsInRoleAsync(user, RoleAdmin))
                 {
                 var adminCount = (await _userManager.GetUsersInRoleAsync(RoleAdmin)).Count;
                 if (adminCount <= 1)
-                    return (false, "Cannot remove the last admin.");
+                    return (false, L["Cannot remove the last administrator."]); // localized
                 }
 
             if (hardDelete)
