@@ -136,10 +136,7 @@ namespace Loco1.Web
                 opts.KnownProxies.Clear();
             });
 
-
-            var app = builder.Build();
-
-            builder.Services.AddPermissionPolicies(
+  builder.Services.AddPermissionPolicies(
                 // existing
                 Perm.Repairs_View, Perm.Repairs_Add, Perm.Repairs_Edit,
                 Perm.Expl_View, Perm.Expl_Add, Perm.Expl_Edit,
@@ -149,6 +146,9 @@ namespace Loco1.Web
                 // ✅ new Locomotives
                 Perm.Loco_View, Perm.Loco_Add, Perm.Loco_Edit, Perm.Loco_Delete
             );
+            var app = builder.Build();
+
+          
 
 
             // ---------------------------------------------------------

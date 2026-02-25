@@ -15,7 +15,7 @@ namespace GCommon
         // Canonical set (used by seeding, checks, etc.)
         public static readonly string[] All =
         {
-            Admin,
+            //Admin,
             User,
             Owner,
             DieselLocomotiveRepairManager,
@@ -28,14 +28,15 @@ namespace GCommon
         // Role hierarchy from highest to lowest privilege (used for UI ordering)
         public static readonly string[] Hierarchy =
         {
-            Owner,                               // top business owner
-            Admin,                               // global admin
+            
+           // Admin,                               // global admin
             RailTransportManager,                // Началник ж.п. транспорт
             LocomotiveTransportManager,          // Началник на Експлоатацията
-            LocomotivesDriversManager,           // Деломайстор
             DieselLocomotiveRepairManager,       // Нач. Дизелово депо-ремонт
+            LocomotivesDriversManager,           // Деломайстор
             DieselLocomotiveRepairSupervisor,    // Ръководител смяна Дизелово депо-ремонт
-            User                                 // base user
+            User,                                // base user        
+            Owner,                               // top business owner
         };
         }
     }

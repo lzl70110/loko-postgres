@@ -1,16 +1,12 @@
 ﻿using GCommon;                         // AppRoles (canonical names)
-using Loco1.Service.Abstractions;
-using Loco1.ViewModels;
 using Loco1.Data.Models;
 using Loco1.Localizer;
-
+using Loco1.Service.Abstractions;
+using Loco1.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using static GCommon.AppRoles; // for direct access to role constants
 
 namespace Loco1.Service
     {
@@ -26,17 +22,17 @@ namespace Loco1.Service
 
         // Explicit hierarchy (highest -> lowest) for UI ordering
         // NOTE: Keep this in sync with your intended business order.
-        private static readonly string[] RoleHierarchy =
-        {
-            AppRoles.Owner,
-            AppRoles.Admin,
-            AppRoles.RailTransportManager,
-            AppRoles.LocomotiveTransportManager,
-            AppRoles.DieselLocomotiveRepairManager,
-            AppRoles.DieselLocomotiveRepairSupervisor,
-            AppRoles.LocomotivesDriversManager,
-            AppRoles.User
-        };
+        //private static readonly string[] RoleHierarchy =
+        //{
+        //    AppRoles.Owner,
+        //    AppRoles.Admin,
+        //    AppRoles.RailTransportManager,
+        //    AppRoles.LocomotiveTransportManager,
+        //    AppRoles.DieselLocomotiveRepairManager,
+        //    AppRoles.DieselLocomotiveRepairSupervisor,
+        //    AppRoles.LocomotivesDriversManager,
+        //    AppRoles.User
+        //};
         // Note: Added explicit hierarchy for stable non-alphabetical ordering.
 
         public UserRoleService(
@@ -48,11 +44,11 @@ namespace Loco1.Service
             _roleManager = roleManager;
             L = localizer;
             }
-
+        
         // Utility: order roles by hierarchy (fallback by name for safety)
         private static IEnumerable<string> OrderByHierarchy(IEnumerable<string> roles)
             => roles
-                .OrderBy(r => Array.IndexOf(RoleHierarchy, r))
+                .OrderBy(r => Array.IndexOf(Hierarchy, r))
                 .ThenBy(r => r, StringComparer.Ordinal);
         // Note: Central method that enforces hierarchy in one place.
 
