@@ -6,13 +6,13 @@
 .loco-brand {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-left: 16px;
+    gap: 10px;
+    margin-left: 12px;
 }
 
     .loco-brand img {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         object-fit: contain;
     }
 
@@ -34,7 +34,7 @@
 
 /* ================= SIDEBAR ================= */
 .sidebar-nav .list-group-item {
-    padding: .55rem .11rem;
+    padding: .45rem .15rem;
 }
 
 /* ================= PAGE FLEX ================= */

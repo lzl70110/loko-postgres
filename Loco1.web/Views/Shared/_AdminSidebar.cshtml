@@ -3,73 +3,65 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 @inject SignInManager<ApplicationUser> SignInManager
 
-<div class="list-group list-group-flush sidebar-nav">
-
-    @* ===================== Admin ===================== *@
-    @if (SignInManager.IsSignedIn(User) &&
-             (User.IsInRole("Admin") || User.IsInRole("Owner")))
-        {
-            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-               data-bs-toggle="collapse"
-               href="#adminSubmenu"
-               role="button"
-               aria-expanded="false"
-               aria-controls="adminSubmenu">
-            <span><i class="bi bi-gear-fill"></i> @L["Role.Admin"]</span>
-            <i class="bi bi-chevron-down small"></i>
-            </a>
-
-            <div class="collapse" id="adminSubmenu">
-
-            <!-- Users -->
-                <a class="list-group-item list-group-item-action ps-4"
-                   asp-area="" asp-controller="Admin" asp-action="Users">
-                <i class="bi bi-people-fill"></i> @L["Users"]
-                </a>
-
-            <!-- Locomotives -->
-                <a class="list-group-item list-group-item-action ps-4"
-                   asp-area="" asp-controller="Locomotives" asp-action="Index">
-                <i class="bi bi-train-front-fill"></i> @L["Locomotives"]
-                </a>
-
-            </div>
-        }
-
-    @* ===================== ShiftWork / Work ===================== *@
+@* ===================== Admin ===================== *@
+@if (SignInManager.IsSignedIn(User) &&
+     (User.IsInRole("Admin") || User.IsInRole("Owner")))
+    {
         <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
            data-bs-toggle="collapse"
-           href="#workSubmenu"
+           href="#adminSubmenu"
            role="button"
            aria-expanded="false"
-           aria-controls="workSubmenu">
-        <span><i class="bi bi-activity"></i> @L["WorkSection"]</span>
+           aria-controls="adminSubmenu">
+        <span><i class="bi bi-gear-fill"></i> @L["Role.Admin"]</span>
         <i class="bi bi-chevron-down small"></i>
         </a>
-        <div class="collapse ps-3" id="workSubmenu">
-        <!-- future partials for ShiftWork -->
+
+        <div class="collapse" id="adminSubmenu">
             <a class="list-group-item list-group-item-action ps-4"
-               asp-area="" asp-controller="ShiftWork" asp-action="Index">
-            @L["ShiftWork"]
+               asp-area="" asp-controller="Admin" asp-action="Users">
+            <i class="bi bi-people-fill"></i> @L["Users"]
+            </a>
+
+            <a class="list-group-item list-group-item-action ps-4"
+               asp-area="" asp-controller="Locomotives" asp-action="Index">
+            <i class="bi bi-train-front-fill"></i> @L["Locomotives"]
             </a>
         </div>
+    }
 
-    @* ===================== Repairs ===================== *@
-        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-           data-bs-toggle="collapse"
-           href="#repairSubmenu"
-           role="button"
-           aria-expanded="false"
-           aria-controls="repairSubmenu">
-        <span><i class="bi bi-tools"></i> @L["Repairs"]</span>
-        <i class="bi bi-chevron-down small"></i>
+@* ===================== Work ===================== *@
+    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+       data-bs-toggle="collapse"
+       href="#workSubmenu"
+       role="button"
+       aria-expanded="false"
+       aria-controls="workSubmenu">
+    <span><i class="bi bi-activity"></i> @L["WorkSection"]</span>
+    <i class="bi bi-chevron-down small"></i>
+    </a>
+
+    <div class="collapse ps-3" id="workSubmenu">
+        <a class="list-group-item list-group-item-action ps-4"
+           asp-area="" asp-controller="ShiftWork" asp-action="Index">
+        @L["ShiftWork"]
         </a>
-        <div class="collapse ps-3" id="repairSubmenu">
-        <!-- all repairs handled by business logic in RepairController -->
-            <a class="list-group-item list-group-item-action ps-4"
-               asp-area="" asp-controller="Repair" asp-action="Index">
-            @L["PlanedRepairs"]
-            </a>
-        </div>
+    </div>
 
+@* ===================== Repairs ===================== *@
+    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+       data-bs-toggle="collapse"
+       href="#repairSubmenu"
+       role="button"
+       aria-expanded="false"
+       aria-controls="repairSubmenu">
+    <span><i class="bi bi-tools"></i> @L["Repairs"]</span>
+    <i class="bi bi-chevron-down small"></i>
+    </a>
+
+    <div class="collapse ps-3" id="repairSubmenu">
+        <a class="list-group-item list-group-item-action ps-4"
+           asp-area="" asp-controller="Repair" asp-action="Index">
+        @L["PlanedRepairs"]
+        </a>
     </div>
