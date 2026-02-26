@@ -1,12 +1,12 @@
 # SUMMARY
 - Root: C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
-- ScanTimeUtc: 2026-02-25T11:57:14.3706966Z
+- ScanTimeUtc: 2026-02-26T10:55:34.3358863Z
 - OS: Win32NT 10.0.26100.0 (Microsoft Windows 10.0.26100)
 - .NET SDKs (from dotnet --info): 8.0.124; 9.0.311; 10.0.103
 - Solution files: 1
 - Projects: 8
-- Total files: 210 | Total size: 15,84 MB
-- Code lines: .css=43 133; .db=42 689; .js=31 315; .sqlite=6 886; .cs=4 515; .txt=3 216; (noext)=2 512; .resx=1 062; .cshtml=975; .config=974; .v2=500; .json=478; .gitignore=364; .suo=310; .csproj=144; .ps1=74; .sln=65; .gitattributes=63; .user=51; .pubxml=30; .bat=26; .wsuo=26; .md=23; .map=23; .ico=1; .vsidx=0; .db-shm=0; .db-wal=0
+- Total files: 231 | Total size: 16,07 MB
+- Code lines: .db=59 222; .css=43 235; .js=31 409; .sqlite=6 886; .cs=6 420; .txt=3 148; (noext)=2 512; .resx=1 062; .config=974; .cshtml=948; .png=539; .json=534; .v2=505; .gitignore=364; .suo=278; .csproj=144; .ps1=74; .sln=65; .gitattributes=63; .user=51; .pubxml=30; .bat=26; .wsuo=26; .md=23; .map=23; .ico=10; .vsidx=0
 
 # SOLUTIONS
 - ..\Loco_17_Feb.sln
@@ -142,19 +142,15 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   │   │   │   └── SemanticSymbols.db
 │   │   │   └── 18.4.89.4080
 │   │   │       ├── CodeChunks.db
-│   │   │       ├── CodeChunks.db-shm
-│   │   │       ├── CodeChunks.db-wal
-│   │   │       ├── SemanticSymbols.db
-│   │   │       ├── SemanticSymbols.db-shm
-│   │   │       └── SemanticSymbols.db-wal
+│   │   │       └── SemanticSymbols.db
 │   │   ├── DesignTimeBuild
 │   │   │   └── .dtbcache.v2
 │   │   ├── FileContentIndex
-│   │   │   ├── 0bebcde7-4af9-49e6-ab74-94f116941af3.vsidx
-│   │   │   ├── 51ff1a23-1080-4d3a-ac83-6e7a8b91abd3.vsidx
-│   │   │   ├── 5981559d-f303-4b78-b79b-87ee32ed4a1b.vsidx
-│   │   │   ├── eb0a6b2b-5383-45d4-a23d-77f8dfbedbd6.vsidx
-│   │   │   └── ffde79c4-32f1-4c55-b562-dc5b6fbb9784.vsidx
+│   │   │   ├── 1533f84f-71af-4bae-84c0-ac7b1678b4d1.vsidx
+│   │   │   ├── d7f8a277-4d8e-4c2a-9987-8f6782dbdb19.vsidx
+│   │   │   ├── e374fc9b-ab0f-4e7b-b024-5e9e984c5a72.vsidx
+│   │   │   ├── e892751a-7fc0-490d-a654-1e34b5c01dfe.vsidx
+│   │   │   └── e92ea879-5ee4-4765-b9b3-008a0317bb69.vsidx
 │   │   ├── v17
 │   │   │   ├── .futdcache.v2
 │   │   │   ├── .suo
@@ -180,6 +176,7 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   ├── EntityValidationConstants.cs
 │   ├── GCommon.csproj
 │   ├── GCommon.csproj.user
+│   ├── Perm.cs
 │   └── Enum
 │       ├── AuditAction.cs
 │       ├── LocomotiveType.cs
@@ -201,6 +198,10 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   │   ├── 20260224115150_InitialMigration.Designer.cs
 │   │   ├── 20260225105015_AddFirstLastNameToUsers.cs
 │   │   ├── 20260225105015_AddFirstLastNameToUsers.Designer.cs
+│   │   ├── 20260225120848_AddUserName.cs
+│   │   ├── 20260225120848_AddUserName.Designer.cs
+│   │   ├── 20260226082427_AddWorkdayCalendar.cs
+│   │   ├── 20260226082427_AddWorkdayCalendar.Designer.cs
 │   │   ├── AddFirstAndLastNameToUsers.cs
 │   │   └── LocoDbContextModelSnapshot.cs
 │   └── Models
@@ -211,7 +212,8 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │       ├── Locomotive.cs
 │       ├── PlannedRepairSet.cs
 │       ├── ShiftWork.cs
-│       └── ValuesEntity.cs
+│       ├── ValuesEntity.cs
+│       └── WorkdayCalendar.cs
 ├── Loco1.Data.Models
 │   └── Loco1.Data.Models.csproj
 ├── Loco1.Localizer
@@ -278,7 +280,8 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
     │   └── LanguageController.cs
     ├── Infrastructure
     │   ├── DataSeeder.cs
-    │   └── HierarchicalRolesSeeder.cs
+    │   ├── HierarchicalRolesSeeder.cs
+    │   └── PermissionAuthorization.cs
     ├── Properties
     │   ├── launchSettings.json
     │   ├── serviceDependencies.json
@@ -312,7 +315,26 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
         ├── favicon.ico
         ├── css
         │   └── site.css
+        ├── icons
+        │   ├── android-chrome-192.png
+        │   ├── android-chrome-512.png
+        │   ├── apple-touch-icon.png
+        │   ├── myicon-anim-1.png
+        │   ├── myicon-anim-10.png
+        │   ├── myicon-anim-11.png
+        │   ├── myicon-anim-12.png
+        │   ├── myicon-anim-2.png
+        │   ├── myicon-anim-3.png
+        │   ├── myicon-anim-4.png
+        │   ├── myicon-anim-5.png
+        │   ├── myicon-anim-6.png
+        │   ├── myicon-anim-7.png
+        │   ├── myicon-anim-8.png
+        │   ├── myicon-anim-9.png
+        │   └── myicon.ico
         ├── js
+        │   ├── favicon-anim.js
+        │   ├── header-anim.js
         │   └── site.js
         └── lib
             ├── bootstrap
@@ -393,6 +415,9 @@ using Loco1.Data.Models;           // ApplicationUser
 using Loco1.Service;               // Services implementation
 using Loco1.Service.Abstractions;  // Service contracts
 
+using GCommon;
+using Loco1.Web.Infrastructure;
+
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;     // <-- required for RequestLocalizationOptions / RequestCulture
@@ -461,9 +486,6 @@ namespace Loco1.Web
                         factory.Create(typeof(SharedResource));
                 });
 
-            // ---------------------------------------------------------
-            //  IDENTITY (ApplicationUser)
-            // ---------------------------------------------------------
 
 - ..\Loco1.Services\Program.cs (first 80 lines)
 namespace Loco1.Services;
@@ -551,8 +573,12 @@ namespace Loco1.Data
   - 20260224115150_InitialMigration.Designer.cs (SHA1: 09436A3826F7851D69B2D89470F610296FD4CE72, Size: 21,62 KB)
   - 20260225105015_AddFirstLastNameToUsers.cs (SHA1: 9308B76B1288C1FFF707D2000AB4947458DBE861, Size: 1,05 KB)
   - 20260225105015_AddFirstLastNameToUsers.Designer.cs (SHA1: 77FA3417C748F82CE66EC9EBD2035FBD967A1D80, Size: 21,83 KB)
+  - 20260225120848_AddUserName.cs (SHA1: 803F3E55DF30F46DC9F4F24308183653196EA93D, Size: 9,72 KB)
+  - 20260225120848_AddUserName.Designer.cs (SHA1: 2511F5CCF12A09D0738C112A33E8A9D1A7B3B9F1, Size: 21,89 KB)
+  - 20260226082427_AddWorkdayCalendar.cs (SHA1: C111B2C5AC6C25284078C8E5B7ADC3E03CC8E81F, Size: 9,94 KB)
+  - 20260226082427_AddWorkdayCalendar.Designer.cs (SHA1: 71F2CBF6603F18D253BCA3B1CB6B0A7A6BCCBD95, Size: 21,95 KB)
   - AddFirstAndLastNameToUsers.cs (SHA1: A2A367B9BFBE2FA8B91DBC20D5DFDF8852DAB8FB, Size: 957 B)
-  - LocoDbContextModelSnapshot.cs (SHA1: 4C7D18315106ED8D278D7137EE335C115239C94F, Size: 21,71 KB)
+  - LocoDbContextModelSnapshot.cs (SHA1: A4AE487F7BD2B3D23584AAC51738DF330CF15139, Size: 21,84 KB)
 
 # LOCALIZATION
 - SharedResource.resx: found
@@ -568,20 +594,21 @@ namespace Loco1.Data
 - Excluded folders/files: bin, obj, .git, node_modules
 
 # RAW METRICS
-- .css=43 133 lines
-- .db=42 689 lines
-- .js=31 315 lines
+- .db=59 222 lines
+- .css=43 235 lines
+- .js=31 409 lines
 - .sqlite=6 886 lines
-- .cs=4 515 lines
-- .txt=3 216 lines
+- .cs=6 420 lines
+- .txt=3 148 lines
 - (noext)=2 512 lines
 - .resx=1 062 lines
-- .cshtml=975 lines
 - .config=974 lines
-- .v2=500 lines
-- .json=478 lines
+- .cshtml=948 lines
+- .png=539 lines
+- .json=534 lines
+- .v2=505 lines
 - .gitignore=364 lines
-- .suo=310 lines
+- .suo=278 lines
 - .csproj=144 lines
 - .ps1=74 lines
 - .sln=65 lines
@@ -592,8 +619,6 @@ namespace Loco1.Data
 - .wsuo=26 lines
 - .md=23 lines
 - .map=23 lines
-- .ico=1 lines
+- .ico=10 lines
 - .vsidx=0 lines
-- .db-shm=0 lines
-- .db-wal=0 lines
 

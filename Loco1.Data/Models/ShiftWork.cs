@@ -15,7 +15,7 @@ namespace Loco1.Data.Models
         [ForeignKey(nameof(LocomotiveId))]
         public Locomotive Locomotive { get; set; } = null!;
         public DateTime ShiftDate { get; set; }
-        public Shift Shift { get; set; } = Shift.Day;   // Day | Night
+        public Shift Shift { get; set; }  
         public decimal EngineHoursUsed { get; set; }
         public bool IsAWorkingDay { get; set; }
         }
