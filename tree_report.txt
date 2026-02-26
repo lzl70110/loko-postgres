@@ -1,12 +1,12 @@
 # SUMMARY
 - Root: C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
-- ScanTimeUtc: 2026-02-26T10:55:34.3358863Z
+- ScanTimeUtc: 2026-02-26T11:42:53.8390526Z
 - OS: Win32NT 10.0.26100.0 (Microsoft Windows 10.0.26100)
 - .NET SDKs (from dotnet --info): 8.0.124; 9.0.311; 10.0.103
 - Solution files: 1
 - Projects: 8
-- Total files: 231 | Total size: 16,07 MB
-- Code lines: .db=59 222; .css=43 235; .js=31 409; .sqlite=6 886; .cs=6 420; .txt=3 148; (noext)=2 512; .resx=1 062; .config=974; .cshtml=948; .png=539; .json=534; .v2=505; .gitignore=364; .suo=278; .csproj=144; .ps1=74; .sln=65; .gitattributes=63; .user=51; .pubxml=30; .bat=26; .wsuo=26; .md=23; .map=23; .ico=10; .vsidx=0
+- Total files: 234 | Total size: 16,09 MB
+- Code lines: .db=59 222; .css=43 235; .js=31 409; .sqlite=6 886; .cs=6 479; .txt=3 146; (noext)=2 512; .resx=1 062; .config=974; .cshtml=948; .json=633; .png=539; .v2=502; .gitignore=364; .suo=297; .csproj=144; .ps1=74; .sln=65; .gitattributes=63; .user=51; .pubxml=30; .bat=26; .wsuo=26; .md=23; .map=23; .ico=10; .vsidx=0
 
 # SOLUTIONS
 - ..\Loco_17_Feb.sln
@@ -146,11 +146,11 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   │   ├── DesignTimeBuild
 │   │   │   └── .dtbcache.v2
 │   │   ├── FileContentIndex
-│   │   │   ├── 1533f84f-71af-4bae-84c0-ac7b1678b4d1.vsidx
+│   │   │   ├── 09301982-da6f-45c2-8f56-31420852b1d9.vsidx
+│   │   │   ├── 39ed91ba-cc7f-416d-9119-55b047746240.vsidx
+│   │   │   ├── a079f15e-513d-4b4f-936c-742b54f02837.vsidx
 │   │   │   ├── d7f8a277-4d8e-4c2a-9987-8f6782dbdb19.vsidx
-│   │   │   ├── e374fc9b-ab0f-4e7b-b024-5e9e984c5a72.vsidx
-│   │   │   ├── e892751a-7fc0-490d-a654-1e34b5c01dfe.vsidx
-│   │   │   └── e92ea879-5ee4-4765-b9b3-008a0317bb69.vsidx
+│   │   │   └── f46ad5cd-6f75-44f7-9f0f-4c5c2043217b.vsidx
 │   │   ├── v17
 │   │   │   ├── .futdcache.v2
 │   │   │   ├── .suo
@@ -181,7 +181,8 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │       ├── AuditAction.cs
 │       ├── LocomotiveType.cs
 │       ├── MeasuringUnits.cs
-│       └── Shift.cs
+│       ├── Shift.cs
+│       └── ShiftCode.cs
 ├── Loco1.Data
 │   ├── Loco1.Data.csproj
 │   ├── Configuration
@@ -227,9 +228,11 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 ├── Loco1.Service
 │   ├── AuditLogService.cs
 │   ├── Loco1.Service.csproj
+│   ├── ShiftCalendar.cs
 │   ├── UserRoleService.cs
 │   └── Abstractions
 │       ├── IAuditLogService.cs
+│       ├── IShiftCalendar.cs
 │       └── IUserRoleService.cs
 ├── Loco1.Services
 │   ├── Loco1.Services.csproj
@@ -598,17 +601,17 @@ namespace Loco1.Data
 - .css=43 235 lines
 - .js=31 409 lines
 - .sqlite=6 886 lines
-- .cs=6 420 lines
-- .txt=3 148 lines
+- .cs=6 479 lines
+- .txt=3 146 lines
 - (noext)=2 512 lines
 - .resx=1 062 lines
 - .config=974 lines
 - .cshtml=948 lines
+- .json=633 lines
 - .png=539 lines
-- .json=534 lines
-- .v2=505 lines
+- .v2=502 lines
 - .gitignore=364 lines
-- .suo=278 lines
+- .suo=297 lines
 - .csproj=144 lines
 - .ps1=74 lines
 - .sln=65 lines

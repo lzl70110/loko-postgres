@@ -24,7 +24,10 @@
     margin-right: 16px;
 }
 
-    .loco-nav-right .btn, .loco-nav-right span, .loco-nav-right form, .loco-nav-right .loco-badge {
+    .loco-nav-right .btn,
+    .loco-nav-right span,
+    .loco-nav-right form,
+    .loco-nav-right .loco-badge {
         display: inline-flex;
         align-items: center;
     }
@@ -34,11 +37,26 @@
     padding: .55rem .9rem;
 }
 
+/* ================= PAGE FLEX ================= */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
 /* ================= FOOTER ================= */
 .app-footer {
     border-top: 1px solid #dee2e6;
     background-color: #fff;
-    min-height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,11 +70,11 @@
 .rotator {
     position: relative;
     width: 100%;
-    max-width: 300px;
-    height: 1.5em;
+    min-height: 2em; /* allows multiline text */
     overflow: hidden;
     margin: 0 auto;
     text-align: center;
+    padding: 0 12px;
 }
 
 .rotator__item {
@@ -66,8 +84,11 @@
     opacity: 0;
     transform: translateY(20px);
     animation: rotatorFade 9s infinite ease-in-out;
+    white-space: normal; /* allow wrapping */
+    word-break: break-word; /* prevent overflow */
 }
 
+    /* Animation timing */
     .rotator__item:nth-child(1) {
         animation-delay: 0s;
     }
@@ -120,22 +141,6 @@
     .loco-nav-right {
         gap: 10px;
     }
-}
-
-/* ================= PAGE FLEX ================= */
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-main {
-    flex: 1 0 auto;
 }
 
 /* ================= STATUS MESSAGE ================= */

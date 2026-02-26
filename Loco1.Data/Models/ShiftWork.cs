@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Loco1.GCommon.Enum;
 using Loco1.GCommon.Enums; // Shift enum
  
 using static Loco1.GCommon.EntityValidationConstants.AuditEntity;  // NoteMaxLength
