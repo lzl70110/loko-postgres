@@ -147,3 +147,7 @@ main {
 #status-message {
     transition: opacity 0.8s ease;
 }
+
+.sidebar-nav {
+    margin-left: -42px;
+}
