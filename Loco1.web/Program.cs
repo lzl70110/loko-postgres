@@ -98,8 +98,16 @@ namespace Loco1.Web
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<LocoDbContext>();
 
+            // ---------------------------------------------------------
+            //  IDENTITY SERVICES
+            // ---------------------------------------------------------
             builder.Services.AddScoped<IUserRoleService, UserRoleService>();
             builder.Services.AddRazorPages(); // Identity UI
+
+            //   ---------------------------------------------------------
+            //  APPLICATION SERVICES
+            // ---------------------------------------------------------
+            builder.Services.AddScoped<ILocomotiveService, LocomotiveService>();
 
             // ---------------------------------------------------------
             //  CULTURES

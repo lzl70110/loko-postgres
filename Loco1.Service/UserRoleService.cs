@@ -2,7 +2,7 @@
 using Loco1.Data.Models;
 using Loco1.Localizer;
 using Loco1.Service.Abstractions;
-using Loco1.ViewModels;
+using Loco1.ViewModels.Roles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;

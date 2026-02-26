@@ -1,4 +1,4 @@
-﻿namespace Loco1.ViewModels
+﻿namespace Loco1.ViewModels.Roles
     {
     public class UserWithRolesVm
         {

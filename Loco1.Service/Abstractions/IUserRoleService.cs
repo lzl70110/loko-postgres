@@ -1,4 +1,4 @@
-﻿using Loco1.ViewModels;
+﻿using Loco1.ViewModels.Roles;
 
 namespace Loco1.Service.Abstractions
     {

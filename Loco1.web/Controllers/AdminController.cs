@@ -1,6 +1,6 @@
 ﻿using Loco1.Localizer;
 using Loco1.Service.Abstractions;
-using Loco1.ViewModels;
+using Loco1.ViewModels.Roles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;

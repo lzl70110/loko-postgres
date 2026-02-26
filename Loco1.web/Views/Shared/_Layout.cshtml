@@ -29,7 +29,7 @@
                     <span class="d-none d-md-inline">@L["Header_AppName"]</span>
                     </a>
 
-                    <div class="loco-nav-right d-none d-lg-flex">
+                    <div class="loco-nav-right d-flex">
                     @if (SignInManager.IsSignedIn(User))
                         {
                         <div class="loco-badge"><partial name="_UserBadge" /></div>
@@ -65,8 +65,35 @@
             <h5 class="offcanvas-title">@L["Header_AppName"]</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
             </div>
-            <div class="offcanvas-body p-0">
+            <div class="loco-nav-right d-none d-lg-flex">
                 <div class="list-group list-group-flush sidebar-nav">
+                <!-- MOBILE LOGIN/LOGOUT -->
+                @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a class="list-group-item list-group-item-action">
+                        <partial name="_UserBadge" />
+                        </a>
+
+                        <form asp-area="Identity"
+                          asp-page="/Account/Logout"
+                          asp-route-returnUrl="@Url.Action("Index","Home")"
+                          method="post"
+                          class="list-group-item mb-0 p-0 border-0">
+                            <button type="submit" class="btn w-100 text-start">
+                            <i class="bi bi-box-arrow-right"></i> @L["Logout"]
+                            </button>
+                        </form>
+                    }
+                else
+                    {
+                        <a class="list-group-item list-group-item-action" asp-area="Identity" asp-page="/Account/Login">
+                        <i class="bi bi-box-arrow-in-right"></i> @L["Login"]
+                        </a>
+
+                        <a class="list-group-item list-group-item-action" asp-area="Identity" asp-page="/Account/Register">
+                        <i class="bi bi-person-plus-fill"></i> @L["Register"]
+                        </a>
+                    }
                     <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Index">
                     <i class="bi bi-house-door-fill"></i> @L["Home"]
                     </a>

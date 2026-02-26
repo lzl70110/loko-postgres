@@ -1,4 +1,4 @@
-﻿namespace Loco1.ViewModels
+﻿namespace Loco1.ViewModels.Roles
     {
     // ViewModel for displaying a role and its permissions
     public class RoleWithPermissionsVm
