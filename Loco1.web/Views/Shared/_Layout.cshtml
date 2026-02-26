@@ -10,110 +10,67 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>@ViewData["Title"] - @L["Header_AppName"]</title>
 
-    <!-- CSS Libraries -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/Loco1.web.styles.css" />
 
-    <!-- ===========================
-         ANIMATED FAVICON (PNG frames)
-         =========================== -->
     <link rel="icon" type="image/png" href="~/icons/myicon-anim-1.png" />
     <script src="~/js/favicon-anim.js"></script>
-
-    <!-- (Optional quick revert: static ICO) -->
-    @* <link rel="icon" href="~/icons/myicon.ico" /> *@
-
-    <!-- ===========================
-         ANDROID / iOS PLATFORM ICONS
-         =========================== -->
-    <!-- iOS Home Screen icon -->
-    <link rel="apple-touch-icon" href="~/icons/apple-touch-icon.png" />
-    <!-- Android high-res icons -->
-    <link rel="icon" sizes="192x192" href="~/icons/android-chrome-192.png" />
-    <link rel="icon" sizes="512x512" href="~/icons/android-chrome-512.png" />
-      
-
-    <title>  🚂    </title>
-    <!-- (Optional) PWA Manifest – разкоментирай ако добавим файла
-    <link rel="manifest" href="~/manifest.webmanifest" />
-    
-    -->
     </head>
     <body>
-    <!-- ========================
-         HEADER / NAVBAR
-         ======================== -->
+    <!-- HEADER -->
         <header>
-       
-            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm loco-navbar">
-                <div class="container-fluid">
-                <!-- Brand -->
+            <nav class="navbar loco-navbar navbar-light bg-white border-bottom">
+                <div class="container-fluid d-flex align-items-center justify-content-between flex-nowrap">
                     <a class="navbar-brand loco-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="fs-4">🚂</span>
-                    <span class="d-none d-md-inline ms-1">@L["Header_AppName"]</span>
+                    <img id="locoHeaderAnim" src="~/icons/myicon-anim-1.png?v=1" alt="Лого Локо" />
+                    <span class="d-none d-md-inline">@L["Header_AppName"]</span>
                     </a>
-              
 
-               
-
-                <!-- Mobile toggle button -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                <!-- Desktop actions -->
-                    <div class="ms-auto loco-nav-right d-none d-lg-flex">
+                    <div class="loco-nav-right d-none d-lg-flex">
                     @if (SignInManager.IsSignedIn(User))
                         {
-                        <!-- Logged-in user -->
-                            <div class="loco-actions">
-                            <div class="loco-badge"><partial name="_UserBadge" /></div>
-                                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index","Home")" method="post">
-                                    <button type="submit" class="btn btn-sm btn-outline-danger">
-                                    <i class="bi bi-box-arrow-right"></i> <span>@L["Logout"]</span>
-                                    </button>
-                                </form>
-                            </div>
+                        <div class="loco-badge"><partial name="_UserBadge" /></div>
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index","Home")" method="post" class="mb-0">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-box-arrow-right"></i><span class="ms-1">@L["Logout"]</span>
+                                </button>
+                            </form>
                         }
                     else
                         {
-                        <!-- Not logged-in -->
-                            <div class="loco-actions">
-                                <a class="btn btn-sm btn-outline-primary" asp-area="Identity" asp-page="/Account/Login">
-                                <i class="bi bi-box-arrow-in-right"></i> <span>@L["LoginButton"]</span>
-                                </a>
-                                <a class="btn btn-sm btn-primary" asp-area="Identity" asp-page="/Account/Register">
-                                <i class="bi bi-person-plus-fill"></i> <span>@L["RegisterButton"]</span>
-                                </a>
-                            </div>
+                            <a class="btn btn-sm btn-outline-primary" asp-area="Identity" asp-page="/Account/Login">
+                            <i class="bi bi-box-arrow-in-right"></i><span class="ms-1">@L["LoginButton"]</span>
+                            </a>
+                            <a class="btn btn-sm btn-primary" asp-area="Identity" asp-page="/Account/Register">
+                            <i class="bi bi-person-plus-fill"></i><span class="ms-1">@L["RegisterButton"]</span>
+                            </a>
                         }
 
-                    <!-- Language switcher -->
                     <div class="loco-lang">@await Html.PartialAsync("_LanguageSwitcher")</div>
                     </div>
+
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
             </nav>
         </header>
 
-    <!-- ========================
-         MOBILE SIDEBAR
-         ======================== -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+    <!-- MOBILE SIDEBAR -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
             <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="mobileSidebarLabel">@L["Header_AppName"]</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <h5 class="offcanvas-title">@L["Header_AppName"]</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
             </div>
             <div class="offcanvas-body p-0">
                 <div class="list-group list-group-flush sidebar-nav">
-                    <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="Index">
+                    <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Index">
                     <i class="bi bi-house-door-fill"></i> @L["Home"]
                     </a>
-                    <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="Privacy">
+                    <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Privacy">
                     <i class="bi bi-shield-lock-fill"></i> @L["Privacy_Title"]
                     </a>
                 @await Html.PartialAsync("_AdminSidebar")
@@ -121,32 +78,27 @@
             </div>
         </div>
 
-    <!-- ========================
-         STATUS MESSAGES
-         ======================== -->
+    <!-- STATUS MESSAGE -->
     @if (TempData["StatusMessage"] is string status && !string.IsNullOrWhiteSpace(status))
         {
             <div class="container mt-3">
-                <div id="status-message" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                <div id="status-message" class="alert alert-success alert-dismissible fade show text-center">
                 @status
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             </div>
         }
 
-    <!-- ========================
-         MAIN LAYOUT
-         ======================== -->
-        <div class="container my-4">
+    <!-- MAIN CONTENT -->
+        <main class="flex-fill container my-4">
             <div class="row">
-            <!-- Desktop sidebar -->
                 <aside class="col-12 col-lg-3 mb-4 d-none d-lg-block">
                     <div class="card shadow-sm">
                         <div class="list-group list-group-flush sidebar-nav">
-                            <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Index">
                             <i class="bi bi-house-door-fill"></i> @L["Home"]
                             </a>
-                            <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="Privacy">
+                            <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Privacy">
                             <i class="bi bi-shield-lock-fill"></i> @L["Privacy_Title"]
                             </a>
                         @await Html.PartialAsync("_AdminSidebar")
@@ -154,39 +106,31 @@
                     </div>
                 </aside>
 
-            <!-- Page body -->
-                <main class="col-12 col-lg-9">
-                @RenderBody()
-                </main>
+            <section class="col-12 col-lg-9">@RenderBody()</section>
             </div>
-        </div>
+        </main>
 
-    <!-- ========================
-         FOOTER
-         ======================== -->
-        <footer class="border-top text-muted py-3 mt-4 app-footer">
-            <div class="container text-center small">
-                <span class="rotator d-block">
-                <span class="rotator__item">@L["Footer_R1"]</span>
-                <span class="rotator__item">@L["Footer_R2"]</span>
-                <span class="rotator__item">@L["Footer_R3"]</span>
-                </span>
+    <!-- FOOTER WITH ROTATOR -->
+        <footer class="app-footer">
+            <div class="rotator">
+            <span class="rotator__item">@L["Footer_R1"]</span>
+            <span class="rotator__item">@L["Footer_R2"]</span>
+            <span class="rotator__item">@L["Footer_R3"]</span>
             </div>
         </footer>
 
-    <!-- ========================
-         SCRIPTS
-         ======================== -->
+    <!-- SCRIPTS -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js"></script>
+    <script src="~/js/header-anim.js?v=1"></script>
+
         <script>
-            // Hide status messages after 3 seconds
             setTimeout(() => {
                 const el = document.getElementById('status-message');
                 if (!el) return;
-                el.style.opacity = "0";
-                setTimeout(() => { if (el && el.parentElement) el.parentElement.removeChild(el); }, 800);
+                el.classList.remove('show');
+                setTimeout(() => el.remove(), 800);
             }, 3000);
         </script>
 
