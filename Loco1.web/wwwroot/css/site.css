@@ -150,12 +150,12 @@ main {
     }
 
     .loco-brand img {
-        width: 32px;
-        height: 32px;
+        width: 22px;
+        height: 22px;
     }
 
     .loco-nav-right {
-        gap: 10px;
+        gap: 15px;
     }
 }
 
