@@ -1,0 +1,674 @@
+# SUMMARY
+- Root: C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
+- ScanTimeUtc: 2026-02-27T16:52:33.1519595Z
+- OS: Win32NT 10.0.26100.0 (Microsoft Windows 10.0.26100)
+- .NET SDKs (from dotnet --info): 8.0.124; 9.0.311; 10.0.103
+- Solution files: 1
+- Projects: 9
+- Total files: 260 | Total size: 16,98 MB
+- Code lines: .db=61 592; .css=43 268; .js=31 409; .cs=8 441; .sqlite=6 886; .bin=6 836; .txt=3 195; (noext)=2 512; .cshtml=1 324; .resx=1 257; .v2=1 095; .config=974; .png=539; .json=480; .gitignore=364; .suo=286; .csproj=163; .ps1=74; .sln=71; .gitattributes=63; .user=54; .pubxml=30; .bat=26; .wsuo=26; .md=23; .map=23; .ico=10; .vsidx=0
+
+# SOLUTIONS
+- ..\Loco_17_Feb.sln
+  - Projects in .sln:
+    - Loco1.web\Loco1.Web.csproj
+    - Data
+    - Loco1.Data\Loco1.Data.csproj
+    - GCommon\GCommon.csproj
+    - Loco1.Service\Loco1.Service.csproj
+    - Solution Items
+    - Loco1.ViewModels\Loco1.ViewModels.csproj
+    - Loco1.Localizer\Loco1.Localizer.csproj
+    - Loco1.Repositories\Loco1.Repositories.csproj
+
+# PROJECTS (.csproj)
+- ..\GCommon\GCommon.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - (none)
+  - ProjectReferences:
+    - (none)
+
+- ..\Loco1.Data.Models\Loco1.Data.Models.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - (none)
+  - ProjectReferences:
+    - ..\GCommon\GCommon.csproj
+
+- ..\Loco1.Data\Loco1.Data.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - Microsoft.AspNetCore.Identity.EntityFrameworkCore 8.0.23
+    - Microsoft.Bcl.AsyncInterfaces 8.0.0
+    - Microsoft.EntityFrameworkCore 8.0.23
+    - Microsoft.EntityFrameworkCore.Tools 8.0.23 (PrivateAssets=all)
+    - Npgsql.EntityFrameworkCore.PostgreSQL 8.0.11
+    - Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite 8.0.11
+  - ProjectReferences:
+    - ..\GCommon\GCommon.csproj
+
+- ..\Loco1.Localizer\Loco1.Localizer.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - Microsoft.Extensions.Localization 8.0.23
+  - ProjectReferences:
+    - (none)
+
+- ..\Loco1.Repositories\Loco1.Repositories.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - Microsoft.EntityFrameworkCore 8.0.23
+  - ProjectReferences:
+    - ..\Loco1.Data\Loco1.Data.csproj
+
+- ..\Loco1.Service\Loco1.Service.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - Microsoft.EntityFrameworkCore.Design 8.0.23 (PrivateAssets=all)
+    - Microsoft.Extensions.Localization 8.0.23
+  - ProjectReferences:
+    - ..\GCommon\GCommon.csproj
+    - ..\Loco1.Data\Loco1.Data.csproj
+    - ..\Loco1.Localizer\Loco1.Localizer.csproj
+    - ..\Loco1.Repositories\Loco1.Repositories.csproj
+    - ..\Loco1.ViewModels\Loco1.ViewModels.csproj
+
+- ..\Loco1.Services\Loco1.Services.csproj
+  - TargetFramework: net8.0
+  - OutputType: Exe
+  - PackageReferences:
+    - (none)
+  - ProjectReferences:
+    - (none)
+
+- ..\Loco1.ViewModels\Loco1.ViewModels.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - (none)
+  - ProjectReferences:
+    - ..\GCommon\GCommon.csproj
+    - ..\Loco1.Data\Loco1.Data.csproj
+
+- ..\Loco1.web\Loco1.Web.csproj
+  - TargetFramework: net8.0
+  - OutputType: Exe
+  - PackageReferences:
+    - Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 8.0.23
+    - Microsoft.AspNetCore.Identity.EntityFrameworkCore 8.0.23
+    - Microsoft.AspNetCore.Identity.UI 8.0.23
+    - Microsoft.EntityFrameworkCore.Tools 8.0.23
+    - Microsoft.VisualStudio.Web.CodeGeneration.Design 8.0.23
+    - Npgsql.EntityFrameworkCore.PostgreSQL 8.*
+  - ProjectReferences:
+    - ..\GCommon\GCommon.csproj
+    - ..\Loco1.Data\Loco1.Data.csproj
+    - ..\Loco1.Localizer\Loco1.Localizer.csproj
+    - ..\Loco1.Repositories\Loco1.Repositories.csproj
+    - ..\Loco1.Service\Loco1.Service.csproj
+    - ..\Loco1.ViewModels\Loco1.ViewModels.csproj
+
+# DIRECTORY TREE (clean)
+C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
+├── .gitattributes
+├── .gitignore
+├── Dockerfile
+├── Loco_17_Feb.sln
+├── Pack-Loco.ps1
+├── PackLoco.Bat
+├── README.md
+├── solution_tree.txt
+├── tree_report.txt
+├── .github
+│   └── workflows
+├── .vs
+│   ├── slnx.sqlite
+│   ├── VSWorkspaceState.json
+│   ├── Loco_17_Feb
+│   │   ├── config
+│   │   │   └── applicationhost.config
+│   │   ├── copilot-chat
+│   │   │   └── 0f52aac3
+│   │   │       └── sessions
+│   │   │           ├── 3b828516-8c05-42cb-91fa-0502c4d875a3
+│   │   │           ├── 592b5908-63ea-44c1-a543-e3bf6d8b1013
+│   │   │           ├── 63980e76-1b9c-4a2c-9276-60e487bb7bd0
+│   │   │           └── e416c8f7-0efa-4bd5-a178-577ac2383f5d
+│   │   ├── CopilotIndices
+│   │   │   ├── 17.14.1584.41681
+│   │   │   │   ├── CodeChunks.db
+│   │   │   │   └── SemanticSymbols.db
+│   │   │   ├── 17.14.1593.33849
+│   │   │   │   ├── CodeChunks.db
+│   │   │   │   └── SemanticSymbols.db
+│   │   │   ├── 18.4.84.18506
+│   │   │   │   ├── CodeChunks.db
+│   │   │   │   └── SemanticSymbols.db
+│   │   │   └── 18.4.89.4080
+│   │   │       ├── CodeChunks.db
+│   │   │       └── SemanticSymbols.db
+│   │   ├── DesignTimeBuild
+│   │   │   └── .dtbcache.v2
+│   │   ├── FileContentIndex
+│   │   │   ├── 552cf951-5037-47c5-baf7-2210ae45aac1.vsidx
+│   │   │   ├── 553c844a-9e12-4227-bb96-274e0676330f.vsidx
+│   │   │   ├── 9e907125-f03b-4c62-93cd-08b66bda5272.vsidx
+│   │   │   ├── aa5878eb-d825-4d2e-a5d3-a0e01c536e8b.vsidx
+│   │   │   └── bf6ef7f2-5314-457e-9177-5eac733cdb1d.vsidx
+│   │   ├── v17
+│   │   │   ├── .futdcache.v2
+│   │   │   ├── .suo
+│   │   │   ├── DocumentLayout.backup.json
+│   │   │   ├── DocumentLayout.json
+│   │   │   ├── HierarchyCache.v1.txt
+│   │   │   └── ResourceExplorer
+│   │   │       └── settings.json
+│   │   └── v18
+│   │       ├── .futdcache.v2
+│   │       ├── .suo
+│   │       ├── .wsuo
+│   │       ├── DocumentLayout.backup.json
+│   │       ├── DocumentLayout.json
+│   │       ├── HierarchyCache.v1.txt
+│   │       └── ResourceExplorer
+│   │           └── settings.json
+│   ├── ProjectEvaluation
+│   │   ├── loco_17_feb.metadata.v10.bin
+│   │   ├── loco_17_feb.projects.v10.bin
+│   │   └── loco_17_feb.strings.v10.bin
+│   └── sd
+│       └── 4ac8f850-cd6c-4d9b-a1af-55b53fdde000
+├── GCommon
+│   ├── AppRoles.cs
+│   ├── EntityValidationConstants.cs
+│   ├── GCommon.csproj
+│   ├── GCommon.csproj.user
+│   ├── Perm.cs
+│   └── Enum
+│       ├── AuditAction.cs
+│       ├── LocomotiveType.cs
+│       ├── MeasuringUnits.cs
+│       ├── Shift.cs
+│       └── ShiftCode.cs
+├── Loco1.Data
+│   ├── Loco1.Data.csproj
+│   ├── Configuration
+│   │   ├── AuditLogConfiguration.cs
+│   │   ├── FuelConfiguration.cs
+│   │   ├── LocomotiveConfiguration.cs
+│   │   └── ShiftWorkConfiguration.cs
+│   ├── Data
+│   │   ├── LocoDbContext.cs
+│   │   ├── LocoDbContextFactory.cs
+│   │   └── Roles.json
+│   ├── Migrations
+│   │   ├── 20260224115150_InitialMigration.cs
+│   │   ├── 20260224115150_InitialMigration.Designer.cs
+│   │   ├── 20260225105015_AddFirstLastNameToUsers.cs
+│   │   ├── 20260225105015_AddFirstLastNameToUsers.Designer.cs
+│   │   ├── 20260225120848_AddUserName.cs
+│   │   ├── 20260225120848_AddUserName.Designer.cs
+│   │   ├── 20260226082427_AddWorkdayCalendar.cs
+│   │   ├── 20260226082427_AddWorkdayCalendar.Designer.cs
+│   │   ├── 20260227070105_Sync_String_Lengths_And_Uniques.cs
+│   │   ├── 20260227070105_Sync_String_Lengths_And_Uniques.Designer.cs
+│   │   ├── 20260227075155_ChangeCreatedByAndEditedByMaxLength.cs
+│   │   ├── 20260227075155_ChangeCreatedByAndEditedByMaxLength.Designer.cs
+│   │   ├── AddFirstAndLastNameToUsers.cs
+│   │   └── LocoDbContextModelSnapshot.cs
+│   └── Models
+│       ├── ApplicationUser.cs
+│       ├── AuditEntity.cs
+│       ├── AuditLog.cs
+│       ├── Fuel.cs
+│       ├── Locomotive.cs
+│       ├── PlannedRepairSet.cs
+│       ├── ShiftWork.cs
+│       ├── ValuesEntity.cs
+│       └── WorkdayCalendar.cs
+├── Loco1.Data.Models
+│   └── Loco1.Data.Models.csproj
+├── Loco1.Localizer
+│   ├── Loco1.Localizer.csproj
+│   ├── Loco1.Localizer.csproj.user
+│   └── Resources
+│       ├── SharedResource.bg-BG.resx
+│       ├── SharedResource.cs
+│       ├── SharedResource.en-US.resx
+│       └── SharedResource.resx
+├── Loco1.Repositories
+│   ├── Loco1.Repositories.csproj
+│   ├── LocomotiveRepository.cs
+│   └── Interfaces
+│       └── ILocomotiveRepository.cs
+├── Loco1.Service
+│   ├── AuditLogService.cs
+│   ├── Loco1.Service.csproj
+│   ├── LocomotiveService.cs
+│   ├── ShiftCalendar.cs
+│   ├── UserRoleService.cs
+│   └── Abstractions
+│       ├── IAuditLogService.cs
+│       ├── ILocomotiveService.cs
+│       ├── IShiftCalendar.cs
+│       └── IUserRoleService.cs
+├── Loco1.Services
+│   ├── Loco1.Services.csproj
+│   └── Program.cs
+├── Loco1.ViewModels
+│   ├── ErrorViewModel.cs
+│   ├── Loco1.ViewModels.csproj
+│   ├── Locomotives
+│   │   ├── LocoEditVm.cs
+│   │   └── LocoListVm.cs
+│   └── Roles
+│       ├── EditUserRolesVm.cs
+│       ├── RoleWithPermissionsVm.cs
+│       └── UserWithRolesVm.cs
+└── Loco1.web
+    ├── appsettings.Development.json
+    ├── appsettings.json
+    ├── Loco1.Web.csproj
+    ├── Loco1.Web.csproj.user
+    ├── Program.cs
+    ├── Areas
+    │   └── Identity
+    │       └── Pages
+    │           ├── _ValidationScriptsPartial.cshtml
+    │           ├── _ViewImports.cshtml
+    │           ├── _ViewStart.cshtml
+    │           └── Account
+    │               ├── AccessDenied.cshtml
+    │               ├── AccessDenied.cshtml.cs
+    │               ├── Lockout.cshtml
+    │               ├── Lockout.cshtml.cs
+    │               ├── Login.cshtml
+    │               ├── Login.cshtml.cs
+    │               ├── Logout.cshtml
+    │               ├── Logout.cshtml.cs
+    │               ├── Register.cshtml
+    │               ├── Register.cshtml.cs
+    │               ├── _ViewImports.cshtml
+    │               └── Manage
+    │                   ├── ChangePassword.cshtml
+    │                   ├── ChangePassword.cshtml.cs
+    │                   ├── Index.cshtml
+    │                   ├── Index.cshtml.cs
+    │                   ├── ManageNavPages.cs
+    │                   ├── _ManageNav.cshtml
+    │                   └── _ViewImports.cshtml
+    ├── Controllers
+    │   ├── AdminController.cs
+    │   ├── BaseController.cs
+    │   ├── HomeController.cs
+    │   ├── LanguageController.cs
+    │   ├── LocomotiveController.cs
+    │   ├── RepairController.cs
+    │   └── ShiftWorkController.cs
+    ├── Infrastructure
+    │   ├── DataSeeder.cs
+    │   ├── HierarchicalRolesSeeder.cs
+    │   ├── OwnerOptions.cs
+    │   ├── OwnerOverrideAuthorizationHandler.cs
+    │   └── PermissionAuthorization.cs
+    ├── Properties
+    │   ├── launchSettings.json
+    │   ├── serviceDependencies.json
+    │   ├── serviceDependencies.local.json
+    │   ├── serviceDependencies.local.json.user
+    │   └── PublishProfiles
+    │       ├── FolderProfile.pubxml
+    │       ├── FolderProfile.pubxml.user
+    │       ├── FolderProfile1.pubxml
+    │       └── FolderProfile1.pubxml.user
+    ├── Views
+    │   ├── _ViewImports.cshtml
+    │   ├── _ViewStart.cshtml
+    │   ├── Admin
+    │   │   ├── AdminRolesPartial.cshtml
+    │   │   ├── EditRoles.cshtml
+    │   │   └── Users.cshtml
+    │   ├── Home
+    │   │   ├── Index.cshtml
+    │   │   └── Privacy.cshtml
+    │   ├── Locomotive
+    │   │   ├── Create.cshtml
+    │   │   ├── Edit.cshtml
+    │   │   └── Index.cshtml
+    │   ├── Repair
+    │   │   └── Index.cshtml
+    │   ├── Shared
+    │   │   ├── Error.cshtml
+    │   │   ├── _AdminSidebar.cshtml
+    │   │   ├── _LanguageSwitcher.cshtml
+    │   │   ├── _Layout.cshtml
+    │   │   ├── _Layout.cshtml.css
+    │   │   ├── _LoginPartial.cshtml
+    │   │   ├── _UnderConstruction.cshtml
+    │   │   ├── _UserBadge.cshtml
+    │   │   └── _ValidationScriptsPartial.cshtml
+    │   └── ShiftWork
+    │       └── Index.cshtml
+    └── wwwroot
+        ├── favicon.ico
+        ├── css
+        │   └── site.css
+        ├── icons
+        │   ├── android-chrome-192.png
+        │   ├── android-chrome-512.png
+        │   ├── apple-touch-icon.png
+        │   ├── myicon-anim-1.png
+        │   ├── myicon-anim-10.png
+        │   ├── myicon-anim-11.png
+        │   ├── myicon-anim-12.png
+        │   ├── myicon-anim-2.png
+        │   ├── myicon-anim-3.png
+        │   ├── myicon-anim-4.png
+        │   ├── myicon-anim-5.png
+        │   ├── myicon-anim-6.png
+        │   ├── myicon-anim-7.png
+        │   ├── myicon-anim-8.png
+        │   ├── myicon-anim-9.png
+        │   └── myicon.ico
+        ├── js
+        │   ├── favicon-anim.js
+        │   ├── header-anim.js
+        │   └── site.js
+        └── lib
+            ├── bootstrap
+            │   ├── LICENSE
+            │   └── dist
+            │       ├── css
+            │       │   ├── bootstrap-grid.css
+            │       │   ├── bootstrap-grid.css.map
+            │       │   ├── bootstrap-grid.min.css
+            │       │   ├── bootstrap-grid.min.css.map
+            │       │   ├── bootstrap-grid.rtl.css
+            │       │   ├── bootstrap-grid.rtl.css.map
+            │       │   ├── bootstrap-grid.rtl.min.css
+            │       │   ├── bootstrap-grid.rtl.min.css.map
+            │       │   ├── bootstrap-reboot.css
+            │       │   ├── bootstrap-reboot.css.map
+            │       │   ├── bootstrap-reboot.min.css
+            │       │   ├── bootstrap-reboot.min.css.map
+            │       │   ├── bootstrap-reboot.rtl.css
+            │       │   ├── bootstrap-reboot.rtl.css.map
+            │       │   ├── bootstrap-reboot.rtl.min.css
+            │       │   ├── bootstrap-reboot.rtl.min.css.map
+            │       │   ├── bootstrap-utilities.css
+            │       │   ├── bootstrap-utilities.css.map
+            │       │   ├── bootstrap-utilities.min.css
+            │       │   ├── bootstrap-utilities.min.css.map
+            │       │   ├── bootstrap-utilities.rtl.css
+            │       │   ├── bootstrap-utilities.rtl.css.map
+            │       │   ├── bootstrap-utilities.rtl.min.css
+            │       │   ├── bootstrap-utilities.rtl.min.css.map
+            │       │   ├── bootstrap.css
+            │       │   ├── bootstrap.css.map
+            │       │   ├── bootstrap.min.css
+            │       │   ├── bootstrap.min.css.map
+            │       │   ├── bootstrap.rtl.css
+            │       │   ├── bootstrap.rtl.css.map
+            │       │   ├── bootstrap.rtl.min.css
+            │       │   └── bootstrap.rtl.min.css.map
+            │       └── js
+            │           ├── bootstrap.bundle.js
+            │           ├── bootstrap.bundle.js.map
+            │           ├── bootstrap.bundle.min.js
+            │           ├── bootstrap.bundle.min.js.map
+            │           ├── bootstrap.esm.js
+            │           ├── bootstrap.esm.js.map
+            │           ├── bootstrap.esm.min.js
+            │           ├── bootstrap.esm.min.js.map
+            │           ├── bootstrap.js
+            │           ├── bootstrap.js.map
+            │           ├── bootstrap.min.js
+            │           └── bootstrap.min.js.map
+            ├── jquery
+            │   ├── LICENSE.txt
+            │   └── dist
+            │       ├── jquery.js
+            │       ├── jquery.min.js
+            │       └── jquery.min.map
+            ├── jquery-validation
+            │   ├── LICENSE.md
+            │   └── dist
+            │       ├── additional-methods.js
+            │       ├── additional-methods.min.js
+            │       ├── jquery.validate.js
+            │       └── jquery.validate.min.js
+            └── jquery-validation-unobtrusive
+                ├── jquery.validate.unobtrusive.js
+                ├── jquery.validate.unobtrusive.min.js
+                └── LICENSE.txt
+
+# IMPORTANT FILES (first lines)
+- ..\Loco1.web\Program.cs (first 80 lines)
+using System.Globalization;
+using System.Text.RegularExpressions;
+using GCommon;
+using Loco1.Data;                  // DbContext
+using Loco1.Data.Models;           // ApplicationUser
+using Loco1.Localizer;             // SharedResource
+using Loco1.Repositories;
+using Loco1.Repositories.Interfaces;
+using Loco1.Service;               // Services implementation
+using Loco1.Service.Abstractions;  // Service contracts
+using Loco1.Web.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;     // <-- required for RequestLocalizationOptions / RequestCulture
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
+namespace Loco1.Web
+    {
+    public class Program
+        {
+        public static async Task Main(string[] args)
+            {
+            // Keep legacy timestamp behavior in Npgsql (compatibility switch)
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+            var builder = WebApplication.CreateBuilder(args);
+
+            // ---------------------------------------------------------
+            //  BIND PORT (Render / Dev)
+            // ---------------------------------------------------------
+            var port = Environment.GetEnvironmentVariable("PORT");
+            if (!string.IsNullOrEmpty(port))
+                {
+                builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+                }
+            else if (builder.Environment.IsDevelopment())
+                {
+             
+                builder.WebHost.UseUrls("http://localhost:5088");
+                }
+
+            // ---------------------------------------------------------
+            //  CONNECTION STRING
+            // ---------------------------------------------------------
+            var connStr =
+                Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
+                ?? builder.Configuration.GetConnectionString("DefaultConnection")
+                ?? throw new InvalidOperationException("ConnectionStrings:DefaultConnection not found.");
+
+            // Normalize rare 'server=tcp://host:port' into Npgsql format
+            if (connStr.Contains("tcp://", StringComparison.OrdinalIgnoreCase))
+                {
+                connStr = Regex.Replace(
+                    connStr,
+                    @"(?i)server\s*=\s*tcp://([^:;]+):(\d+)",
+                    "Host=$1;Port=$2");
+                }
+
+            // Log sanitized connection string (mask password)
+            var sanitized = Regex.Replace(connStr, @"(?i)password\s*=\s*[^;]*", "Password=***");
+            Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
+
+            builder.Services.AddDbContext<LocoDbContext>(opt => opt.UseNpgsql(connStr));
+
+            // ----------------------------------------------------------
+            // Policies
+            // ----------------------------------------------------------
+            builder.Services.Configure<OwnerOptions>(builder.Configuration.GetSection("Seed:Owner"));
+            builder.Services.AddSingleton<IAuthorizationHandler, OwnerOverrideAuthorizationHandler>();
+
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+
+            // ---------------------------------------------------------
+            //  MVC + LOCALIZATION
+            // ---------------------------------------------------------
+            builder.Services.AddLocalization();
+
+
+- ..\Loco1.Services\Program.cs (first 80 lines)
+namespace Loco1.Services;
+
+internal class Program
+    {
+    static void Main(string[] args)
+        {
+        Console.WriteLine("Hello, World!");
+        }
+    }
+
+- AppDbContext.cs: (not found)
+- ..\Loco1.Data\Data\LocoDbContext.cs (first 120 lines)
+using Loco1.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+namespace Loco1.Data
+    {
+    // Note: We type the IdentityDbContext with IdentityUser (optional but clearer)
+    
+    public class LocoDbContext : IdentityDbContext<ApplicationUser>
+        {
+       
+        public LocoDbContext(DbContextOptions<LocoDbContext> options)
+            : base(options)
+            {
+            }
+
+        // Domain sets
+        public DbSet<Locomotive> Locomotives { get; set; } = null!;
+        public DbSet<Fuel> Fuels { get; set; } = null!;
+        public DbSet<ShiftWork> ShiftWorks { get; set; } = null!;
+
+        // Audit
+        public DbSet<AuditLog> AuditLogs { get; set; } = null!;
+        
+        protected override void OnModelCreating(ModelBuilder builder)
+            {
+            base.OnModelCreating(builder); // Keep Identity defaults
+
+            // Apply IEntityTypeConfiguration<> from this assembly
+            builder.ApplyConfigurationsFromAssembly(typeof(LocoDbContext).Assembly);
+            }
+        }
+    }
+
+- ..\Loco1.web\appsettings.json (full content)
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Port=5432;Database=loco_db;Username=loco_user;Password=__SET_IN_SECRETS__;Include Error Detail=true;Pooling=true;Maximum Pool Size=50"
+  },
+  "Seed": {
+    "Owner": {
+      "Email": "lzl70110@gmail.com",
+      "FirstName": "Любомир",
+      "LastName": "Чекански"
+    },
+    "Admin": {
+      "Email": "lzl@test.test",
+      "FirstName": "Админ",
+      "LastName": "Тестов"
+    },
+    "User": {
+      "Email": "test@test.test",
+      "FirstName": "Тест",
+      "LastName": "Потребител"
+    },
+    "DefaultPassword": "testtest"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+
+# MIGRATIONS
+- ..\Loco1.Data\Migrations
+  - 20260224115150_InitialMigration.cs (SHA1: 966DF9B07A71312C7ACA2C596875CA5F7CC05622, Size: 20,46 KB)
+  - 20260224115150_InitialMigration.Designer.cs (SHA1: 09436A3826F7851D69B2D89470F610296FD4CE72, Size: 21,62 KB)
+  - 20260225105015_AddFirstLastNameToUsers.cs (SHA1: 9308B76B1288C1FFF707D2000AB4947458DBE861, Size: 1,05 KB)
+  - 20260225105015_AddFirstLastNameToUsers.Designer.cs (SHA1: 77FA3417C748F82CE66EC9EBD2035FBD967A1D80, Size: 21,83 KB)
+  - 20260225120848_AddUserName.cs (SHA1: 803F3E55DF30F46DC9F4F24308183653196EA93D, Size: 9,72 KB)
+  - 20260225120848_AddUserName.Designer.cs (SHA1: 2511F5CCF12A09D0738C112A33E8A9D1A7B3B9F1, Size: 21,89 KB)
+  - 20260226082427_AddWorkdayCalendar.cs (SHA1: C111B2C5AC6C25284078C8E5B7ADC3E03CC8E81F, Size: 9,94 KB)
+  - 20260226082427_AddWorkdayCalendar.Designer.cs (SHA1: 71F2CBF6603F18D253BCA3B1CB6B0A7A6BCCBD95, Size: 21,95 KB)
+  - 20260227070105_Sync_String_Lengths_And_Uniques.cs (SHA1: 45F5FC8C6241087B57443111CDFF4F3CD79F5510, Size: 472 B)
+  - 20260227070105_Sync_String_Lengths_And_Uniques.Designer.cs (SHA1: 126570CED795350206DEA7870EA7305F3849CAE7, Size: 21,97 KB)
+  - 20260227075155_ChangeCreatedByAndEditedByMaxLength.cs (SHA1: 2607C7D4F816D3D276A6800700F69337158BFC66, Size: 6,5 KB)
+  - 20260227075155_ChangeCreatedByAndEditedByMaxLength.Designer.cs (SHA1: B6F3C5FDAB5B4DD4E98F06F61D7653E3A53F40D3, Size: 22 KB)
+  - AddFirstAndLastNameToUsers.cs (SHA1: A2A367B9BFBE2FA8B91DBC20D5DFDF8852DAB8FB, Size: 957 B)
+  - LocoDbContextModelSnapshot.cs (SHA1: 78EABAE6367F3BEFA01FAA23E091CD0851AD28D0, Size: 21,85 KB)
+
+# LOCALIZATION
+- SharedResource.resx: found
+- SharedResource.bg-BG.resx: found
+- SharedResource.en-US.resx: found
+- Program.cs: AddLocalization() present: yes
+
+# GIT
+- .git found: yes
+- Uncommitted changes: 0
+
+# EXCLUSIONS
+- Excluded folders/files: bin, obj, .git, node_modules
+
+# RAW METRICS
+- .db=61 592 lines
+- .css=43 268 lines
+- .js=31 409 lines
+- .cs=8 441 lines
+- .sqlite=6 886 lines
+- .bin=6 836 lines
+- .txt=3 195 lines
+- (noext)=2 512 lines
+- .cshtml=1 324 lines
+- .resx=1 257 lines
+- .v2=1 095 lines
+- .config=974 lines
+- .png=539 lines
+- .json=480 lines
+- .gitignore=364 lines
+- .suo=286 lines
+- .csproj=163 lines
+- .ps1=74 lines
+- .sln=71 lines
+- .gitattributes=63 lines
+- .user=54 lines
+- .pubxml=30 lines
+- .bat=26 lines
+- .wsuo=26 lines
+- .md=23 lines
+- .map=23 lines
+- .ico=10 lines
+- .vsidx=0 lines
+

@@ -37,6 +37,7 @@ namespace Loco1.Web
                 }
             else if (builder.Environment.IsDevelopment())
                 {
+             
                 builder.WebHost.UseUrls("http://localhost:5088");
                 }
 

@@ -53,22 +53,6 @@ main {
     flex: 1 0 auto;
 }
 
-/* ================= PAGE FLEX ================= */
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-main {
-    flex: 1 0 auto;
-}
-
 /* ================= FOOTER ================= */
 .app-footer {
     border-top: 1px solid #dee2e6;
@@ -154,8 +138,36 @@ main {
         height: 22px;
     }
 
+    /* Пренареждане вдясно от логото: бадж, имейл, Изход, локализатор на нов ред */
     .loco-nav-right {
-        gap: 15px;
+        gap: 12px; /* малко по-малък от desktop */
+        flex-wrap: wrap; /* позволи пренасяне на нов ред */
+        white-space: normal; /* позволи пренасяне на текста вътре */
+    }
+
+        /* Всеки елемент подреден вертикално, един под друг */
+        .loco-nav-right > * {
+            width: 100%;
+        }
+}
+
+@media (max-width: 576px) {
+    .loco-nav-right {
+        flex-wrap: wrap !important;
+        gap: 6px;
+        justify-content: flex-start;
+        white-space: normal !important;
+    }
+
+        .loco-nav-right > * {
+            width: 100%;
+        }
+}
+
+@media (max-width: 576px) {
+    .navbar-toggler {
+        margin-right: auto !important; /* бутона се премества наляво */
+        margin-left: 8px !important; /* малко разстояние от логото */
     }
 }
 
