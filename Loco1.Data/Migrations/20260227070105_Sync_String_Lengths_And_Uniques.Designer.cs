@@ -3,6 +3,7 @@ using System;
 using Loco1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Loco1.Data.Migrations
 {
     [DbContext(typeof(LocoDbContext))]
-    partial class LocoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260227070105_Sync_String_Lengths_And_Uniques")]
+    partial class Sync_String_Lengths_And_Uniques
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,8 +125,8 @@ namespace Loco1.Data.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
 
                     b.Property<int>("EntityId")
                         .HasColumnType("integer");
@@ -156,8 +159,8 @@ namespace Loco1.Data.Migrations
 
                     b.Property<string>("User")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
 
                     b.HasKey("Id");
 
@@ -183,8 +186,8 @@ namespace Loco1.Data.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
@@ -199,8 +202,8 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("timestamp without time zone");
@@ -240,8 +243,8 @@ namespace Loco1.Data.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
@@ -268,8 +271,8 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("timestamp without time zone");
@@ -311,8 +314,8 @@ namespace Loco1.Data.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
@@ -330,8 +333,8 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("timestamp without time zone");

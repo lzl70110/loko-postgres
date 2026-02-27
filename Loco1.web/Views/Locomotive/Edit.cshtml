@@ -1,0 +1,124 @@
+﻿@model Loco1.ViewModels.Locomotives.LocoEditVm
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+
+@{
+    ViewData["Title"] = L["Edit Locomotive"].Value;
+    }
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+    <form asp-action="Edit" asp-controller="Locomotive" method="post" class="needs-validation" novalidate>
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Id" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row g-3">
+        <!-- Number -->
+            <div class="col-md-4">
+            <label asp-for="Number" class="form-label"></label>
+            <input asp-for="Number" class="form-control" />
+            <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+
+        <!-- Type -->
+            <div class="col-md-4">
+            <label asp-for="Type" class="form-label"></label>
+                @{
+                var typeItems =
+                    Html.GetEnumSelectList<Loco1.GCommon.Enums.LocomotiveType>()
+                        .Select(i => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+                            {
+                            Value = i.Value,
+                            Selected = i.Selected,
+                            Text = L[$"Enum_LocomotiveType_{i.Text}"].Value
+                            });
+                }
+            <select asp-for="Type" class="form-select" asp-items="typeItems"></select>
+            <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+
+        <!-- MeasuringUnit -->
+            <div class="col-md-4">
+            <label asp-for="MeasuringUnit" class="form-label"></label>
+                @{
+                var muItems =
+                    Html.GetEnumSelectList<Loco1.GCommon.Enums.MeasuringUnits>()
+                        .Select(i => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+                            {
+                            Value = i.Value,
+                            Selected = i.Selected,
+                            Text = L[$"Enum_MeasuringUnits_{i.Text}"].Value
+                            });
+                }
+            <select asp-for="MeasuringUnit" class="form-select" asp-items="muItems"></select>
+            <span asp-validation-for="MeasuringUnit" class="text-danger"></span>
+            </div>
+
+        <!-- FuelCapacity -->
+            <div class="col-md-4">
+            <label asp-for="FuelCapacity" class="form-label"></label>
+            <input asp-for="FuelCapacity" class="form-control" />
+            <span asp-validation-for="FuelCapacity" class="text-danger"></span>
+            </div>
+
+        <!-- AxleCount -->
+            <div class="col-md-4">
+            <label asp-for="AxleCount" class="form-label"></label>
+            <input asp-for="AxleCount" class="form-control" />
+            <span asp-validation-for="AxleCount" class="text-danger"></span>
+            </div>
+
+        <!-- TotalEngineHours -->
+            <div class="col-md-4">
+            <label asp-for="TotalEngineHours" class="form-label"></label>
+            <input asp-for="TotalEngineHours" class="form-control" />
+            <span asp-validation-for="TotalEngineHours" class="text-danger"></span>
+            </div>
+
+        <!-- TotalWorkingDays -->
+            <div class="col-md-4">
+            <label asp-for="TotalWorkingDays" class="form-label"></label>
+            <input asp-for="TotalWorkingDays" class="form-control" />
+            <span asp-validation-for="TotalWorkingDays" class="text-danger"></span>
+            </div>
+
+        <!-- LastPlannedRepairType -->
+            <div class="col-md-8">
+            <label asp-for="LastPlannedRepairType" class="form-label"></label>
+            <input asp-for="LastPlannedRepairType" class="form-control" />
+            <span asp-validation-for="LastPlannedRepairType" class="text-danger"></span>
+            </div>
+
+        <!-- LastPlannedRepairDate -->
+            <div class="col-md-4">
+            <label asp-for="LastPlannedRepairDate" class="form-label"></label>
+            <input asp-for="LastPlannedRepairDate" type="date" class="form-control" />
+            <span asp-validation-for="LastPlannedRepairDate" class="text-danger"></span>
+            </div>
+
+        <!-- LastAxleMeasurementDate -->
+            <div class="col-md-4">
+            <label asp-for="LastAxleMeasurementDate" class="form-label"></label>
+            <input asp-for="LastAxleMeasurementDate" type="date" class="form-control" />
+            <span asp-validation-for="LastAxleMeasurementDate" class="text-danger"></span>
+            </div>
+
+        <!-- InterAxleMeasurementPeriodDays -->
+            <div class="col-md-4">
+            <label asp-for="InterAxleMeasurementPeriodDays" class="form-label"></label>
+            <input asp-for="InterAxleMeasurementPeriodDays" class="form-control" />
+            <span asp-validation-for="InterAxleMeasurementPeriodDays" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">@L["Save"].Value</button>
+        <a asp-action="Index" asp-controller="Locomotive" class="btn btn-secondary">@L["Back"].Value</a>
+        </div>
+    </form>
+
+    @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    }

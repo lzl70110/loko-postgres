@@ -351,4 +351,70 @@
   <data name="Role.LocomotivesDriversManager" xml:space="preserve">
     <value>Locomotives Drivers Manager</value>
   </data>
+  <data name="Page_InDevelopment_Title" xml:space="preserve">
+    <value>„Page under development“ </value>
+  </data>
+  <data name="Page_InDevelopment_Description" xml:space="preserve">
+    <value>„This feature is not available yet.“</value>
+  </data>
+  <data name="Enum_Shift_Day" xml:space="preserve">
+    <value>day</value>
+  </data>
+  <data name="Enum_Shift_Night" xml:space="preserve">
+    <value>night</value>
+  </data>
+  <data name="Locomotive_Number" xml:space="preserve">
+    <value>Locomotive Number</value>
+  </data>
+  <data name="Locomotive_Type" xml:space="preserve">
+    <value>Locomotive Type</value>
+  </data>
+  <data name="Locomotive_MeasuringUnit" xml:space="preserve">
+    <value>Measuring Unit</value>
+  </data>
+  <data name="Locomotive_AxleCount" xml:space="preserve">
+    <value>Axle Count</value>
+  </data>
+  <data name="Locomotive_TotalEngineHours" xml:space="preserve">
+    <value>Total Engine Hours</value>
+  </data>
+  <data name="Create Locomotive" xml:space="preserve">
+    <value>Create Locomotive</value>
+  </data>
+  <data name="Edit Locomotive" xml:space="preserve">
+    <value>Edit Locomotive</value>
+  </data>
+  <data name="Locomotive_LastPlannedRepairType" xml:space="preserve">
+    <value>Last Planned Repair Type</value>
+  </data>
+  <data name="Locomotive_LastPlannedRepairDate" xml:space="preserve">
+    <value>Last Planned Repair Date</value>
+  </data>
+  <data name="Locomotive_LastAxleMeasurementDate" xml:space="preserve">
+    <value>Last Axle Measurement Date</value>
+  </data>
+  <data name="Locomotive_InterAxleMeasurementPeriodDays" xml:space="preserve">
+    <value>Axle Measurement Period Days</value>
+  </data>
+  <data name="Locomotive_TotalWorkingDays" xml:space="preserve">
+    <value>Total Working Days</value>
+  </data>
+  <data name="Locomotive_FuelCapacity" xml:space="preserve">
+    <value>Fuel Capacity</value>
+  </data>
+  <data name="Enum_LocomotiveType_Shunter" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Enum_LocomotiveType_Mainline" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Enum_MeasuringUnits_Mh" xml:space="preserve">
+    <value>Mh</value>
+  </data>
+  <data name="Enum_MeasuringUnits_Km" xml:space="preserve">
+    <value>Km</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
 </root>

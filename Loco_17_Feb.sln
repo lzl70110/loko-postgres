@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.37012.4 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11519.219 insiders
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Web", "Loco1.web\Loco1.Web.csproj", "{4AC8F850-CD6C-4D9B-A1AF-55B53FDDE000}"
 EndProject
@@ -21,6 +21,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.ViewModels", "Loco1.ViewModels\Loco1.ViewModels.csproj", "{585D8C84-1497-4866-A1EF-B4B76D25BB40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Localizer", "Loco1.Localizer\Loco1.Localizer.csproj", "{E2FA37AB-62A6-4F8E-BD4E-6CA84FED8447}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Repositories", "Loco1.Repositories\Loco1.Repositories.csproj", "{EA7C1EC5-4A4F-4CB7-9CC7-141F7AAE6929}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,10 @@ Global
 		{E2FA37AB-62A6-4F8E-BD4E-6CA84FED8447}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2FA37AB-62A6-4F8E-BD4E-6CA84FED8447}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2FA37AB-62A6-4F8E-BD4E-6CA84FED8447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA7C1EC5-4A4F-4CB7-9CC7-141F7AAE6929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA7C1EC5-4A4F-4CB7-9CC7-141F7AAE6929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA7C1EC5-4A4F-4CB7-9CC7-141F7AAE6929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA7C1EC5-4A4F-4CB7-9CC7-141F7AAE6929}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
