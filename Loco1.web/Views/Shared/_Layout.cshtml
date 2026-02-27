@@ -29,7 +29,7 @@
                     <span class="d-none d-md-inline">@L["Header_AppName"]</span>
                     </a>
 
-                    <div class="loco-nav-right d-flex">
+                    <div class="loco-nav-right d-flex flex-wrap">
                     @if (SignInManager.IsSignedIn(User))
                         {
                         <div class="loco-badge"><partial name="_UserBadge" /></div>
@@ -65,46 +65,51 @@
             <h6 class="offcanvas-title">@L["Header_AppName"]</h6>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
             </div>
-            <div class="loco-nav-right d-none d-lg-flex">
+
+            <div class="offcanvas-body">
+
+            <!-- MOBILE LOGIN/LOGOUT -->
+            @if (SignInManager.IsSignedIn(User))
+                {
+                    <a class="list-group-item list-group-item-action">
+                    <partial name="_UserBadge" />
+                    </a>
+
+                    <form asp-area="Identity"
+                      asp-page="/Account/Logout"
+                      asp-route-returnUrl="@Url.Action("Index","Home")"
+                      method="post"
+                      class="list-group-item mb-2 p-0 border-0">
+                        <button type="submit" class="btn w-100 text-start">
+                        <i class="bi bi-box-arrow-right"></i> @L["Logout"]
+                        </button>
+                    </form>
+                }
+            else
+                {
+                    <a class="list-group-item list-group-item-action" asp-area="Identity" asp-page="/Account/Login">
+                    <i class="bi bi-box-arrow-in-right"></i> @L["Login"]
+                    </a>
+
+                    <a class="list-group-item list-group-item-action" asp-area="Identity" asp-page="/Account/Register">
+                    <i class="bi bi-person-plus-fill"></i> @L["Register"]
+                    </a>
+                }
+
+            <!-- СЪЩОТО МЕНЮ, КОЕТО Е В ЛЕВИЯ LAYOUT -->
                 <div class="list-group list-group-flush sidebar-nav">
-                <!-- MOBILE LOGIN/LOGOUT -->
-                @if (SignInManager.IsSignedIn(User))
-                    {
-                        <a class="list-group-item list-group-item-action">
-                        <partial name="_UserBadge" />
-                        </a>
-
-                        <form asp-area="Identity"
-                          asp-page="/Account/Logout"
-                          asp-route-returnUrl="@Url.Action("Index","Home")"
-                          method="post"
-                          class="list-group-item mb-0 p-0 border-0">
-                            <button type="submit" class="btn w-100 text-start">
-                            <i class="bi bi-box-arrow-right"></i> @L["Logout"]
-                            </button>
-                        </form>
-                    }
-                else
-                    {
-                        <a class="list-group-item list-group-item-action" asp-area="Identity" asp-page="/Account/Login">
-                        <i class="bi bi-box-arrow-in-right"></i> @L["Login"]
-                        </a>
-
-                        <a class="list-group-item list-group-item-action" asp-area="Identity" asp-page="/Account/Register">
-                        <i class="bi bi-person-plus-fill"></i> @L["Register"]
-                        </a>
-                    }
                     <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Index">
                     <i class="bi bi-house-door-fill"></i> @L["Home"]
                     </a>
+
                     <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Privacy">
                     <i class="bi bi-shield-lock-fill"></i> @L["Privacy_Title"]
                     </a>
+
                 @await Html.PartialAsync("_AdminSidebar")
                 </div>
             </div>
         </div>
-
     <!-- STATUS MESSAGE -->
     @if (TempData["StatusMessage"] is string status && !string.IsNullOrWhiteSpace(status))
         {
@@ -119,7 +124,8 @@
     <!-- MAIN CONTENT -->
         <main class="flex-fill container my-4">
             <div class="row">
-                <aside class="col-10 col-lg-3 mb-4 collapsed d-lg-block">
+               
+                    <aside class="col-12 col-lg-3 mb-4 d-none d-lg-block">
                     <div class="card shadow-sm">
                         <div class="list-group list-group-flush sidebar-nav">
                             <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Index">

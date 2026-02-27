@@ -136,47 +136,13 @@ main {
     }
 
     .loco-brand img {
-        width: 22px;
-        height: 22px;
+        width: 32px;
+        height: 32px;
     }
 
+@media (max-width: 576px) {
     .loco-nav-right {
-        gap: 15px;
-    }
-
-    .loco-badge {
-        display: block !important;
-        text-align: left;
-    }
-
-        .loco-badge span,
-        .loco-badge div {
-            display: block !important;
-            line-height: 1.2;
-        }
-
-}
-@media (max-width: 576px) {
-    .sidebar-nav .list-group-item {
-        padding-left: 20px !important; /* ~6–7 mm */
-    }
-}
-/* ================= FIXED FOOTER ON MOBILE ================= */
-@media (max-width: 576px) {
-
-    /* Footer always at bottom of mobile screen */
-    .app-footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        background-color: #fff;
-    }
-
-    /* Make room for the fixed footer so it doesn't cover content */
-    main {
-        padding-bottom: 70px; /* equal to footer height */
+        gap: 10px;
     }
 
     /* Sidebar and content spacing remain normal */
