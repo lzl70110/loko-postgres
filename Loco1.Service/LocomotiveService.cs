@@ -1,5 +1,5 @@
-﻿using Loco1.Data;
-using Loco1.Data.Models;
+﻿using Loco1.Data.Models;
+using Loco1.Repositories.Interfaces;
 using Loco1.Service.Abstractions;
 using Loco1.ViewModels.Locomotives;
 using Microsoft.EntityFrameworkCore;
@@ -8,39 +8,34 @@ namespace Loco1.Service
     {
     public class LocomotiveService : ILocomotiveService
         {
-        private readonly LocoDbContext _db;
+        private readonly ILocomotiveRepository _repo;
 
-        public LocomotiveService(LocoDbContext db)
+        public LocomotiveService(ILocomotiveRepository repo)
             {
-            _db = db;
+            _repo = repo;
             }
 
         // List page
         public async Task<List<LocoListVm>> GetAllAsync()
             {
-            return await _db.Locomotives
-                .Where(x => !x.IsDeleted)
-                .OrderBy(x => x.Number)
-                .Select(x => new LocoListVm
-                    {
-                    Id = x.Id,
-                    Number = x.Number,
-                    Type = x.Type,
-                    MeasuringUnit = x.MeasuringUnit,
-                    AxleCount = x.AxleCount,
-                    TotalEngineHours = x.TotalEngineHours
-                    })
-                .ToListAsync();
+            var items = await _repo.GetAllAsync(); // repo already filters IsDeleted == false
+            return items.Select(x => new LocoListVm
+                {
+                Id = x.Id,
+                Number = x.Number,
+                Type = x.Type,
+                MeasuringUnit = x.MeasuringUnit,
+                AxleCount = x.AxleCount,
+                TotalEngineHours = x.TotalEngineHours
+                })
+            .ToList();
             }
 
         // Load for edit
         public async Task<LocoEditVm?> GetForEditAsync(int id)
             {
-            var x = await _db.Locomotives
-                .AsNoTracking()
-                .FirstOrDefaultAsync(l => l.Id == id && !l.IsDeleted);
-
-            if (x == null) return null;
+            var x = await _repo.GetByIdAsync(id); // may return deleted
+            if (x == null || x.IsDeleted) return null;
 
             return new LocoEditVm
                 {
@@ -62,6 +57,10 @@ namespace Loco1.Service
         // Create
         public async Task<int> CreateAsync(LocoEditVm vm, string actor)
             {
+            // unique check
+            if (await _repo.ExistsByNumberAsync(vm.Number.Trim(), null))
+                throw new InvalidOperationException("Validation_Unique_Locomotive_Number"); // or return a code you prefer
+
             var entity = new Locomotive
                 {
                 Number = vm.Number.Trim(),
@@ -77,19 +76,23 @@ namespace Loco1.Service
                 InterAxleMeasurementPeriodDays = vm.InterAxleMeasurementPeriodDays,
 
                 CreatedOn = DateTime.UtcNow,
-                CreatedBy = string.IsNullOrWhiteSpace(actor) ? "system" : actor
+                CreatedBy = string.IsNullOrWhiteSpace(actor) ? "system" : actor,
+                IsDeleted = false
                 };
 
-            _db.Locomotives.Add(entity);
-            await _db.SaveChangesAsync();
+            await _repo.AddAsync(entity);
             return entity.Id;
             }
 
         // Update
         public async Task<bool> UpdateAsync(LocoEditVm vm, string actor)
             {
-            var entity = await _db.Locomotives.FirstOrDefaultAsync(l => l.Id == vm.Id && !l.IsDeleted);
-            if (entity == null) return false;
+            var entity = await _repo.GetByIdAsync(vm.Id ?? 0);
+            if (entity == null || entity.IsDeleted) return false;
+
+            // unique check (exclude current Id)
+            if (await _repo.ExistsByNumberAsync(vm.Number.Trim(), entity.Id))
+                throw new InvalidOperationException("Validation_Unique_Locomotive_Number"); // or return a code you prefer
 
             entity.Number = vm.Number.Trim();
             entity.Type = vm.Type;
@@ -106,23 +109,20 @@ namespace Loco1.Service
             entity.ModifiedOn = DateTime.UtcNow;
             entity.ModifiedBy = string.IsNullOrWhiteSpace(actor) ? "system" : actor;
 
-            await _db.SaveChangesAsync();
+            await _repo.UpdateAsync(entity);
             return true;
             }
 
         // Soft delete (admin only)
         public async Task<bool> DeleteAsync(int id, string actor, string? note = null)
             {
-            var entity = await _db.Locomotives.FirstOrDefaultAsync(l => l.Id == id && !l.IsDeleted);
-            if (entity == null) return false;
+            return await _repo.DeleteAsync(id, actor, note);
+            }
 
-            entity.IsDeleted = true;
-            entity.Note = note; // admin/system note if provided
-            entity.ModifiedOn = DateTime.UtcNow;
-            entity.ModifiedBy = string.IsNullOrWhiteSpace(actor) ? "system" : actor;
-
-            await _db.SaveChangesAsync();
-            return true;
+        // Soft un-delete (admin only)
+        public async Task<bool> UndeleteAsync(int id, string actor)
+            {
+            return await _repo.UndeleteAsync(id, actor);
             }
         }
     }

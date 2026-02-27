@@ -20,9 +20,9 @@ public static class EntityValidationConstants
 
         {
         public const int CreatedByMinLength = 3;
-        public const int CreatedByMaxLength = 10;
+        public const int CreatedByMaxLength = 256;
         public const int ModifiedByMinLength = 3;
-        public const int ModifiedByMaxLength = 10;
+        public const int ModifiedByMaxLength = 256;
 
         public const string Dec = "decimal(9,2)";
 

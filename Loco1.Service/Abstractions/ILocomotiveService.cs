@@ -11,5 +11,7 @@ namespace Loco1.Service.Abstractions
         Task<bool> UpdateAsync(LocoEditVm vm, string actor);
 
         Task<bool> DeleteAsync(int id, string actor, string? note = null); // soft delete
+
+        Task<bool> UndeleteAsync(int id, string actor); //   
         }
     }

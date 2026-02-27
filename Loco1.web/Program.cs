@@ -1,15 +1,15 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
-
-using Loco1.Localizer;             // SharedResource
+using GCommon;
 using Loco1.Data;                  // DbContext
 using Loco1.Data.Models;           // ApplicationUser
+using Loco1.Localizer;             // SharedResource
+using Loco1.Repositories;
+using Loco1.Repositories.Interfaces;
 using Loco1.Service;               // Services implementation
 using Loco1.Service.Abstractions;  // Service contracts
-
-using GCommon;
 using Loco1.Web.Infrastructure;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;     // <-- required for RequestLocalizationOptions / RequestCulture
@@ -62,7 +62,15 @@ namespace Loco1.Web
             Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
 
             builder.Services.AddDbContext<LocoDbContext>(opt => opt.UseNpgsql(connStr));
+
+            // ----------------------------------------------------------
+            // Policies
+            // ----------------------------------------------------------
+            builder.Services.Configure<OwnerOptions>(builder.Configuration.GetSection("Seed:Owner"));
+            builder.Services.AddSingleton<IAuthorizationHandler, OwnerOverrideAuthorizationHandler>();
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
             // ---------------------------------------------------------
             //  MVC + LOCALIZATION
@@ -143,8 +151,8 @@ namespace Loco1.Web
                 opts.KnownNetworks.Clear();
                 opts.KnownProxies.Clear();
             });
-
-  builder.Services.AddPermissionPolicies(
+            builder.Services.AddScoped<ILocomotiveRepository, LocomotiveRepository>();
+            builder.Services.AddPermissionPolicies(
                 // existing
                 Perm.Repairs_View, Perm.Repairs_Add, Perm.Repairs_Edit,
                 Perm.Expl_View, Perm.Expl_Add, Perm.Expl_Edit,

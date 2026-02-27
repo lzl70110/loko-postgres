@@ -1,12 +1,12 @@
 # SUMMARY
 - Root: C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
-- ScanTimeUtc: 2026-02-26T11:42:53.8390526Z
+- ScanTimeUtc: 2026-02-26T21:04:19.1563464Z
 - OS: Win32NT 10.0.26100.0 (Microsoft Windows 10.0.26100)
 - .NET SDKs (from dotnet --info): 8.0.124; 9.0.311; 10.0.103
 - Solution files: 1
-- Projects: 8
-- Total files: 234 | Total size: 16,09 MB
-- Code lines: .db=59 222; .css=43 235; .js=31 409; .sqlite=6 886; .cs=6 479; .txt=3 146; (noext)=2 512; .resx=1 062; .config=974; .cshtml=948; .json=633; .png=539; .v2=502; .gitignore=364; .suo=297; .csproj=144; .ps1=74; .sln=65; .gitattributes=63; .user=51; .pubxml=30; .bat=26; .wsuo=26; .md=23; .map=23; .ico=10; .vsidx=0
+- Projects: 9
+- Total files: 252 | Total size: 24,15 MB
+- Code lines: .css=43 292; .db=42 689; .js=31 409; .sqlite=6 886; .cs=6 825; .txt=3 172; (noext)=2 512; .resx=1 080; .cshtml=1 055; .config=974; .json=633; .png=539; .v2=500; .gitignore=364; .suo=307; .csproj=153; .ps1=74; .sln=65; .gitattributes=63; .user=53; .pubxml=30; .bat=26; .wsuo=26; .md=23; .map=23; .ico=10; .vsidx=0; .db-shm=0; .db-wal=0
 
 # SOLUTIONS
 - ..\Loco_17_Feb.sln
@@ -55,6 +55,14 @@
   - OutputType: Library
   - PackageReferences:
     - Microsoft.Extensions.Localization 8.0.23
+  - ProjectReferences:
+    - (none)
+
+- ..\Loco1.Repositories\Loco1.Repositories.csproj
+  - TargetFramework: net8.0
+  - OutputType: Library
+  - PackageReferences:
+    - (none)
   - ProjectReferences:
     - (none)
 
@@ -142,15 +150,19 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │   │   │   │   └── SemanticSymbols.db
 │   │   │   └── 18.4.89.4080
 │   │   │       ├── CodeChunks.db
-│   │   │       └── SemanticSymbols.db
+│   │   │       ├── CodeChunks.db-shm
+│   │   │       ├── CodeChunks.db-wal
+│   │   │       ├── SemanticSymbols.db
+│   │   │       ├── SemanticSymbols.db-shm
+│   │   │       └── SemanticSymbols.db-wal
 │   │   ├── DesignTimeBuild
 │   │   │   └── .dtbcache.v2
 │   │   ├── FileContentIndex
-│   │   │   ├── 09301982-da6f-45c2-8f56-31420852b1d9.vsidx
-│   │   │   ├── 39ed91ba-cc7f-416d-9119-55b047746240.vsidx
-│   │   │   ├── a079f15e-513d-4b4f-936c-742b54f02837.vsidx
-│   │   │   ├── d7f8a277-4d8e-4c2a-9987-8f6782dbdb19.vsidx
-│   │   │   └── f46ad5cd-6f75-44f7-9f0f-4c5c2043217b.vsidx
+│   │   │   ├── 220d586d-6af2-4222-ba85-7239e589250c.vsidx
+│   │   │   ├── 23d58275-802e-44a4-b583-8c275f0ac6e1.vsidx
+│   │   │   ├── 3be8113d-5e0d-4430-a55e-c0d755286e5b.vsidx
+│   │   │   ├── 72a2bb2c-c40f-4da2-a4c5-1df0e20a935b.vsidx
+│   │   │   └── be23b40e-b022-47ec-bbec-f5a7cb4ea558.vsidx
 │   │   ├── v17
 │   │   │   ├── .futdcache.v2
 │   │   │   ├── .suo
@@ -225,24 +237,34 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
 │       ├── SharedResource.cs
 │       ├── SharedResource.en-US.resx
 │       └── SharedResource.resx
+├── Loco1.Repositories
+│   ├── Loco1.Repositories.csproj
+│   └── Interfaces
+│       └── ILocomotiveRepository.cs
 ├── Loco1.Service
 │   ├── AuditLogService.cs
 │   ├── Loco1.Service.csproj
+│   ├── LocomotiveService.cs
 │   ├── ShiftCalendar.cs
 │   ├── UserRoleService.cs
 │   └── Abstractions
 │       ├── IAuditLogService.cs
+│       ├── ILocomotiveService.cs
 │       ├── IShiftCalendar.cs
 │       └── IUserRoleService.cs
 ├── Loco1.Services
 │   ├── Loco1.Services.csproj
 │   └── Program.cs
 ├── Loco1.ViewModels
-│   ├── EditUserRolesVm.cs
 │   ├── ErrorViewModel.cs
 │   ├── Loco1.ViewModels.csproj
-│   ├── RoleWithPermissionsVm.cs
-│   └── UserWithRolesVm.cs
+│   ├── Locomotives
+│   │   ├── LocoEditVm.cs
+│   │   └── LocoListVm.cs
+│   └── Roles
+│       ├── EditUserRolesVm.cs
+│       ├── RoleWithPermissionsVm.cs
+│       └── UserWithRolesVm.cs
 └── Loco1.web
     ├── appsettings.Development.json
     ├── appsettings.json
@@ -279,8 +301,12 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
     │                   └── _ViewImports.cshtml
     ├── Controllers
     │   ├── AdminController.cs
+    │   ├── BaseController.cs
     │   ├── HomeController.cs
-    │   └── LanguageController.cs
+    │   ├── LanguageController.cs
+    │   ├── LocomotiveController.cs
+    │   ├── RepairController.cs
+    │   └── ShiftWorkController.cs
     ├── Infrastructure
     │   ├── DataSeeder.cs
     │   ├── HierarchicalRolesSeeder.cs
@@ -305,15 +331,22 @@ C:\Users\Lyubomir\Documents\C#\ASP.NET\Projects\Loco_17_Feb\
     │   ├── Home
     │   │   ├── Index.cshtml
     │   │   └── Privacy.cshtml
-    │   └── Shared
-    │       ├── Error.cshtml
-    │       ├── _AdminSidebar.cshtml
-    │       ├── _LanguageSwitcher.cshtml
-    │       ├── _Layout.cshtml
-    │       ├── _Layout.cshtml.css
-    │       ├── _LoginPartial.cshtml
-    │       ├── _UserBadge.cshtml
-    │       └── _ValidationScriptsPartial.cshtml
+    │   ├── Locomotive
+    │   │   └── Index.cshtml
+    │   ├── Repair
+    │   │   └── Index.cshtml
+    │   ├── Shared
+    │   │   ├── Error.cshtml
+    │   │   ├── _AdminSidebar.cshtml
+    │   │   ├── _LanguageSwitcher.cshtml
+    │   │   ├── _Layout.cshtml
+    │   │   ├── _Layout.cshtml.css
+    │   │   ├── _LoginPartial.cshtml
+    │   │   ├── _UnderConstruction.cshtml
+    │   │   ├── _UserBadge.cshtml
+    │   │   └── _ValidationScriptsPartial.cshtml
+    │   └── ShiftWork
+    │       └── Index.cshtml
     └── wwwroot
         ├── favicon.ico
         ├── css
@@ -597,26 +630,26 @@ namespace Loco1.Data
 - Excluded folders/files: bin, obj, .git, node_modules
 
 # RAW METRICS
-- .db=59 222 lines
-- .css=43 235 lines
+- .css=43 292 lines
+- .db=42 689 lines
 - .js=31 409 lines
 - .sqlite=6 886 lines
-- .cs=6 479 lines
-- .txt=3 146 lines
+- .cs=6 825 lines
+- .txt=3 172 lines
 - (noext)=2 512 lines
-- .resx=1 062 lines
+- .resx=1 080 lines
+- .cshtml=1 055 lines
 - .config=974 lines
-- .cshtml=948 lines
 - .json=633 lines
 - .png=539 lines
-- .v2=502 lines
+- .v2=500 lines
 - .gitignore=364 lines
-- .suo=297 lines
-- .csproj=144 lines
+- .suo=307 lines
+- .csproj=153 lines
 - .ps1=74 lines
 - .sln=65 lines
 - .gitattributes=63 lines
-- .user=51 lines
+- .user=53 lines
 - .pubxml=30 lines
 - .bat=26 lines
 - .wsuo=26 lines
@@ -624,4 +657,6 @@ namespace Loco1.Data
 - .map=23 lines
 - .ico=10 lines
 - .vsidx=0 lines
+- .db-shm=0 lines
+- .db-wal=0 lines
 

@@ -351,4 +351,70 @@
   <data name="Role.LocomotivesDriversManager" xml:space="preserve">
     <value>Деломайстор</value>
   </data>
+  <data name="Page_InDevelopment_Title" xml:space="preserve">
+    <value>„Страницата е в разработка“</value>
+  </data>
+  <data name="Page_InDevelopment_Description" xml:space="preserve">
+    <value> „Тази функционалност все още се подготвя.“</value>
+  </data>
+  <data name="Enum_Shift_Day" xml:space="preserve">
+    <value>дневна</value>
+  </data>
+  <data name="Enum_Shift_Night" xml:space="preserve">
+    <value>нощна</value>
+  </data>
+  <data name="Locomotive_Number" xml:space="preserve">
+    <value>Локомотив №</value>
+  </data>
+  <data name="Locomotive_Type" xml:space="preserve">
+    <value>Тип локомотив </value>
+  </data>
+  <data name="Locomotive_MeasuringUnit" xml:space="preserve">
+    <value>Мярка (Мч / Км)</value>
+  </data>
+  <data name="Locomotive_AxleCount" xml:space="preserve">
+    <value>Брой колооси</value>
+  </data>
+  <data name="Locomotive_TotalEngineHours" xml:space="preserve">
+    <value>Общо моточасове</value>
+  </data>
+  <data name="Create Locomotive" xml:space="preserve">
+    <value>Нов №  локомотив</value>
+  </data>
+  <data name="Edit Locomotive" xml:space="preserve">
+    <value>Редакция на локомотив</value>
+  </data>
+  <data name="Locomotive_LastPlannedRepairType" xml:space="preserve">
+    <value> Последен планов ремонт - вид</value>
+  </data>
+  <data name="Locomotive_LastPlannedRepairDate" xml:space="preserve">
+    <value>Дата на последния ППР</value>
+  </data>
+  <data name="Locomotive_LastAxleMeasurementDate" xml:space="preserve">
+    <value>Дата на последното измерване на колоосите</value>
+  </data>
+  <data name="Locomotive_InterAxleMeasurementPeriodDays" xml:space="preserve">
+    <value>Период между измерванията</value>
+  </data>
+  <data name="Locomotive_TotalWorkingDays" xml:space="preserve">
+    <value>Общо работни дни</value>
+  </data>
+  <data name="Locomotive_FuelCapacity" xml:space="preserve">
+    <value>Вместимост - гориво</value>
+  </data>
+  <data name="Enum_LocomotiveType_Shunter" xml:space="preserve">
+    <value>Маневрен</value>
+  </data>
+  <data name="Enum_LocomotiveType_Mainline" xml:space="preserve">
+    <value>Магистрален</value>
+  </data>
+  <data name="Enum_MeasuringUnits_Mh" xml:space="preserve">
+    <value>Мч</value>
+  </data>
+  <data name="Enum_MeasuringUnits_Km" xml:space="preserve">
+    <value>Км</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Изход</value>
+  </data>
 </root>
