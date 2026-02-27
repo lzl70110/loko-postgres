@@ -140,28 +140,40 @@ main {
         height: 32px;
     }
 
-@media (max-width: 576px) {
-    .loco-nav-right {
-        gap: 10px;
+    @media (max-width: 576px) {
+        .loco-nav-right {
+            gap: 10px;
+        }
+
+        /* Sidebar and content spacing remain normal */
     }
 
-    /* Sidebar and content spacing remain normal */
-}
+    /* ================= STATUS MESSAGE ================= */
+    #status-message {
+        transition: opacity 0.8s ease;
+    }
 
-/* ================= STATUS MESSAGE ================= */
-#status-message {
-    transition: opacity 0.8s ease;
-}
-
-/* ================= SIDEBAR ================= */
-.sidebar-nav .list-group-item {
-    padding: .45rem .15rem;
-    margin-left: -8px; /* леко вляво за десктоп */
-}
-
-@media (max-width: 576px) {
+    /* ================= SIDEBAR ================= */
     .sidebar-nav .list-group-item {
-        padding-left: 20px !important; /* леко вдясно за мобилно */
-        margin-left: 0 !important; /* ресет за мобилно */
+        padding: .45rem .15rem;
+        margin-left: -8px; /* леко вляво за десктоп */
     }
+
+    @media (max-width: 576px) {
+        .sidebar-nav .list-group-item {
+            padding-left: 20px !important; /* леко вдясно за мобилно */
+            margin-left: 0 !important; /* ресет за мобилно */
+        }
+    }
+
+    /* Offcanvas rhythm */
+    .offcanvas .list-group-item {
+        padding-top: .65rem;
+        padding-bottom: .65rem;
+    }
+
+        /* Икони + текст да не се "лепят" при по-малък шрифт */
+        .offcanvas .list-group-item .bi {
+            font-size: 1rem;
+        }
 }

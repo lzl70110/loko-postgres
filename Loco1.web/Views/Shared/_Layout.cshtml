@@ -6,7 +6,7 @@
 @inject IStringLocalizer<SharedResource> L
 
 <!DOCTYPE html>
-<html lang="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName">
+<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css?v=@DateTime.UtcNow.Ticks" />
 
     <link rel="icon" type="image/png" href="~/icons/myicon-anim-1.png" />
     <script src="~/js/favicon-anim.js"></script>
@@ -29,7 +29,7 @@
                     <span class="d-none d-md-inline">@L["Header_AppName"]</span>
                     </a>
 
-                    <div class="loco-nav-right d-flex flex-wrap">
+                    <div class="loco-nav-right d-flex flex-wrap align-items-center gap-3">
                     @if (SignInManager.IsSignedIn(User))
                         {
                         <div class="loco-badge"><partial name="_UserBadge" /></div>
@@ -67,49 +67,60 @@
             </div>
 
             <div class="offcanvas-body">
-
             <!-- MOBILE LOGIN/LOGOUT -->
             @if (SignInManager.IsSignedIn(User))
                 {
-                    <a class="list-group-item list-group-item-action">
-                    <partial name="_UserBadge" />
-                    </a>
+                    <div class="list-group list-group-flush sidebar-nav">
 
-                    <form asp-area="Identity"
-                      asp-page="/Account/Logout"
-                      asp-route-returnUrl="@Url.Action("Index","Home")"
-                      method="post"
-                      class="list-group-item mb-2 p-0 border-0">
-                        <button type="submit" class="btn w-100 text-start">
-                        <i class="bi bi-box-arrow-right"></i> @L["Logout"]
-                        </button>
-                    </form>
+                    <!-- User badge като статичен item, не <a> -->
+                        <div class="list-group-item py-2">
+                        <partial name="_UserBadge" />
+                        </div>
+
+                    <!-- Logout като пълен ред/бутон -->
+                        <form asp-area="Identity"
+                          asp-page="/Account/Logout"
+                          asp-route-returnUrl="@Url.Action("Index","Home")"
+                          method="post"
+                          class="list-group-item p-0 border-0">
+                            <button type="submit" class="btn btn-outline-danger w-100 text-start">
+                            <i class="bi bi-box-arrow-right"></i> @L["Logout"]
+                            </button>
+                        </form>
+                    </div>
                 }
             else
                 {
-                    <a class="list-group-item list-group-item-action" asp-area="Identity" asp-page="/Account/Login">
-                    <i class="bi bi-box-arrow-in-right"></i> @L["Login"]
-                    </a>
+                    <div class="list-group list-group-flush sidebar-nav">
 
-                    <a class="list-group-item list-group-item-action" asp-area="Identity" asp-page="/Account/Register">
-                    <i class="bi bi-person-plus-fill"></i> @L["Register"]
-                    </a>
+                    <!-- Login -->
+                        <a class="list-group-item list-group-item-action d-flex align-items-center gap-2"
+                           asp-area="Identity" asp-page="/Account/Login">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        <span>@L["Login"]</span>
+                        </a>
+
+                    <!-- Register -->
+                        <a class="list-group-item list-group-item-action d-flex align-items-center gap-2"
+                           asp-area="Identity" asp-page="/Account/Register">
+                        <i class="bi bi-person-plus-fill"></i>
+                        <span>@L["Register"]</span>
+                        </a>
+                    </div>
                 }
-
-            <!-- СЪЩОТО МЕНЮ, КОЕТО Е В ЛЕВИЯ LAYOUT -->
+            <!-- SAME MENU AS LEFT SIDEBAR (inline for now; can be moved to _LeftSidebarMenu partial) -->
                 <div class="list-group list-group-flush sidebar-nav">
                     <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Index">
                     <i class="bi bi-house-door-fill"></i> @L["Home"]
                     </a>
-
                     <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Privacy">
                     <i class="bi bi-shield-lock-fill"></i> @L["Privacy_Title"]
                     </a>
-
                 @await Html.PartialAsync("_AdminSidebar")
                 </div>
             </div>
         </div>
+
     <!-- STATUS MESSAGE -->
     @if (TempData["StatusMessage"] is string status && !string.IsNullOrWhiteSpace(status))
         {
@@ -124,9 +135,9 @@
     <!-- MAIN CONTENT -->
         <main class="flex-fill container my-4">
             <div class="row">
-               
-                    <aside class="col-12 col-lg-3 mb-4 d-none d-lg-block">
+                <aside class="col-12 col-lg-3 mb-4 d-none d-lg-block">
                     <div class="card shadow-sm">
+                    <!-- SAME MENU AS OFFCANVAS (inline for now; can be moved to _LeftSidebarMenu partial) -->
                         <div class="list-group list-group-flush sidebar-nav">
                             <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Index">
                             <i class="bi bi-house-door-fill"></i> @L["Home"]
