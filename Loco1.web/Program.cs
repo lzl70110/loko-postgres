@@ -9,41 +9,35 @@ using Loco1.Repositories.Interfaces;
 using Loco1.Service;               // Services implementation
 using Loco1.Service.Abstractions;  // Service contracts
 using Loco1.Web.Infrastructure;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;     // <-- required for RequestLocalizationOptions / RequestCulture
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+ 
+using System.Security.Claims;
 
 namespace Loco1.Web
-    {
+{
     public class Program
-        {
+    {
         public static async Task Main(string[] args)
-            {
+        {
             // Keep legacy timestamp behavior in Npgsql (compatibility switch)
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // ---------------------------------------------------------
-            //  BIND PORT (Render / Dev)
-            // ---------------------------------------------------------
+            // ------------------------ BIND PORT ------------------------
             var port = Environment.GetEnvironmentVariable("PORT");
             if (!string.IsNullOrEmpty(port))
-                {
                 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-                }
             else if (builder.Environment.IsDevelopment())
-                {
-             
                 builder.WebHost.UseUrls("http://localhost:5088");
-                }
 
-            // ---------------------------------------------------------
-            //  CONNECTION STRING
-            // ---------------------------------------------------------
+            // ------------------------ CONNECTION STRING ------------------------
             var connStr =
                 Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
                 ?? builder.Configuration.GetConnectionString("DefaultConnection")
@@ -51,33 +45,22 @@ namespace Loco1.Web
 
             // Normalize rare 'server=tcp://host:port' into Npgsql format
             if (connStr.Contains("tcp://", StringComparison.OrdinalIgnoreCase))
-                {
-                connStr = Regex.Replace(
-                    connStr,
-                    @"(?i)server\s*=\s*tcp://([^:;]+):(\d+)",
-                    "Host=$1;Port=$2");
-                }
+                connStr = Regex.Replace(connStr, @"(?i)server\s*=\s*tcp://([^:;]+):(\d+)", "Host=$1;Port=$2");
 
-            // Log sanitized connection string (mask password)
+            // Log sanitized connection string
             var sanitized = Regex.Replace(connStr, @"(?i)password\s*=\s*[^;]*", "Password=***");
             Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
 
             builder.Services.AddDbContext<LocoDbContext>(opt => opt.UseNpgsql(connStr));
 
-            // ----------------------------------------------------------
-            // Policies
-            // ----------------------------------------------------------
+            // ------------------------ SEED & OWNER OPTIONS ------------------------
             builder.Services.Configure<OwnerOptions>(builder.Configuration.GetSection("Seed:Owner"));
             builder.Services.AddSingleton<IAuthorizationHandler, OwnerOverrideAuthorizationHandler>();
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-
-            // ---------------------------------------------------------
-            //  MVC + LOCALIZATION
-            // ---------------------------------------------------------
+            // ------------------------ MVC + LOCALIZATION ------------------------
             builder.Services.AddLocalization();
-
             builder.Services
                 .AddControllersWithViews()
                 .AddViewLocalization()
@@ -87,13 +70,10 @@ namespace Loco1.Web
                         factory.Create(typeof(SharedResource));
                 });
 
-            // ---------------------------------------------------------
-            //  IDENTITY (ApplicationUser)
-            // ---------------------------------------------------------
+            // ------------------------ IDENTITY ------------------------
             builder.Services
                 .AddDefaultIdentity<ApplicationUser>(options =>
                 {
-                    // Dev-friendly; tighten for production
                     options.SignIn.RequireConfirmedAccount = false;
                     options.Password.RequiredLength = 1;
                     options.Password.RequireDigit = false;
@@ -107,20 +87,12 @@ namespace Loco1.Web
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<LocoDbContext>();
 
-            // ---------------------------------------------------------
-            //  IDENTITY SERVICES
-            // ---------------------------------------------------------
+            // ------------------------ IDENTITY & APP SERVICES ------------------------
             builder.Services.AddScoped<IUserRoleService, UserRoleService>();
-            builder.Services.AddRazorPages(); // Identity UI
-
-            //   ---------------------------------------------------------
-            //  APPLICATION SERVICES
-            // ---------------------------------------------------------
             builder.Services.AddScoped<ILocomotiveService, LocomotiveService>();
+            builder.Services.AddScoped<ILocomotiveRepository, LocomotiveRepository>();
 
-            // ---------------------------------------------------------
-            //  CULTURES
-            // ---------------------------------------------------------
+            // ------------------------ CULTURES ------------------------
             var supportedCultures = new[]
             {
                 new CultureInfo("bg-BG"),
@@ -133,82 +105,111 @@ namespace Loco1.Web
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
 
-                // Prefer culture from cookie when user switches language explicitly
                 var cookieProvider = new CookieRequestCultureProvider
-                    {
+                {
                     CookieName = ".Loco.Culture"
-                    };
-
-                // Make cookie the first provider (then query string, then Accept-Language)
+                };
                 options.RequestCultureProviders.Insert(0, cookieProvider);
             });
 
-            // ---------------------------------------------------------
-            //  FORWARDED HEADERS
-            // ---------------------------------------------------------
+            // ------------------------ CLAIMS TRANSFORMATION ------------------------
+            builder.Services.AddScoped<IClaimsTransformation, RoleClaimsTransformation>();
+
+            // ------------------------ PERMISSION POLICIES ------------------------
+            builder.Services.AddPermissionPolicies(
+                Perm.Repairs_View, Perm.Repairs_Add, Perm.Repairs_Edit,
+                Perm.Expl_View, Perm.Expl_Add, Perm.Expl_Edit,
+                Perm.Users_View, Perm.Users_Edit,
+                Perm.Roles_View, Perm.Roles_Edit,
+                Perm.Loco_View, Perm.Loco_Add, Perm.Loco_Edit, Perm.Loco_Delete
+            );
+
+            // ------------------------ FORWARDED HEADERS ------------------------
             builder.Services.Configure<ForwardedHeadersOptions>(opts =>
             {
                 opts.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
                 opts.KnownNetworks.Clear();
                 opts.KnownProxies.Clear();
             });
-            builder.Services.AddScoped<ILocomotiveRepository, LocomotiveRepository>();
-            builder.Services.AddPermissionPolicies(
-                // existing
-                Perm.Repairs_View, Perm.Repairs_Add, Perm.Repairs_Edit,
-                Perm.Expl_View, Perm.Expl_Add, Perm.Expl_Edit,
-                Perm.Users_View, Perm.Users_Edit,
-                Perm.Roles_View, Perm.Roles_Edit,
 
-                // ✅ new Locomotives
-                Perm.Loco_View, Perm.Loco_Add, Perm.Loco_Edit, Perm.Loco_Delete
-            );
             var app = builder.Build();
+            // EN: Ensures roles exist and baseline permission claims are present (adds missing only).
+            //     Safe to run multiple times. Does NOT remove existing claims.
+           
 
-          
+            static async Task EnsureRolesAndClaimsAsync(IServiceProvider sp)
+            {
+                var roleManager = sp.GetRequiredService<RoleManager<IdentityRole>>();
 
+                // 1) Ensure roles exist
+                var rolesToEnsure = new[] { "Owner", "Admin", "Operator" };
+                foreach (var rn in rolesToEnsure)
+                    if (!await roleManager.RoleExistsAsync(rn))
+                        await roleManager.CreateAsync(new IdentityRole(rn));
 
-            // ---------------------------------------------------------
-            //  MIGRATIONS + DATA SEED
-            // ---------------------------------------------------------
-            using (var scope = app.Services.CreateScope())
+                // 2) Ensure Admin has a baseline of permissions (adjust as you prefer)
+                var admin = await roleManager.FindByNameAsync("Admin");
+                if (admin != null)
                 {
+                    const string ct = "permission";
+                    var have = (await roleManager.GetClaimsAsync(admin))
+                               .Where(c => c.Type == ct).Select(c => c.Value)
+                               .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+                    var want = new[]
+                    {
+            Perm.Roles_View, Perm.Roles_Edit,
+            Perm.Users_View, Perm.Users_Edit,
+            Perm.Repairs_View, Perm.Repairs_Add, Perm.Repairs_Edit,
+            Perm.Expl_View, Perm.Expl_Add, Perm.Expl_Edit,
+            Perm.Loco_View, Perm.Loco_Add, Perm.Loco_Edit, Perm.Loco_Delete
+        };
+
+                    foreach (var code in want.Except(have))
+                        await roleManager.AddClaimAsync(admin, new Claim(ct, code));
+                }
+            }
+
+            // ------------------------ MIGRATIONS + SEED ------------------------
+            using (var scope = app.Services.CreateScope())
+            {
                 var services = scope.ServiceProvider;
                 var logger = services.GetRequiredService<ILogger<Program>>();
-
                 try
-                    {
+                {
                     var db = services.GetRequiredService<LocoDbContext>();
                     await db.Database.MigrateAsync();
 
-                    await Loco1.Web.Infrastructure.DataSeeder.SeedAsync(services);
+                    //  Add missing roles/claims idempotently (does not remove anything)
+
+                    await EnsureRolesAndClaimsAsync(services);
+                     
+                    await DataSeeder.SeedAsync(services);
                     logger.LogInformation("Startup DB migrate/seed completed.");
-                    }
+                }
                 catch (Exception ex)
-                    {
+                {
                     logger.LogCritical(ex, "Startup failure during migrate/seed.");
                     throw;
-                    }
                 }
+            }
 
-            // ---------------------------------------------------------
-            //  MIDDLEWARE PIPELINE (order matters)
-            // ---------------------------------------------------------
+            // ------------------------ MIDDLEWARE PIPELINE ------------------------
             app.UseForwardedHeaders();
 
             var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
 
             if (app.Environment.IsDevelopment())
-                {
+            {
                 app.UseMigrationsEndPoint();
-                }
+            }
             else
-                {
+            {
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
                 app.UseHttpsRedirection();
-                }
+            }
 
             app.UseStaticFiles();
             app.UseRouting();
@@ -221,26 +222,9 @@ namespace Loco1.Web
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.MapRazorPages();
-
             app.MapGet("/healthz", () => Results.Ok("OK"));
 
-            //++++++++++++++++++++++++++++++++++++++++++++
-            using (var scope = app.Services.CreateScope())
-                {
-                var services = scope.ServiceProvider;
-                try
-                    {
-                    await Loco1.Web.Infrastructure.DataSeeder.SeedAsync(services);
-                    Console.WriteLine("✅ Seed ran successfully.");
-                    }
-                catch (Exception ex)
-                    {
-                    Console.WriteLine("❌ Seed failed: " + ex.Message);
-                    }
-                }
-            //++++++++++++++++++++++++++++++++++++++++++++
-
             await app.RunAsync();
-            }
         }
     }
+}

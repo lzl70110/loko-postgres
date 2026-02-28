@@ -18,7 +18,7 @@ namespace Loco1.Web.Areas.Identity.Pages.Account
             _logger = logger;
             }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl )
             {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");

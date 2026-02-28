@@ -1,7 +1,12 @@
-﻿@model List<Loco1.ViewModels.Roles.UserWithRolesVm>
+﻿@using System
+@using GCommon
+@using Loco1.ViewModels.Roles
+@model List<Loco1.ViewModels.Roles.UserWithRolesVm>
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
-@using Loco1
-@using static Loco1.GCommon.EntityValidationConstants
+ 
+
+
+
 
 @{
     ViewData["Title"] = L["Users"];
@@ -21,7 +26,7 @@
         @foreach (var u in Model)
             {
             var role = u.Roles?.FirstOrDefault() ?? "-";
-            var isOwner = role.Equals(Roles.Owner, StringComparison.OrdinalIgnoreCase);
+             var isOwner = string.Equals(role, AppRoles.Owner, StringComparison.OrdinalIgnoreCase);
             var isDeleted = u.Email.StartsWith("restored+", StringComparison.OrdinalIgnoreCase);
             var isCurrentUser = User.Identity?.Name?.Equals(u.Email, StringComparison.OrdinalIgnoreCase) == true;
             var loc = L[$"Role.{role}"];
