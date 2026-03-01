@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Loco1.Data.Models;  // <- добавено за ApplicationUser
+using Loco1.Data.Models;   
 
 namespace Loco1.Web.Infrastructure
 {

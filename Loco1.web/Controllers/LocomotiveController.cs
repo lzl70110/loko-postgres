@@ -9,16 +9,10 @@ using Microsoft.Extensions.Localization;
 namespace Loco1.Web.Controllers
     {
     [Authorize(Policy = Perm.Loco_View)]
-    public class LocomotiveController : Controller
+    public class LocomotiveController(ILocomotiveService svc, IStringLocalizer<SharedResource> localizer) : Controller
         {
-        private readonly ILocomotiveService _svc;
-        private readonly IStringLocalizer<SharedResource> _L;
-
-        public LocomotiveController(ILocomotiveService svc, IStringLocalizer<SharedResource> localizer)
-            {
-            _svc = svc;
-            _L = localizer;
-            }
+        private readonly ILocomotiveService _svc = svc;
+        private readonly IStringLocalizer<SharedResource> _L = localizer;
 
         // GET: /Locomotive
         public async Task<IActionResult> Index()

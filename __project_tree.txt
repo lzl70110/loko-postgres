@@ -1,10 +1,12 @@
-Folder PATH listing for volume Windows
+﻿Folder PATH listing for volume Windows
 Volume serial number is 687D-BB85
 C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │   .gitattributes
 │   .gitignore
 │   Dockerfile
+│   Loco1.ViewModels.Roles.EditUserRolesVm.cs
 │   Loco_17_Feb.sln
+│   Loco_17_Feb.slnx
 │   Pack-Loco.ps1
 │   PackLoco.Bat
 │   README.md
@@ -67,7 +69,15 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │   │   Loco1.Data.csproj
 │   │   
 │   ├───bin
-│   │   └───Debug
+│   │   ├───Debug
+│   │   │   └───net8.0
+│   │   │           GCommon.dll
+│   │   │           GCommon.pdb
+│   │   │           Loco1.Data.deps.json
+│   │   │           Loco1.Data.dll
+│   │   │           Loco1.Data.pdb
+│   │   │           
+│   │   └───Release
 │   │       └───net8.0
 │   │               GCommon.dll
 │   │               GCommon.pdb
@@ -121,7 +131,30 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │       │   project.assets.json
 │       │   project.nuget.cache
 │       │   
-│       └───Debug
+│       ├───Debug
+│       │   └───net8.0
+│       │       │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│       │       │   EFCoreNpgsqlNetTopologySuite.cs
+│       │       │   Loco1.Data.AssemblyInfo.cs
+│       │       │   Loco1.Data.AssemblyInfoInputs.cache
+│       │       │   Loco1.Data.assets.cache
+│       │       │   Loco1.Data.csproj.AssemblyReference.cache
+│       │       │   Loco1.Data.csproj.CoreCompileInputs.cache
+│       │       │   Loco1.Data.csproj.FileListAbsolute.txt
+│       │       │   Loco1.Data.csproj.Up2Date
+│       │       │   Loco1.Data.dll
+│       │       │   Loco1.Data.GeneratedMSBuildEditorConfig.editorconfig
+│       │       │   Loco1.Data.GlobalUsings.g.cs
+│       │       │   Loco1.Data.pdb
+│       │       │   Loco1.Data.sourcelink.json
+│       │       │   
+│       │       ├───ref
+│       │       │       Loco1.Data.dll
+│       │       │       
+│       │       └───refint
+│       │               Loco1.Data.dll
+│       │               
+│       └───Release
 │           └───net8.0
 │               │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
 │               │   EFCoreNpgsqlNetTopologySuite.cs
@@ -141,8 +174,35 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │               │   Loco1.Data.sourcelink.json
 │               │   
 │               ├───ref
-│               │       Loco1.Data.dll
-│               │       
+│               └───refint
+├───Loco1.Data.Models
+│   │   Loco1.Data.Models.csproj
+│   │   
+│   ├───bin
+│   │   ├───Debug
+│   │   │   └───net8.0
+│   │   └───Release
+│   │       └───net8.0
+│   └───obj
+│       ├───Debug
+│       │   └───net8.0
+│       │       │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│       │       │   Loco1.Data.Models.AssemblyInfo.cs
+│       │       │   Loco1.Data.Models.AssemblyInfoInputs.cache
+│       │       │   Loco1.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+│       │       │   Loco1.Data.Models.GlobalUsings.g.cs
+│       │       │   
+│       │       ├───ref
+│       │       └───refint
+│       └───Release
+│           └───net8.0
+│               │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│               │   Loco1.Data.Models.AssemblyInfo.cs
+│               │   Loco1.Data.Models.AssemblyInfoInputs.cache
+│               │   Loco1.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+│               │   Loco1.Data.Models.GlobalUsings.g.cs
+│               │   
+│               ├───ref
 │               └───refint
 │                       Loco1.Data.dll
 │                       
@@ -150,6 +210,7 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │       Loco1.Data.Models.csproj
 │       
 ├───Loco1.Localizer
+│   │   EntityValidationConstants.cs
 │   │   Loco1.Localizer.csproj
 │   │   Loco1.Localizer.csproj.user
 │   │   
@@ -173,7 +234,38 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │   │   │   project.assets.json
 │   │   │   project.nuget.cache
 │   │   │   
-│   │   └───Debug
+│   │   ├───Debug
+│   │   │   └───net8.0
+│   │   │       │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│   │   │       │   Loco1.Localizer.AssemblyInfo.cs
+│   │   │       │   Loco1.Localizer.AssemblyInfoInputs.cache
+│   │   │       │   Loco1.Localizer.assets.cache
+│   │   │       │   Loco1.Localizer.csproj.AssemblyReference.cache
+│   │   │       │   Loco1.Localizer.csproj.CoreCompileInputs.cache
+│   │   │       │   Loco1.Localizer.csproj.FileListAbsolute.txt
+│   │   │       │   Loco1.Localizer.csproj.GenerateResource.cache
+│   │   │       │   Loco1.Localizer.dll
+│   │   │       │   Loco1.Localizer.GeneratedMSBuildEditorConfig.editorconfig
+│   │   │       │   Loco1.Localizer.GlobalUsings.g.cs
+│   │   │       │   Loco1.Localizer.pdb
+│   │   │       │   Loco1.Localizer.SharedResource.bg-BG.resources
+│   │   │       │   Loco1.Localizer.SharedResource.en-US.resources
+│   │   │       │   Loco1.Localizer.SharedResource.resources
+│   │   │       │   Loco1.Localizer.sourcelink.json
+│   │   │       │   
+│   │   │       ├───bg-BG
+│   │   │       │       Loco1.Localizer.resources.dll
+│   │   │       │       
+│   │   │       ├───en-US
+│   │   │       │       Loco1.Localizer.resources.dll
+│   │   │       │       
+│   │   │       ├───ref
+│   │   │       │       Loco1.Localizer.dll
+│   │   │       │       
+│   │   │       └───refint
+│   │   │               Loco1.Localizer.dll
+│   │   │               
+│   │   └───Release
 │   │       └───net8.0
 │   │           │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
 │   │           │   Loco1.Localizer.AssemblyInfo.cs
@@ -213,22 +305,14 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │           
 ├───Loco1.Repositories
 │   │   Loco1.Repositories.csproj
-│   │   LocomotiveRepository.cs
 │   │   
+│   ├───Abstractions
+│   │       IRoleRepository.cs
+│   │       IUserRepository.cs
+│   │       
 │   ├───bin
 │   │   └───Debug
 │   │       └───net8.0
-│   │               GCommon.dll
-│   │               GCommon.pdb
-│   │               Loco1.Data.dll
-│   │               Loco1.Data.pdb
-│   │               Loco1.Repositories.deps.json
-│   │               Loco1.Repositories.dll
-│   │               Loco1.Repositories.pdb
-│   │               
-│   ├───Interfaces
-│   │       ILocomotiveRepository.cs
-│   │       
 │   └───obj
 │       │   Loco1.Repositories.csproj.nuget.dgspec.json
 │       │   Loco1.Repositories.csproj.nuget.g.props
@@ -243,11 +327,6 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │               │   Loco1.Repositories.AssemblyInfo.cs
 │               │   Loco1.Repositories.AssemblyInfoInputs.cache
 │               │   Loco1.Repositories.assets.cache
-│               │   Loco1.Repositories.csproj.AssemblyReference.cache
-│               │   Loco1.Repositories.csproj.BuildWithSkipAnalyzers
-│               │   Loco1.Repositories.csproj.CoreCompileInputs.cache
-│               │   Loco1.Repositories.csproj.FileListAbsolute.txt
-│               │   Loco1.Repositories.dll
 │               │   Loco1.Repositories.GeneratedMSBuildEditorConfig.editorconfig
 │               │   Loco1.Repositories.GlobalUsings.g.cs
 │               │   Loco1.Repositories.pdb
@@ -273,7 +352,27 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │   │       IUserRoleService.cs
 │   │       
 │   ├───bin
-│   │   └───Debug
+│   │   ├───Debug
+│   │   │   └───net8.0
+│   │   │       │   GCommon.dll
+│   │   │       │   GCommon.pdb
+│   │   │       │   Loco1.Data.dll
+│   │   │       │   Loco1.Data.pdb
+│   │   │       │   Loco1.Localizer.dll
+│   │   │       │   Loco1.Localizer.pdb
+│   │   │       │   Loco1.Service.deps.json
+│   │   │       │   Loco1.Service.dll
+│   │   │       │   Loco1.Service.pdb
+│   │   │       │   Loco1.ViewModels.dll
+│   │   │       │   Loco1.ViewModels.pdb
+│   │   │       │   
+│   │   │       ├───bg-BG
+│   │   │       │       Loco1.Localizer.resources.dll
+│   │   │       │       
+│   │   │       └───en-US
+│   │   │               Loco1.Localizer.resources.dll
+│   │   │               
+│   │   └───Release
 │   │       └───net8.0
 │   │           │   GCommon.dll
 │   │           │   GCommon.pdb
@@ -322,8 +421,36 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │               │   Loco1.Service.sourcelink.json
 │               │   
 │               ├───ref
-│               │       Loco1.Service.dll
-│               │       
+│               └───refint
+├───Loco1.Services
+│   │   Loco1.Services.csproj
+│   │   Program.cs
+│   │   
+│   ├───bin
+│   │   ├───Debug
+│   │   │   └───net8.0
+│   │   └───Release
+│   │       └───net8.0
+│   └───obj
+│       ├───Debug
+│       │   └───net8.0
+│       │       │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│       │       │   Loco1.Services.AssemblyInfo.cs
+│       │       │   Loco1.Services.AssemblyInfoInputs.cache
+│       │       │   Loco1.Services.GeneratedMSBuildEditorConfig.editorconfig
+│       │       │   Loco1.Services.GlobalUsings.g.cs
+│       │       │   
+│       │       ├───ref
+│       │       └───refint
+│       └───Release
+│           └───net8.0
+│               │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│               │   Loco1.Services.AssemblyInfo.cs
+│               │   Loco1.Services.AssemblyInfoInputs.cache
+│               │   Loco1.Services.GeneratedMSBuildEditorConfig.editorconfig
+│               │   Loco1.Services.GlobalUsings.g.cs
+│               │   
+│               ├───ref
 │               └───refint
 │                       Loco1.Service.dll
 │                       
@@ -334,21 +461,449 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 ├───Loco1.ViewModels
 │   │   ErrorViewModel.cs
 │   │   Loco1.ViewModels.csproj
+│   │   UserWithRolesVm.cs
 │   │   
 │   ├───bin
-│   │   └───Debug
+│   │   ├───Debug
+│   │   │   └───net8.0
+│   │   │           GCommon.dll
+│   │   │           GCommon.pdb
+│   │   │           Loco1.ViewModels.deps.json
+│   │   │           Loco1.ViewModels.dll
+│   │   │           Loco1.ViewModels.pdb
+│   │   │           
+│   │   └───Release
 │   │       └───net8.0
-│   │               GCommon.dll
-│   │               GCommon.pdb
-│   │               Loco1.Data.dll
-│   │               Loco1.Data.pdb
-│   │               Loco1.ViewModels.deps.json
-│   │               Loco1.ViewModels.dll
-│   │               Loco1.ViewModels.pdb
-│   │               
-│   ├───Locomotives
-│   │       LocoEditVm.cs
-│   │       LocoListVm.cs
+│   └───obj
+│       │   Loco1.ViewModels.csproj.nuget.dgspec.json
+│       │   Loco1.ViewModels.csproj.nuget.g.props
+│       │   Loco1.ViewModels.csproj.nuget.g.targets
+│       │   project.assets.json
+│       │   project.nuget.cache
+│       │   
+│       ├───Debug
+│       │   └───net8.0
+│       │       │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│       │       │   Loco1.Vi.24E457BF.Up2Date
+│       │       │   Loco1.ViewModels.AssemblyInfo.cs
+│       │       │   Loco1.ViewModels.AssemblyInfoInputs.cache
+│       │       │   Loco1.ViewModels.assets.cache
+│       │       │   Loco1.ViewModels.csproj.AssemblyReference.cache
+│       │       │   Loco1.ViewModels.csproj.CoreCompileInputs.cache
+│       │       │   Loco1.ViewModels.csproj.FileListAbsolute.txt
+│       │       │   Loco1.ViewModels.dll
+│       │       │   Loco1.ViewModels.GeneratedMSBuildEditorConfig.editorconfig
+│       │       │   Loco1.ViewModels.GlobalUsings.g.cs
+│       │       │   Loco1.ViewModels.pdb
+│       │       │   Loco1.ViewModels.sourcelink.json
+│       │       │   
+│       │       ├───ref
+│       │       │       Loco1.ViewModels.dll
+│       │       │       
+│       │       └───refint
+│       │               Loco1.ViewModels.dll
+│       │               
+│       └───Release
+│           └───net8.0
+│               │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│               │   Loco1.ViewModels.AssemblyInfo.cs
+│               │   Loco1.ViewModels.AssemblyInfoInputs.cache
+│               │   Loco1.ViewModels.assets.cache
+│               │   Loco1.ViewModels.GeneratedMSBuildEditorConfig.editorconfig
+│               │   Loco1.ViewModels.GlobalUsings.g.cs
+│               │   
+│               ├───ref
+│               └───refint
+├───Loco1.web
+│   │   appsettings.Development.json
+│   │   appsettings.json
+│   │   Loco1.Web.csproj
+│   │   Loco1.Web.csproj.user
+│   │   Program.cs
+│   │   
+│   ├───Areas
+│   │   └───Identity
+│   │       └───Pages
+│   │           │   _ValidationScriptsPartial.cshtml
+│   │           │   _ViewImports.cshtml
+│   │           │   _ViewStart.cshtml
+│   │           │   
+│   │           └───Account
+│   │               │   AccessDenied.cshtml
+│   │               │   AccessDenied.cshtml.cs
+│   │               │   Lockout.cshtml
+│   │               │   Lockout.cshtml.cs
+│   │               │   Login.cshtml
+│   │               │   Login.cshtml.cs
+│   │               │   Logout.cshtml
+│   │               │   Logout.cshtml.cs
+│   │               │   Register.cshtml
+│   │               │   Register.cshtml.cs
+│   │               │   RegisterConfirmation.cshtml
+│   │               │   RegisterConfirmation.cshtml.cs
+│   │               │   _ViewImports.cshtml
+│   │               │   
+│   │               └───Manage
+│   │                       ChangePassword.cshtml
+│   │                       ChangePassword.cshtml.cs
+│   │                       Index.cshtml
+│   │                       Index.cshtml.cs
+│   │                       ManageNavPages.cs
+│   │                       PersonalData.cshtml
+│   │                       PersonalData.cshtml.cs
+│   │                       _ManageNav.cshtml
+│   │                       _ViewImports.cshtml
+│   │                       
+│   ├───bin
+│   │   ├───Debug
+│   │   │   └───net8.0
+│   │   │       │   appsettings.Development.json
+│   │   │       │   appsettings.json
+│   │   │       │   dotnet-aspnet-codegenerator-design.dll
+│   │   │       │   GCommon.dll
+│   │   │       │   GCommon.pdb
+│   │   │       │   Humanizer.dll
+│   │   │       │   Loco1.Data.dll
+│   │   │       │   Loco1.Data.pdb
+│   │   │       │   Loco1.Localizer.dll
+│   │   │       │   Loco1.Localizer.pdb
+│   │   │       │   Loco1.Repositories.dll
+│   │   │       │   Loco1.Service.dll
+│   │   │       │   Loco1.Service.pdb
+│   │   │       │   Loco1.ViewModels.dll
+│   │   │       │   Loco1.ViewModels.pdb
+│   │   │       │   Loco1.Web.deps.json
+│   │   │       │   Loco1.Web.dll
+│   │   │       │   Loco1.Web.exe
+│   │   │       │   Loco1.Web.pdb
+│   │   │       │   Loco1.Web.runtimeconfig.json
+│   │   │       │   Loco1.Web.staticwebassets.endpoints.json
+│   │   │       │   Loco1.Web.staticwebassets.runtime.json
+│   │   │       │   Microsoft.AspNetCore.Cryptography.Internal.dll
+│   │   │       │   Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+│   │   │       │   Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+│   │   │       │   Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+│   │   │       │   Microsoft.AspNetCore.Identity.UI.dll
+│   │   │       │   Microsoft.AspNetCore.Razor.Language.dll
+│   │   │       │   Microsoft.Bcl.AsyncInterfaces.dll
+│   │   │       │   Microsoft.Build.dll
+│   │   │       │   Microsoft.Build.Framework.dll
+│   │   │       │   Microsoft.CodeAnalysis.AnalyzerUtilities.dll
+│   │   │       │   Microsoft.CodeAnalysis.CSharp.dll
+│   │   │       │   Microsoft.CodeAnalysis.CSharp.Features.dll
+│   │   │       │   Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+│   │   │       │   Microsoft.CodeAnalysis.dll
+│   │   │       │   Microsoft.CodeAnalysis.Elfie.dll
+│   │   │       │   Microsoft.CodeAnalysis.Features.dll
+│   │   │       │   Microsoft.CodeAnalysis.Razor.dll
+│   │   │       │   Microsoft.CodeAnalysis.Scripting.dll
+│   │   │       │   Microsoft.CodeAnalysis.Workspaces.dll
+│   │   │       │   Microsoft.DiaSymReader.dll
+│   │   │       │   Microsoft.DotNet.Scaffolding.Shared.dll
+│   │   │       │   Microsoft.EntityFrameworkCore.Abstractions.dll
+│   │   │       │   Microsoft.EntityFrameworkCore.Design.dll
+│   │   │       │   Microsoft.EntityFrameworkCore.dll
+│   │   │       │   Microsoft.EntityFrameworkCore.Relational.dll
+│   │   │       │   Microsoft.Extensions.Caching.Memory.dll
+│   │   │       │   Microsoft.Extensions.DependencyInjection.Abstractions.dll
+│   │   │       │   Microsoft.Extensions.DependencyInjection.dll
+│   │   │       │   Microsoft.Extensions.DependencyModel.dll
+│   │   │       │   Microsoft.Extensions.FileProviders.Embedded.dll
+│   │   │       │   Microsoft.Extensions.Identity.Core.dll
+│   │   │       │   Microsoft.Extensions.Identity.Stores.dll
+│   │   │       │   Microsoft.Extensions.Localization.Abstractions.dll
+│   │   │       │   Microsoft.Extensions.Localization.dll
+│   │   │       │   Microsoft.Extensions.Logging.Abstractions.dll
+│   │   │       │   Microsoft.Extensions.Logging.dll
+│   │   │       │   Microsoft.Extensions.Options.dll
+│   │   │       │   Microsoft.NET.StringTools.dll
+│   │   │       │   Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
+│   │   │       │   Microsoft.VisualStudio.Web.CodeGeneration.dll
+│   │   │       │   Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll
+│   │   │       │   Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
+│   │   │       │   Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
+│   │   │       │   Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+│   │   │       │   Mono.TextTemplating.dll
+│   │   │       │   NetTopologySuite.dll
+│   │   │       │   NetTopologySuite.IO.PostGis.dll
+│   │   │       │   Newtonsoft.Json.dll
+│   │   │       │   Npgsql.dll
+│   │   │       │   Npgsql.EntityFrameworkCore.PostgreSQL.dll
+│   │   │       │   Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite.dll
+│   │   │       │   Npgsql.NetTopologySuite.dll
+│   │   │       │   NuGet.Common.dll
+│   │   │       │   NuGet.Configuration.dll
+│   │   │       │   NuGet.DependencyResolver.Core.dll
+│   │   │       │   NuGet.Frameworks.dll
+│   │   │       │   NuGet.LibraryModel.dll
+│   │   │       │   NuGet.Packaging.dll
+│   │   │       │   NuGet.ProjectModel.dll
+│   │   │       │   NuGet.Protocol.dll
+│   │   │       │   NuGet.Versioning.dll
+│   │   │       │   System.CodeDom.dll
+│   │   │       │   System.Composition.AttributedModel.dll
+│   │   │       │   System.Composition.Convention.dll
+│   │   │       │   System.Composition.Hosting.dll
+│   │   │       │   System.Composition.Runtime.dll
+│   │   │       │   System.Composition.TypedParts.dll
+│   │   │       │   System.Configuration.ConfigurationManager.dll
+│   │   │       │   System.Reflection.MetadataLoadContext.dll
+│   │   │       │   System.Security.Cryptography.ProtectedData.dll
+│   │   │       │   
+│   │   │       ├───af
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───ar
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───az
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───bg
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───bg-BG
+│   │   │       │       Loco1.Localizer.resources.dll
+│   │   │       │       
+│   │   │       ├───bn-BD
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───cs
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       ├───da
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───de
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       ├───el
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───en-US
+│   │   │       │       Loco1.Localizer.resources.dll
+│   │   │       │       
+│   │   │       ├───es
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       ├───fa
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───fi-FI
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───fr
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       ├───fr-BE
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───he
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───hr
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───hu
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───hy
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───id
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───is
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───it
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       ├───ja
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       ├───ko
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       ├───ko-KR
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───ku
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───lv
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───ms-MY
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───mt
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───nb
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───nb-NO
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───nl
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───pl
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       ├───pt
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───pt-BR
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       ├───ro
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───ru
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       ├───sk
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───sl
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───sr
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───sr-Latn
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───sv
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───th-TH
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───tr
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       ├───uk
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───uz-Cyrl-UZ
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───uz-Latn-UZ
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───vi
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───zh-CN
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       
+│   │   │       ├───zh-Hans
+│   │   │       │       Humanizer.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │       │       Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │       │       
+│   │   │       └───zh-Hant
+│   │   │               Humanizer.resources.dll
+│   │   │               Microsoft.CodeAnalysis.CSharp.Features.resources.dll
+│   │   │               Microsoft.CodeAnalysis.CSharp.resources.dll
+│   │   │               Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│   │   │               Microsoft.CodeAnalysis.Features.resources.dll
+│   │   │               Microsoft.CodeAnalysis.resources.dll
+│   │   │               Microsoft.CodeAnalysis.Scripting.resources.dll
+│   │   │               Microsoft.CodeAnalysis.Workspaces.resources.dll
+│   │   │               
+│   │   └───Release
+│   │       └───net8.0
+│   ├───Controllers
+│   │       AdminController.cs
+│   │       HomeController.cs
+│   │       LanguageController.cs
+│   │       
+│   ├───Infrastructure
+│   │       DataSeeder.cs
 │   │       
 │   ├───obj
 │   │   │   Loco1.ViewModels.csproj.nuget.dgspec.json
@@ -378,627 +933,124 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │   │           │       Loco1.ViewModels.dll
 │   │           │       
 │   │           └───refint
-│   │                   Loco1.ViewModels.dll
-│   │                   
-│   └───Roles
-│           EditUserRolesVm.cs
-│           PermGroupVm.cs
-│           PermItemVm.cs
-│           RoleListItem.cs
-│           RolePermVm.cs
-│           RoleWithPermissionsVm.cs
-│           UserWithRolesVm.cs
-│           
-└───Loco1.web
-    │   appsettings.Development.json
-    │   appsettings.json
-    │   Loco1.Web.csproj
-    │   Loco1.Web.csproj.user
-    │   Program.cs
-    │   
-    ├───Areas
-    │   └───Identity
-    │       └───Pages
-    │           │   _ValidationScriptsPartial.cshtml
-    │           │   _ViewImports.cshtml
-    │           │   _ViewStart.cshtml
-    │           │   
-    │           └───Account
-    │               │   AccessDenied.cshtml
-    │               │   AccessDenied.cshtml.cs
-    │               │   Lockout.cshtml
-    │               │   Lockout.cshtml.cs
-    │               │   Login.cshtml
-    │               │   Login.cshtml.cs
-    │               │   Logout.cshtml
-    │               │   Logout.cshtml.cs
-    │               │   Register.cshtml
-    │               │   Register.cshtml.cs
-    │               │   _ViewImports.cshtml
-    │               │   
-    │               └───Manage
-    │                       ChangePassword.cshtml
-    │                       ChangePassword.cshtml.cs
-    │                       Index.cshtml
-    │                       Index.cshtml.cs
-    │                       ManageNavPages.cs
-    │                       _ManageNav.cshtml
-    │                       _ViewImports.cshtml
-    │                       
-    ├───bin
-    │   └───Debug
-    │       └───net8.0
-    │           │   appsettings.Development.json
-    │           │   appsettings.json
-    │           │   dotnet-aspnet-codegenerator-design.dll
-    │           │   GCommon.dll
-    │           │   GCommon.pdb
-    │           │   Humanizer.dll
-    │           │   Loco1.Data.dll
-    │           │   Loco1.Data.pdb
-    │           │   Loco1.Localizer.dll
-    │           │   Loco1.Localizer.pdb
-    │           │   Loco1.Repositories.dll
-    │           │   Loco1.Repositories.pdb
-    │           │   Loco1.Service.dll
-    │           │   Loco1.Service.pdb
-    │           │   Loco1.ViewModels.dll
-    │           │   Loco1.ViewModels.pdb
-    │           │   Loco1.Web.deps.json
-    │           │   Loco1.Web.dll
-    │           │   Loco1.Web.exe
-    │           │   Loco1.Web.pdb
-    │           │   Loco1.Web.runtimeconfig.json
-    │           │   Loco1.Web.staticwebassets.endpoints.json
-    │           │   Loco1.Web.staticwebassets.runtime.json
-    │           │   Microsoft.AspNetCore.Cryptography.Internal.dll
-    │           │   Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
-    │           │   Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
-    │           │   Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-    │           │   Microsoft.AspNetCore.Identity.UI.dll
-    │           │   Microsoft.AspNetCore.Razor.Language.dll
-    │           │   Microsoft.Bcl.AsyncInterfaces.dll
-    │           │   Microsoft.Build.dll
-    │           │   Microsoft.Build.Framework.dll
-    │           │   Microsoft.CodeAnalysis.AnalyzerUtilities.dll
-    │           │   Microsoft.CodeAnalysis.CSharp.dll
-    │           │   Microsoft.CodeAnalysis.CSharp.Features.dll
-    │           │   Microsoft.CodeAnalysis.CSharp.Workspaces.dll
-    │           │   Microsoft.CodeAnalysis.dll
-    │           │   Microsoft.CodeAnalysis.Elfie.dll
-    │           │   Microsoft.CodeAnalysis.Features.dll
-    │           │   Microsoft.CodeAnalysis.Razor.dll
-    │           │   Microsoft.CodeAnalysis.Scripting.dll
-    │           │   Microsoft.CodeAnalysis.Workspaces.dll
-    │           │   Microsoft.DiaSymReader.dll
-    │           │   Microsoft.DotNet.Scaffolding.Shared.dll
-    │           │   Microsoft.EntityFrameworkCore.Abstractions.dll
-    │           │   Microsoft.EntityFrameworkCore.Design.dll
-    │           │   Microsoft.EntityFrameworkCore.dll
-    │           │   Microsoft.EntityFrameworkCore.Relational.dll
-    │           │   Microsoft.Extensions.Caching.Memory.dll
-    │           │   Microsoft.Extensions.DependencyInjection.Abstractions.dll
-    │           │   Microsoft.Extensions.DependencyInjection.dll
-    │           │   Microsoft.Extensions.DependencyModel.dll
-    │           │   Microsoft.Extensions.FileProviders.Embedded.dll
-    │           │   Microsoft.Extensions.Identity.Core.dll
-    │           │   Microsoft.Extensions.Identity.Stores.dll
-    │           │   Microsoft.Extensions.Localization.Abstractions.dll
-    │           │   Microsoft.Extensions.Localization.dll
-    │           │   Microsoft.Extensions.Logging.Abstractions.dll
-    │           │   Microsoft.Extensions.Logging.dll
-    │           │   Microsoft.Extensions.Options.dll
-    │           │   Microsoft.NET.StringTools.dll
-    │           │   Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
-    │           │   Microsoft.VisualStudio.Web.CodeGeneration.dll
-    │           │   Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll
-    │           │   Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
-    │           │   Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
-    │           │   Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
-    │           │   Mono.TextTemplating.dll
-    │           │   NetTopologySuite.dll
-    │           │   NetTopologySuite.IO.PostGis.dll
-    │           │   Newtonsoft.Json.dll
-    │           │   Npgsql.dll
-    │           │   Npgsql.EntityFrameworkCore.PostgreSQL.dll
-    │           │   Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite.dll
-    │           │   Npgsql.NetTopologySuite.dll
-    │           │   NuGet.Common.dll
-    │           │   NuGet.Configuration.dll
-    │           │   NuGet.DependencyResolver.Core.dll
-    │           │   NuGet.Frameworks.dll
-    │           │   NuGet.LibraryModel.dll
-    │           │   NuGet.Packaging.dll
-    │           │   NuGet.ProjectModel.dll
-    │           │   NuGet.Protocol.dll
-    │           │   NuGet.Versioning.dll
-    │           │   System.CodeDom.dll
-    │           │   System.Composition.AttributedModel.dll
-    │           │   System.Composition.Convention.dll
-    │           │   System.Composition.Hosting.dll
-    │           │   System.Composition.Runtime.dll
-    │           │   System.Composition.TypedParts.dll
-    │           │   System.Configuration.ConfigurationManager.dll
-    │           │   System.Reflection.MetadataLoadContext.dll
-    │           │   System.Security.Cryptography.ProtectedData.dll
-    │           │   
-    │           ├───af
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───ar
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───az
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───bg
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───bg-BG
-    │           │       Loco1.Localizer.resources.dll
-    │           │       
-    │           ├───bn-BD
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───cs
-    │           │       Humanizer.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           ├───da
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───de
-    │           │       Humanizer.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           ├───el
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───en-US
-    │           │       Loco1.Localizer.resources.dll
-    │           │       
-    │           ├───es
-    │           │       Humanizer.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           ├───fa
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───fi-FI
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───fr
-    │           │       Humanizer.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           ├───fr-BE
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───he
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───hr
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───hu
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───hy
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───id
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───is
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───it
-    │           │       Humanizer.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           ├───ja
-    │           │       Humanizer.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           ├───ko
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           ├───ko-KR
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───ku
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───lv
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───ms-MY
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───mt
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───nb
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───nb-NO
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───nl
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───pl
-    │           │       Humanizer.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           ├───pt
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───pt-BR
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           ├───ro
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───ru
-    │           │       Humanizer.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           ├───sk
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───sl
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───sr
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───sr-Latn
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───sv
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───th-TH
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───tr
-    │           │       Humanizer.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           ├───uk
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───uz-Cyrl-UZ
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───uz-Latn-UZ
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───vi
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───zh-CN
-    │           │       Humanizer.resources.dll
-    │           │       
-    │           ├───zh-Hans
-    │           │       Humanizer.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.resources.dll
-    │           │       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │           │       Microsoft.CodeAnalysis.Features.resources.dll
-    │           │       Microsoft.CodeAnalysis.resources.dll
-    │           │       Microsoft.CodeAnalysis.Scripting.resources.dll
-    │           │       Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │           │       
-    │           └───zh-Hant
-    │                   Humanizer.resources.dll
-    │                   Microsoft.CodeAnalysis.CSharp.Features.resources.dll
-    │                   Microsoft.CodeAnalysis.CSharp.resources.dll
-    │                   Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-    │                   Microsoft.CodeAnalysis.Features.resources.dll
-    │                   Microsoft.CodeAnalysis.resources.dll
-    │                   Microsoft.CodeAnalysis.Scripting.resources.dll
-    │                   Microsoft.CodeAnalysis.Workspaces.resources.dll
-    │                   
-    ├───Controllers
-    │       AdminController.cs
-    │       BaseController.cs
-    │       HomeController.cs
-    │       LanguageController.cs
-    │       LocomotiveController.cs
-    │       RepairController.cs
-    │       RolesController.cs
-    │       ShiftWorkController.cs
-    │       
-    ├───Infrastructure
-    │       DataSeeder.cs
-    │       HierarchicalRolesSeeder.cs
-    │       OwnerOptions.cs
-    │       OwnerOverrideAuthorizationHandler.cs
-    │       PermissionAuthorization.cs
-    │       RoleClaimsTransformation.cs
-    │       RolePermissionClaimsTransformer.cs
-    │       
-    ├───obj
-    │   │   Loco1.Web.csproj.nuget.dgspec.json
-    │   │   Loco1.Web.csproj.nuget.g.props
-    │   │   Loco1.Web.csproj.nuget.g.targets
-    │   │   project.assets.json
-    │   │   project.nuget.cache
-    │   │   
-    │   └───Debug
-    │       └───net8.0
-    │           │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-    │           │   ApiEndpoints.json
-    │           │   apphost.exe
-    │           │   Loco1.Web.AssemblyInfo.cs
-    │           │   Loco1.Web.AssemblyInfoInputs.cache
-    │           │   Loco1.Web.assets.cache
-    │           │   Loco1.Web.csproj.AssemblyReference.cache
-    │           │   Loco1.Web.csproj.BuildWithSkipAnalyzers
-    │           │   Loco1.Web.csproj.CoreCompileInputs.cache
-    │           │   Loco1.Web.csproj.FileListAbsolute.txt
-    │           │   Loco1.Web.csproj.Up2Date
-    │           │   Loco1.Web.dll
-    │           │   Loco1.Web.GeneratedMSBuildEditorConfig.editorconfig
-    │           │   Loco1.Web.genruntimeconfig.cache
-    │           │   Loco1.Web.GlobalUsings.g.cs
-    │           │   Loco1.Web.MvcApplicationPartsAssemblyInfo.cache
-    │           │   Loco1.Web.MvcApplicationPartsAssemblyInfo.cs
-    │           │   Loco1.Web.pdb
-    │           │   Loco1.Web.RazorAssemblyInfo.cache
-    │           │   Loco1.Web.RazorAssemblyInfo.cs
-    │           │   Loco1.Web.sourcelink.json
-    │           │   rjimswa.dswa.cache.json
-    │           │   rjsmcshtml.dswa.cache.json
-    │           │   rjsmrazor.dswa.cache.json
-    │           │   rpswa.dswa.cache.json
-    │           │   staticwebassets.build.endpoints.json
-    │           │   staticwebassets.build.json
-    │           │   staticwebassets.build.json.cache
-    │           │   staticwebassets.development.json
-    │           │   staticwebassets.references.upToDateCheck.txt
-    │           │   staticwebassets.removed.txt
-    │           │   staticwebassets.upToDateCheck.txt
-    │           │   swae.build.ex.cache
-    │           │   
-    │           ├───ref
-    │           │       Loco1.Web.dll
-    │           │       
-    │           ├───refint
-    │           │       Loco1.Web.dll
-    │           │       
-    │           ├───scopedcss
-    │           │   ├───bundle
-    │           │   │       Loco1.Web.styles.css
-    │           │   │       
-    │           │   ├───projectbundle
-    │           │   │       Loco1.Web.bundle.scp.css
-    │           │   │       
-    │           │   └───Views
-    │           │       └───Shared
-    │           │               _Layout.cshtml.rz.scp.css
-    │           │               
-    │           └───staticwebassets
-    ├───Properties
-    │   │   launchSettings.json
-    │   │   serviceDependencies.json
-    │   │   serviceDependencies.local.json
-    │   │   serviceDependencies.local.json.user
-    │   │   
-    │   └───PublishProfiles
-    │           FolderProfile.pubxml
-    │           FolderProfile.pubxml.user
-    │           FolderProfile1.pubxml
-    │           FolderProfile1.pubxml.user
-    │           
-    ├───Views
-    │   │   _ViewImports.cshtml
-    │   │   _ViewStart.cshtml
-    │   │   
-    │   ├───Admin
-    │   │       AdminRolesPartial.cshtml
-    │   │       EditRoles.cshtml
-    │   │       Users.cshtml
-    │   │       
-    │   ├───Home
-    │   │       Index.cshtml
-    │   │       Privacy.cshtml
-    │   │       
-    │   ├───Locomotive
-    │   │       Create.cshtml
-    │   │       Edit.cshtml
-    │   │       Index.cshtml
-    │   │       
-    │   ├───Repair
-    │   │       Index.cshtml
-    │   │       
-    │   ├───Roles
-    │   │       Edit.cshtml
-    │   │       Index.cshtml
-    │   │       
-    │   ├───Shared
-    │   │       Error.cshtml
-    │   │       _AdminSidebar.cshtml
-    │   │       _LanguageSwitcher.cshtml
-    │   │       _Layout.cshtml
-    │   │       _Layout.cshtml.css
-    │   │       _LoginPartial.cshtml
-    │   │       _UnderConstruction.cshtml
-    │   │       _UserBadge.cshtml
-    │   │       _ValidationScriptsPartial.cshtml
-    │   │       
-    │   └───ShiftWork
-    │           Index.cshtml
-    │           
-    └───wwwroot
-        │   favicon.ico
-        │   
-        ├───css
-        │       site.css
-        │       
-        ├───icons
-        │       android-chrome-192.png
-        │       android-chrome-512.png
-        │       apple-touch-icon.png
-        │       myicon-anim-1.png
-        │       myicon-anim-10.png
-        │       myicon-anim-11.png
-        │       myicon-anim-12.png
-        │       myicon-anim-2.png
-        │       myicon-anim-3.png
-        │       myicon-anim-4.png
-        │       myicon-anim-5.png
-        │       myicon-anim-6.png
-        │       myicon-anim-7.png
-        │       myicon-anim-8.png
-        │       myicon-anim-9.png
-        │       myicon.ico
-        │       
-        ├───js
-        │       favicon-anim.js
-        │       header-anim.js
-        │       site.js
-        │       
-        └───lib
-            ├───bootstrap
-            │   │   LICENSE
-            │   │   
-            │   └───dist
-            │       ├───css
-            │       │       bootstrap-grid.css
-            │       │       bootstrap-grid.css.map
-            │       │       bootstrap-grid.min.css
-            │       │       bootstrap-grid.min.css.map
-            │       │       bootstrap-grid.rtl.css
-            │       │       bootstrap-grid.rtl.css.map
-            │       │       bootstrap-grid.rtl.min.css
-            │       │       bootstrap-grid.rtl.min.css.map
-            │       │       bootstrap-reboot.css
-            │       │       bootstrap-reboot.css.map
-            │       │       bootstrap-reboot.min.css
-            │       │       bootstrap-reboot.min.css.map
-            │       │       bootstrap-reboot.rtl.css
-            │       │       bootstrap-reboot.rtl.css.map
-            │       │       bootstrap-reboot.rtl.min.css
-            │       │       bootstrap-reboot.rtl.min.css.map
-            │       │       bootstrap-utilities.css
-            │       │       bootstrap-utilities.css.map
-            │       │       bootstrap-utilities.min.css
-            │       │       bootstrap-utilities.min.css.map
-            │       │       bootstrap-utilities.rtl.css
-            │       │       bootstrap-utilities.rtl.css.map
-            │       │       bootstrap-utilities.rtl.min.css
-            │       │       bootstrap-utilities.rtl.min.css.map
-            │       │       bootstrap.css
-            │       │       bootstrap.css.map
-            │       │       bootstrap.min.css
-            │       │       bootstrap.min.css.map
-            │       │       bootstrap.rtl.css
-            │       │       bootstrap.rtl.css.map
-            │       │       bootstrap.rtl.min.css
-            │       │       bootstrap.rtl.min.css.map
-            │       │       
-            │       └───js
-            │               bootstrap.bundle.js
-            │               bootstrap.bundle.js.map
-            │               bootstrap.bundle.min.js
-            │               bootstrap.bundle.min.js.map
-            │               bootstrap.esm.js
-            │               bootstrap.esm.js.map
-            │               bootstrap.esm.min.js
-            │               bootstrap.esm.min.js.map
-            │               bootstrap.js
-            │               bootstrap.js.map
-            │               bootstrap.min.js
-            │               bootstrap.min.js.map
-            │               
-            ├───jquery
-            │   │   LICENSE.txt
-            │   │   
-            │   └───dist
-            │           jquery.js
-            │           jquery.min.js
-            │           jquery.min.map
-            │           
-            ├───jquery-validation
-            │   │   LICENSE.md
-            │   │   
-            │   └───dist
-            │           additional-methods.js
-            │           additional-methods.min.js
-            │           jquery.validate.js
-            │           jquery.validate.min.js
-            │           
-            └───jquery-validation-unobtrusive
-                    jquery.validate.unobtrusive.js
-                    jquery.validate.unobtrusive.min.js
-                    LICENSE.txt
-                    
+│   ├───Properties
+│   │   │   launchSettings.json
+│   │   │   serviceDependencies.json
+│   │   │   serviceDependencies.local.json
+│   │   │   serviceDependencies.local.json.user
+│   │   │   
+│   │   └───PublishProfiles
+│   │           FolderProfile.pubxml
+│   │           FolderProfile.pubxml.user
+│   │           FolderProfile1.pubxml
+│   │           FolderProfile1.pubxml.user
+│   │           
+│   ├───Views
+│   │   │   _ViewImports.cshtml
+│   │   │   _ViewStart.cshtml
+│   │   │   
+│   │   ├───Admin
+│   │   │       EditRoles.cshtml
+│   │   │       Users.cshtml
+│   │   │       
+│   │   ├───Home
+│   │   │       Index.cshtml
+│   │   │       Privacy.cshtml
+│   │   │       
+│   │   └───Shared
+│   │           Error.cshtml
+│   │           _LanguageSwitcher.cshtml
+│   │           _Layout.cshtml
+│   │           _Layout.cshtml.css
+│   │           _LoginPartial.cshtml
+│   │           _UserBadge.cshtml
+│   │           _ValidationScriptsPartial.cshtml
+│   │           
+│   └───wwwroot
+│       │   favicon.ico
+│       │   
+│       ├───css
+│       │       site.css
+│       │       
+│       ├───js
+│       │       site.js
+│       │       
+│       └───lib
+│           ├───bootstrap
+│           │   │   LICENSE
+│           │   │   
+│           │   └───dist
+│           │       ├───css
+│           │       │       bootstrap-grid.css
+│           │       │       bootstrap-grid.css.map
+│           │       │       bootstrap-grid.min.css
+│           │       │       bootstrap-grid.min.css.map
+│           │       │       bootstrap-grid.rtl.css
+│           │       │       bootstrap-grid.rtl.css.map
+│           │       │       bootstrap-grid.rtl.min.css
+│           │       │       bootstrap-grid.rtl.min.css.map
+│           │       │       bootstrap-reboot.css
+│           │       │       bootstrap-reboot.css.map
+│           │       │       bootstrap-reboot.min.css
+│           │       │       bootstrap-reboot.min.css.map
+│           │       │       bootstrap-reboot.rtl.css
+│           │       │       bootstrap-reboot.rtl.css.map
+│           │       │       bootstrap-reboot.rtl.min.css
+│           │       │       bootstrap-reboot.rtl.min.css.map
+│           │       │       bootstrap-utilities.css
+│           │       │       bootstrap-utilities.css.map
+│           │       │       bootstrap-utilities.min.css
+│           │       │       bootstrap-utilities.min.css.map
+│           │       │       bootstrap-utilities.rtl.css
+│           │       │       bootstrap-utilities.rtl.css.map
+│           │       │       bootstrap-utilities.rtl.min.css
+│           │       │       bootstrap-utilities.rtl.min.css.map
+│           │       │       bootstrap.css
+│           │       │       bootstrap.css.map
+│           │       │       bootstrap.min.css
+│           │       │       bootstrap.min.css.map
+│           │       │       bootstrap.rtl.css
+│           │       │       bootstrap.rtl.css.map
+│           │       │       bootstrap.rtl.min.css
+│           │       │       bootstrap.rtl.min.css.map
+│           │       │       
+│           │       └───js
+│           │               bootstrap.bundle.js
+│           │               bootstrap.bundle.js.map
+│           │               bootstrap.bundle.min.js
+│           │               bootstrap.bundle.min.js.map
+│           │               bootstrap.esm.js
+│           │               bootstrap.esm.js.map
+│           │               bootstrap.esm.min.js
+│           │               bootstrap.esm.min.js.map
+│           │               bootstrap.js
+│           │               bootstrap.js.map
+│           │               bootstrap.min.js
+│           │               bootstrap.min.js.map
+│           │               
+│           ├───jquery
+│           │   │   LICENSE.txt
+│           │   │   
+│           │   └───dist
+│           │           jquery.js
+│           │           jquery.min.js
+│           │           jquery.min.map
+│           │           
+│           ├───jquery-validation
+│           │   │   LICENSE.md
+│           │   │   
+│           │   └───dist
+│           │           additional-methods.js
+│           │           additional-methods.min.js
+│           │           jquery.validate.js
+│           │           jquery.validate.min.js
+│           │           
+│           └───jquery-validation-unobtrusive
+│                   jquery.validate.unobtrusive.js
+│                   jquery.validate.unobtrusive.min.js
+│                   LICENSE.txt
+│                   
+└───obj
+    └───Debug
+        └───net8.0
+            └───ref
