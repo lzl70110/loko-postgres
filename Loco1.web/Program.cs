@@ -8,9 +8,7 @@ using Loco1.Repositories;
 using Loco1.Repositories.Interfaces;
 using Loco1.Service;               // Services implementation
 using Loco1.Service.Abstractions;  // Service contracts
-using Loco1.Web.Infrastructure;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
@@ -92,7 +90,9 @@ namespace Loco1.Web
             builder.Services.AddScoped<ILocomotiveService, LocomotiveService>();
             builder.Services.AddScoped<ILocomotiveRepository, LocomotiveRepository>();
 
-            // ------------------------ CULTURES ------------------------
+            // ---------------------------------------------------------
+            //  CULTURES
+            // ---------------------------------------------------------
             var supportedCultures = new[]
             {
                 new CultureInfo("bg-BG"),

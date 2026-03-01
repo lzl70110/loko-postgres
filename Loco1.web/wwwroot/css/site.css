@@ -1,4 +1,4 @@
-/* ================= NAVBAR ================= */
+﻿/* ================= NAVBAR ================= */
 .loco-navbar {
     min-height: 68px;
 }
@@ -172,8 +172,12 @@ main {
         padding-bottom: .65rem;
     }
 
-        /* Икони + текст да не се "лепят" при по-малък шрифт */
-        .offcanvas .list-group-item .bi {
-            font-size: 1rem;
-        }
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .rotator__item {
+        position: static;
+        display: block;
+        opacity: 1;
+        animation: none;
+    }
 }
