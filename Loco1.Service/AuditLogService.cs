@@ -1,4 +1,5 @@
-﻿using Loco1.Data;
+﻿namespace Loco1.Services;
+using Loco1.Data;
 using Loco1.Data.Models;
 using Loco1.Service.Abstractions;
 
@@ -25,6 +26,7 @@ public class AuditLogService : IAuditLogService
             throw new NotImplementedException();
         }
 
+    // Generic Log
     public async Task LogAsync(
         string user,
         string action,
@@ -52,8 +54,11 @@ public class AuditLogService : IAuditLogService
             log.ShiftWork = shift;
 
         _context.AuditLogs.Add(log);
+
         await _context.SaveChangesAsync();
     }
+
+    // Shortcuts (Create/Update/Delete)
 
     public Task LogCreateAsync(string user, string entityName, int entityId)
         => LogAsync(user, "Create", entityName, entityId);
