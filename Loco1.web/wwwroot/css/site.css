@@ -38,7 +38,7 @@
     margin-left: -8px;
 }
 
-/* ================= PAGE FLEX ================= */
+/* ================= PAGE FLEX (footer-safe) ================= */
 html, body {
     height: 100%;
     margin: 0;
@@ -55,6 +55,15 @@ main {
     min-height: 0;
 }
 
+.app-footer {
+    flex-shrink: 0;
+}
+
+/* Optional bottom guard when a page has sticky action bars */
+.page-has-sticky {
+    padding-bottom: 4.5rem;
+}
+
 /* ================= FOOTER ================= */
 .app-footer {
     border-top: 1px solid #dee2e6;
@@ -65,14 +74,13 @@ main {
     padding: 16px;
     text-align: center;
     color: #212529;
-    flex-shrink: 0;
 }
 
 /* ================= ROTATOR ================= */
 .rotator {
     position: relative;
     width: 100%;
-    min-height: 2em; /* allows multiline text */
+    min-height: 2em;
     overflow: hidden;
     margin: 0 auto;
     text-align: center;
@@ -86,11 +94,10 @@ main {
     opacity: 0;
     transform: translateY(20px);
     animation: rotatorFade 9s infinite ease-in-out;
-    white-space: normal; /* allow wrapping */
-    word-break: break-word; /* prevent overflow */
+    white-space: normal;
+    word-break: break-word;
 }
 
-    /* Animation timing */
     .rotator__item:nth-child(1) {
         animation-delay: 0s;
     }
@@ -129,6 +136,11 @@ main {
     }
 }
 
+/* ================= STATUS MESSAGE ================= */
+#status-message {
+    transition: opacity 0.8s ease;
+}
+
 /* ================= MOBILE ================= */
 @media (max-width: 576px) {
     .loco-navbar {
@@ -140,39 +152,136 @@ main {
         height: 32px;
     }
 
-    @media (max-width: 576px) {
-        .loco-nav-right {
-            gap: 10px;
-        }
-
-        /* Sidebar and content spacing remain normal */
+    .loco-nav-right {
+        gap: 10px;
     }
 
-    /* ================= STATUS MESSAGE ================= */
-    #status-message {
-        transition: opacity 0.8s ease;
-    }
-
-    /* ================= SIDEBAR ================= */
     .sidebar-nav .list-group-item {
-        padding: .45rem .15rem;
-        margin-left: -8px; /* леко вляво за десктоп */
+        padding-left: 20px !important;
+        margin-left: 0 !important;
     }
 
-    @media (max-width: 576px) {
-        .sidebar-nav .list-group-item {
-            padding-left: 20px !important; /* леко вдясно за мобилно */
-            margin-left: 0 !important; /* ресет за мобилно */
-        }
-    }
-
-    /* Offcanvas rhythm */
     .offcanvas .list-group-item {
         padding-top: .65rem;
         padding-bottom: .65rem;
     }
+}
 
-/* Accessibility */
+/* ================= ACCESSIBILITY ================= */
+@media (prefers-reduced-motion: reduce) {
+    .rotator__item {
+        position: static;
+        display: block;
+        opacity: 1;
+        animation: none;
+    }
+}
+/* ===== Mobile-first footer-safe layout ===== */
+html, body {
+    height: 100%;
+}
+
+    body.d-flex.flex-column.min-vh-100 {
+        min-height: 100vh;
+    }
+
+main.flex-grow-1 {
+    flex-grow: 1;
+    min-height: 1px;
+}
+
+.app-footer {
+    flex-shrink: 0;
+}
+
+/* iOS safe areas (notch) */
+@supports (padding: max(0px)) {
+    body {
+        padding-bottom: max(0px, env(safe-area-inset-bottom));
+    }
+
+    .app-footer {
+        padding-bottom: max(16px, env(safe-area-inset-bottom));
+    }
+}
+
+/* Prevent bottom controls from being covered by virtual keyboards */
+@media (max-width: 576px) {
+    input, select, textarea {
+        font-size: 16px; /* avoid zoom on focus iOS */
+    }
+}
+
+/* ===== Mobile navbar / header spacing ===== */
+@media (max-width: 576px) {
+    .loco-navbar {
+        min-height: 56px;
+    }
+
+    .loco-brand img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .loco-nav-right {
+        gap: 10px;
+        margin-right: 8px;
+    }
+}
+
+/* ===== Mobile lists and buttons (tap-friendly) ===== */
+@media (max-width: 576px) {
+    .sidebar-nav .list-group-item {
+        padding: .65rem .75rem;
+        margin-left: 0;
+    }
+
+    .btn,
+    .form-control,
+    .form-select {
+        min-height: 44px; /* thumb target */
+    }
+
+    .btn-sm {
+        min-height: 38px;
+    }
+}
+
+/* ===== Forms with sticky actions (mobile guard) ===== */
+.page-has-sticky {
+    padding-bottom: 4.5rem;
+}
+
+@media (max-width: 576px) {
+    .page-has-sticky {
+        padding-bottom: 5.5rem;
+    }
+}
+
+/* ===== Footer text wrap + smaller on narrow screens ===== */
+.rotator {
+    padding: 0 8px;
+}
+
+@media (max-width: 576px) {
+    .app-footer {
+        padding: 12px 8px;
+    }
+
+    .rotator {
+        min-height: 2.2em;
+    }
+}
+
+/* ===== Offcanvas list rhythm (mobile) ===== */
+@media (max-width: 576px) {
+    .offcanvas .list-group-item {
+        padding-top: .7rem;
+        padding-bottom: .7rem;
+    }
+}
+
+/* ===== Reduce motion ===== */
 @media (prefers-reduced-motion: reduce) {
     .rotator__item {
         position: static;

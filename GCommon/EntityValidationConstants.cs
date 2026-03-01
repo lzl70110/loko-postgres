@@ -75,27 +75,5 @@ public static class EntityValidationConstants
         public const int ModifiedByMaxLength = 10;
         }
 
-    public static class Roles
-        {
-        public const string Owner = "Owner";
-        public const string Admin = "Admin";
-        public const string RailTransportManager = "RailTransportManager";
-        public const string LocomotiveTransportManager = "LocomotiveTransportManager";
-        public const string DieselLocomotiveRepairManager = "DieselLocomotiveRepairManager";
-        public const string DieselLocomotiveRepairSupervisor = "DieselLocomotiveRepairSupervisor";
-        public const string LocomotivesDriversManager = "LocomotivesDriversManager";
-        public const string User = "User";
-
-        public static readonly string[] All =
-        {
-        Owner,
-        Admin,
-        RailTransportManager,
-        LocomotiveTransportManager,
-        DieselLocomotiveRepairManager,
-        DieselLocomotiveRepairSupervisor,
-        LocomotivesDriversManager,
-        User
-    };
-        }
+    
     }
