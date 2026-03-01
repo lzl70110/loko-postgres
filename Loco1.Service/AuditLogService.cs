@@ -1,47 +1,69 @@
-﻿using System;
-using System.Threading.Tasks;
-using Loco1.Data;               // LocoDbContext
-using Loco1.Data.Models;        // AuditLog (или твоето име)
-using Loco1.Service.Abstractions;
-using Microsoft.EntityFrameworkCore;
+﻿namespace Loco1.Services;
+using Loco1.Data;
+using Loco1.Data.Models;
 
-namespace Loco1.Service
-{
-    // EN: Service for writing audit entries.
-    // NOTE: Minimal implementation; adjust entity names/fields to your model.
-    public sealed class AuditLogService : IAuditLogService
+public interface IAuditLogService
     {
-        private readonly LocoDbContext _db;
+    Task LogAsync(
+        string user,
+        string action,
+        string entityName,
+        int entityId,
+        object? navigationEntity = null);
 
-        public AuditLogService(LocoDbContext db)
-        {
-            _db = db ?? throw new ArgumentNullException(nameof(db));
-        }
+    Task LogCreateAsync(string user, string entityName, int entityId);
+    Task LogUpdateAsync(string user, string entityName, int entityId);
+    Task LogDeleteAsync(string user, string entityName, int entityId);
+    }
 
-        public Task LogAsync(string user, string action, string entityName, int entityId, object? navigationEntity = null)
-        {
-            throw new NotImplementedException();
-        }
+public class AuditLogService : IAuditLogService
+    {
+    private readonly LocoDbContext _context;
 
         public Task LogCreateAsync(string user, string entityName, int entityId)
         {
             throw new NotImplementedException();
         }
 
-        public Task LogDeleteAsync(string user, string entityName, int entityId)
+    // Generic Log
+    public async Task LogAsync(
+        string user,
+        string action,
+        string entityName,
+        int entityId,
+        object? navigationEntity = null)
         {
-            throw new NotImplementedException();
+        var log = new AuditLog
+            {
+            User = user,
+            Action = action,
+            EntityName = entityName,
+            EntityId = entityId,
+            Timestamp = DateTime.UtcNow
+            };
+
+        //   Navigation property linking based on type
+        if (navigationEntity is Locomotive loco)
+            log.Locomotive = loco;
+
+        if (navigationEntity is Fuel fuel)
+            log.Fuel = fuel;
+
+        if (navigationEntity is ShiftWork shift)
+            log.ShiftWork = shift;
+
+        _context.AuditLogs.Add(log);
+
+        await _context.SaveChangesAsync();
         }
 
-        public Task LogUpdateAsync(string user, string entityName, int entityId)
-        {
-            throw new NotImplementedException();
-        }
+    // Shortcuts (Create/Update/Delete)
 
-        public async Task WriteAsync(AuditLog entry)
-        {
-            // Guard
-            if (entry == null) throw new ArgumentNullException(nameof(entry));
+    public Task LogCreateAsync(string user, string entityName, int entityId)
+        => LogAsync(user, "Create", entityName, entityId);
+
+    public Task LogUpdateAsync(string user, string entityName, int entityId)
+        => LogAsync(user, "Update", entityName, entityId);
 
             _db.AuditLogs.Add(entry);
             await _db.SaveChangesAsync();

@@ -3,6 +3,7 @@ using static Loco1.GCommon.EntityValidationConstants.AuditEntity;
 
 namespace Loco1.Data.Models
     {
+    // Base entity with audit and soft-delete metadata
     public abstract class AuditEntity
         {
         [Key]
@@ -23,7 +24,5 @@ namespace Loco1.Data.Models
 
         [MaxLength(NoteMaxLength)]
         public string? Note { get; set; }
-
-       
         }
     }

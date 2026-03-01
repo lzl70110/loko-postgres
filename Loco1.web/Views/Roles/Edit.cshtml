@@ -1,0 +1,31 @@
+﻿@model Loco1.ViewModels.Roles.RolePermVm
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
+
+@{
+    ViewData["Title"] = L["Edit role permissions"];
+}
+
+<form asp-controller="Roles" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="RoleId" />
+    <h2>@Model.RoleName</h2>
+
+    @for (int g = 0; g < Model.Groups.Count; g++)
+    {
+        <h4>@Model.Groups[g].GroupName</h4>
+        <ul class="list-unstyled">
+            @for (int i = 0; i < Model.Groups[g].Items.Count; i++)
+            {
+                <li class="form-check">
+                    <input class="form-check-input" type="checkbox" asp-for="Groups[g].Items[i].Granted" />
+                    <label class="form-check-label">
+                        @Model.Groups[g].Items[i].Display (@Model.Groups[g].Items[i].Code)
+                    </label>
+                    <input type="hidden" asp-for="Groups[g].Items[i].Code" />
+                    <input type="hidden" asp-for="Groups[g].Items[i].Display" />
+                </li>
+            }
+        </ul>
+    }
+
+    <button type="submit" class="btn btn-primary">@L["Save"]</button>
+</form>

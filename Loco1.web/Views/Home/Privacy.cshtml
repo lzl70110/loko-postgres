@@ -1,6 +1,14 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@using Loco1.Localizer
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 
-<p>Use this page to detail your site's privacy policy.</p>
+@{
+    ViewData["Title"] = L["Privacy_Title"];
+    }
+
+<h1>@L["Privacy_Title"]</h1>
+
+<p>@L["Privacy_P1"]</p>
+
+<p>@L["Privacy_P2"]</p>
+
+<p>@L["Privacy_P3"]</p>

@@ -5,26 +5,19 @@
 namespace Loco1.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddSoftDeleteFieldsToAspNetUsers : Migration
+    public partial class AddFirstLastNameToUsers : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "IsDeactivated",
-                table: "AspNetUsers",
-                type: "boolean",
-                nullable: false,
-                defaultValue: false);
-
             migrationBuilder.AddColumn<string>(
-                name: "OriginalEmail",
+                name: "FirstName",
                 table: "AspNetUsers",
                 type: "text",
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "OriginalUserName",
+                name: "LastName",
                 table: "AspNetUsers",
                 type: "text",
                 nullable: true);
@@ -34,15 +27,11 @@ namespace Loco1.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsDeactivated",
+                name: "FirstName",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "OriginalEmail",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "OriginalUserName",
+                name: "LastName",
                 table: "AspNetUsers");
         }
     }

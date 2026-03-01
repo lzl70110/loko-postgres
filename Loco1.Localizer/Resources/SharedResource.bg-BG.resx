@@ -1,186 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
 
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="Header_AppName" xml:space="preserve">
-    <value>Локо</value>
-  </data>
-  <data name="Footer_R1" xml:space="preserve">
-    <value>Дизайн и изработка: Любомир Чекански ® 2026</value>
-  </data>
-  <data name="Footer_R2" xml:space="preserve">
-    <value>Създадено с ❤️ от Любомир Чекански ® 2026</value>
-  </data>
-  <data name="Footer_R3" xml:space="preserve">
-    <value>Проект Loco · Любомир Чекански ® 2026</value>
-  </data>
-  <data name="From" xml:space="preserve">
-    <value>От</value>
-  </data>
-  <data name="To" xml:space="preserve">
-    <value>На</value>
-  </data>
-  <data name="PleaseSelectRole" xml:space="preserve">
-    <value>Моля, изберете роля</value>
-  </data>
-  <data name="NoRolesAvailable" xml:space="preserve">
-    <value>Няма налични роли</value>
-  </data>
-  <data name="EditRolesTitle" xml:space="preserve">
-    <value>Редакция на роли</value>
-  </data>
-  <data name="User" xml:space="preserve">
-    <value>Потребител</value>
-  </data>
-  <data name="Roles" xml:space="preserve">
-    <value>Роли</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Запис</value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Назад</value>
-  </data>
-  <data name="Confirm" xml:space="preserve">
-    <value>Потвърждение</value>
-  </data>
-  <data name="ConfirmRoleChange" xml:space="preserve">
-    <value>Потвърждавате ли смяна на роля?</value>
-  </data>
-  <data name="Roles updated." xml:space="preserve">
-    <value>Ролите са обновени.</value>
-  </data>
-  <data name="User not found." xml:space="preserve">
-    <value>Потребителят не е намерен.</value>
-  </data>
-  <data name="Role.Owner" xml:space="preserve">
-    <value>Собственик</value>
-  </data>
-  <data name="Role.Admin" xml:space="preserve">
-    <value>Администратор</value>
-  </data>
-  <data name="Role.User" xml:space="preserve">
-    <value>Потребител</value>
-  </data>
-  <data name="Deactivate" xml:space="preserve">
-    <value> Деактивирай</value>
-  </data>
-  <data name="Actions" xml:space="preserve">
-    <value>Действия</value>
-  </data>
+	<!-- App Header/Footer -->
+	<data name="Header_AppName" xml:space="preserve"><value>Локо</value></data>
+	<data name="Footer_R1" xml:space="preserve"><value>Дизайн и изработка: Любомир Чекански ® 2026</value></data>
+	<data name="Footer_R2" xml:space="preserve"><value>Създадено с ❤️ от Любомир Чекански ® 2026</value></data>
+	<data name="Footer_R3" xml:space="preserve"><value>Проект Loco · Любомир Чекански ® 2026</value></data>
+
+	<!-- Navigation -->
+	<data name="Home" xml:space="preserve"><value>Начало</value></data>
+	<data name="Welcome" xml:space="preserve"><value>Добре дошли</value></data>
+	<data name="WelcomeSubtitle" xml:space="preserve"><value>Система за отчет на работата и ремонта на локомотиви 🚂</value></data>
+	<data name="Logout" xml:space="preserve"><value>Изход</value></data>
+
+	<!-- Authentication -->
+	<data name="Login.Title" xml:space="preserve"><value>Вход в системата</value></data>
+	<data name="LoginButton" xml:space="preserve"><value>Вход</value></data>
+	<data name="RegisterTitle" xml:space="preserve"><value>Регистрация</value></data>
+	<data name="RegisterButton" xml:space="preserve"><value>Създай акаунт</value></data>
+	<data name="RememberMe" xml:space="preserve"><value>Запомни ме</value></data>
+	<data name="InvalidLoginAttempt" xml:space="preserve"><value>Невалиден опит за вход.</value></data>
+	<data name="LockoutTitle" xml:space="preserve"><value>Акаунтът е заключен</value></data>
+	<data name="LockoutMessage" xml:space="preserve"><value>Този акаунт е заключен. Опитайте отново по-късно.</value></data>
+	<data name="AccessDeniedTitle" xml:space="preserve"><value>Достъпът е отказан</value></data>
+	<data name="AccessDeniedMessage" xml:space="preserve"><value>Нямате достъп до този ресурс.</value></data>
+
+	<!-- Users & Roles -->
+	<data name="Users" xml:space="preserve"><value>Потребители</value></data>
+	<data name="Roles" xml:space="preserve"><value>Роли</value></data>
+	<data name="Actions" xml:space="preserve"><value>Действия</value></data>
+	<data name="Edit roles" xml:space="preserve"><value>Редакция на роли</value></data>
+	<data name="View roles &amp; permissions" xml:space="preserve"><value>Преглед на роли и разрешения</value></data>
+	<data name="Manage permissions (grant/revoke)" xml:space="preserve"><value>Управление на разрешения (даване/отнемане)</value></data>
+	<data name="NoRolesAvailable" xml:space="preserve"><value>Няма налични роли</value></data>
+	<data name="EditRolesTitle" xml:space="preserve"><value>Редакция на роли</value></data>
+	<data name="ConfirmRoleChange" xml:space="preserve"><value>Потвърждавате ли промяна на роля?</value></data>
+	<data name="Roles updated." xml:space="preserve"><value>Ролите са обновени.</value></data>
+	<data name="PleaseSelectRole" xml:space="preserve"><value>Моля, изберете роля</value></data>
+
+	<!-- Role Names -->
+	<data name="Role.Owner" xml:space="preserve"><value>Собственик</value></data>
+	<data name="Role.Admin" xml:space="preserve"><value>Администратор</value></data>
+	<data name="Role.User" xml:space="preserve"><value>Потребител</value></data>
+	<data name="Role.RailTransportManager" xml:space="preserve"><value>Началник ж.п. транспорт</value></data>
+	<data name="Role.LocomotiveTransportManager" xml:space="preserve"><value>Началник на Експлоатацията</value></data>
+	<data name="Role.DieselLocomotiveRepairManager" xml:space="preserve"><value>Началник Дизелово депо-ремонт</value></data>
+	<data name="Role.DieselLocomotiveRepairSupervisor" xml:space="preserve"><value>Ръководител смяна Дизелово депо-ремонт</value></data>
+	<data name="Role.LocomotivesDriversManager" xml:space="preserve"><value>Деломайстор</value></data>
+
+	<!-- Owners & Admin constraints -->
+	<data name="Owner cannot be removed here" xml:space="preserve"><value>Собственик не може да бъде променян тук</value></data>
+	<data name="Cannot remove the last admin." xml:space="preserve"><value>Не може да бъде премахнат последният администратор.</value></data>
+
+	<!-- Permissions -->
+	<data name="Permissions" xml:space="preserve"><value>Разрешения</value></data>
+
+	<!-- Confirmation & Alerts -->
+	<data name="Confirm" xml:space="preserve"><value>Потвърждение</value></data>
+	<data name="Are you sure?" xml:space="preserve"><value>Сигурни ли сте?</value></data>
+
+	<!-- Locomotive-related -->
+	<data name="Locomotives" xml:space="preserve"><value>Локомотиви</value></data>
+	<data name="Create Locomotive" xml:space="preserve"><value>Нов №  локомотив</value></data>
+	<data name="Edit Locomotive" xml:space="preserve"><value>Редакция на локомотив</value></data>
+	<data name="Locomotive_Number" xml:space="preserve"><value>Локомотив №</value></data>
+	<data name="Locomotive_Type" xml:space="preserve"><value>Тип локомотив</value></data>
+	<data name="Locomotive_MeasuringUnit" xml:space="preserve"><value>Мярка (Мч / Км)</value></data>
+	<data name="Locomotive_AxleCount" xml:space="preserve"><value>Брой колооси</value></data>
+	<data name="Locomotive_TotalEngineHours" xml:space="preserve"><value>Общо моточасове</value></data>
+	<data name="Locomotive_TotalWorkingDays" xml:space="preserve"><value>Общо работни дни</value></data>
+	<data name="Locomotive_FuelCapacity" xml:space="preserve"><value>Вместимост - гориво</value></data>
+	<data name="Enum_LocomotiveType_Shunter" xml:space="preserve"><value>Маневрен</value></data>
+	<data name="Enum_LocomotiveType_Mainline" xml:space="preserve"><value>Магистрален</value></data>
+	<data name="Enum_MeasuringUnits_Mh" xml:space="preserve"><value>Мч</value></data>
+	<data name="Enum_MeasuringUnits_Km" xml:space="preserve"><value>Км</value></data>
+	<data name="Enum_Shift_Day" xml:space="preserve"><value>дневна</value></data>
+	<data name="Enum_Shift_Night" xml:space="preserve"><value>нощна</value></data>
+
+	<!-- Add any other keys you need for rights/permissions -->
+	<data name="View users" xml:space="preserve"><value>Преглед на потребители</value></data>
+	<data name="View locomotives" xml:space="preserve"><value>Преглед на локомотиви</value></data>
+
 </root>

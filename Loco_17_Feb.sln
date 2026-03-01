@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.37012.4
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11506.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Web", "Loco1.web\Loco1.Web.csproj", "{4AC8F850-CD6C-4D9B-A1AF-55B53FDDE000}"
 EndProject
@@ -11,15 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCommon", "GCommon\GCommon.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Service", "Loco1.Service\Loco1.Service.csproj", "{2A8226EF-AB89-4C73-9999-3586EC366878}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{69E44422-FF29-411B-9448-6FCCF491B73B}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.ViewModels", "Loco1.ViewModels\Loco1.ViewModels.csproj", "{585D8C84-1497-4866-A1EF-B4B76D25BB40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Localizer", "Loco1.Localizer\Loco1.Localizer.csproj", "{E2FA37AB-62A6-4F8E-BD4E-6CA84FED8447}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Data", "Loco1.Data\Loco1.Data.csproj", "{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9A419353-5494-4BAA-AEDE-5E8C904422E1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Repositories", "Loco1.Repositories\Loco1.Repositories.csproj", "{6F7B4A22-B3BB-5AEF-F837-FB1271838122}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,14 +43,6 @@ Global
 		{E2FA37AB-62A6-4F8E-BD4E-6CA84FED8447}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2FA37AB-62A6-4F8E-BD4E-6CA84FED8447}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2FA37AB-62A6-4F8E-BD4E-6CA84FED8447}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F7B4A22-B3BB-5AEF-F837-FB1271838122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F7B4A22-B3BB-5AEF-F837-FB1271838122}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F7B4A22-B3BB-5AEF-F837-FB1271838122}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F7B4A22-B3BB-5AEF-F837-FB1271838122}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

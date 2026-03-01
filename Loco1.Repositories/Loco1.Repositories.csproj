@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.23" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Loco1.Data\Loco1.Data.csproj" />
     <ProjectReference Include="..\Loco1.Localizer\Loco1.Localizer.csproj" />
     <ProjectReference Include="..\Loco1.ViewModels\Loco1.ViewModels.csproj" />

@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
 @inject UserManager<ApplicationUser> UserManager
-
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 @{
     var userEntity = await UserManager.GetUserAsync(User);
     string role = "user";
@@ -15,17 +15,17 @@
 
         if (roles.Contains("Owner"))
             {
-            role = "owner";
-            badgeClass = "bg-dark"; // black
+            role = L["Role.Owner"];
+            badgeClass = "bg-danger fw-bold fs-5";
             }
         else if (roles.Contains("Admin"))
             {
-            role = "admin";
-            badgeClass = "bg-success"; // green
+            role = L["Role.Admin"];
+        badgeClass = "bg-success"; // green
             }
         else
             {
-            role = "user";
+            role =L[ "User"];
             badgeClass = "bg-primary"; // blue
             }
 

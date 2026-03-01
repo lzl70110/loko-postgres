@@ -1,4 +1,4 @@
-﻿namespace Loco1.GCommon.Enums;
+﻿namespace Loco1.GCommon.Enum;
 
 public enum Shift
 {

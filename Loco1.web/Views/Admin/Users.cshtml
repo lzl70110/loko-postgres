@@ -1,6 +1,12 @@
-﻿@using Loco1.Localizer
+﻿@using System
+@using GCommon
+@using Loco1.ViewModels.Roles
+@model List<Loco1.ViewModels.Roles.UserWithRolesVm>
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
-@model List<Loco1.ViewModels.UserWithRolesVm>
+ 
+
+
+
 
 @{
     ViewData["Title"] = L["Users"];
@@ -20,59 +26,46 @@
         @foreach (var u in Model)
             {
             var role = u.Roles?.FirstOrDefault() ?? "-";
-            bool isOwner = role.Equals("Owner", StringComparison.OrdinalIgnoreCase);
-            bool isDeleted = u.Email.StartsWith("restored+", StringComparison.OrdinalIgnoreCase);
-            bool isCurrentUser = User.Identity?.Name?.Equals(u.Email, StringComparison.OrdinalIgnoreCase) == true;
+             var isOwner = string.Equals(role, AppRoles.Owner, StringComparison.OrdinalIgnoreCase);
+            var isDeleted = u.Email.StartsWith("restored+", StringComparison.OrdinalIgnoreCase);
+            var isCurrentUser = User.Identity?.Name?.Equals(u.Email, StringComparison.OrdinalIgnoreCase) == true;
+            var loc = L[$"Role.{role}"];
+            var roleLabel = loc.ResourceNotFound ? role : loc.Value;
 
                 <tr>
                 <td>@u.Email</td>
-                    <td>
-                        @{
-                        var loc = L[$"Role.{role}"];
-                        var roleLabel = loc.ResourceNotFound ? role : loc.Value;
-                        }
-                    @roleLabel
-                    </td>
-
+                <td>@roleLabel</td>
                     <td class="text-end">
-
-                    <!-- Edit Roles -->
-                        <a asp-controller="Admin"
-                           asp-action="EditRoles"
-                           asp-route-id="@u.Id"
-                           class="btn btn-primary btn-sm me-1">
-                        @L["Edit roles"]
-                        </a>
-
-                    <!-- Deactivate button (soft delete) -->
-                    @if (!isOwner && !isDeleted && !isCurrentUser)
+                    @if (isOwner)
                         {
-                            <form asp-controller="Admin" asp-action="DeactivateUser" asp-route-id="@u.Id"
-                              method="post" class="d-inline">
-                            @Html.AntiForgeryToken()
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('@L["Are you sure?"]');">
-                                @L["Deactivate"]
-                                </button>
-                            </form>
+                        <span class="badge bg-secondary">@L["Role.Owner"]</span>
                         }
-
-                    <!-- Restore button -->
-                    @if (isDeleted)
+                    else
                         {
-                            <form asp-controller="Admin"
-                              asp-action="RestoreUser"
-                              asp-route-id="@u.Id"
-                              method="post"
-                              class="d-inline">
-                            @Html.AntiForgeryToken()
-                                <button type="submit" class="btn btn-success btn-sm"
-                                    onclick="return confirm('@L["Restore this user?"]');">
-                                @L["Restore"]
-                                </button>
-                            </form>
-                        }
+                            <a asp-controller="Admin" asp-action="EditRoles" asp-route-id="@u.Id" class="btn btn-primary btn-sm me-1">
+                            @L["Edit roles"]
+                            </a>
 
+                        @if (!isDeleted && !isCurrentUser)
+                            {
+                                <form asp-controller="Admin" asp-action="DeactivateUser" asp-route-id="@u.Id" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('@L["Are you sure?"]');">
+                                    @L["Deactivate"]
+                                    </button>
+                                </form>
+                            }
+
+                        @if (isDeleted)
+                            {
+                                <form asp-controller="Admin" asp-action="RestoreUser" asp-route-id="@u.Id" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('@L["Restore this user?"]');">
+                                    @L["Restore"]
+                                    </button>
+                                </form>
+                            }
+                        }
                     </td>
                 </tr>
             }
@@ -81,7 +74,5 @@
 
 @if (TempData["StatusMessage"] != null)
     {
-        <div class="alert alert-info mt-3">
-        @TempData["StatusMessage"]
-        </div>
+    <div class="alert alert-info mt-3">@TempData["StatusMessage"]</div>
     }

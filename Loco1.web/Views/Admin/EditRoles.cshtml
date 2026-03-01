@@ -1,184 +1,114 @@
-﻿@using Loco1.Localizer
+﻿@model Loco1.ViewModels.Roles.EditUserRolesVm
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
-@model Loco1.ViewModels.EditUserRolesVm
+@using System.Text.Json
 
 @{
-    ViewData["Title"] = L["EditRolesTitle"].Value;
+    ViewData["Title"] = L["EditRolesTitle"];
     var currentRole = Model.SelectedRoles?.FirstOrDefault() ?? "";
-    }
-
-    <style>
-    /* Render \n as line breaks inside modal text */
-    #confirmRoleChangeText {
-        white-space: pre-line;
-    }
-    </style>
+    var jsData = JsonSerializer.Serialize(new
+    {
+        currentRole = currentRole ?? "",
+        confirm = L["ConfirmRoleChange"]?.Value ?? "",
+        from = L["From"]?.Value ?? "",
+        to = L["To"]?.Value ?? "",
+        select = L["PleaseSelectRole"]?.Value ?? "",
+        ownerLocked = L["OwnerCannotBeChanged"]?.Value ?? "",
+        ownerKey = Model.OwnerRoleName // string, e.g., "Owner"
+    });
+}
 
 <h2>@L["EditRolesTitle"]</h2>
 <p><strong>@L["User"]:</strong> @Model.Email</p>
 
-<!-- Show all validation messages -->
 <div asp-validation-summary="All" class="text-danger"></div>
 
-    <form id="edit-roles-form"
-      asp-controller="Admin"
-      asp-action="EditRoles"
-      method="post">
+<form id="edit-roles-form" asp-controller="Admin" asp-action="EditRoles" method="post">
     @Html.AntiForgeryToken()
     <input asp-for="UserId" type="hidden" />
 
-        <div class="mb-3">
+    <div class="mb-3">
         <label class="form-label">@L["Roles"]</label>
+        <div class="row">
+            @foreach (var role in Model.AvailableRoles ?? Enumerable.Empty<string>())
+            {
+                var isChecked = Model.SelectedRoles?.Contains(role) == true;
+                var isOwner = string.Equals(role, Model.OwnerRoleName, StringComparison.OrdinalIgnoreCase);
+                var roleId = $"role_{role.Replace(" ", "_")}";
+                var loc = L[$"Role.{role}"];
+                var roleLabel = loc.ResourceNotFound ? role : loc.Value;
 
-            <div class="row">
-            @if (Model.AvailableRoles?.Any() == true)
-                {
-                foreach (var role in Model.AvailableRoles)
-                    {
-                    var isChecked = Model.SelectedRoles?.Contains(role) == true;
+                <div class="col-12 col-md-6 mb-2">
+                    <div class="form-check">
+                        <input id="@roleId"
+                               class="form-check-input"
+                               type="radio"
+                               name="SelectedRoles"
+                               value="@role"
+                               @(isChecked ? "checked" : null)
+                               @(isOwner && !isChecked ? "disabled" : null) />
+                        <label class="form-check-label" for="@roleId">@roleLabel</label>
 
-                    // BUSINESS RULE: Owner is locked unless already owner
-                    var isOwnerRole = role.Equals("Owner", StringComparison.OrdinalIgnoreCase);
-                    var makeDisabled = isOwnerRole && !isChecked; // lock selecting Owner if not current
-
-                    var roleId = "role_" + new string(role.Select(ch => char.IsWhiteSpace(ch) ? '_' : ch).ToArray());
-
-                    // Localize role name with fallback
-                    var loc = L[$"Role.{role}"];
-                    var roleLabel = loc.ResourceNotFound ? role : loc.Value;
-
-                        <div class="col-12 col-md-6 mb-2">
-                            <div class="form-check">
-                            <input id="@roleId"
-                                   class="form-check-input"
-                                   type="radio"
-                                   name="SelectedRoles"
-                                   value="@role"
-                            @(isChecked ? "checked" : "")
-                            @(makeDisabled ? "disabled" : "") />
-                            <label class="form-check-label" for="@roleId">@roleLabel</label>
-
-                            @if (isOwnerRole && isChecked)
-                                {
-                                <small class="text-muted ms-2">@L["Owner cannot be removed here"]</small>
-                                }
-                            </div>
-                        </div>
-                    }
-                }
-            else
-                {
-                    <div class="col-12">
-                    <span class="text-muted">@L["NoRolesAvailable"]</span>
+                        @if (isOwner && isChecked)
+                        {
+                            <small class="text-muted ms-2">@L["OwnerCannotBeChanged"]</small>
+                        }
                     </div>
-                }
-            </div>
-        </div>
-
-        <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-success">@L["Save"]</button>
-        <a asp-controller="Admin" asp-action="Users" class="btn btn-secondary">@L["Back"]</a>
-        </div>
-    </form>
-
-<!-- === Confirmation Modal === -->
-    <div class="modal fade" id="confirmRoleChangeModal" tabindex="-1" aria-labelledby="confirmRoleChangeLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                <h6 class="modal-title" id="confirmRoleChangeLabel">@L["Confirm"]</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label='@L["Back"]'></button>
                 </div>
-
-                <div class="modal-body">
-                <p class="mb-0"><span id="confirmRoleChangeText"></span></p>
-                </div>
-
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@L["Back"]</button>
-                <button type="button" id="confirmRoleChangeOkBtn" class="btn btn-primary">OK</button>
-                </div>
-
-            </div>
+            }
         </div>
     </div>
 
-    @section Scripts {
-        <script>
-        (function () {
-            let confirmed = false;
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-success">@L["Save"]</button>
+        <a asp-controller="Admin" asp-action="Users" class="btn btn-secondary">@L["Back"]</a>
+    </div>
+</form>
 
-            const form    = document.getElementById('edit-roles-form');
+@section Scripts {
+    <script>
+        (function () {
+            const form = document.getElementById("edit-roles-form");
             if (!form) return;
 
-            const modalEl = document.getElementById('confirmRoleChangeModal');
-            const textEl  = document.getElementById('confirmRoleChangeText');
-            const okBtn   = document.getElementById('confirmRoleChangeOkBtn');
-            const modal   = (window.bootstrap && modalEl) ? new bootstrap.Modal(modalEl) : null;
+            const data = @Html.Raw(jsData);
+            const modalEl = document.getElementById("confirmRoleChangeModal");
+            const modal = modalEl ? new bootstrap.Modal(modalEl) : null;
+            const textEl = document.getElementById("confirmRoleChangeText");
+            const okBtn = document.getElementById("confirmRoleChangeOkBtn");
 
-            const currentRole = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(currentRole));
+            let confirmed = false;
 
-            const txtConfirm       = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["ConfirmRoleChange"].Value));
-            const txtFrom          = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["From"].Value));
-            const txtTo            = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["To"].Value));
-            const txtPleaseSelect  = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["PleaseSelectRole"].Value));
-            const txtOwnerLocked   = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["Owner cannot be removed here"].Value));
-
-            form.addEventListener('submit', function (e) {
+            form.addEventListener("submit", function (e) {
                 if (confirmed) { confirmed = false; return; }
 
-                // IMPORTANT: use selected radio first, do NOT default to hidden inputs
-                const selectedRadio = form.querySelector('input[name="SelectedRoles"]:checked');
-                const selected = selectedRadio || null;
+                const selected = form.querySelector("input[name='SelectedRoles']:checked");
+                if (!selected) { e.preventDefault(); alert(data.select); return; }
 
-                if (!selected) {
+                const newRole = selected.value;
+                const ownerKey = data.ownerKey;
+
+                if (data.currentRole?.toLowerCase() === ownerKey.toLowerCase() && newRole.toLowerCase() !== ownerKey.toLowerCase()) {
                     e.preventDefault();
-                    alert(txtPleaseSelect);
+                    alert(data.ownerLocked);
                     return;
                 }
 
-                const desiredRole = selected.value;
+                if (data.currentRole?.toLowerCase() === newRole.toLowerCase()) return;
 
-                // Block Owner change (UI guard)
-                if (currentRole && currentRole.toLowerCase() === "owner" &&
-                    desiredRole.toLowerCase() !== "owner") {
+                if (modal && textEl) {
                     e.preventDefault();
-                    alert(txtOwnerLocked);
-                    return;
-                }
-
-                // No change → submit directly
-                if (currentRole && desiredRole &&
-                    currentRole.toLowerCase() === desiredRole.toLowerCase()) {
-                    return;
-                }
-
-                // Ask for confirmation
-                e.preventDefault();
-                const message = txtConfirm + "\n\n" +
-                                txtFrom + ": " + (currentRole || "-") + "\n" +
-                                txtTo   + ": " + desiredRole;
-
-                if (modal) {
-                    textEl.textContent = message;
+                    textEl.textContent = `${data.confirm}\n\n${data.from}: ${data.currentRole || "-"}\n${data.to}: ${newRole}`;
                     modal.show();
-
-                    const onOk = function () {
-                        okBtn.removeEventListener('click', onOk);
-                        confirmed = true;
-                        modal.hide();
-                        form.submit();
-                    };
-
-                    okBtn.addEventListener('click', onOk);
-                } else {
-                    if (confirm(message)) {
-                        confirmed = true;
-                        form.submit();
-                    }
                 }
             });
+
+            if (okBtn && modal) {
+                okBtn.addEventListener("click", function () {
+                    confirmed = true;
+                    modal.hide();
+                    form.submit();
+                });
+            }
         })();
-        </script>
-    }
+    </script>
+}

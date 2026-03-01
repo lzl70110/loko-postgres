@@ -34,6 +34,9 @@ namespace Loco1.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
@@ -41,8 +44,14 @@ namespace Loco1.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
                     b.Property<bool>("IsDeactivated")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -108,6 +117,14 @@ namespace Loco1.Data.Migrations
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
                     b.Property<int>("EntityId")
                         .HasColumnType("integer");
 
@@ -122,6 +139,12 @@ namespace Loco1.Data.Migrations
                     b.Property<int?>("LocomotiveId")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
+
                     b.Property<int?>("ShiftWorkId")
                         .HasColumnType("integer");
 
@@ -133,8 +156,8 @@ namespace Loco1.Data.Migrations
 
                     b.Property<string>("User")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
@@ -160,8 +183,8 @@ namespace Loco1.Data.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
@@ -176,8 +199,8 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("timestamp without time zone");
@@ -198,6 +221,7 @@ namespace Loco1.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("LocomotiveId", "RecordedOn")
+                        .IsDescending(false, true)
                         .HasDatabaseName("IX_Fuel_Loco_Date");
 
                     b.ToTable("Fuels");
@@ -216,8 +240,8 @@ namespace Loco1.Data.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
@@ -244,8 +268,8 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("timestamp without time zone");
@@ -287,14 +311,14 @@ namespace Loco1.Data.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<decimal>("EngineHoursUsed")
-                        .HasColumnType("decimal(9,2)");
+                        .HasColumnType("numeric");
 
                     b.Property<bool>("IsAWorkingDay")
                         .HasColumnType("boolean");
@@ -306,8 +330,8 @@ namespace Loco1.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("timestamp without time zone");

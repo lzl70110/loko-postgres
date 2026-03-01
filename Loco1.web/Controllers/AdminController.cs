@@ -1,33 +1,39 @@
 ﻿using Loco1.Localizer;
 using Loco1.Service.Abstractions;
-using Loco1.ViewModels;
+using Loco1.ViewModels.Roles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
 namespace Loco1.Web.Controllers
     {
+    // Access restricted to administrative roles
     [Authorize(Roles = "Owner,Admin")]
     public class AdminController : Controller
         {
         private readonly IUserRoleService _userRoleService;
         private readonly IStringLocalizer<SharedResource> L;
 
-        public AdminController(IUserRoleService userRoleService,
-                               IStringLocalizer<SharedResource> localizer)
+        public AdminController(
+            IUserRoleService userRoleService,
+            IStringLocalizer<SharedResource> localizer)
             {
             _userRoleService = userRoleService;
             L = localizer;
             }
 
-        // GET: /Admin/Users
+        /// <summary>
+        /// List all users with their roles.
+        /// </summary>
         public async Task<IActionResult> Users()
             {
             var model = await _userRoleService.GetAllUsersWithRolesAsync();
             return View(model);
             }
 
-        // GET: /Admin/EditRoles/{id}
+        /// <summary>
+        /// Load role editing page for a specific user.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> EditRoles(string id)
             {
@@ -41,14 +47,15 @@ namespace Loco1.Web.Controllers
             return View(vm);
             }
 
-        // POST: /Admin/EditRoles
+        /// <summary>
+        /// Update roles for a user.
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditRoles(EditUserRolesVm vm)
             {
             if (!ModelState.IsValid)
                 {
-                // Never return raw vm (it doesn't contain Email/AvailableRoles)
                 var rebuilt = await _userRoleService.GetEditModelAsync(vm.UserId);
                 if (rebuilt != null)
                     {
@@ -71,6 +78,7 @@ namespace Loco1.Web.Controllers
                     rebuilt.SelectedRoles = vm.SelectedRoles ?? new List<string>();
                     return View(rebuilt);
                     }
+
                 return RedirectToAction(nameof(Users));
                 }
 
@@ -78,7 +86,9 @@ namespace Loco1.Web.Controllers
             return RedirectToAction(nameof(Users));
             }
 
-        // POST: /Admin/DeactivateUser/{id}
+        /// <summary>
+        /// Soft-deactivate a user account (cannot deactivate self).
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeactivateUser(string id)
@@ -89,7 +99,9 @@ namespace Loco1.Web.Controllers
                 return RedirectToAction(nameof(Users));
                 }
 
-            var currentUserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            var currentUserId =
+                User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
             if (currentUserId == id)
                 {
                 TempData["StatusMessage"] = L["You cannot deactivate yourself."].Value;
@@ -97,6 +109,7 @@ namespace Loco1.Web.Controllers
                 }
 
             var (ok, errorKey) = await _userRoleService.DeactivateUserAsync(id);
+
             if (!ok)
                 {
                 TempData["StatusMessage"] = L[errorKey ?? "Delete failed."].Value;
@@ -107,7 +120,9 @@ namespace Loco1.Web.Controllers
             return RedirectToAction(nameof(Users));
             }
 
-        // POST: /Admin/RestoreUser/{id}
+        /// <summary>
+        /// Restore a previously deactivated user account.
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RestoreUser(string id)
@@ -119,6 +134,7 @@ namespace Loco1.Web.Controllers
                 }
 
             var (ok, errorKey) = await _userRoleService.RestoreUserAsync(id);
+
             if (!ok)
                 {
                 TempData["StatusMessage"] = L[errorKey ?? "Restore failed."].Value;

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Loco1.Data.Models;
 using Loco1.Repositories.Abstractions;
 using Loco1.Service.Abstractions;
-using Loco1.ViewModels;
+using Loco1.ViewModels.Roles;
 using Microsoft.AspNetCore.Identity;
 
 namespace Loco1.Service;

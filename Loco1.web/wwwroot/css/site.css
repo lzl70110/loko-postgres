@@ -1,84 +1,176 @@
-﻿html {
-  font-size: 14px;
+﻿/* ================= NAVBAR ================= */
+.loco-navbar {
+    min-height: 68px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.loco-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 12px;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    .loco-brand img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+    }
+
+.loco-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    white-space: nowrap;
+    margin-right: 16px;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+    .loco-nav-right .btn,
+    .loco-nav-right span,
+    .loco-nav-right form,
+    .loco-nav-right .loco-badge {
+        display: inline-flex;
+        align-items: center;
+    }
+
+/* ================= SIDEBAR ================= */
+.sidebar-nav .list-group-item {
+    padding: .45rem .15rem;
+    margin-left: -8px;
+}
+
+/* ================= PAGE FLEX ================= */
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
 body {
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Footer look */
+main {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+/* ================= FOOTER ================= */
 .app-footer {
-    background: #111;
-    color: #ddd;
+    border-top: 1px solid #dee2e6;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    text-align: center;
+    color: #212529;
+    flex-shrink: 0;
 }
 
-    .app-footer strong {
-        color: #fff;
-    }
-
-/* Rotator for Footer */
+/* ================= ROTATOR ================= */
 .rotator {
-    display: inline-block;
     position: relative;
-    min-height: 1.4em;
-    white-space: nowrap;
+    width: 100%;
+    min-height: 2em; /* allows multiline text */
+    overflow: hidden;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 12px;
 }
 
 .rotator__item {
     position: absolute;
-    inset: 0;
+    left: 0;
+    width: 100%;
     opacity: 0;
-    animation: rotator-fade 12s infinite;
+    transform: translateY(20px);
+    animation: rotatorFade 9s infinite ease-in-out;
+    white-space: normal; /* allow wrapping */
+    word-break: break-word; /* prevent overflow */
 }
 
+    /* Animation timing */
     .rotator__item:nth-child(1) {
         animation-delay: 0s;
     }
 
     .rotator__item:nth-child(2) {
-        animation-delay: 4s;
+        animation-delay: 3s;
     }
 
     .rotator__item:nth-child(3) {
-        animation-delay: 8s;
+        animation-delay: 6s;
     }
 
-@keyframes rotator-fade {
+@keyframes rotatorFade {
     0% {
         opacity: 0;
+        transform: translateY(20px);
     }
 
     8% {
         opacity: 1;
+        transform: translateY(0);
     }
 
     30% {
         opacity: 1;
+        transform: translateY(0);
     }
 
     38% {
         opacity: 0;
+        transform: translateY(-20px);
     }
 
     100% {
         opacity: 0;
     }
 }
+
+/* ================= MOBILE ================= */
+@media (max-width: 576px) {
+    .loco-navbar {
+        min-height: 60px;
+    }
+
+    .loco-brand img {
+        width: 32px;
+        height: 32px;
+    }
+
+    @media (max-width: 576px) {
+        .loco-nav-right {
+            gap: 10px;
+        }
+
+        /* Sidebar and content spacing remain normal */
+    }
+
+    /* ================= STATUS MESSAGE ================= */
+    #status-message {
+        transition: opacity 0.8s ease;
+    }
+
+    /* ================= SIDEBAR ================= */
+    .sidebar-nav .list-group-item {
+        padding: .45rem .15rem;
+        margin-left: -8px; /* леко вляво за десктоп */
+    }
+
+    @media (max-width: 576px) {
+        .sidebar-nav .list-group-item {
+            padding-left: 20px !important; /* леко вдясно за мобилно */
+            margin-left: 0 !important; /* ресет за мобилно */
+        }
+    }
+
+    /* Offcanvas rhythm */
+    .offcanvas .list-group-item {
+        padding-top: .65rem;
+        padding-bottom: .65rem;
+    }
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
@@ -88,101 +180,4 @@ body {
         opacity: 1;
         animation: none;
     }
-}
-/* === Permissions page polish (compact & readable) === */
-/* EN: This block is non-destructive. Safe to append at the end of your site.css */
-
-.perm-wrapper {
-    padding-bottom: 3.5rem; /* EN: footer guard so sticky bar won't overlap */
-}
-
-.perm-card {
-    max-width: 920px;
-    margin: 0 auto 2rem; /* EN: center the card and add breathing room below */
-}
-
-/* EN: Each permission group as a soft card section */
-.perm-group {
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    background: #fff;
-    padding: 1rem 1rem .5rem;
-    margin-bottom: 1rem;
-}
-
-/* EN: Group header with tools (collapse, select-all, clear) aligned to the right */
-.perm-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: .25rem;
-}
-
-    .perm-head h3 {
-        font-size: 1.1rem;
-        margin: 0;
-    }
-
-.perm-tools {
-    display: flex;
-    gap: .5rem;
-}
-
-/* EN: Compact rows; full-clickable labels remain native via <label> */
-.perm-list .form-check {
-    margin: .25rem 0;
-}
-
-.perm-list .form-check-label {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-}
-
-/* EN: 2 columns on md+ screens using Bootstrap grid in the view:
-   <div class="perm-list row"> <div class="col-12 col-md-6"> ... </div> </div> */
-
-/* EN: Sticky action bar at the bottom */
-.sticky-actions {
-    position: sticky;
-    bottom: 0;
-    background: rgba(255,255,255,.9);
-    backdrop-filter: blur(4px);
-    border-top: 1px solid #e5e7eb;
-    padding: .75rem 0;
-    margin-top: .5rem;
-}
-
-/* EN: Small color dots by operation to improve scanning */
-.perm-op-view {
-    color: #2563eb
-}
-/* blue   */
-.perm-op-add {
-    color: #15803d
-}
-/* green  */
-.perm-op-edit {
-    color: #b45309
-}
-/* amber  */
-.perm-op-delete {
-    color: #dc2626
-}
-/* red    */
-
-/* === Users list tweaks === */
-.table td, .table th {
-    vertical-align: middle; /*   better alignment in users table */
-}
-
-.badge + .badge, .badge + .btn, .btn + .badge {
-    margin-left: .375rem; /*  preserve spacing when Owner badge is next to text/button */
-}
-
-/*   Optional—make confirm modals text wrap nicely in permissions UI */
-#confirmRoleChangeText {
-    white-space: pre-wrap;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-size: .95rem;
 }
