@@ -60,6 +60,8 @@ public class AuditLogService : IAuditLogService
 
     // Shortcuts (Create/Update/Delete)
 
+    // Shortcuts (Create/Update/Delete)
+
     public Task LogCreateAsync(string user, string entityName, int entityId)
         => LogAsync(user, "Create", entityName, entityId);
 

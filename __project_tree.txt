@@ -159,35 +159,7 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │               │   
 │               ├───ref
 <<<<<<< HEAD
-│               └───refint
-├───Loco1.Data.Models
-│   │   Loco1.Data.Models.csproj
-│   │   
-│   ├───bin
-│   │   ├───Debug
-│   │   │   └───net8.0
-│   │   └───Release
-│   │       └───net8.0
-│   └───obj
-│       ├───Debug
-│       │   └───net8.0
-│       │       │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-│       │       │   Loco1.Data.Models.AssemblyInfo.cs
-│       │       │   Loco1.Data.Models.AssemblyInfoInputs.cache
-│       │       │   Loco1.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
-│       │       │   Loco1.Data.Models.GlobalUsings.g.cs
-│       │       │   
-│       │       ├───ref
-│       │       └───refint
-│       └───Release
-│           └───net8.0
-│               │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-│               │   Loco1.Data.Models.AssemblyInfo.cs
-│               │   Loco1.Data.Models.AssemblyInfoInputs.cache
-│               │   Loco1.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
-│               │   Loco1.Data.Models.GlobalUsings.g.cs
-│               │   
-│               ├───ref
+<<<<<<< HEAD
 =======
 >>>>>>> 4e6906d8e826d0546b6ef76191888d50e794f0d7
 │               └───refint
@@ -219,6 +191,40 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │               │   Loco1.Data.Models.GlobalUsings.g.cs
 │               │   
 │               ├───ref
+<<<<<<< HEAD
+=======
+>>>>>>> 4e6906d8e826d0546b6ef76191888d50e794f0d7
+│               └───refint
+├───Loco1.Data.Models
+│   │   Loco1.Data.Models.csproj
+│   │   
+│   ├───bin
+│   │   ├───Debug
+│   │   │   └───net8.0
+│   │   └───Release
+│   │       └───net8.0
+│   └───obj
+│       ├───Debug
+│       │   └───net8.0
+│       │       │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│       │       │   Loco1.Data.Models.AssemblyInfo.cs
+│       │       │   Loco1.Data.Models.AssemblyInfoInputs.cache
+│       │       │   Loco1.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+│       │       │   Loco1.Data.Models.GlobalUsings.g.cs
+│       │       │   
+│       │       ├───ref
+│       │       └───refint
+│       └───Release
+│           └───net8.0
+│               │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│               │   Loco1.Data.Models.AssemblyInfo.cs
+│               │   Loco1.Data.Models.AssemblyInfoInputs.cache
+│               │   Loco1.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+│               │   Loco1.Data.Models.GlobalUsings.g.cs
+│               │   
+│               ├───ref
+=======
+>>>>>>> 4e6906d8e826d0546b6ef76191888d50e794f0d7
 │               └───refint
 ├───Loco1.Localizer
 │   │   EntityValidationConstants.cs
@@ -397,10 +403,14 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │               │   
 │               ├───ref
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4e6906d8e826d0546b6ef76191888d50e794f0d7
 │               └───refint
 ├───Loco1.Services
 │   │   Loco1.Services.csproj
 │   │   Program.cs
+<<<<<<< HEAD
 │   │   
 │   ├───bin
 │   │   ├───Debug
@@ -443,10 +453,13 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │   │   Loco1.Services.csproj
 │   │   Program.cs
 >>>>>>> 4e6906d8e826d0546b6ef76191888d50e794f0d7
+=======
+>>>>>>> 4e6906d8e826d0546b6ef76191888d50e794f0d7
 │   │   
 │   ├───bin
 │   │   ├───Debug
 │   │   │   └───net8.0
+<<<<<<< HEAD
 <<<<<<< HEAD
 │   │   │           GCommon.dll
 │   │   │           GCommon.pdb
@@ -461,6 +474,11 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │   │   └───Release
 │   │       └───net8.0
 │   └───obj
+=======
+│   │   └───Release
+│   │       └───net8.0
+│   └───obj
+>>>>>>> 4e6906d8e826d0546b6ef76191888d50e794f0d7
 │       ├───Debug
 │       │   └───net8.0
 │       │       │   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
@@ -1493,6 +1511,9 @@ C:\USERS\LYUBOMIR\DOCUMENTS\C#\ASP.NET\PROJECTS\LOCO_17_FEB
 │   │   └───Release
 │   │       └───net8.0
 │   └───obj
+<<<<<<< HEAD
+>>>>>>> 4e6906d8e826d0546b6ef76191888d50e794f0d7
+=======
 >>>>>>> 4e6906d8e826d0546b6ef76191888d50e794f0d7
 │       │   Loco1.ViewModels.csproj.nuget.dgspec.json
 │       │   Loco1.ViewModels.csproj.nuget.g.props
