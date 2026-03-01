@@ -1,0 +1,29 @@
+﻿Are you sure?
+Cannot remove the last admin.
+Create Locomotive
+Delete failed.
+Edit Locomotive
+Edit roles
+Invalid request.
+Login.Title
+Manage permissions (grant/revoke)
+Owner cannot be removed here
+Please select a role.
+Restore failed.
+Restore this user?
+Role.Admin
+Role.DieselLocomotiveRepairManager
+Role.DieselLocomotiveRepairSupervisor
+Role.LocomotivesDriversManager
+Role.LocomotiveTransportManager
+Role.Owner
+Role.RailTransportManager
+Role.User
+Roles updated.
+User deactivated.
+User not found.
+User restored.
+View locomotives
+View roles &amp; permissions
+View users
+You cannot deactivate yourself.

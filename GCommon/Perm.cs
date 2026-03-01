@@ -10,7 +10,7 @@ namespace GCommon
         public const string Repairs_Add = "Repairs.Add";
         public const string Repairs_Edit = "Repairs.Edit";
 
-        // Exploitation (ShiftWork / Driving)
+        // Exploitation
         public const string Expl_View = "Exploitation.View";
         public const string Expl_Add = "Exploitation.Add";
         public const string Expl_Edit = "Exploitation.Edit";
@@ -23,62 +23,62 @@ namespace GCommon
         public const string Roles_View = "Roles.View";
         public const string Roles_Edit = "Roles.Edit";
 
-        // Locomotives (new module)
+        // Locomotives
         public const string Loco_View = "Locomotives.View";
         public const string Loco_Add = "Locomotives.Add";
         public const string Loco_Edit = "Locomotives.Edit";
         public const string Loco_Delete = "Locomotives.Delete";
 
-        // Permission groups for UI mapping
+        // UI groups with resource keys (no hard-coded text)
         public static readonly List<PermissionGroup> Groups = new()
         {
             new PermissionGroup
             {
-                Name = "Users",
+                NameKey = "Group_Users",
                 Items = new List<PermissionItem>
                 {
-                    new PermissionItem { Code = Users_View, Display = "View Users" },
-                    new PermissionItem { Code = Users_Edit, Display = "Edit Users" }
+                    new PermissionItem { Code = Users_View, ResourceKey = "Perm_Users_View" },
+                    new PermissionItem { Code = Users_Edit, ResourceKey = "Perm_Users_Edit" }
                 }
             },
             new PermissionGroup
             {
-                Name = "Roles",
+                NameKey = "Group_Roles",
                 Items = new List<PermissionItem>
                 {
-                    new PermissionItem { Code = Roles_View, Display = "View Roles" },
-                    new PermissionItem { Code = Roles_Edit, Display = "Edit Roles" }
+                    new PermissionItem { Code = Roles_View, ResourceKey = "Perm_Roles_View" },
+                    new PermissionItem { Code = Roles_Edit, ResourceKey = "Perm_Roles_Edit" }
                 }
             },
             new PermissionGroup
             {
-                Name = "Repairs",
+                NameKey = "Group_Repairs",
                 Items = new List<PermissionItem>
                 {
-                    new PermissionItem { Code = Repairs_View, Display = "View Repairs" },
-                    new PermissionItem { Code = Repairs_Add,  Display = "Add Repairs" },
-                    new PermissionItem { Code = Repairs_Edit, Display = "Edit Repairs" }
+                    new PermissionItem { Code = Repairs_View, ResourceKey = "Perm_Repairs_View" },
+                    new PermissionItem { Code = Repairs_Add,  ResourceKey = "Perm_Repairs_Add"  },
+                    new PermissionItem { Code = Repairs_Edit, ResourceKey = "Perm_Repairs_Edit" }
                 }
             },
             new PermissionGroup
             {
-                Name = "Exploitation",
+                NameKey = "Group_Exploitation",
                 Items = new List<PermissionItem>
                 {
-                    new PermissionItem { Code = Expl_View, Display = "View Exploitation" },
-                    new PermissionItem { Code = Expl_Add,  Display = "Add Exploitation" },
-                    new PermissionItem { Code = Expl_Edit, Display = "Edit Exploitation" }
+                    new PermissionItem { Code = Expl_View, ResourceKey = "Perm_Expl_View" },
+                    new PermissionItem { Code = Expl_Add,  ResourceKey = "Perm_Expl_Add"  },
+                    new PermissionItem { Code = Expl_Edit, ResourceKey = "Perm_Expl_Edit" }
                 }
             },
             new PermissionGroup
             {
-                Name = "Locomotives",
+                NameKey = "Group_Locomotives",
                 Items = new List<PermissionItem>
                 {
-                    new PermissionItem { Code = Loco_View,   Display = "View Locomotives" },
-                    new PermissionItem { Code = Loco_Add,    Display = "Add Locomotives" },
-                    new PermissionItem { Code = Loco_Edit,   Display = "Edit Locomotives" },
-                    new PermissionItem { Code = Loco_Delete, Display = "Delete Locomotives" }
+                    new PermissionItem { Code = Loco_View,   ResourceKey = "Perm_Loco_View"   },
+                    new PermissionItem { Code = Loco_Add,    ResourceKey = "Perm_Loco_Add"    },
+                    new PermissionItem { Code = Loco_Edit,   ResourceKey = "Perm_Loco_Edit"   },
+                    new PermissionItem { Code = Loco_Delete, ResourceKey = "Perm_Loco_Delete" }
                 }
             }
         };
@@ -86,13 +86,13 @@ namespace GCommon
 
     public class PermissionGroup
     {
-        public string Name { get; set; } = string.Empty;                  // default avoids null warnings
-        public List<PermissionItem> Items { get; set; } = new();          // default avoids null warnings
+        public string NameKey { get; set; } = string.Empty;       // resource key for group header
+        public List<PermissionItem> Items { get; set; } = new();
     }
 
     public class PermissionItem
     {
-        public string Code { get; set; } = string.Empty;
-        public string Display { get; set; } = string.Empty;
+        public string Code { get; set; } = string.Empty;          // permission code (claim value)
+        public string ResourceKey { get; set; } = string.Empty;   // resource key for display text
     }
 }

@@ -8,9 +8,10 @@
 @{
     // Check if current user can edit roles
     var canEditRoles = (await Auth.AuthorizeAsync(User, Perm.Roles_Edit)).Succeeded;
-    ViewData["Title"] = L["Roles"];
+    ViewData["Title"] = L["Roles"].Value;
 }
 
+ 
 <h2 class="mb-3">@ViewData["Title"]</h2>
 
 @if (TempData["StatusMessage"] is string status && !string.IsNullOrWhiteSpace(status))
@@ -25,8 +26,8 @@
     <table class="table table-striped align-middle">
         <thead>
             <tr>
-                <th>@L["Role"]</th>
-                <th class="text-end">@L["Actions"]</th>
+                <th>@L["Role"].Value</th>
+                <th class="text-end">@L["Actions"].Value</th>
             </tr>
         </thead>
         <tbody>

@@ -1,0 +1,108 @@
+﻿.Loco.Culture
+.NET 8.0
+AccessDeniedMessage
+AccessDeniedTitle
+Actions
+AddRole
+AdminRolesTitle
+Are you sure?
+AreYouSure
+Back
+clicking here
+Confirm
+Confirm new password
+Confirm password
+Confirm your email
+ConfirmPassword
+ConfirmRoleChange
+Create Locomotive
+Created successfully
+Current password
+Deactivate
+Default role assignment failed.
+Delete
+Deleted successfully
+Edit
+Edit Locomotive
+Edit role permissions
+Edit roles
+EditRolesTitle
+Email
+Error_Message
+Error_RequestId
+Error_Title
+Exploitation
+Failed to ensure default role.
+FailedToAddClaim
+FailedToRemoveClaim
+Footer_R1
+Footer_R2
+Footer_R3
+From
+Header_AppName
+Home
+InvalidFormData
+LockoutMessage
+LockoutTitle
+Locomotive_AxleCount
+Locomotive_FuelCapacity
+Locomotive_InterAxleMeasurementPeriodDays
+Locomotive_LastAxleMeasurementDate
+Locomotive_LastPlannedRepairDate
+Locomotive_LastPlannedRepairType
+Locomotive_MeasuringUnit
+Locomotive_Number
+Locomotive_TotalEngineHours
+Locomotive_TotalWorkingDays
+Locomotive_Type
+Locomotives
+Login
+Login.Title
+LoginButton
+Logout
+Manage
+New password
+No access
+Owner
+OwnerCannotBeChanged
+OwnerPermissionsCannotBeChanged
+Page_InDevelopment_Description
+Page_InDevelopment_Title
+Password
+Permissions
+PermissionsUpdatedSuccessfully
+Phone number
+PlanedRepairs
+Please confirm your account by clicking here
+PleaseSelectRole
+Privacy_P1
+Privacy_P2
+Privacy_P3
+Privacy_Title
+Register
+RegisterButton
+RegisterTitle
+Remember me?
+RememberMe
+Repairs
+Restore
+Restore this user?
+Restored successfully
+Role
+Role.Admin
+Role.Owner
+RoleDisplayName
+RoleName
+Roles
+Roles & Permissions
+Save
+Saved successfully
+ShiftWork
+The default UI requires a user store with email support.
+To
+User
+Users
+Validation_Unique_Locomotive_Number
+Welcome
+WelcomeSubtitle
+WorkSection

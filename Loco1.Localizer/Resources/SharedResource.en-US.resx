@@ -1,342 +1,616 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-	<data name="Header_AppName" xml:space="preserve">
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Header_AppName" xml:space="preserve">
     <value>Loco</value>
   </data>
-	<data name="Footer_R1" xml:space="preserve">
+  <data name="Footer_R1" xml:space="preserve">
     <value>Design &amp; Build by Lyubomir Chekanski ® 2026</value>
   </data>
-	<data name="Footer_R2" xml:space="preserve">
+  <data name="Footer_R2" xml:space="preserve">
     <value>Created with ❤️ by Lyubomir Chekanski ® 2026</value>
   </data>
-	<data name="Footer_R3" xml:space="preserve">
+  <data name="Footer_R3" xml:space="preserve">
     <value>Loco Project · Lyubomir Chekanski ® 2026</value>
   </data>
-	<data name="From" xml:space="preserve">
+  <data name="From" xml:space="preserve">
     <value>From</value>
   </data>
-	<data name="To" xml:space="preserve">
+  <data name="To" xml:space="preserve">
     <value>To</value>
   </data>
-	<data name="Home" xml:space="preserve">
+  <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
-	<data name="Welcome" xml:space="preserve">
+  <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>
   </data>
-	<data name="WelcomeSubtitle" xml:space="preserve">
+  <data name="WelcomeSubtitle" xml:space="preserve">
     <value>Locomotive Work &amp; Maintenance Reporting System 🚂</value>
   </data>
-	<data name="Privacy_Title" xml:space="preserve">
+  <data name="Privacy_Title" xml:space="preserve">
     <value>Privacy Policy</value>
   </data>
-	<data name="Privacy_P1" xml:space="preserve">
+  <data name="Privacy_P1" xml:space="preserve">
     <value>This system is intended for internal use only. No personal information is shared with third parties.</value>
   </data>
-	<data name="Privacy_P2" xml:space="preserve">
+  <data name="Privacy_P2" xml:space="preserve">
     <value>The application stores only the data required for authentication, authorization, and operational functionality. Access to all information is strictly controlled and limited to authorized personnel.</value>
   </data>
-	<data name="Privacy_P3" xml:space="preserve">
+  <data name="Privacy_P3" xml:space="preserve">
     <value>If you have questions about how data is handled or stored, please contact your system administrator.</value>
   </data>
-
-	<data name="Error_Title" xml:space="preserve">
+  <data name="Error_Title" xml:space="preserve">
     <value>Error</value>
   </data>
-	<data name="Error_Message" xml:space="preserve">
+  <data name="Error_Message" xml:space="preserve">
     <value>An error occurred while processing your request.</value>
   </data>
-	<data name="Error_RequestId" xml:space="preserve">
+  <data name="Error_RequestId" xml:space="preserve">
     <value>Request ID</value>
   </data>
-
-	<data name="Login.Title" xml:space="preserve">
+  <data name="Login.Title" xml:space="preserve">
     <value>Log in</value>
   </data>
-	<data name="RememberMe" xml:space="preserve">
+  <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>
   </data>
-	<data name="LoginButton" xml:space="preserve">
+  <data name="LoginButton" xml:space="preserve">
     <value>Log in</value>
   </data>
-	<data name="InvalidLoginAttempt" xml:space="preserve">
+  <data name="InvalidLoginAttempt" xml:space="preserve">
     <value>Invalid login attempt.</value>
   </data>
-	<data name="LockoutTitle" xml:space="preserve">
+  <data name="LockoutTitle" xml:space="preserve">
     <value>Locked out</value>
   </data>
-	<data name="LockoutMessage" xml:space="preserve">
+  <data name="LockoutMessage" xml:space="preserve">
     <value>This account has been locked out. Please try again later.</value>
   </data>
-	<data name="AccessDeniedTitle" xml:space="preserve">
+  <data name="AccessDeniedTitle" xml:space="preserve">
     <value>Access denied</value>
   </data>
-	<data name="AccessDeniedMessage" xml:space="preserve">
+  <data name="AccessDeniedMessage" xml:space="preserve">
     <value>You do not have access to this resource.</value>
   </data>
-
-	<data name="RegisterTitle" xml:space="preserve">
+  <data name="RegisterTitle" xml:space="preserve">
     <value>Register</value>
   </data>
-	<data name="RegisterButton" xml:space="preserve">
+  <data name="RegisterButton" xml:space="preserve">
     <value>Create account</value>
   </data>
-	<data name="Users" xml:space="preserve">
+  <data name="Users" xml:space="preserve">
     <value>Users</value>
   </data>
-	<data name="Email" xml:space="preserve">
+  <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
-	<data name="Roles" xml:space="preserve">
+  <data name="Roles" xml:space="preserve">
     <value>Roles</value>
   </data>
-	<data name="Actions" xml:space="preserve">
+  <data name="Actions" xml:space="preserve">
     <value>Actions</value>
   </data>
-	<data name="Edit roles" xml:space="preserve">
+  <data name="Edit roles" xml:space="preserve">
     <value>Edit roles</value>
   </data>
-	<data name="Deactivate" xml:space="preserve">
+  <data name="Deactivate" xml:space="preserve">
     <value>Deactivate</value>
   </data>
-	<data name="Restore" xml:space="preserve">
+  <data name="Restore" xml:space="preserve">
     <value>Restore</value>
   </data>
-	<data name="Are you sure?" xml:space="preserve">
+  <data name="Are you sure?" xml:space="preserve">
     <value>Are you sure?</value>
   </data>
-	<data name="Restore this user?" xml:space="preserve">
+  <data name="Restore this user?" xml:space="preserve">
     <value>Restore this user?</value>
   </data>
-	<data name="EditRolesTitle" xml:space="preserve">
+  <data name="EditRolesTitle" xml:space="preserve">
     <value>Edit roles</value>
   </data>
-	<data name="User" xml:space="preserve">
+  <data name="User" xml:space="preserve">
     <value>User</value>
   </data>
-	<data name="Save" xml:space="preserve">
+  <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
-	<data name="Back" xml:space="preserve">
+  <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
-	<data name="Confirm" xml:space="preserve">
+  <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
-	<data name="ConfirmRoleChange" xml:space="preserve">
+  <data name="ConfirmRoleChange" xml:space="preserve">
     <value>Confirm role change?</value>
   </data>
-	<data name="NoRolesAvailable" xml:space="preserve">
+  <data name="NoRolesAvailable" xml:space="preserve">
     <value>No roles available</value>
   </data>
-	<data name="Owner cannot be removed here" xml:space="preserve">
+  <data name="Owner cannot be removed here" xml:space="preserve">
     <value>Owner cannot be changed here</value>
   </data>
-
-	<data name="Role.Owner" xml:space="preserve">
+  <data name="Role.Owner" xml:space="preserve">
     <value>Owner</value>
   </data>
-	<data name="Role.Admin" xml:space="preserve">
+  <data name="Role.Admin" xml:space="preserve">
     <value>Administrator</value>
   </data>
-	<data name="Role.User" xml:space="preserve">
+  <data name="Role.User" xml:space="preserve">
     <value>User</value>
   </data>
-
-	<data name="PR_TP1" xml:space="preserve">
+  <data name="PR_TP1" xml:space="preserve">
     <value>TP-1</value>
   </data>
-	<data name="PR_TP2" xml:space="preserve">
+  <data name="PR_TP2" xml:space="preserve">
     <value>TP-2</value>
   </data>
-	<data name="PR_MPR" xml:space="preserve">
+  <data name="PR_MPR" xml:space="preserve">
     <value>MPR</value>
   </data>
-
-	<data name="User deactivated." xml:space="preserve">
+  <data name="User deactivated." xml:space="preserve">
     <value>User has been deactivated.</value>
   </data>
-	<data name="User restored." xml:space="preserve">
+  <data name="User restored." xml:space="preserve">
     <value>User has been restored.</value>
   </data>
-	<data name="Invalid request." xml:space="preserve">
+  <data name="Invalid request." xml:space="preserve">
     <value>Invalid request.</value>
   </data>
-	<data name="Delete failed." xml:space="preserve">
+  <data name="Delete failed." xml:space="preserve">
     <value>Deactivation failed.</value>
   </data>
-	<data name="Restore failed." xml:space="preserve">
+  <data name="Restore failed." xml:space="preserve">
     <value>Restore failed.</value>
   </data>
-	<data name="Cannot remove the last admin." xml:space="preserve">
+  <data name="Cannot remove the last admin." xml:space="preserve">
     <value>Cannot remove the last administrator.</value>
   </data>
-	<data name="User not found." xml:space="preserve">
+  <data name="User not found." xml:space="preserve">
     <value>User not found.</value>
   </data>
-	<data name="You cannot deactivate yourself." xml:space="preserve">
+  <data name="You cannot deactivate yourself." xml:space="preserve">
     <value>You cannot deactivate your own account.</value>
   </data>
-	<data name="Please select a role." xml:space="preserve">
+  <data name="Please select a role." xml:space="preserve">
     <value>Please select a role.</value>
   </data>
-	<data name="ADMIN" xml:space="preserve">
+  <data name="ADMIN" xml:space="preserve">
     <value>Admin</value>
   </data>
-	<data name="Owner" xml:space="preserve">
+  <data name="Owner" xml:space="preserve">
     <value>Owner</value>
   </data>
-	<data name="PleaseSelectRole" xml:space="preserve">
+  <data name="PleaseSelectRole" xml:space="preserve">
     <value>Please select a role.</value>
   </data>
-	<data name="Roles updated." xml:space="preserve">
+  <data name="Roles updated." xml:space="preserve">
     <value>Roles updated.</value>
   </data>
-
-	<data name="WorkSection" xml:space="preserve">
+  <data name="WorkSection" xml:space="preserve">
     <value>Driving</value>
   </data>
-	<data name="ShiftWork" xml:space="preserve">
+  <data name="ShiftWork" xml:space="preserve">
     <value> ShiftWork</value>
   </data>
-	<data name="Repairs" xml:space="preserve">
+  <data name="Repairs" xml:space="preserve">
     <value>Repairs</value>
   </data>
-	<data name="PlanedRepairs" xml:space="preserve">
+  <data name="PlanedRepairs" xml:space="preserve">
     <value>Planed Repairs</value>
   </data>
-	<data name="Locomotives" xml:space="preserve">
+  <data name="Locomotives" xml:space="preserve">
     <value>Locomotives</value>
   </data>
-
-	<data name="AdminRolesTitle" xml:space="preserve">
+  <data name="AdminRolesTitle" xml:space="preserve">
     <value>Roles Management</value>
   </data>
-	<data name="AddRole" xml:space="preserve">
+  <data name="AddRole" xml:space="preserve">
     <value>Add Role</value>
   </data>
-	<data name="RoleName" xml:space="preserve">
+  <data name="RoleName" xml:space="preserve">
     <value>Role Name</value>
   </data>
-	<data name="RoleDisplayName" xml:space="preserve">
+  <data name="RoleDisplayName" xml:space="preserve">
     <value>Display Name</value>
   </data>
-	<data name="Permissions" xml:space="preserve">
+  <data name="Permissions" xml:space="preserve">
     <value>Permissions</value>
   </data>
-	<data name="Password" xml:space="preserve">
+  <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
-
-	<data name="Role.RailTransportManager" xml:space="preserve">
+  <data name="Role.RailTransportManager" xml:space="preserve">
     <value>Rail Transport Manager</value>
   </data>
-	<data name="Role.LocomotiveTransportManager" xml:space="preserve">
+  <data name="Role.LocomotiveTransportManager" xml:space="preserve">
     <value>Locomotive Transport Manager</value>
   </data>
-	<data name="Role.DieselLocomotiveRepairManager" xml:space="preserve">
+  <data name="Role.DieselLocomotiveRepairManager" xml:space="preserve">
     <value>Diesel Locomotives Repair Manager</value>
   </data>
-	<data name="Role.DieselLocomotiveRepairSupervisor" xml:space="preserve">
+  <data name="Role.DieselLocomotiveRepairSupervisor" xml:space="preserve">
     <value>Diesel Locomotives Repair Supervisor</value>
   </data>
-	<data name="Role.LocomotivesDriversManager" xml:space="preserve">
+  <data name="Role.LocomotivesDriversManager" xml:space="preserve">
     <value>Locomotives Drivers Manager</value>
   </data>
-
-	<data name="Page_InDevelopment_Title" xml:space="preserve">
+  <data name="Page_InDevelopment_Title" xml:space="preserve">
     <value>Page under development</value>
   </data>
-	<data name="Page_InDevelopment_Description" xml:space="preserve">
+  <data name="Page_InDevelopment_Description" xml:space="preserve">
     <value>This feature is not available yet.</value>
   </data>
-
-	<data name="Enum_Shift_Day" xml:space="preserve">
+  <data name="Enum_Shift_Day" xml:space="preserve">
     <value>day</value>
   </data>
-	<data name="Enum_Shift_Night" xml:space="preserve">
+  <data name="Enum_Shift_Night" xml:space="preserve">
     <value>night</value>
   </data>
-
-	<data name="Locomotive_Number" xml:space="preserve">
+  <data name="Locomotive_Number" xml:space="preserve">
     <value>Locomotive Number</value>
   </data>
-	<data name="Locomotive_Type" xml:space="preserve">
+  <data name="Locomotive_Type" xml:space="preserve">
     <value>Locomotive Type</value>
   </data>
-	<data name="Locomotive_MeasuringUnit" xml:space="preserve">
+  <data name="Locomotive_MeasuringUnit" xml:space="preserve">
     <value>Measuring Unit</value>
   </data>
-	<data name="Locomotive_AxleCount" xml:space="preserve">
+  <data name="Locomotive_AxleCount" xml:space="preserve">
     <value>Axle Count</value>
   </data>
-	<data name="Locomotive_TotalEngineHours" xml:space="preserve">
+  <data name="Locomotive_TotalEngineHours" xml:space="preserve">
     <value>Total Engine Hours</value>
   </data>
-	<data name="Create Locomotive" xml:space="preserve">
+  <data name="Create Locomotive" xml:space="preserve">
     <value>Create Locomotive</value>
   </data>
-	<data name="Edit Locomotive" xml:space="preserve">
+  <data name="Edit Locomotive" xml:space="preserve">
     <value>Edit Locomotive</value>
   </data>
-	<data name="Locomotive_LastPlannedRepairType" xml:space="preserve">
+  <data name="Locomotive_LastPlannedRepairType" xml:space="preserve">
     <value>Last Planned Repair Type</value>
   </data>
-	<data name="Locomotive_LastPlannedRepairDate" xml:space="preserve">
+  <data name="Locomotive_LastPlannedRepairDate" xml:space="preserve">
     <value>Last Planned Repair Date</value>
   </data>
-	<data name="Locomotive_LastAxleMeasurementDate" xml:space="preserve">
+  <data name="Locomotive_LastAxleMeasurementDate" xml:space="preserve">
     <value>Last Axle Measurement Date</value>
   </data>
-	<data name="Locomotive_InterAxleMeasurementPeriodDays" xml:space="preserve">
+  <data name="Locomotive_InterAxleMeasurementPeriodDays" xml:space="preserve">
     <value>Axle Measurement Period Days</value>
   </data>
-	<data name="Locomotive_TotalWorkingDays" xml:space="preserve">
+  <data name="Locomotive_TotalWorkingDays" xml:space="preserve">
     <value>Total Working Days</value>
   </data>
-	<data name="Locomotive_FuelCapacity" xml:space="preserve">
+  <data name="Locomotive_FuelCapacity" xml:space="preserve">
     <value>Fuel Capacity</value>
   </data>
-
-	<data name="Enum_LocomotiveType_Shunter" xml:space="preserve">
+  <data name="Enum_LocomotiveType_Shunter" xml:space="preserve">
     <value>Shunter</value>
   </data>
-	<data name="Enum_LocomotiveType_Mainline" xml:space="preserve">
+  <data name="Enum_LocomotiveType_Mainline" xml:space="preserve">
     <value>Mainline</value>
   </data>
-	<data name="Enum_MeasuringUnits_Mh" xml:space="preserve">
+  <data name="Enum_MeasuringUnits_Mh" xml:space="preserve">
     <value>Mh</value>
   </data>
-	<data name="Enum_MeasuringUnits_Km" xml:space="preserve">
+  <data name="Enum_MeasuringUnits_Km" xml:space="preserve">
     <value>Km</value>
   </data>
-
-	<data name="View roles &amp; permissions" xml:space="preserve">
+  <data name="View roles &amp; permissions" xml:space="preserve">
     <value>View roles &amp; permissions</value>
   </data>
-	<data name="Manage permissions (grant/revoke)" xml:space="preserve">
+  <data name="Manage permissions (grant/revoke)" xml:space="preserve">
     <value>Manage permissions (grant/revoke)</value>
   </data>
-	<data name="View users" xml:space="preserve">
+  <data name="View users" xml:space="preserve">
     <value>View users</value>
   </data>
-	<data name="Logout" xml:space="preserve">
+  <data name="Logout" xml:space="preserve">
     <value>Log out</value>
   </data>
-	<data name="View locomotives" xml:space="preserve">
+  <data name="View locomotives" xml:space="preserve">
     <value>View locomotives</value>
+  </data>
+  <data name="Edit_Locomotive" xml:space="preserve">
+    <value>Edit locomotive</value>
+  </data>
+  <data name="Roles_Permissions" xml:space="preserve">
+    <value>Roles &amp; Permissions</value>
+  </data>
+  <data name="Role_Owner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Edit_Role_Permissions" xml:space="preserve">
+    <value>Edit Role Permissions</value>
+  </data>
+  <data name="Group_Users" xml:space="preserve">
+    <value>Group Users</value>
+  </data>
+  <data name="Group_Roles" xml:space="preserve">
+    <value>Group Roles</value>
+  </data>
+  <data name="Group_Locomotives" xml:space="preserve">
+    <value>Group Locomotives</value>
+  </data>
+  <data name="Perm_Users_View" xml:space="preserve">
+    <value>Perm Users View </value>
+  </data>
+  <data name="Group_Repairs" xml:space="preserve">
+    <value>Group Repairs</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Permiss_For" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Auth_Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Auth_Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Auth_RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="Auth_PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="Auth_CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="Auth_NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="Auth_ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="Auth_ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
+  <data name="Auth_ConfirmYourEmail" xml:space="preserve">
+    <value>Confirm your email</value>
+  </data>
+  <data name="Auth_PleaseConfirmByClickingHere" xml:space="preserve">
+    <value>Please confirm your account by clicking here</value>
+  </data>
+  <data name="Common_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Common_Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Msg_Created_Success" xml:space="preserve">
+    <value>Created successfully.</value>
+  </data>
+  <data name="Msg_Deleted_Success" xml:space="preserve">
+    <value>Deleted successfully.</value>
+  </data>
+  <data name="Msg_Saved_Success" xml:space="preserve">
+    <value>Saved successfully.</value>
+  </data>
+  <data name="Msg_Restored_Success" xml:space="preserve">
+    <value>Restored successfully.</value>
+  </data>
+  <data name="Msg_NoAccess" xml:space="preserve">
+    <value>No access.</value>
+  </data>
+  <data name="Msg_InvalidFormData" xml:space="preserve">
+    <value>Invalid form data.</value>
+  </data>
+  <data name="Msg_Permissions_Updated_Success" xml:space="preserve">
+    <value>Permissions updated successfully.</value>
+  </data>
+  <data name="Msg_Owner_CannotBeChanged" xml:space="preserve">
+    <value>The 'Owner' role cannot be changed.</value>
+  </data>
+  <data name="Msg_Owner_Permissions_CannotBeChanged" xml:space="preserve">
+    <value>'Owner' permissions cannot be changed here.</value>
+  </data>
+  <data name="Msg_Claim_Add_Failed" xml:space="preserve">
+    <value>Failed to add permission.</value>
+  </data>
+  <data name="Msg_Claim_Remove_Failed" xml:space="preserve">
+    <value>Failed to remove permission.</value>
+  </data>
+  <data name="UI_RolesAndPermissions" xml:space="preserve">
+    <value>Roles &amp; Permissions</value>
+  </data>
+  <data name="UI_EditRolePermissions" xml:space="preserve">
+    <value>Edit role permissions</value>
+  </data>
+  <data name="Validation_Unique_Locomotive_Number" xml:space="preserve">
+    <value>Locomotive number already exists.</value>
+  </data>
+  <data name="Group_Exploitation" xml:space="preserve">
+    <value>Exploitation</value>
+  </data>
+  <data name="Role_Admin" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="Role_User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Role_Operator" xml:space="preserve">
+    <value>Operator</value>
+  </data>
+  <data name="Role_RailTransportManager" xml:space="preserve">
+    <value>Rail Transport Manager</value>
+  </data>
+  <data name="Role_LocomotiveTransportManager" xml:space="preserve">
+    <value>Locomotive Transport Manager</value>
+  </data>
+  <data name="Role_LocomotivesDriversManager" xml:space="preserve">
+    <value>Drivers Supervisor</value>
+  </data>
+  <data name="Role_DieselLocomotiveRepairManager" xml:space="preserve">
+    <value>Diesel Locomotive Repair Manager</value>
+  </data>
+  <data name="Role_DieselLocomotiveRepairSupervisor" xml:space="preserve">
+    <value>Diesel Locomotive Repair Supervisor</value>
+  </data>
+  <data name="Perm_Users_Edit" xml:space="preserve">
+    <value>Manage users</value>
+  </data>
+  <data name="Perm_Roles_View" xml:space="preserve">
+    <value>View roles &amp; permissions</value>
+  </data>
+  <data name="Perm_Roles_Edit" xml:space="preserve">
+    <value>Manage permissions (grant/revoke)</value>
+  </data>
+  <data name="Perm_Repairs_View" xml:space="preserve">
+    <value>View repairs</value>
+  </data>
+  <data name="Perm_Repairs_Add" xml:space="preserve">
+    <value>Add repairs</value>
+  </data>
+  <data name="Perm_Repairs_Edit" xml:space="preserve">
+    <value>Edit repairs</value>
+  </data>
+  <data name="Perm_Expl_View" xml:space="preserve">
+    <value>View exploitation</value>
+  </data>
+  <data name="Perm_Expl_Add" xml:space="preserve">
+    <value>Add exploitation</value>
+  </data>
+  <data name="Perm_Expl_Edit" xml:space="preserve">
+    <value>Edit exploitation</value>
+  </data>
+  <data name="Perm_Loco_View" xml:space="preserve">
+    <value>View locomotives</value>
+  </data>
+  <data name="Perm_Loco_Add" xml:space="preserve">
+    <value>Add locomotives</value>
+  </data>
+  <data name="Perm_Loco_Edit" xml:space="preserve">
+    <value>Edit locomotives</value>
+  </data>
+  <data name="Perm_Loco_Delete" xml:space="preserve">
+    <value>Delete locomotives</value>
+  </data>
+  <data name="PermissionsUpdatedSuccessfully" xml:space="preserve">
+    <value>Permissions Updated Successfully</value>
   </data>
 </root>

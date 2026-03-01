@@ -2,23 +2,24 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 
 @{
-    ViewData["Title"] = L["Edit role permissions"];
+    ViewData["Title"] = L["Edit_Role_Permissions"].Value;
 }
 
 <form asp-controller="Roles" asp-action="Edit" method="post">
     <input type="hidden" asp-for="RoleId" />
-    <h2>@Model.RoleName</h2>
+    <h4>@L["Permiss_For"]</h4>
+    <h3>@L[Model.RoleName]</h3>
 
     @for (int g = 0; g < Model.Groups.Count; g++)
     {
-        <h4>@Model.Groups[g].GroupName</h4>
+        <h4>@L[Model.Groups[g].GroupName]</h4>
         <ul class="list-unstyled">
             @for (int i = 0; i < Model.Groups[g].Items.Count; i++)
             {
                 <li class="form-check">
                     <input class="form-check-input" type="checkbox" asp-for="Groups[g].Items[i].Granted" />
                     <label class="form-check-label">
-                        @Model.Groups[g].Items[i].Display (@Model.Groups[g].Items[i].Code)
+                        @L[Model.Groups[g].Items[i].Display]  
                     </label>
                     <input type="hidden" asp-for="Groups[g].Items[i].Code" />
                     <input type="hidden" asp-for="Groups[g].Items[i].Display" />

@@ -1,0 +1,16 @@
+﻿clicking here
+Confirm your email
+Created successfully
+Default role assignment failed.
+Deleted successfully
+Failed to ensure default role.
+FailedToAddClaim
+FailedToRemoveClaim
+InvalidFormData
+OwnerPermissionsCannotBeChanged
+PermissionsUpdatedSuccessfully
+Please confirm your account by clicking here
+Restored successfully
+Saved successfully
+The default UI requires a user store with email support.
+Validation_Unique_Locomotive_Number

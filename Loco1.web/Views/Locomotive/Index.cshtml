@@ -1,53 +1,55 @@
-﻿@model List<Loco1.ViewModels.Locomotives.LocoListVm>
+﻿@* Views/Locomotives/Index.cshtml *@
+@model List<Loco1.ViewModels.Locomotives.LocoListVm>
 @using GCommon
 @using Microsoft.AspNetCore.Authorization
-@inject Microsoft.AspNetCore.Authorization.IAuthorizationService Authz
+@inject IAuthorizationService Authz
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
 
 <h2>@L["Locomotives"]</h2>
 
 @if ((await Authz.AuthorizeAsync(User, Perm.Loco_Add)).Succeeded)
-    {
-    <a class="btn btn-primary" asp-action="Create">@L["Create Locomotive"]</a>
-    }
+{
+    <a class="btn btn-primary" asp-action="Create">@L["Create_Locomotive"]</a>
+}
 
-    <table class="table table-striped mt-3">
-        <thead>
-            <tr>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
             <th>@L["Locomotive_Number"]</th>
             <th>@L["Locomotive_Type"]</th>
             <th>@L["Locomotive_MeasuringUnit"]</th>
             <th>@L["Locomotive_AxleCount"]</th>
             <th>@L["Locomotive_TotalEngineHours"]</th>
             <th></th>
-            </tr>
-        </thead>
-        <tbody>
+        </tr>
+    </thead>
+    <tbody>
         @foreach (var x in Model)
-            {
-                <tr>
+        {
+            <tr>
                 <td>@x.Number</td>
                 <td>@x.Type</td>
                 <td>@x.MeasuringUnit</td>
                 <td>@x.AxleCount</td>
                 <td>@x.TotalEngineHours</td>
-                    <td class="text-end">
+                <td class="text-end">
                     @if ((await Authz.AuthorizeAsync(User, Perm.Loco_Edit)).Succeeded)
-                        {
-                            <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@x.Id">
-                            @L["Edit"]
-                            </a>
-                        }
+                    {
+                        <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@x.Id">
+                            @L["Common_Edit"]
+                        </a>
+                    }
                     @if ((await Authz.AuthorizeAsync(User, Perm.Loco_Delete)).Succeeded)
-                        {
-                            <form method="post" asp-action="Delete" asp-route-id="@x.Id" class="d-inline">
-                                <button type="submit" class="btn btn-sm btn-danger"
+                    {
+                        <form method="post" asp-action="Delete" asp-route-id="@x.Id" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger"
                                     onclick="return confirm('@L["AreYouSure"]');">
-                                @L["Delete"]
-                                </button>
-                            </form>
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                                @L["Common_Delete"]
+                            </button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
