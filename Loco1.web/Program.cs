@@ -7,6 +7,9 @@ using Loco1.Data.Models;           // ApplicationUser
 using Loco1.Service;               // Services implementation
 using Loco1.Service.Abstractions;  // Service contracts
 
+using Loco1.Repositories;
+using Loco1.Repositories.Abstractions;
+
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -93,6 +96,10 @@ namespace Loco1.Web
 
             builder.Services.AddScoped<IUserRoleService, UserRoleService>();
             builder.Services.AddRazorPages(); // Identity UI
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+
 
             // ---------------------------------------------------------
             //  CULTURES

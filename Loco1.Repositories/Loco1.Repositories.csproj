@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GCommon\GCommon.csproj" />
+    <ProjectReference Include="..\Loco1.Data\Loco1.Data.csproj" />
+    <ProjectReference Include="..\Loco1.Localizer\Loco1.Localizer.csproj" />
+    <ProjectReference Include="..\Loco1.ViewModels\Loco1.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
