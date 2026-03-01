@@ -1,34 +1,46 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using Loco1.Data.Models;
-using Loco1.Repositories.Abstractions;
 using Loco1.Service.Abstractions;
-using Loco1.ViewModels.Roles;
 using Microsoft.AspNetCore.Identity;
+
+// repo interfaces are here
+using Loco1.Repositories.Abstractions;
 
 namespace Loco1.Service;
 
-public sealed class UserRoleService(
-    UserManager<ApplicationUser> userManager,
-    RoleManager<IdentityRole> roleManager,
-    IUserRepository users,
-    IRoleRepository roles) : IUserRoleService
+public sealed class UserRoleService : IUserRoleService
 {
-    private readonly UserManager<ApplicationUser> _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-    private readonly RoleManager<IdentityRole> _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
-    private readonly IUserRepository _users = users ?? throw new ArgumentNullException(nameof(users));
-    private readonly IRoleRepository _roles = roles ?? throw new ArgumentNullException(nameof(roles));
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly IUserRepository _users;
+    private readonly IRoleRepository _roles;
 
-    public async Task<System.Collections.Generic.List<UserWithRolesVm>> GetAllUsersWithRolesAsync()
+    public UserRoleService(
+        UserManager<ApplicationUser> userManager,
+        RoleManager<IdentityRole> roleManager,
+        IUserRepository users,
+        IRoleRepository roles)
+    {
+        _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+        _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
+        _users = users ?? throw new ArgumentNullException(nameof(users));
+        _roles = roles ?? throw new ArgumentNullException(nameof(roles));
+    }
+
+    // signatures must match interface 1:1
+    public async Task<List<Loco1.ViewModels.Roles.UserWithRolesVm>> GetAllUsersWithRolesAsync()
     {
         var list = await _users.GetAllAsync();
-        var result = new System.Collections.Generic.List<UserWithRolesVm>(list.Count);
+        var result = new List<Loco1.ViewModels.Roles.UserWithRolesVm>(list.Count);
 
         foreach (var u in list)
         {
             var roleNames = await _users.GetUserRoleNamesAsync(u.Id);
-            result.Add(new UserWithRolesVm
+            result.Add(new Loco1.ViewModels.Roles.UserWithRolesVm
             {
                 Id = u.Id,
                 Email = u.Email ?? string.Empty,
@@ -39,7 +51,7 @@ public sealed class UserRoleService(
         return result;
     }
 
-    public async Task<EditUserRolesVm?> GetEditModelAsync(string userId)
+    public async Task<Loco1.ViewModels.Roles.EditUserRolesVm?> GetEditModelAsync(string userId)
     {
         var user = await _users.FindByIdAsync(userId);
         if (user == null) return null;
@@ -47,7 +59,7 @@ public sealed class UserRoleService(
         var allRoleNames = await _roles.GetAllNamesAsync();
         var currentRoleNames = await _users.GetUserRoleNamesAsync(user.Id);
 
-        return new EditUserRolesVm
+        return new Loco1.ViewModels.Roles.EditUserRolesVm
         {
             UserId = user.Id,
             UserName = user.UserName ?? string.Empty,
@@ -55,11 +67,11 @@ public sealed class UserRoleService(
             Owner = false,
             OwnerRoleName = "Owner",
             AvailableRoles = allRoleNames,
-            SelectedRoles = [.. currentRoleNames]
+            SelectedRoles = currentRoleNames.ToList()
         };
     }
 
-    public async Task<(bool Ok, string? Error)> UpdateRolesAsync(EditUserRolesVm vm)
+    public async Task<(bool Ok, string? Error)> UpdateRolesAsync(Loco1.ViewModels.Roles.EditUserRolesVm vm)
     {
         if (vm is null) return (false, "Model is null");
 
@@ -75,7 +87,7 @@ public sealed class UserRoleService(
         }
 
         var toAdd = vm.SelectedRoles?.Distinct(StringComparer.OrdinalIgnoreCase).ToList()
-                   ?? [];
+                   ?? new List<string>();
 
         foreach (var r in toAdd)
         {

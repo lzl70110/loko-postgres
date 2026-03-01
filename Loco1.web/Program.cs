@@ -3,14 +3,24 @@ using System.Text.RegularExpressions;
 using System.Security.Claims;
 
 using GCommon;
-using Loco1.Data;                  // DbContext
-using Loco1.Data.Models;           // ApplicationUser
-using Loco1.Localizer;             // SharedResource
-using Loco1.Repositories;
-using Loco1.Repositories.Interfaces;
-using Loco1.Service;               // Services implementation
-using Loco1.Service.Abstractions;  // Service contracts
+using Loco1.Data;                    // DbContext
+using Loco1.Data.Models;             // ApplicationUser
+using Loco1.Localizer;               // SharedResource
 
+// Repositories: interfaces + implementations
+using Loco1.Repositories.Abstractions;   // IUserRepository, IRoleRepository
+using Loco1.Repositories.Interfaces;     // ILocomotiveRepository
+using Loco1.Repositories;                // UserRepository, RoleRepository, LocomotiveRepository
+
+// Services: contracts + implementations
+using Loco1.Service;
+using Loco1.Service.Abstractions;
+
+// Infrastructure (OwnerOptions, handlers, AddPermissionPolicies, DataSeeder)
+using Loco1.Web.Infrastructure;
+
+using Microsoft.AspNetCore.Authentication;  // IClaimsTransformation
+using Microsoft.AspNetCore.Authorization;   // IAuthorizationHandler
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
@@ -52,9 +62,9 @@ namespace Loco1.Web
             // DbContext
             builder.Services.AddDbContext<LocoDbContext>(opt => opt.UseNpgsql(connStr));
 
-            // Owner options + authorization infra
-            builder.Services.Configure<OwnerOptions>(builder.Configuration.GetSection("Seed:Owner"));
+            // Authorization infra
             builder.Services.AddAuthorization();
+            builder.Services.Configure<OwnerOptions>(builder.Configuration.GetSection("Seed:Owner"));
             builder.Services.AddSingleton<IAuthorizationHandler, OwnerOverrideAuthorizationHandler>();
             builder.Services.AddTransient<IClaimsTransformation, RoleClaimsTransformation>();
 
@@ -98,9 +108,7 @@ namespace Loco1.Web
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
             builder.Services.AddScoped<ILocomotiveRepository, LocomotiveRepository>();
 
-            // ---------------------------------------------------------
-            //  CULTURES
-            // ---------------------------------------------------------
+            // Cultures
             var supportedCultures = new[]
             {
                 new CultureInfo("bg-BG"),

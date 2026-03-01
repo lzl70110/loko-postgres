@@ -2,7 +2,6 @@
 using Loco1.Repositories.Interfaces;
 using Loco1.Service.Abstractions;
 using Loco1.ViewModels.Locomotives;
-using Microsoft.EntityFrameworkCore;
 
 namespace Loco1.Service
     {
