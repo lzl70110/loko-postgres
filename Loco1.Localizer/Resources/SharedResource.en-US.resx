@@ -601,16 +601,4 @@
   <data name="Perm_Loco_View" xml:space="preserve">
     <value>View locomotives</value>
   </data>
-  <data name="Perm_Loco_Add" xml:space="preserve">
-    <value>Add locomotives</value>
-  </data>
-  <data name="Perm_Loco_Edit" xml:space="preserve">
-    <value>Edit locomotives</value>
-  </data>
-  <data name="Perm_Loco_Delete" xml:space="preserve">
-    <value>Delete locomotives</value>
-  </data>
-  <data name="PermissionsUpdatedSuccessfully" xml:space="preserve">
-    <value>Permissions Updated Successfully</value>
-  </data>
 </root>
