@@ -4,8 +4,8 @@
 
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService Authz
-@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
 
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 <h2>@L["Locomotives"]</h2>
 
 @if ((await Authz.AuthorizeAsync(User, Perm.Loco_Add)).Succeeded)
