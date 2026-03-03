@@ -129,41 +129,23 @@
   <data name="Footer_R3" xml:space="preserve">
     <value>Проект Loco · Любомир Чекански ® 2026</value>
   </data>
-  <data name="From" xml:space="preserve">
-    <value>От</value>
-  </data>
-  <data name="To" xml:space="preserve">
-    <value>На</value>
-  </data>
   <data name="Home" xml:space="preserve">
     <value>Начало</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Добре дошли</value>
   </data>
-  <data name="WelcomeSubtitle" xml:space="preserve">
-    <value>Система за отчет на работата и ремонта на локомотиви 🚂</value>
-  </data>
   <data name="Privacy_Title" xml:space="preserve">
     <value>Политика за поверителност</value>
   </data>
   <data name="Privacy_P1" xml:space="preserve">
-    <value>Настоящата система е предназначена единствено за вътрешна употреба. Лични данни не се предоставят на трети лица.</value>
+    <value>Системата е предназначена само за вътрешна употреба.</value>
   </data>
   <data name="Privacy_P2" xml:space="preserve">
-    <value>Приложението съхранява само необходимите данни за удостоверяване, управление на достъпа и нормалната си работа. Достъп имат единствено упълномощени лица.</value>
+    <value>Не се споделя лична информация с трети лица.</value>
   </data>
   <data name="Privacy_P3" xml:space="preserve">
-    <value>При въпроси относно обработката или съхранението на данни се обърнете към системния администратор.</value>
-  </data>
-  <data name="Error_Title" xml:space="preserve">
-    <value>Грешка</value>
-  </data>
-  <data name="Error_Message" xml:space="preserve">
-    <value>Грешка при обработка на заяявка</value>
-  </data>
-  <data name="Error_RequestId" xml:space="preserve">
-    <value>Заявка №</value>
+    <value>При въпроси относно обработката на данни се обърнете към системния администратор.</value>
   </data>
   <data name="Login.Title" xml:space="preserve">
     <value>Вход в системата</value>
@@ -195,44 +177,17 @@
   <data name="RegisterButton" xml:space="preserve">
     <value>Създай акаунт</value>
   </data>
-  <data name="Users" xml:space="preserve">
-    <value>Потребители</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Е-мейл</value>
-  </data>
-  <data name="Roles" xml:space="preserve">
-    <value>Роли</value>
-  </data>
   <data name="Actions" xml:space="preserve">
     <value>Действия</value>
   </data>
   <data name="Edit roles" xml:space="preserve">
     <value>Редакция на роли</value>
   </data>
-  <data name="Deactivate" xml:space="preserve">
-    <value>Деактивиране</value>
-  </data>
-  <data name="Restore" xml:space="preserve">
-    <value>Възстановяване</value>
-  </data>
   <data name="Are you sure?" xml:space="preserve">
     <value>Сигурни ли сте?</value>
   </data>
-  <data name="Restore this user?" xml:space="preserve">
-    <value>Да възстановя ли ?</value>
-  </data>
   <data name="EditRolesTitle" xml:space="preserve">
     <value>Редакция на роли</value>
-  </data>
-  <data name="User" xml:space="preserve">
-    <value>Потребител</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Запис</value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Назад</value>
   </data>
   <data name="Confirm" xml:space="preserve">
     <value>Потвърждение</value>
@@ -255,47 +210,8 @@
   <data name="Role.User" xml:space="preserve">
     <value>Потребител</value>
   </data>
-  <data name="PR_TP1" xml:space="preserve">
-    <value>ПР-1</value>
-  </data>
-  <data name="PR_TP2" xml:space="preserve">
-    <value>ТП-2</value>
-  </data>
-  <data name="PR_MPR" xml:space="preserve">
-    <value>МПР</value>
-  </data>
-  <data name="User deactivated." xml:space="preserve">
-    <value>Потребителя деактивиран</value>
-  </data>
-  <data name="User restored." xml:space="preserve">
-    <value>Потребителя възстановен</value>
-  </data>
-  <data name="Invalid request." xml:space="preserve">
-    <value>Невалидна заявка</value>
-  </data>
-  <data name="Delete failed." xml:space="preserve">
-    <value>Изтриването ОТКАЗАНО</value>
-  </data>
-  <data name="Restore failed." xml:space="preserve">
-    <value>Възстановяването  отказано</value>
-  </data>
   <data name="Cannot remove the last admin." xml:space="preserve">
     <value>Не може да бъде премахнат последният администратор.</value>
-  </data>
-  <data name="User not found." xml:space="preserve">
-    <value>Потребителя не е намерен</value>
-  </data>
-  <data name="You cannot deactivate yourself." xml:space="preserve">
-    <value>Не можете да се деактивирате сам</value>
-  </data>
-  <data name="Please select a role." xml:space="preserve">
-    <value>Моля, изберете роля</value>
-  </data>
-  <data name="ADMIN" xml:space="preserve">
-    <value>Администратор</value>
-  </data>
-  <data name="Owner" xml:space="preserve">
-    <value>Собственик</value>
   </data>
   <data name="PleaseSelectRole" xml:space="preserve">
     <value>Моля, изберете роля</value>
@@ -303,36 +219,11 @@
   <data name="Roles updated." xml:space="preserve">
     <value>Ролите са обновени.</value>
   </data>
-  <data name="WorkSection" xml:space="preserve">
-    <value>Експлоатация</value>
-  </data>
-  <data name="ShiftWork" xml:space="preserve">
-    <value>Работа в смяна</value>
-  </data>
   <data name="Repairs" xml:space="preserve">
     <value>Ремонти</value>
   </data>
-  <data name="PlanedRepairs" xml:space="preserve">
-    <value>Планови Ремонти</value>
-  </data>
-  <data name="Locomotives" xml:space="preserve">
-    <value>Локомотиви</value>
-  </data>
-  <data name="AdminRolesTitle" xml:space="preserve">
-    <value>Администрация на роли</value>
-  </data>
-  <data name="AddRole" xml:space="preserve">
-    <value>Добави роля</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="RoleDisplayName" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Permissions" xml:space="preserve">
     <value>Разрешения</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Парола</value>
   </data>
   <data name="Role.RailTransportManager" xml:space="preserve">
     <value>Началник ж.п. транспорт</value>
@@ -348,12 +239,6 @@
   </data>
   <data name="Role.LocomotivesDriversManager" xml:space="preserve">
     <value>Деломайстор</value>
-  </data>
-  <data name="Page_InDevelopment_Title" xml:space="preserve">
-    <value>Страницата в разработка</value>
-  </data>
-  <data name="Page_InDevelopment_Description" xml:space="preserve">
-    <value>Страницата не е налична</value>
   </data>
   <data name="Enum_Shift_Day" xml:space="preserve">
     <value>дневна</value>
@@ -382,18 +267,6 @@
   <data name="Edit Locomotive" xml:space="preserve">
     <value>Редакция на локомотив</value>
   </data>
-  <data name="Locomotive_LastPlannedRepairType" xml:space="preserve">
-    <value>Последен ППР - дата</value>
-  </data>
-  <data name="Locomotive_LastPlannedRepairDate" xml:space="preserve">
-    <value>Последен ППР - вид</value>
-  </data>
-  <data name="Locomotive_LastAxleMeasurementDate" xml:space="preserve">
-    <value>последна дата на измерване</value>
-  </data>
-  <data name="Locomotive_InterAxleMeasurementPeriodDays" xml:space="preserve">
-    <value>Период между измерванията на колоосите</value>
-  </data>
   <data name="Locomotive_TotalWorkingDays" xml:space="preserve">
     <value>Общо работни дни</value>
   </data>
@@ -412,62 +285,38 @@
   <data name="Enum_MeasuringUnits_Km" xml:space="preserve">
     <value>Км</value>
   </data>
-  <data name="View roles &amp; permissions" xml:space="preserve">
-    <value>Преглед на роли и разрешения</value>
-  </data>
   <data name="Manage permissions (grant/revoke)" xml:space="preserve">
     <value>Управление на разрешения (даване/отнемане)</value>
-  </data>
-  <data name="View users" xml:space="preserve">
-    <value>Преглед на потребители</value>
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Изход</value>
   </data>
-  <data name="View locomotives" xml:space="preserve">
-    <value>Преглед на локомотиви</value>
+  <data name="Privacy_R1" xml:space="preserve">
+    <value>Системата е предназначена само за вътрешна употреба.</value>
   </data>
-  <data name="Edit_Locomotive" xml:space="preserve">
-    <value>Редакция на локомотив</value>
+  <data name="Privacy_R2" xml:space="preserve">
+    <value>Не се споделя лична информация с трети лица.</value>
   </data>
-  <data name="Roles_Permissions" xml:space="preserve">
-    <value>Роли и права</value>
+  <data name="Privacy_R3" xml:space="preserve">
+    <value>При въпроси относно обработката на данни се обърнете към системния администратор.</value>
   </data>
-  <data name="Role_Owner" xml:space="preserve">
-    <value>Собственик</value>
+  <data name="Welcome_Subtitle" xml:space="preserve">
+    <value>Система за отчет на работата и ремонта на локомотиви 🚂</value>
   </data>
-  <data name="Edit_Role_Permissions" xml:space="preserve">
-    <value>Редакция на права</value>
-  </data>
-  <data name="Group_Users" xml:space="preserve">
-    <value>Отдел Потребители</value>
-  </data>
-  <data name="Group_Roles" xml:space="preserve">
-    <value>Отдел Роли</value>
-  </data>
-  <data name="Group_Locomotives" xml:space="preserve">
-    <value>Отдел Локомотиви</value>
-  </data>
-  <data name="Perm_Users_View" xml:space="preserve">
-    <value>Да вижда потребители</value>
-  </data>
-  <data name="Group_Repairs" xml:space="preserve">
-    <value>Отдел Ремонт</value>
-  </data>
-  <data name="Permiss_For" xml:space="preserve">
-    <value>Разрешения за   : </value>
-  </data>
-  <data name="Auth_Login" xml:space="preserve">
+  <data name="Auth_Login_Title" xml:space="preserve">
     <value>Вход</value>
-  </data>
-  <data name="Auth_Register" xml:space="preserve">
-    <value>Регистрация</value>
   </data>
   <data name="Auth_RememberMe" xml:space="preserve">
     <value>Запомни ме</value>
   </data>
-  <data name="Auth_PhoneNumber" xml:space="preserve">
-    <value>Телефон</value>
+  <data name="Auth_ConfirmPassword" xml:space="preserve">
+    <value>Потвърди парола</value>
+  </data>
+  <data name="Auth_ConfirmNewPassword" xml:space="preserve">
+    <value>Потвърди нова парола</value>
+  </data>
+  <data name="Auth_ConfirmYourEmail" xml:space="preserve">
+    <value>Потвърдете имейла си</value>
   </data>
   <data name="Auth_CurrentPassword" xml:space="preserve">
     <value>Текуща парола</value>
@@ -475,74 +324,17 @@
   <data name="Auth_NewPassword" xml:space="preserve">
     <value>Нова парола</value>
   </data>
-  <data name="Auth_ConfirmPassword" xml:space="preserve">
-    <value>Потвърди паролата</value>
-  </data>
-  <data name="Auth_ConfirmNewPassword" xml:space="preserve">
-    <value>Потвърди новата парола</value>
-  </data>
-  <data name="Auth_ConfirmYourEmail" xml:space="preserve">
-    <value>Потвърдете имейла си</value>
+  <data name="Auth_PhoneNumber" xml:space="preserve">
+    <value>Телефон</value>
   </data>
   <data name="Auth_PleaseConfirmByClickingHere" xml:space="preserve">
     <value>Моля, потвърдете акаунта си, като кликнете тук</value>
   </data>
-  <data name="Common_Edit" xml:space="preserve">
-    <value>Редакция</value>
+  <data name="Roles_Edit_Title" xml:space="preserve">
+    <value>Права за роля</value>
   </data>
-  <data name="Common_Delete" xml:space="preserve">
-    <value>Изтриване</value>
-  </data>
-  <data name="Common_Save" xml:space="preserve">
-    <value>Запис</value>
-  </data>
-  <data name="Common_Back" xml:space="preserve">
-    <value>Назад</value>
-  </data>
-  <data name="Msg_Created_Success" xml:space="preserve">
-    <value>Успешно създадено.</value>
-  </data>
-  <data name="Msg_Deleted_Success" xml:space="preserve">
-    <value>Успешно изтрито.</value>
-  </data>
-  <data name="Msg_Saved_Success" xml:space="preserve">
-    <value>Успешно записано.</value>
-  </data>
-  <data name="Msg_Restored_Success" xml:space="preserve">
-    <value>Успешно възстановено.</value>
-  </data>
-  <data name="Msg_NoAccess" xml:space="preserve">
-    <value>Нямате достъп.</value>
-  </data>
-  <data name="Msg_InvalidFormData" xml:space="preserve">
-    <value>Невалидни данни във формата.</value>
-  </data>
-  <data name="Msg_Permissions_Updated_Success" xml:space="preserve">
-    <value>Разрешенията са обновени успешно.</value>
-  </data>
-  <data name="Msg_Owner_CannotBeChanged" xml:space="preserve">
-    <value>Ролята „Собственик“ не може да бъде променяна.</value>
-  </data>
-  <data name="Msg_Owner_Permissions_CannotBeChanged" xml:space="preserve">
-    <value>Разрешенията на „Собственик“ не се променят от тук.</value>
-  </data>
-  <data name="Msg_Claim_Add_Failed" xml:space="preserve">
-    <value>Грешка при добавяне на право.</value>
-  </data>
-  <data name="Msg_Claim_Remove_Failed" xml:space="preserve">
-    <value>Грешка при отнемане на право.</value>
-  </data>
-  <data name="UI_RolesAndPermissions" xml:space="preserve">
-    <value>Роли и разрешения</value>
-  </data>
-  <data name="UI_EditRolePermissions" xml:space="preserve">
-    <value>Редакция на разрешения за роля</value>
-  </data>
-  <data name="Validation_Unique_Locomotive_Number" xml:space="preserve">
-    <value>Номерът на локомотива вече съществува.</value>
-  </data>
-  <data name="Group_Exploitation" xml:space="preserve">
-    <value>Експлоатация</value>
+  <data name="View_roles_permissions" xml:space="preserve">
+    <value>Преглед на роли и разрешения</value>
   </data>
   <data name="Role_Admin" xml:space="preserve">
     <value>Администратор</value>
@@ -550,64 +342,136 @@
   <data name="Role_User" xml:space="preserve">
     <value>Потребител</value>
   </data>
-  <data name="Role_Operator" xml:space="preserve">
-    <value>Оператор</value>
-  </data>
   <data name="Role_RailTransportManager" xml:space="preserve">
     <value>Началник ж.п. транспорт</value>
   </data>
   <data name="Role_LocomotiveTransportManager" xml:space="preserve">
-    <value>Началник експлоатация</value>
+    <value>Началник на Експлоатацията</value>
+  </data>
+  <data name="Role_DieselLocomotiveRepairManager" xml:space="preserve">
+    <value>Началник Дизелово депо-ремонт</value>
+  </data>
+  <data name="Role_DieselLocomotiveRepairSupervisor" xml:space="preserve">
+    <value>Ръководител смяна Дизелово депо-ремонт</value>
   </data>
   <data name="Role_LocomotivesDriversManager" xml:space="preserve">
     <value>Деломайстор</value>
   </data>
-  <data name="Role_DieselLocomotiveRepairManager" xml:space="preserve">
-    <value>Началник ремонт Диз. Депо</value>
+  <data name="Role_Owner" xml:space="preserve">
+    <value>Собственик</value>
   </data>
-  <data name="Role_DieselLocomotiveRepairSupervisor" xml:space="preserve">
-    <value>Ръководител смяна Диз. Депо</value>
+  <data name="OwnerPermissionsCannotBeChanged" xml:space="preserve">
+    <value>Разрешенията на Owner не могат да бъдат променяни.</value>
   </data>
-  <data name="Perm_Users_Edit" xml:space="preserve">
-    <value>Да управлява потребители</value>
+  <data name="InvalidFormData" xml:space="preserve">
+    <value>Невалидни данни във формата.</value>
   </data>
-  <data name="Perm_Roles_View" xml:space="preserve">
-    <value>Да вижда роли и права</value>
+  <data name="FailedToAddClaim" xml:space="preserve">
+    <value>Неуспешно добавяне на разрешение.</value>
   </data>
-  <data name="Perm_Roles_Edit" xml:space="preserve">
-    <value>Да управлява права (даване/отнемане)</value>
-  </data>
-  <data name="Perm_Repairs_View" xml:space="preserve">
-    <value>Да вижда ремонт</value>
-  </data>
-  <data name="Perm_Repairs_Add" xml:space="preserve">
-    <value>Да добавя ремонт</value>
-  </data>
-  <data name="Perm_Repairs_Edit" xml:space="preserve">
-    <value>Да редактира ремонт</value>
-  </data>
-  <data name="Perm_Expl_View" xml:space="preserve">
-    <value>Да вижда експлоатация</value>
-  </data>
-  <data name="Perm_Expl_Add" xml:space="preserve">
-    <value>Да добавя експлоатация</value>
-  </data>
-  <data name="Perm_Expl_Edit" xml:space="preserve">
-    <value>Да редактира експлоатация</value>
-  </data>
-  <data name="Perm_Loco_View" xml:space="preserve">
-    <value>Да вижда локомотиви</value>
-  </data>
-  <data name="Perm_Loco_Add" xml:space="preserve">
-    <value>Да добавя локомотиви</value>
-  </data>
-  <data name="Perm_Loco_Edit" xml:space="preserve">
-    <value>Да редактира локомотиви</value>
-  </data>
-  <data name="Perm_Loco_Delete" xml:space="preserve">
-    <value>Да изтрива локомотиви</value>
+  <data name="FailedToRemoveClaim" xml:space="preserve">
+    <value>Неуспешно премахване на разрешение.</value>
   </data>
   <data name="PermissionsUpdatedSuccessfully" xml:space="preserve">
-    <value>Успешно обновяване на разрешенията</value>
+    <value>Разрешенията бяха обновени успешно.</value>
+  </data>
+  <data name="Roles_Groups_Title" xml:space="preserve">
+    <value>Групи за роля</value>
+  </data>
+  <data name="Roles_Edit_Group" xml:space="preserve">
+    <value>Редакция на група</value>
+  </data>
+  <data name="Roles_Group_Permissions" xml:space="preserve">
+    <value>Права в групата</value>
+  </data>
+  <data name="Roles_Select_All" xml:space="preserve">
+    <value>Избери всички</value>
+  </data>
+  <data name="Roles_Deselect_All" xml:space="preserve">
+    <value>Изчисти всички</value>
+  </data>
+  <data name="Roles_Back_To_Groups" xml:space="preserve">
+    <value>Назад към групите</value>
+  </data>
+  <data name="Roles_Save" xml:space="preserve">
+    <value>Запази</value>
+  </data>
+  <data name="Roles_Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="Perm_Users_View" xml:space="preserve">
+    <value>Преглед на потребители</value>
+  </data>
+  <data name="Perm_Users_Edit" xml:space="preserve">
+    <value>Редакция на потребители</value>
+  </data>
+  <data name="Perm_Roles_View" xml:space="preserve">
+    <value>Преглед на роли</value>
+  </data>
+  <data name="Perm_Roles_Edit" xml:space="preserve">
+    <value>Редакция на роли</value>
+  </data>
+  <data name="Perm_Repairs_View" xml:space="preserve">
+    <value>Преглед на ремонти</value>
+  </data>
+  <data name="Perm_Repairs_Add" xml:space="preserve">
+    <value>Добавяне на ремонт</value>
+  </data>
+  <data name="Perm_Repairs_Edit" xml:space="preserve">
+    <value>Редакция на ремонт</value>
+  </data>
+  <data name="Perm_Expl_View" xml:space="preserve">
+    <value>Преглед на експлоатация</value>
+  </data>
+  <data name="Perm_Expl_Add" xml:space="preserve">
+    <value>Добавяне на експлоатация</value>
+  </data>
+  <data name="Perm_Expl_Edit" xml:space="preserve">
+    <value>Редакция на експлоатация</value>
+  </data>
+  <data name="Perm_Loco_View" xml:space="preserve">
+    <value>Преглед на локомотиви</value>
+  </data>
+  <data name="Perm_Loco_Add" xml:space="preserve">
+    <value>Добавяне на локомотив</value>
+  </data>
+  <data name="Perm_Loco_Edit" xml:space="preserve">
+    <value>Редакция на локомотив</value>
+  </data>
+  <data name="Perm_Loco_Delete" xml:space="preserve">
+    <value>Изтриване на локомотив</value>
+  </data>
+  <data name="Group_Users" xml:space="preserve">
+    <value>Потребители</value>
+  </data>
+  <data name="Group_Roles" xml:space="preserve">
+    <value>Роли</value>
+  </data>
+  <data name="Group_Locomotives" xml:space="preserve">
+    <value>Локомотиви</value>
+  </data>
+  <data name="Group_Exploitation" xml:space="preserve">
+    <value>Експлоатация</value>
+  </data>
+  <data name="Group_Repairs" xml:space="preserve">
+    <value>Ремонти</value>
+  </data>
+  <data name="Common_Create" xml:space="preserve">
+    <value>Създай</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Запази</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>Изтриване</value>
+  </data>
+  <data name="Common_Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="Common_Edit" xml:space="preserve">
+    <value>Редакция</value>
   </data>
 </root>

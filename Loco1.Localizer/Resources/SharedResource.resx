@@ -429,37 +429,4 @@
   <data name="View locomotives" xml:space="preserve">
     <value>View locomotives</value>
   </data>
-  <data name="Edit_Locomotive" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Roles_Permissions" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Role_Owner" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Edit_Role_Permissions" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Group_Users" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Group_Roles" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Group_Locomotives" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Perm_Users_View" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Group_Repairs" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Permiss_For" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PermissionsUpdatedSuccessfully" xml:space="preserve">
-    <value />
-  </data>
 </root>

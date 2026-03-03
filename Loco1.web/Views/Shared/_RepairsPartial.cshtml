@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using GCommon
+@inject IAuthorizationService Auth
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Loco1.Localizer.SharedResource> L
+
+@{
+    var collapseId = (string)ViewData["RepairsCollapseId"];
+    var isOwner = User.IsInRole("Owner");
+
+    var canView = isOwner || (await Auth.AuthorizeAsync(User, Perm.Repairs_View)).Succeeded;
+    var canAdd = isOwner || (await Auth.AuthorizeAsync(User, Perm.Repairs_Add)).Succeeded;
+}
+
+@if (canView)
+{
+    <button class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse"
+            data-bs-target="#@collapseId">
+        <span class="small fw-semibold">@L["Repairs"]</span>
+        <i class="bi bi-chevron-down"></i>
+    </button>
+
+    <div id="@collapseId" class="collapse ms-2">
+        <div class="list-group list-group-flush">
+@* 
+            <a class="list-group-item list-group-item-action"
+               asp-controller="Repair" asp-action="Index">
+                <i class="bi bi-tools"></i>
+                <span>@L["Repairs"]</span>
+            </a> *@
+
+            @if (canAdd)
+            {
+                <a class="list-group-item list-group-item-action"
+                   asp-controller="Repair" asp-action="Create">
+                    <i class="bi bi-plus-square"></i>
+                    <span>@L["Common_Create"]</span>
+                </a>
+            }
+        </div>
+    </div>
+}

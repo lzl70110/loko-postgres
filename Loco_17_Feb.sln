@@ -5,8 +5,6 @@ VisualStudioVersion = 17.14.37012.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Web", "Loco1.web\Loco1.Web.csproj", "{4AC8F850-CD6C-4D9B-A1AF-55B53FDDE000}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCommon", "GCommon\GCommon.csproj", "{94E02CE6-AE2B-4A53-B35D-690AA8136F3A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Service", "Loco1.Service\Loco1.Service.csproj", "{2A8226EF-AB89-4C73-9999-3586EC366878}"
@@ -18,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Localizer", "Loco1.Localizer\Loco1.Localizer.csproj", "{E2FA37AB-62A6-4F8E-BD4E-6CA84FED8447}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Repositories", "Loco1.Repositories\Loco1.Repositories.csproj", "{6F7B4A22-B3BB-5AEF-F837-FB1271838122}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loco1.Data", "Loco1.Data\Loco1.Data.csproj", "{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +101,18 @@ Global
 		{6F7B4A22-B3BB-5AEF-F837-FB1271838122}.Release|x64.Build.0 = Release|Any CPU
 		{6F7B4A22-B3BB-5AEF-F837-FB1271838122}.Release|x86.ActiveCfg = Release|Any CPU
 		{6F7B4A22-B3BB-5AEF-F837-FB1271838122}.Release|x86.Build.0 = Release|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Debug|x64.Build.0 = Debug|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Debug|x86.Build.0 = Debug|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Release|x64.ActiveCfg = Release|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Release|x64.Build.0 = Release|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Release|x86.ActiveCfg = Release|Any CPU
+		{6E303F85-79EE-DDBC-A0E2-C009DFEE1E80}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,7 @@
-﻿using GCommon;
+﻿ 
+using System.Security.Claims;
+using System.Linq;
+using GCommon;
 using Loco1.Localizer;
 using Loco1.ViewModels.Roles;
 using Microsoft.AspNetCore.Authorization;
@@ -6,34 +9,36 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using System.Security.Claims;
-
-using static GCommon.RolesBase;
- 
-
-
-// Disambiguate the constants type (avoid assembly type clash)
-
+using static System.StringComparison;
 
 namespace Loco1.Web.Controllers
 {
+    // Requires view permissions for roles
     [Authorize(Policy = Perm.Roles_View)]
     public class RolesController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IStringLocalizer<SharedResource> _L;
+        private readonly IRolePermissionService _permService;
 
-        private const string OwnerRoleName = "Owner";
+        // Keep owner name consistent with RolesBase; do not list/edit via UI
+        private const string OwnerRoleName = RolesBase.Owner;
+
+        // Claim type used to store permissions on roles
         private const string PermissionClaimType = "permission";
 
-        public RolesController(RoleManager<IdentityRole> roleManager,
-                               IStringLocalizer<SharedResource> L)
+        public RolesController(
+            RoleManager<IdentityRole> roleManager,
+            IStringLocalizer<SharedResource> L,
+            IRolePermissionService permService)
         {
             _roleManager = roleManager;
             _L = L;
+            _permService = permService;
         }
 
-        // Index: filter/order by EV.Roles.All; localized display names
+        // GET: /Roles
+        // Lists roles in predefined order (RolesBase.All). Skips roles not in the whitelist (Owner on purpose).
         public async Task<IActionResult> Index()
         {
             var dbRoles = await _roleManager.Roles
@@ -44,24 +49,26 @@ namespace Loco1.Web.Controllers
             var dbByName = dbRoles
                 .GroupBy(r => r.Name ?? string.Empty, StringComparer.OrdinalIgnoreCase)
                 .ToDictionary(g => g.Key, g => g.First(), StringComparer.OrdinalIgnoreCase);
-     
-            var orderSource =RolesBase. All; // Use the ordered whitelist
 
+            var orderSource = RolesBase.All;
             var roles = new List<RoleListItem>(orderSource.Length);
+
             foreach (var name in orderSource)
             {
-                if (!dbByName.TryGetValue(name, out var r)) continue; // skip if not in DB
+                if (!dbByName.TryGetValue(name, out var r)) continue;
 
                 roles.Add(new RoleListItem
                 {
                     Id = r.Id,
-                    Name = LocalizeRole(name) // Role_<Name> with fallback
+                    Name = LocalizeRole(name) // Uses resource key "Role_<Name>" with fallback
                 });
             }
 
             return View(roles);
         }
 
+        // GET: /Roles/Edit/{id}
+        // Build full VM via service; service handles ordering; controller stays thin.
         [Authorize(Policy = Perm.Roles_Edit)]
         public async Task<IActionResult> Edit(string id)
         {
@@ -71,42 +78,20 @@ namespace Loco1.Web.Controllers
             if (role == null) return NotFound();
 
             // Guard: Owner cannot be edited via UI
-            if (string.Equals(role.Name, OwnerRoleName, StringComparison.Ordinal))
+            if (string.Equals(role.Name, OwnerRoleName, Ordinal))
             {
                 TempData["StatusMessage"] = _L["OwnerPermissionsCannotBeChanged"].Value;
                 return RedirectToAction(nameof(Index));
             }
 
-            var current = (await _roleManager.GetClaimsAsync(role))
-                .Where(c => c.Type == PermissionClaimType)
-                .Select(c => c.Value)
-                .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-            // Localized groups/items from Perm (NameKey/ResourceKey) — label only
-            var groups = Perm.Groups.Select(g => new PermGroupVm
-            {
-                GroupName = _L[g.NameKey].Value,
-                Items = g.Items
-                    .Select(i => new PermItemVm
-                    {
-                        Code = i.Code,
-                        Display = _L[i.ResourceKey].Value,
-                        Granted = current.Contains(i.Code)
-                    })
-                    .OrderBy(x => x.Display, StringComparer.CurrentCultureIgnoreCase)
-                    .ToList()
-            }).ToList();
-
-            var vm = new RolePermVm
-            {
-                RoleId = role.Id,
-                RoleName = role.Name ?? string.Empty,
-                Groups = groups
-            };
+            // Service returns ALL groups (so you can grant new permissions)
+            var vm = _permService.BuildRolePermVm(id);
 
             return View(vm);
         }
 
+        // POST: /Roles/Edit
+        // Diff-based update of role permission claims with validation + universal View rule.
         [HttpPost]
         [Authorize(Policy = Perm.Roles_Edit)]
         [ValidateAntiForgeryToken]
@@ -122,27 +107,69 @@ namespace Loco1.Web.Controllers
             if (role == null) return NotFound();
 
             // Guard: Owner cannot be edited via UI
-            if (string.Equals(role.Name, OwnerRoleName, StringComparison.Ordinal))
+            if (string.Equals(role.Name, OwnerRoleName, Ordinal))
             {
                 TempData["StatusMessage"] = _L["OwnerPermissionsCannotBeChanged"].Value;
                 return RedirectToAction(nameof(Index));
             }
 
+            // Current claims
             var current = (await _roleManager.GetClaimsAsync(role))
                 .Where(c => c.Type == PermissionClaimType)
                 .Select(c => c.Value)
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
+            // Desired = all checked codes from posted form
             var desired = vm.Groups
                 .SelectMany(g => g.Items)
                 .Where(i => i.Granted)
                 .Select(i => i.Code)
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-            // Rule: strong ops imply View
+            // Existing helper (suffix-based) — keeps backward compatibility
             EnsureViewForStrongerOps(desired);
 
-            // Add
+            // UNIVERSAL: any Add/Edit/Delete => ensure matching View (supports '.' and '_')
+            var autoView = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var code in desired)
+            {
+                var up = code.ToUpperInvariant();
+                bool isStrong =
+                       up.EndsWith(".EDIT") || up.EndsWith(".ADD") || up.EndsWith(".DELETE")
+                    || up.EndsWith("_EDIT") || up.EndsWith("_ADD") || up.EndsWith("_DELETE");
+                if (!isStrong) continue;
+
+                char sep = up.Contains('.') ? '.' : '_';
+                int idx = code.LastIndexOf(sep);
+                if (idx < 0) continue;
+
+                var prefix = code[..idx];
+                var viewCode = $"{prefix}{sep}View";
+                autoView.Add(viewCode);
+            }
+            foreach (var v in autoView) desired.Add(v);
+
+            // SAFETY: remove strong ops if corresponding View is not present
+            var toRemove = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var code in desired)
+            {
+                var up = code.ToUpperInvariant();
+                bool isStrong =
+                       up.EndsWith(".EDIT") || up.EndsWith(".ADD") || up.EndsWith(".DELETE")
+                    || up.EndsWith("_EDIT") || up.EndsWith("_ADD") || up.EndsWith("_DELETE");
+                if (!isStrong) continue;
+
+                char sep = up.Contains('.') ? '.' : '_';
+                int idx = code.LastIndexOf(sep);
+                if (idx < 0) continue;
+
+                var prefix = code[..idx];
+                var viewCode = $"{prefix}{sep}View";
+                if (!desired.Contains(viewCode)) toRemove.Add(code);
+            }
+            foreach (var c in toRemove) desired.Remove(c);
+
+            // Add missing claims
             foreach (var toAdd in desired.Except(current))
             {
                 var res = await _roleManager.AddClaimAsync(role, new Claim(PermissionClaimType, toAdd));
@@ -155,10 +182,10 @@ namespace Loco1.Web.Controllers
                 }
             }
 
-            // Remove
-            foreach (var toRemove in current.Except(desired))
+            // Remove extra claims
+            foreach (var toRem in current.Except(desired))
             {
-                var res = await _roleManager.RemoveClaimAsync(role, new Claim(PermissionClaimType, toRemove));
+                var res = await _roleManager.RemoveClaimAsync(role, new Claim(PermissionClaimType, toRem));
                 if (!res.Succeeded)
                 {
                     TempData["StatusMessage"] = string.Format(
@@ -172,7 +199,7 @@ namespace Loco1.Web.Controllers
             return RedirectToAction(nameof(Edit), new { id = role.Id });
         }
 
-        // Localize role display using resx key "Role_<Name>" with fallback
+        // Uses resx key "Role_<Name>" with fallback to raw role name
         private string LocalizeRole(string roleName)
         {
             var key = $"Role_{roleName}";
@@ -180,24 +207,39 @@ namespace Loco1.Web.Controllers
             return ls.ResourceNotFound ? roleName : ls.Value;
         }
 
-        // Ensures .View exists when .Add/.Edit/.Delete are present
+        // Ensures that a matching View permission exists when Edit/Add/Delete are selected.
+        // Supports codes like "Perm.Users.Edit" or "Perm_Users_Edit".
         private static void EnsureViewForStrongerOps(HashSet<string> selected)
         {
             if (selected == null || selected.Count == 0) return;
 
-            foreach (var code in selected.ToList())
+            var snapshot = selected.ToList();
+            foreach (var code in snapshot)
             {
-                if (code.EndsWith(".Edit", StringComparison.OrdinalIgnoreCase) ||
-                    code.EndsWith(".Add", StringComparison.OrdinalIgnoreCase) ||
-                    code.EndsWith(".Delete", StringComparison.OrdinalIgnoreCase))
+                if (TryBuildViewCode(code, out var viewCode))
                 {
-                    var viewCode =
-                        code.EndsWith(".Edit", StringComparison.OrdinalIgnoreCase) ? code[..^5] + ".View" :
-                        code.EndsWith(".Add", StringComparison.OrdinalIgnoreCase) ? code[..^4] + ".View" :
-                        /* .Delete */                                                   code[..^7] + ".View";
-
                     selected.Add(viewCode);
                 }
+            }
+
+            static bool TryBuildViewCode(string code, out string viewCode)
+            {
+                viewCode = string.Empty;
+
+                var suffixes = new[] { ".Edit", ".Add", ".Delete", "_Edit", "_Add", "_Delete" };
+
+                foreach (var sfx in suffixes)
+                {
+                    if (code.EndsWith(sfx, OrdinalIgnoreCase))
+                    {
+                        var baseCode = code[..^sfx.Length];
+                        var sep = sfx[0]; // '.' or '_'
+                        viewCode = $"{baseCode}{sep}View";
+                        return true;
+                    }
+                }
+
+                return false;
             }
         }
     }

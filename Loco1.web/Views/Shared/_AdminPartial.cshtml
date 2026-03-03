@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using GCommon
+@inject IAuthorizationService Auth
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Loco1.Localizer.SharedResource> L
+
+@{
+    var collapseId = (string)ViewData["AdminCollapseId"];
+    var isOwner = User.IsInRole("Owner");
+
+    var canUsers = isOwner || (await Auth.AuthorizeAsync(User, Perm.Users_View)).Succeeded;
+    var canRoles = isOwner || (await Auth.AuthorizeAsync(User, Perm.Roles_View)).Succeeded;
+    var canLoco = isOwner || (await Auth.AuthorizeAsync(User, Perm.Loco_View)).Succeeded;
+
+    var show = canUsers || canRoles || canLoco;
+}
+
+@if (show)
+{
+    <button class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse"
+            data-bs-target="#@collapseId">
+        <span class="small fw-semibold">@L["Role_Admin"]</span>
+        <i class="bi bi-chevron-down"></i>
+    </button>
+
+    <div id="@collapseId" class="collapse ms-2">
+        <div class="list-group list-group-flush">
+
+            @if (canUsers)
+            {
+                <a class="list-group-item list-group-item-action"
+                   asp-controller="Admin" asp-action="Users">
+                    <i class="bi bi-people-fill"></i>
+                    <span>@L["Users"]</span>
+                </a>
+            }
+
+            @if (canRoles)
+            {
+                <a class="list-group-item list-group-item-action"
+                   asp-controller="Roles" asp-action="Index">
+                    <i class="bi bi-shield-lock"></i>
+                    <span>@L["Roles"]</span>
+                </a>
+            }
+
+            @if (canLoco)
+            {
+                <a class="list-group-item list-group-item-action"
+                   asp-controller="Locomotive" asp-action="Index">
+                    <i class="bi bi-train-front"></i>
+                    <span>@L["Locomotives"]</span>
+                </a>
+            }
+
+        </div>
+    </div>
+}

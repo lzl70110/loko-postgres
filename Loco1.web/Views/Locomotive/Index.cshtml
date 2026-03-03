@@ -1,11 +1,9 @@
 ﻿@* Views/Locomotives/Index.cshtml *@
 @model List<Loco1.ViewModels.Locomotives.LocoListVm>
 @using GCommon
-
 @using Microsoft.AspNetCore.Authorization
-@inject IAuthorizationService Authz
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService Authz
 
-@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 <h2>@L["Locomotives"]</h2>
 
 @if ((await Authz.AuthorizeAsync(User, Perm.Loco_Add)).Succeeded)
@@ -17,8 +15,8 @@
     <thead>
         <tr>
             <th>@L["Locomotive_Number"]</th>
-            <th>@L["Locomotive_Type"]</th>
-            <th>@L["Locomotive_MeasuringUnit"]</th>
+            <th>@L["Locomotive_Type"].Value</th>
+            <th>@L["Locomotive_MeasuringUnit"].Value</th>
             <th>@L["Locomotive_AxleCount"]</th>
             <th>@L["Locomotive_TotalEngineHours"]</th>
             <th></th>
