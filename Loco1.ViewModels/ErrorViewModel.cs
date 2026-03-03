@@ -1,4 +1,4 @@
-namespace Loco1.web.Models
+﻿namespace Loco1.ViewModels
 {
     public class ErrorViewModel
     {
@@ -7,3 +7,4 @@ namespace Loco1.web.Models
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
+ 

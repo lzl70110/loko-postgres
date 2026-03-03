@@ -3,8 +3,8 @@ using System.Text.RegularExpressions;
 using System.Security.Claims;
 
 using GCommon;
-using Loco1.Data;                    // DbContext
-using Loco1.Data.Models;             // ApplicationUser
+using Loco1.Data;                    // DbContext: LocoDbContext
+using Loco1.Data.Models;             // Identity user: ApplicationUser
 using Loco1.Localizer;               // SharedResource
 
 // Repositories: interfaces + implementations
@@ -26,7 +26,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-
+using HealthChecks.NpgSql;
 namespace Loco1.Web
 {
     public class Program
@@ -45,7 +45,7 @@ namespace Loco1.Web
             else if (builder.Environment.IsDevelopment())
                 builder.WebHost.UseUrls("http://localhost:5088");
 
-            // Connection string
+            // Read connection string (env override -> appsettings)
             var connStr =
                 Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
                 ?? builder.Configuration.GetConnectionString("DefaultConnection")
@@ -55,12 +55,21 @@ namespace Loco1.Web
             if (connStr.Contains("tcp://", StringComparison.OrdinalIgnoreCase))
                 connStr = Regex.Replace(connStr, @"(?i)server\s*=\s*tcp://([^:;]+):(\d+)", "Host=$1;Port=$2");
 
-            // Log sanitized connection string
+            // Force Include Error Detail=false outside Development
+            if (!builder.Environment.IsDevelopment())
+                connStr = Regex.Replace(connStr, @"(?i)include\s+error\s+detail\s*=\s*(true|1)", "Include Error Detail=false");
+
+            // Log sanitized connection string (hide password)
             var sanitized = Regex.Replace(connStr, @"(?i)password\s*=\s*[^;]*", "Password=***");
             Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
 
-            // DbContext
-            builder.Services.AddDbContext<LocoDbContext>(opt => opt.UseNpgsql(connStr));
+            // DbContext with PostgreSQL + transient retries
+            builder.Services.AddDbContext<LocoDbContext>(opt =>
+                opt.UseNpgsql(connStr, npgsql =>
+                {
+                    // Retry transient PostgreSQL errors (docker/dev environments)
+                    npgsql.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: null);
+                }));
 
             // Authorization infra
             builder.Services.AddAuthorization();
@@ -81,19 +90,36 @@ namespace Loco1.Web
                         factory.Create(typeof(SharedResource));
                 });
 
-            // Identity
+            // Identity: lenient in Development, safer in Production
             builder.Services
                 .AddDefaultIdentity<ApplicationUser>(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = false;
-                    options.Password.RequiredLength = 1;
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequiredUniqueChars = 0;
-                    options.User.RequireUniqueEmail = false;
-                    options.Lockout.AllowedForNewUsers = false;
+                    if (builder.Environment.IsDevelopment())
+                    {
+                        // Dev-friendly options
+                        options.SignIn.RequireConfirmedAccount = false;
+                        options.Password.RequiredLength = 1;
+                        options.Password.RequireDigit = false;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequireUppercase = false;
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequiredUniqueChars = 0;
+                        options.User.RequireUniqueEmail = false;
+                        options.Lockout.AllowedForNewUsers = false;
+                    }
+                    else
+                    {
+                        // Production defaults (adjust as needed)
+                        options.SignIn.RequireConfirmedAccount = true;
+                        options.Password.RequiredLength = 6;
+                        options.Password.RequireDigit = true;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequireUppercase = false;
+                        options.Password.RequireLowercase = true;
+                        options.Password.RequiredUniqueChars = 1;
+                        options.User.RequireUniqueEmail = true;
+                        options.Lockout.AllowedForNewUsers = true;
+                    }
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<LocoDbContext>();
@@ -145,43 +171,49 @@ namespace Loco1.Web
                 opts.KnownProxies.Clear();
             });
 
+            // Role-permission service (Groups/EditGroup flow)
+            builder.Services.AddScoped<IRolePermissionService, RolePermissionService>();
+
+            // HealthChecks (DB liveness)
+            builder.Services.AddHealthChecks()
+                .AddNpgSql(connStr, name: "postgres", timeout: TimeSpan.FromSeconds(3));
+
             var app = builder.Build();
 
-            // Ensure roles/claims helper (idempotent)
+            // Ensure roles/claims helper (idempotent, driven by Perm.Groups)
             static async Task EnsureRolesAndClaimsAsync(IServiceProvider sp)
             {
                 var roleManager = sp.GetRequiredService<RoleManager<IdentityRole>>();
 
-                // Ensure roles exist
+                // Ensure baseline roles exist
                 var rolesToEnsure = new[] { "Owner", "Admin", "Operator" };
                 foreach (var rn in rolesToEnsure)
                     if (!await roleManager.RoleExistsAsync(rn))
                         await roleManager.CreateAsync(new IdentityRole(rn));
 
-                // Baseline Admin permission claims
+                // Collect all permission codes from GCommon.Perm.Groups
+                var allPermCodes = Perm.Groups
+                    .SelectMany(g => g.Items)
+                    .Select(i => i.Code)
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToArray();
+
+                // Grant Admin all permissions (claim type: "permission")
                 var admin = await roleManager.FindByNameAsync("Admin");
-                if (admin != null)
-                {
-                    const string ct = "permission";
-                    var have = (await roleManager.GetClaimsAsync(admin))
-                               .Where(c => c.Type == ct).Select(c => c.Value)
-                               .ToHashSet(StringComparer.OrdinalIgnoreCase);
+                if (admin is null) return;
 
-                    var want = new[]
-                    {
-                        Perm.Roles_View, Perm.Roles_Edit,
-                        Perm.Users_View, Perm.Users_Edit,
-                        Perm.Repairs_View, Perm.Repairs_Add, Perm.Repairs_Edit,
-                        Perm.Expl_View, Perm.Expl_Add, Perm.Expl_Edit,
-                        Perm.Loco_View, Perm.Loco_Add, Perm.Loco_Edit, Perm.Loco_Delete
-                    };
+                const string ct = "permission";
+                var have = (await roleManager.GetClaimsAsync(admin))
+                           .Where(c => c.Type == ct)
+                           .Select(c => c.Value)
+                           .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-                    foreach (var code in want.Except(have))
-                        await roleManager.AddClaimAsync(admin, new Claim(ct, code));
-                }
+                var missing = allPermCodes.Except(have, StringComparer.OrdinalIgnoreCase);
+                foreach (var code in missing)
+                    await roleManager.AddClaimAsync(admin, new Claim(ct, code));
             }
 
-            // Migrations + Seed
+            // Migrations + Seed at startup
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -231,7 +263,9 @@ namespace Loco1.Web
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.MapRazorPages();
-            app.MapGet("/healthz", () => Results.Ok("OK"));
+
+            // Health endpoint (DB included)
+            app.MapHealthChecks("/healthz");
 
             await app.RunAsync();
         }

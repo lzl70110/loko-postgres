@@ -1,10 +1,12 @@
-﻿@* _Layout.cshtml (clean, footer always at bottom, mobile-safe) *@
+﻿@* Loco1.Web — CLEAN FINAL LAYOUT *@
 @using Loco1.Data.Models
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Authorization
 @using System.Globalization
 @inject SignInManager<ApplicationUser> SignInManager
 @inject IStringLocalizer<SharedResource> L
+@inject IAuthorizationService Auth
 
 <!DOCTYPE html>
 <html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
@@ -71,17 +73,16 @@
         </div>
 
         <div class="offcanvas-body">
+            @* user badge / auth *@
             @if (SignInManager.IsSignedIn(User))
             {
                 <div class="list-group list-group-flush sidebar-nav">
                     <div class="list-group-item py-2">
                         <partial name="_UserBadge" />
                     </div>
-                    <form asp-area="Identity"
-                          asp-page="/Account/Logout"
+                    <form asp-area="Identity" asp-page="/Account/Logout"
                           asp-route-returnUrl="@Url.Action("Index","Home")"
-                          method="post"
-                          class="list-group-item p-0 border-0">
+                          method="post" class="list-group-item p-0 border-0">
                         <button type="submit" class="btn btn-outline-danger w-100 text-start">
                             <i class="bi bi-box-arrow-right"></i> @L["Logout"]
                         </button>
@@ -94,24 +95,49 @@
                     <a class="list-group-item list-group-item-action d-flex align-items-center gap-2"
                        asp-area="Identity" asp-page="/Account/Login">
                         <i class="bi bi-box-arrow-in-right"></i>
-                        <span>@L["Login"]</span>
+                        <span>@L["LoginButton"]</span>
                     </a>
                     <a class="list-group-item list-group-item-action d-flex align-items-center gap-2"
                        asp-area="Identity" asp-page="/Account/Register">
                         <i class="bi bi-person-plus-fill"></i>
-                        <span>@L["Register"]</span>
+                        <span>@L["RegisterButton"]</span>
                     </a>
                 </div>
             }
 
+            @* MOBILE — main menu *@
             <div class="list-group list-group-flush sidebar-nav">
+                <!-- Home at top -->
                 <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Index">
                     <i class="bi bi-house-door-fill"></i> @L["Home"]
                 </a>
-                <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Privacy">
-                    <i class="bi bi-shield-lock-fill"></i> @L["Privacy_Title"]
-                </a>
-                @await Html.PartialAsync("_AdminSidebar")
+
+               
+
+                <!-- Collapsible subsets (MOBILE) -->
+                @{
+                    ViewData["AdminCollapseId"] = "adminMenuMobile";
+                }
+                @await Html.PartialAsync("_AdminPartial", viewData: ViewData)
+
+                @{
+                    ViewData["ExplCollapseId"] = "explMenuMobile";
+                }
+                @await Html.PartialAsync("_ExplPartial", viewData: ViewData)
+
+                @{
+                    ViewData["RepairsCollapseId"] = "repairsMenuMobile";
+                }
+                @await Html.PartialAsync("_RepairsPartial", viewData: ViewData)
+
+                <!-- PRIVACY ALWAYS LAST -->
+                <div class="mt-2 border-top pt-2">
+                    <a class="list-group-item list-group-item-action d-flex align-items-center gap-2"
+                       asp-controller="Home" asp-action="Privacy">
+                        <i class="bi bi-shield-lock-fill"></i>
+                        <span>@L["Privacy_Title"]</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -129,23 +155,54 @@
 
     <!-- MAIN CONTENT -->
     <main class="flex-grow-1">
-        <div class="container my-4">
-            <div class="row">
-                <aside class="col-12 col-lg-3 mb-4 d-none d-lg-block">
-                    <div class="card shadow-sm">
+        <div class="container-fluid my-4 px-3">
+            <div class="row g-3">
+                <!-- DESKTOP SIDEBAR -->
+                <aside class="col-12 col-lg-2 mb-4 d-none d-lg-block ps-0">
+                    <div class="card shadow-sm sidebar-card">
                         <div class="list-group list-group-flush sidebar-nav">
-                            <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Index">
-                                <i class="bi bi-house-door-fill"></i> @L["Home"]
+
+                            <!-- Home -->
+                            <a class="list-group-item list-group-item-action d-flex align-items-center gap-2"
+                               asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house-door-fill"></i>
+                                <span>@L["Home"]</span>
                             </a>
-                            <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Privacy">
-                                <i class="bi bi-shield-lock-fill"></i> @L["Privacy_Title"]
+
+                       
+             
+                            @{
+                                ViewData["AdminCollapseId"] = "adminMenuDesktop";
+                            }
+                            @await Html.PartialAsync("_AdminPartial", viewData: ViewData)
+
+                       
+                            @{
+                                ViewData["ExplCollapseId"] = "explMenuDesktop";
+                            }
+                            @await Html.PartialAsync("_ExplPartial", viewData: ViewData)
+
+                             
+                            @{
+                                ViewData["RepairsCollapseId"] = "repairsMenuDesktop";
+                            }
+                            @await Html.PartialAsync("_RepairsPartial", viewData: ViewData)
+
+                            <!-- PRIVACY ALWAYS LAST   -->
+                            <a class="list-group-item list-group-item-action d-flex align-items-center gap-2 border-top"
+                               asp-controller="Home" asp-action="Privacy">
+                                <i class="bi bi-shield-lock-fill"></i>
+                                <span>@L["Privacy_Title"]</span>
                             </a>
-                            @await Html.PartialAsync("_AdminSidebar")
+
                         </div>
                     </div>
                 </aside>
 
-                <section class="col-12 col-lg-9">@RenderBody()</section>
+                <!-- PAGE BODY -->
+                <section class="col-12 col-lg-9">
+                    @RenderBody()
+                </section>
             </div>
         </div>
     </main>
@@ -166,6 +223,7 @@
     <script src="~/js/header-anim.js?v=1"></script>
 
     <script>
+        // Auto-hide status message after a short delay
         setTimeout(() => {
             const el = document.getElementById('status-message');
             if (!el) return;

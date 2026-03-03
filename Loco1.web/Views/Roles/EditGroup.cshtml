@@ -1,0 +1,72 @@
+﻿@model Loco1.ViewModels.Roles.PermGroupVm
+@{
+    // RoleId is provided via ViewData in controller
+    var roleId = (string)(ViewData["RoleId"] ?? "");
+}
+
+<h2>@L["Roles_Edit_Group"]: @L[Model.GroupName]</h2>
+
+<form method="post" asp-action="EditGroup" asp-controller="Roles">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="roleId" value="@roleId" />
+    <input type="hidden" name="groupName" value="@Model.GroupName" />
+
+    <div class="card mt-3">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <strong>@L["Roles_Group_Permissions"]</strong>
+            <div>
+                <button type="button" class="btn btn-sm btn-outline-primary me-1" id="btnSelectAll">
+                    @L["Roles_Select_All"]
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="btnDeselectAll">
+                    @L["Roles_Deselect_All"]
+                </button>
+            </div>
+        </div>
+
+        <div class="card-body">
+            @for (int i = 0; i < Model.Items.Count; i++)
+            {
+                var item = Model.Items[i];
+                var id = $"cb_{Model.GroupName}_{i}";
+
+                <div class="form-check mb-2">
+                    <input class="form-check-input js-perm"
+                           type="checkbox"
+                           name="items[@i].Granted"
+                           value="true"
+                           id="@id"
+                           @(item.Granted ? "checked" : "") />
+
+                    <label class="form-check-label" for="@id">
+                        @L[item.Display]
+                    </label>
+
+                    <input type="hidden" name="items[@i].Code" value="@item.Code" />
+                    <input type="hidden" name="items[@i].Display" value="@item.Display" />
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="mt-3 d-flex gap-2">
+        <button class="btn btn-primary" type="submit">@L["Roles_Save"]</button>
+        <a class="btn btn-secondary" href="@Url.Action("Groups", "Roles", new { roleId = roleId })">
+            @L["Roles_Back_To_Groups"]
+        </a>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        // Toggles all checkboxes in the current group view
+        document.getElementById('btnSelectAll')?.addEventListener('click', function() {
+            document.querySelectorAll('.js-perm').forEach(cb => cb.checked = true)
+        })
+        document.getElementById('btnDeselectAll')?.addEventListener('click', function() {
+            document.querySelectorAll('.js-perm').forEach(cb => cb.checked = false)
+        })
+    </script>
+}
+``
