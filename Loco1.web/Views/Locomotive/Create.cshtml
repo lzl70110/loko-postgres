@@ -56,50 +56,57 @@
             <input asp-for="FuelCapacity" class="form-control" />
             <span asp-validation-for="FuelCapacity" class="text-danger"></span>
         </div>
-       <h7>@L["AXLE"]</h7>
-        <div class="col-md-1">
-            <label asp-for="AxleCount" class="form-label"></label>
-            <input asp-for="AxleCount" class="form-control" />
-            <span asp-validation-for="AxleCount" class="text-danger"></span>
-        </div>
-        <div class="col-md-1">
-            <label asp-for="LastAxleMeasurementDate" class="form-label"></label>
-            <input asp-for="LastAxleMeasurementDate" type="date" class="form-control" />
-            <span asp-validation-for="LastAxleMeasurementDate" class="text-danger"></span>
-        </div>
+       
+        < 
+            <h7>@L["AXLE"]</h7>
+         
 
-        <div class="col-md-1">
-            <label asp-for="InterAxleMeasurementPeriodDays" class="form-label"></label>
-            <input asp-for="InterAxleMeasurementPeriodDays" class="form-control" />
-            <span asp-validation-for="InterAxleMeasurementPeriodDays" class="text-danger"></span>
-        </div>
+            <div class="col-md-1">
+                <label asp-for="AxleCount" class="form-label"></label>
+                <input asp-for="AxleCount" class="form-control" />
+                <span asp-validation-for="AxleCount" class="text-danger"></span>
+            </div>
+            <div class="col-md-2">
+                <label asp-for="LastAxleMeasurementDate" class="form-label"></label>
+                <input asp-for="LastAxleMeasurementDate" type="date" class="form-control" />
+                <span asp-validation-for="LastAxleMeasurementDate" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-2">
+                <label asp-for="InterAxleMeasurementPeriodDays" class="form-label"></label>
+                <input asp-for="InterAxleMeasurementPeriodDays" class="form-control" />
+                <span asp-validation-for="InterAxleMeasurementPeriodDays" class="text-danger"></span>
+            </div> 
+ 
         <h7>@L["Work"]</h7>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <label asp-for="TotalEngineHours" class="form-label"></label>
             <input asp-for="TotalEngineHours" class="form-control" />
             <span asp-validation-for="TotalEngineHours" class="text-danger"></span>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-2">
             <label asp-for="TotalWorkingDays" class="form-label"></label>
             <input asp-for="TotalWorkingDays" class="form-control" />
             <span asp-validation-for="TotalWorkingDays" class="text-danger"></span>
         </div>
 
         <!-- LastPlannedRepairType -->
-            <div class="col-md-8">
+        <div class="col-md-2">
             <label asp-for="LastPlannedRepairType" class="form-label"></label>
             <input asp-for="LastPlannedRepairType" class="form-control" />
             <span asp-validation-for="LastPlannedRepairType" class="text-danger"></span>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-2">
             <label asp-for="LastPlannedRepairDate" class="form-label"></label>
             <input asp-for="LastPlannedRepairDate" type="date" class="form-control" />
             <span asp-validation-for="LastPlannedRepairDate" class="text-danger"></span>
         </div>
 
-       
+ 
+    
+   
     </div>
 
     <div class="mt-4 d-flex gap-2">
