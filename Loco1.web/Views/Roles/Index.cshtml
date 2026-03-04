@@ -8,12 +8,12 @@
 @{
     // Check if current user can edit roles
     var canEditRoles = (await Auth.AuthorizeAsync(User, Perm.Roles_Edit)).Succeeded;
-    ViewData["Title"] = L["Roles"].Value;
+    ViewData["Title"] = @L["Roles"].Value;
 }
 
- 
+@*  
 <h2 class="mb-3">@ViewData["Title"]</h2>
-
+ *@
 @if (TempData["StatusMessage"] is string status && !string.IsNullOrWhiteSpace(status))
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">

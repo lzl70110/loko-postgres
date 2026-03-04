@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Loco1.GCommon.Enums;
+using Loco1.Localizer;
 
 namespace Loco1.ViewModels.Locomotives
     {

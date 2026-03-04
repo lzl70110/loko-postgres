@@ -129,11 +129,20 @@
   <data name="Footer_R3" xml:space="preserve">
     <value>Проект Loco · Любомир Чекански ® 2026</value>
   </data>
+  <data name="From" xml:space="preserve">
+    <value>От</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>На</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Начало</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Добре дошли</value>
+  </data>
+  <data name="WelcomeSubtitle" xml:space="preserve">
+    <value>Система за отчет на работа и ремонт на локомотивите</value>
   </data>
   <data name="Privacy_Title" xml:space="preserve">
     <value>Политика за поверителност</value>
@@ -146,6 +155,15 @@
   </data>
   <data name="Privacy_P3" xml:space="preserve">
     <value>При въпроси относно обработката на данни се обърнете към системния администратор.</value>
+  </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>Грешно име</value>
+  </data>
+  <data name="Error_Message" xml:space="preserve">
+    <value>Грешка при обработка на заявката</value>
+  </data>
+  <data name="Error_RequestId" xml:space="preserve">
+    <value>Грешка при обработка на заявка №</value>
   </data>
   <data name="Login.Title" xml:space="preserve">
     <value>Вход в системата</value>
@@ -177,17 +195,38 @@
   <data name="RegisterButton" xml:space="preserve">
     <value>Създай акаунт</value>
   </data>
+  <data name="Users" xml:space="preserve">
+    <value>Потребители</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Роли</value>
+  </data>
   <data name="Actions" xml:space="preserve">
     <value>Действия</value>
   </data>
   <data name="Edit roles" xml:space="preserve">
     <value>Редакция на роли</value>
   </data>
+  <data name="Deactivate" xml:space="preserve">
+    <value>Деактивиране</value>
+  </data>
   <data name="Are you sure?" xml:space="preserve">
     <value>Сигурни ли сте?</value>
   </data>
   <data name="EditRolesTitle" xml:space="preserve">
     <value>Редакция на роли</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Потребител</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Запис</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
   </data>
   <data name="Confirm" xml:space="preserve">
     <value>Потвърждение</value>
@@ -210,8 +249,32 @@
   <data name="Role.User" xml:space="preserve">
     <value>Потребител</value>
   </data>
+  <data name="User deactivated." xml:space="preserve">
+    <value>Потребителя деактивиран</value>
+  </data>
+  <data name="User restored." xml:space="preserve">
+    <value>Потребителя възстановен</value>
+  </data>
+  <data name="Invalid request." xml:space="preserve">
+    <value>Неправилна заявка</value>
+  </data>
+  <data name="Delete failed." xml:space="preserve">
+    <value>Деактивирането отказано</value>
+  </data>
   <data name="Cannot remove the last admin." xml:space="preserve">
     <value>Не може да бъде премахнат последният администратор.</value>
+  </data>
+  <data name="User not found." xml:space="preserve">
+    <value>Потребителя не е намерен</value>
+  </data>
+  <data name="You cannot deactivate yourself." xml:space="preserve">
+    <value>Не можете да деактивирате сам себе си</value>
+  </data>
+  <data name="ADMIN" xml:space="preserve">
+    <value>Администратор</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Собственик</value>
   </data>
   <data name="PleaseSelectRole" xml:space="preserve">
     <value>Моля, изберете роля</value>
@@ -219,11 +282,26 @@
   <data name="Roles updated." xml:space="preserve">
     <value>Ролите са обновени.</value>
   </data>
+  <data name="WorkSection" xml:space="preserve">
+    <value>Работа</value>
+  </data>
+  <data name="ShiftWork" xml:space="preserve">
+    <value>Работа на смяна</value>
+  </data>
   <data name="Repairs" xml:space="preserve">
     <value>Ремонти</value>
   </data>
+  <data name="Locomotives" xml:space="preserve">
+    <value>Локомотиви</value>
+  </data>
+  <data name="AddRole" xml:space="preserve">
+    <value>Добавяне на роля</value>
+  </data>
   <data name="Permissions" xml:space="preserve">
     <value>Разрешения</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Парола</value>
   </data>
   <data name="Role.RailTransportManager" xml:space="preserve">
     <value>Началник ж.п. транспорт</value>
@@ -240,6 +318,12 @@
   <data name="Role.LocomotivesDriversManager" xml:space="preserve">
     <value>Деломайстор</value>
   </data>
+  <data name="Page_InDevelopment_Title" xml:space="preserve">
+    <value>в процес на изграждане е </value>
+  </data>
+  <data name="Page_InDevelopment_Description" xml:space="preserve">
+    <value>Не е налична</value>
+  </data>
   <data name="Enum_Shift_Day" xml:space="preserve">
     <value>дневна</value>
   </data>
@@ -253,10 +337,10 @@
     <value>Тип локомотив</value>
   </data>
   <data name="Locomotive_MeasuringUnit" xml:space="preserve">
-    <value>Мярка (Мч / Км)</value>
+    <value>Мярка </value>
   </data>
   <data name="Locomotive_AxleCount" xml:space="preserve">
-    <value>Брой колооси</value>
+    <value>Брой </value>
   </data>
   <data name="Locomotive_TotalEngineHours" xml:space="preserve">
     <value>Общо моточасове</value>
@@ -267,11 +351,23 @@
   <data name="Edit Locomotive" xml:space="preserve">
     <value>Редакция на локомотив</value>
   </data>
+  <data name="Locomotive_LastPlannedRepairType" xml:space="preserve">
+    <value>Вид последен ППР</value>
+  </data>
+  <data name="Locomotive_LastPlannedRepairDate" xml:space="preserve">
+    <value>Дата на последен ППР</value>
+  </data>
+  <data name="Locomotive_LastAxleMeasurementDate" xml:space="preserve">
+    <value>Последно замерване </value>
+  </data>
+  <data name="Locomotive_InterAxleMeasurementPeriodDays" xml:space="preserve">
+    <value>Период на замерване</value>
+  </data>
   <data name="Locomotive_TotalWorkingDays" xml:space="preserve">
     <value>Общо работни дни</value>
   </data>
   <data name="Locomotive_FuelCapacity" xml:space="preserve">
-    <value>Вместимост - гориво</value>
+    <value>Гориво</value>
   </data>
   <data name="Enum_LocomotiveType_Shunter" xml:space="preserve">
     <value>Маневрен</value>
@@ -285,11 +381,20 @@
   <data name="Enum_MeasuringUnits_Km" xml:space="preserve">
     <value>Км</value>
   </data>
+  <data name="View roles &amp; permissions" xml:space="preserve">
+    <value>Да вижда роли и разрешения</value>
+  </data>
   <data name="Manage permissions (grant/revoke)" xml:space="preserve">
     <value>Управление на разрешения (даване/отнемане)</value>
   </data>
+  <data name="View users" xml:space="preserve">
+    <value>Преглед на потребители</value>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>Изход</value>
+  </data>
+  <data name="View locomotives" xml:space="preserve">
+    <value>Преглед на локомотиви</value>
   </data>
   <data name="Privacy_R1" xml:space="preserve">
     <value>Системата е предназначена само за вътрешна употреба.</value>
@@ -473,5 +578,17 @@
   </data>
   <data name="Common_Edit" xml:space="preserve">
     <value>Редакция</value>
+  </data>
+  <data name="AXLE" xml:space="preserve">
+    <value>КОЛООСИ</value>
+  </data>
+  <data name="Create_Locomotive" xml:space="preserve">
+    <value>Нов Локомотив</value>
+  </data>
+  <data name="Work" xml:space="preserve">
+    <value>Работа</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Роля</value>
   </data>
 </root>

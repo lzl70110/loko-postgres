@@ -135,6 +135,9 @@
   <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>
   </data>
+  <data name="WelcomeSubtitle" xml:space="preserve">
+    <value>Locomotive management system — Loco</value>
+  </data>
   <data name="Login.Title" xml:space="preserve">
     <value>Log in</value>
   </data>
@@ -220,10 +223,10 @@
     <value>Locomotive Type</value>
   </data>
   <data name="Locomotive_MeasuringUnit" xml:space="preserve">
-    <value>Measuring Unit</value>
+    <value>Unit</value>
   </data>
   <data name="Locomotive_AxleCount" xml:space="preserve">
-    <value>Axle Count</value>
+    <value> Count</value>
   </data>
   <data name="Locomotive_TotalEngineHours" xml:space="preserve">
     <value>Total Engine Hours</value>
@@ -234,11 +237,23 @@
   <data name="Edit Locomotive" xml:space="preserve">
     <value>Edit Locomotive</value>
   </data>
+  <data name="Locomotive_LastPlannedRepairType" xml:space="preserve">
+    <value>Last Planned Repair Type</value>
+  </data>
+  <data name="Locomotive_LastPlannedRepairDate" xml:space="preserve">
+    <value>Last Planned Repair Date</value>
+  </data>
+  <data name="Locomotive_LastAxleMeasurementDate" xml:space="preserve">
+    <value>Last Axle Measurement Date</value>
+  </data>
+  <data name="Locomotive_InterAxleMeasurementPeriodDays" xml:space="preserve">
+    <value>  Measurement Period </value>
+  </data>
   <data name="Locomotive_TotalWorkingDays" xml:space="preserve">
     <value>Total Working Days</value>
   </data>
   <data name="Locomotive_FuelCapacity" xml:space="preserve">
-    <value>Fuel Capacity</value>
+    <value>Fuel</value>
   </data>
   <data name="Enum_LocomotiveType_Shunter" xml:space="preserve">
     <value>Shunter</value>
@@ -440,5 +455,18 @@
   </data>
   <data name="Common_Edit" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="AXLE" xml:space="preserve">
+    <value>Axles</value>
+  </data>
+  <data name="Create_Locomotive" xml:space="preserve">
+    <value>Create Locomotive</value>
+  </data>
+  <data name="Work" xml:space="preserve">
+    <value>Work</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Role" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
 </root>

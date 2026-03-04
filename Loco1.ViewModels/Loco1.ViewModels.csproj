@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GCommon\GCommon.csproj" />
+    <ProjectReference Include="..\Loco1.Localizer\Loco1.Localizer.csproj" />
   </ItemGroup>
 
 </Project>
