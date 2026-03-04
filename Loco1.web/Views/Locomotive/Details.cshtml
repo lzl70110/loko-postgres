@@ -1,0 +1,94 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using GCommon
+@inject IAuthorizationService Auth
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+@model Loco1.ViewModels.Locomotives.LocoEditVm
+
+@{
+    ViewData["Title"] = L["Locomotive"];
+
+    // Rights checks for action buttons in Details
+    var canEdit = (await Auth.AuthorizeAsync(User, Perm.Loco_Edit)).Succeeded;
+    var canDelete = (await Auth.AuthorizeAsync(User, Perm.Loco_Delete)).Succeeded;
+}
+
+<h1 class="mb-3">@L["Locomotive"]</h1>
+
+<div class="d-flex gap-2 mb-3">
+    <!-- Back to Index is always available -->
+    <a asp-controller="Locomotive" asp-action="Index" class="btn btn-secondary btn-sm">
+        <i class="bi bi-arrow-left"></i> @L["Common_Back"]
+    </a>
+
+    @if (canEdit)
+    {
+        <!-- Edit visible only with Loco_Edit -->
+        <a asp-controller="Locomotive" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
+            <i class="bi bi-pencil-square"></i> @L["Common_Edit"]
+        </a>
+    }
+
+    @if (canDelete)
+    {
+        <!-- Soft delete with confirmation; visible only with Loco_Delete -->
+        <form asp-controller="Locomotive" asp-action="Delete" asp-route-id="@Model.Id"
+              method="post" class="d-inline">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger btn-sm"
+                    onclick="return confirm('@L["Are you sure?"]')">
+                <i class="bi bi-trash"></i> @L["Common_Delete"]
+            </button>
+        </form>
+    }
+</div>
+
+<!-- Basic details layout; extend as needed -->
+<div class="card">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">@L["Locomotive_Number"]</dt>
+            <dd class="col-sm-8">@Model.Number</dd>
+
+            <dt class="col-sm-4">@L["Locomotive_Type"]</dt>
+            <dd class="col-sm-8">@Model.Type</dd>
+
+            <dt class="col-sm-4">@L["Locomotive_MeasuringUnit"]</dt>
+            <dd class="col-sm-8">@Model.MeasuringUnit</dd>
+
+            <dt class="col-sm-4">@L["Locomotive_FuelCapacity"]</dt>
+            <dd class="col-sm-8">@Model.FuelCapacity</dd>
+
+            <dt class="col-sm-4">@L["Locomotive_TotalEngineHours"]</dt>
+            <dd class="col-sm-8">@Model.TotalEngineHours</dd>
+
+            <dt class="col-sm-4">@L["Locomotive_TotalWorkingDays"]</dt>
+            <dd class="col-sm-8">@Model.TotalWorkingDays</dd>
+
+            <dt class="col-sm-4">@L["LastAxleMeasurementDate"]</dt>
+            <dd class="col-sm-8">@Model.LastAxleMeasurementDate?.ToString("yyyy-MM-dd")</dd>
+
+            <dt class="col-sm-4">@L["InterAxleMeasurementPeriodDays"]</dt>
+            <dd class="col-sm-8">@Model.InterAxleMeasurementPeriodDays</dd>
+
+            <dt class="col-sm-4">@L["LastPlannedRepairType"]</dt>
+            <dd class="col-sm-8">@Model.LastPlannedRepairType</dd>
+
+            <dt class="col-sm-4">@L["LastPlannedRepairDate"]</dt>
+            <dd class="col-sm-8">@Model.LastPlannedRepairDate?.ToString("yyyy-MM-dd")</dd>
+
+        </dl>
+        @if (Model.IsDeleted)
+        {
+            <div class="alert alert-warning d-flex align-items-center gap-2" role="alert">
+                <i class="bi bi-exclamation-triangle"></i>
+                <span>
+                    @L["DeletedOn"] @Model.DateDeleted?.ToString("yyyy-MM-dd HH:mm 'UTC'")
+                    @if (!string.IsNullOrWhiteSpace(Model.DeletedBy))
+                    {
+                        <text> — @L["DeletedBy"] @Model.DeletedBy</text>
+                    }
+                </span>
+            </div>
+        }
+    </div>
+</div>

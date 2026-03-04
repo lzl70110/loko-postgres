@@ -222,3 +222,35 @@ main {
         min-height: 38px;
     }
 }
+
+/* ================= TOASTS (Success notifications) ================= */
+/* Keep toast above offcanvas/navbars and below modals */
+.toast-container {
+    z-index: 1080; /* Bootstrap modal = 1055; keep toast above most UI */
+    margin-top: 0.75rem; /* small offset from the very top */
+}
+
+/* Let long messages wrap nicely */
+.toast .toast-body {
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* Optional: subtle shadow for better contrast */
+.toast.text-bg-success {
+    box-shadow: 0 0.5rem 1rem rgba(25, 135, 84, 0.25); /* success color shadow */
+}
+
+/* Respect user reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .toast {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ================= OFFCANVAS / MOBILE FINE-TUNING   ================= */
+/* Improve tap hit areas and readability inside offcanvas menus */
+.offcanvas .list-group-item i {
+    font-size: 1.05rem; /* slightly larger icon for better visibility */
+}

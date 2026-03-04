@@ -5,14 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Loco1.Repositories
     {
-    public class LocomotiveRepository : ILocomotiveRepository
+    public class LocomotiveRepository(LocoDbContext db) : ILocomotiveRepository
         {
-        private readonly LocoDbContext _db;
-
-        public LocomotiveRepository(LocoDbContext db)
-            {
-            _db = db;
-            }
+        private readonly LocoDbContext _db = db;
 
         public async Task<List<Locomotive>> GetAllAsync(CancellationToken ct = default)
             {
@@ -24,12 +19,15 @@ namespace Loco1.Repositories
                 .ToListAsync(ct);
             }
 
+
         public async Task<Locomotive?> GetByIdAsync(int id, CancellationToken ct = default)
-            {
-            // Returns entity regardless of IsDeleted (service decides what to do)
+        {
+            // Load entity regardless of soft-delete; controller/service will decide what to do.
             return await _db.Locomotives
-                .FirstOrDefaultAsync(x => x.Id == id, ct);
-            }
+                            .IgnoreQueryFilters() // <-- include IsDeleted=true rows
+                            .FirstOrDefaultAsync(x => x.Id == id, ct);
+        }
+
 
         public async Task<bool> ExistsByNumberAsync(string number, int? excludeId = null, CancellationToken ct = default)
             {
@@ -58,35 +56,32 @@ namespace Loco1.Repositories
             }
 
         public async Task<bool> DeleteAsync(int id, string actor, string? note = null, CancellationToken ct = default)
-            {
-            // Soft delete with audit
+        {
             var entity = await _db.Locomotives.FirstOrDefaultAsync(x => x.Id == id, ct);
             if (entity is null) return false;
-
             if (entity.IsDeleted) return true; // idempotent
 
+            // Flip to soft-deleted; DbContext.ApplyAudit() will set DateDeleted/DeletedBy/Modified*
             entity.IsDeleted = true;
             entity.Note = note;
-            entity.ModifiedOn = DateTime.UtcNow;
-            entity.ModifiedBy = string.IsNullOrWhiteSpace(actor) ? "system" : actor;
 
             await _db.SaveChangesAsync(ct);
             return true;
-            }
+        }
 
         public async Task<bool> UndeleteAsync(int id, string actor, CancellationToken ct = default)
-            {
-            var entity = await _db.Locomotives.FirstOrDefaultAsync(x => x.Id == id, ct);
+        {
+            var entity = await _db.Locomotives
+                                  .IgnoreQueryFilters()
+                                  .FirstOrDefaultAsync(x => x.Id == id, ct);
             if (entity is null) return false;
-
             if (!entity.IsDeleted) return true; // idempotent
 
+            // Flip back to active; DbContext.ApplyAudit() will clear DateDeleted/DeletedBy and set Modified*
             entity.IsDeleted = false;
-            entity.ModifiedOn = DateTime.UtcNow;
-            entity.ModifiedBy = string.IsNullOrWhiteSpace(actor) ? "system" : actor;
 
             await _db.SaveChangesAsync(ct);
             return true;
-            }
         }
+    }
     }

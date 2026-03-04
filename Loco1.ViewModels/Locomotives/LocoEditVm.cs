@@ -3,9 +3,9 @@ using Loco1.GCommon.Enums;
 using Loco1.Localizer;
 
 namespace Loco1.ViewModels.Locomotives
-    {
+{
     public class LocoEditVm
-        {
+    {
         public int? Id { get; set; }
 
         [Display(Name = "Locomotive_Number")]
@@ -50,5 +50,12 @@ namespace Loco1.ViewModels.Locomotives
         [Display(Name = "Locomotive_InterAxleMeasurementPeriodDays")]
         [Range(0, 366, ErrorMessage = "Validation_Range")]
         public int InterAxleMeasurementPeriodDays { get; set; }
-        }
+
+
+        public bool IsDeleted { get; set; }
+        public DateTime? DateDeleted { get; set; }   
+        public string? DeletedBy { get; set; }      
+
     }
+
+}

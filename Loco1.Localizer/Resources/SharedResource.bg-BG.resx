@@ -591,4 +591,75 @@
   <data name="Role" xml:space="preserve">
     <value>Роля</value>
   </data>
+	<!-- UI actions (for Index/Details buttons) -->
+	<data name="Details" xml:space="preserve">
+  <value>Детайли</value>
+</data>
+	<data name="NoLocomotivesAvailable" xml:space="preserve">
+  <value>Няма налични локомотиви.</value>
+</data>
+
+	<!-- Field aliases used in Details (keep original Locomotive_* keys intact) -->
+	<data name="LastAxleMeasurementDate" xml:space="preserve">
+  <value>Последно замерване на колооси</value>
+</data>
+	<data name="InterAxleMeasurementPeriodDays" xml:space="preserve">
+  <value>Период между замерванията (дни)</value>
+</data>
+	<data name="LastPlannedRepairType" xml:space="preserve">
+  <value>Тип последен планиран ремонт</value>
+</data>
+	<data name="LastPlannedRepairDate" xml:space="preserve">
+  <value>Дата последен планиран ремонт</value>
+</data>
+
+	<!-- Notifications (TempData) -->
+	<data name="Created successfully" xml:space="preserve">
+  <value>Създадено успешно.</value>
+</data>
+	<data name="Saved successfully" xml:space="preserve">
+  <value>Записано успешно.</value>
+</data>
+	<data name="Deleted successfully" xml:space="preserve">
+  <value>Изтрито успешно.</value>
+</data>
+	<data name="Restored successfully" xml:space="preserve">
+  <value>Възстановено успешно.</value>
+</data>
+	<!-- Admin / Repairs / Misc that were empty in BG -->
+	<data name="AdminRolesTitle" xml:space="preserve"><value>Управление на роли</value></data>
+	<data name="PlanedRepairs" xml:space="preserve"><value>Планирани ремонти</value></data>
+	<data name="RoleDisplayName" xml:space="preserve"><value>Име за показване</value></data>
+	<data name="RoleName" xml:space="preserve"><value>Име на роля</value></data>
+
+	<!-- Restore actions/messages -->
+	<data name="Restore" xml:space="preserve"><value>Възстанови</value></data>
+	<data name="Restore failed." xml:space="preserve"><value>Възстановяването е неуспешно.</value></data>
+	<data name="Restore this user?" xml:space="preserve"><value>Да възстановим ли този потребител?</value></data>
+
+	<!-- PR_* short codes -->
+	<data name="PR_MPR" xml:space="preserve"><value>МПР</value></data>
+	<data name="PR_TP1" xml:space="preserve"><value>ТП-1</value></data>
+	<data name="PR_TP2" xml:space="preserve"><value>ТП-2</value></data>
+	<!-- ===== Fill missing BG for Admin/Repairs labels ===== -->
+	<data name="AdminRolesTitle" xml:space="preserve"><value>Управление на роли</value></data>
+	<data name="PlanedRepairs" xml:space="preserve"><value>Планирани ремонти</value></data>
+	<data name="RoleDisplayName" xml:space="preserve"><value>Име за показване</value></data>
+	<data name="RoleName" xml:space="preserve"><value>Име на роля</value></data>
+
+	<!-- ===== Fill missing BG for restore actions/messages ===== -->
+	<data name="Restore" xml:space="preserve"><value>Възстанови</value></data>
+	<data name="Restore failed." xml:space="preserve"><value>Възстановяването е неуспешно.</value></data>
+	<data name="Restore this user?" xml:space="preserve"><value>Да възстановим ли този потребител?</value></data>
+
+	<!-- ===== Fill missing BG for “Please select a role.” (alias used somewhere) ===== -->
+	<data name="Please select a role." xml:space="preserve"><value>Моля, изберете роля.</value></data>
+
+	<!-- ===== Fill missing BG for PR_* short codes ===== -->
+	<data name="PR_MPR" xml:space="preserve"><value>МПР</value></data>
+	<data name="PR_TP1" xml:space="preserve"><value>ТП-1</value></data>
+	<data name="PR_TP2" xml:space="preserve"><value>ТП-2</value></data>
+	<data name="DeletedOn" xml:space="preserve"><value>Изтрит на</value></data>
+	<data name="DeletedBy" xml:space="preserve"><value>Изтрит от</value></data>
+	
 </root>

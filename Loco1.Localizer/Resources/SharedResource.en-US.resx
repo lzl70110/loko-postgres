@@ -1,472 +1,154 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
+	 
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
 
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="Header_AppName" xml:space="preserve">
-    <value>Loco</value>
-  </data>
-  <data name="Footer_R1" xml:space="preserve">
-    <value>Design &amp; Build by Lyubomir Chekanski ® 2026</value>
-  </data>
-  <data name="Footer_R2" xml:space="preserve">
-    <value>Created with ❤️ by Lyubomir Chekanski ® 2026</value>
-  </data>
-  <data name="Footer_R3" xml:space="preserve">
-    <value>Loco Project · Lyubomir Chekanski ® 2026</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Home</value>
-  </data>
-  <data name="Welcome" xml:space="preserve">
-    <value>Welcome</value>
-  </data>
-  <data name="WelcomeSubtitle" xml:space="preserve">
-    <value>Locomotive management system — Loco</value>
-  </data>
-  <data name="Login.Title" xml:space="preserve">
-    <value>Log in</value>
-  </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Remember me</value>
-  </data>
-  <data name="LoginButton" xml:space="preserve">
-    <value>Log in</value>
-  </data>
-  <data name="InvalidLoginAttempt" xml:space="preserve">
-    <value>Invalid login attempt.</value>
-  </data>
-  <data name="LockoutTitle" xml:space="preserve">
-    <value>Locked out</value>
-  </data>
-  <data name="LockoutMessage" xml:space="preserve">
-    <value>This account has been locked out. Please try again later.</value>
-  </data>
-  <data name="AccessDeniedTitle" xml:space="preserve">
-    <value>Access denied</value>
-  </data>
-  <data name="AccessDeniedMessage" xml:space="preserve">
-    <value>You do not have access to this resource.</value>
-  </data>
-  <data name="RegisterTitle" xml:space="preserve">
-    <value>Register</value>
-  </data>
-  <data name="RegisterButton" xml:space="preserve">
-    <value>Create account</value>
-  </data>
-  <data name="Users" xml:space="preserve">
-    <value>Users</value>
-  </data>
-  <data name="Roles" xml:space="preserve">
-    <value>Roles</value>
-  </data>
-  <data name="Actions" xml:space="preserve">
-    <value>Actions</value>
-  </data>
-  <data name="Edit roles" xml:space="preserve">
-    <value>Edit roles</value>
-  </data>
-  <data name="Are you sure?" xml:space="preserve">
-    <value>Are you sure?</value>
-  </data>
-  <data name="EditRolesTitle" xml:space="preserve">
-    <value>Edit roles</value>
-  </data>
-  <data name="Confirm" xml:space="preserve">
-    <value>Confirm</value>
-  </data>
-  <data name="ConfirmRoleChange" xml:space="preserve">
-    <value>Confirm role change?</value>
-  </data>
-  <data name="NoRolesAvailable" xml:space="preserve">
-    <value>No roles available</value>
-  </data>
-  <data name="PleaseSelectRole" xml:space="preserve">
-    <value>Please select a role.</value>
-  </data>
-  <data name="Roles updated." xml:space="preserve">
-    <value>Roles updated.</value>
-  </data>
-  <data name="Repairs" xml:space="preserve">
-    <value>Repairs</value>
-  </data>
-  <data name="Locomotives" xml:space="preserve">
-    <value>Locomotives</value>
-  </data>
-  <data name="Permissions" xml:space="preserve">
-    <value>Permissions</value>
-  </data>
-  <data name="Enum_Shift_Day" xml:space="preserve">
-    <value>day</value>
-  </data>
-  <data name="Enum_Shift_Night" xml:space="preserve">
-    <value>night</value>
-  </data>
-  <data name="Locomotive_Number" xml:space="preserve">
-    <value>Locomotive Number</value>
-  </data>
-  <data name="Locomotive_Type" xml:space="preserve">
-    <value>Locomotive Type</value>
-  </data>
-  <data name="Locomotive_MeasuringUnit" xml:space="preserve">
-    <value>Unit</value>
-  </data>
-  <data name="Locomotive_AxleCount" xml:space="preserve">
-    <value> Count</value>
-  </data>
-  <data name="Locomotive_TotalEngineHours" xml:space="preserve">
-    <value>Total Engine Hours</value>
-  </data>
-  <data name="Create Locomotive" xml:space="preserve">
-    <value>Create Locomotive</value>
-  </data>
-  <data name="Edit Locomotive" xml:space="preserve">
-    <value>Edit Locomotive</value>
-  </data>
-  <data name="Locomotive_LastPlannedRepairType" xml:space="preserve">
-    <value>Last Planned Repair Type</value>
-  </data>
-  <data name="Locomotive_LastPlannedRepairDate" xml:space="preserve">
-    <value>Last Planned Repair Date</value>
-  </data>
-  <data name="Locomotive_LastAxleMeasurementDate" xml:space="preserve">
-    <value>Last Axle Measurement Date</value>
-  </data>
-  <data name="Locomotive_InterAxleMeasurementPeriodDays" xml:space="preserve">
-    <value>  Measurement Period </value>
-  </data>
-  <data name="Locomotive_TotalWorkingDays" xml:space="preserve">
-    <value>Total Working Days</value>
-  </data>
-  <data name="Locomotive_FuelCapacity" xml:space="preserve">
-    <value>Fuel</value>
-  </data>
-  <data name="Enum_LocomotiveType_Shunter" xml:space="preserve">
-    <value>Shunter</value>
-  </data>
-  <data name="Enum_LocomotiveType_Mainline" xml:space="preserve">
-    <value>Mainline</value>
-  </data>
-  <data name="Enum_MeasuringUnits_Mh" xml:space="preserve">
-    <value>Mh</value>
-  </data>
-  <data name="Enum_MeasuringUnits_Km" xml:space="preserve">
-    <value>Km</value>
-  </data>
-  <data name="View roles &amp; permissions" xml:space="preserve">
-    <value>View roles &amp; permissions</value>
-  </data>
-  <data name="Manage permissions (grant/revoke)" xml:space="preserve">
-    <value>Manage permissions (grant/revoke)</value>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Log out</value>
-  </data>
-  <data name="Privacy_R1" xml:space="preserve">
-    <value>This system is intended for internal use only.</value>
-  </data>
-  <data name="Privacy_R2" xml:space="preserve">
-    <value>No personal information is shared with third parties.</value>
-  </data>
-  <data name="Privacy_R3" xml:space="preserve">
-    <value>For any questions about data handling or storage, please contact your system administrator.</value>
-  </data>
-  <data name="Welcome_Subtitle" xml:space="preserve">
-    <value>Locomotive Work &amp; Maintenance Reporting System 🚂</value>
-  </data>
-  <data name="Auth_Login_Title" xml:space="preserve">
-    <value>Log in</value>
-  </data>
-  <data name="Auth_RememberMe" xml:space="preserve">
-    <value>Remember me</value>
-  </data>
-  <data name="Auth_ConfirmPassword" xml:space="preserve">
-    <value>Confirm password</value>
-  </data>
-  <data name="Auth_ConfirmNewPassword" xml:space="preserve">
-    <value>Confirm new password</value>
-  </data>
-  <data name="Auth_ConfirmYourEmail" xml:space="preserve">
-    <value>Confirm your email</value>
-  </data>
-  <data name="Auth_CurrentPassword" xml:space="preserve">
-    <value>Current password</value>
-  </data>
-  <data name="Auth_NewPassword" xml:space="preserve">
-    <value>New password</value>
-  </data>
-  <data name="Auth_PhoneNumber" xml:space="preserve">
-    <value>Phone number</value>
-  </data>
-  <data name="Auth_PleaseConfirmByClickingHere" xml:space="preserve">
-    <value>Please confirm your account by clicking here</value>
-  </data>
-  <data name="Roles_Edit_Title" xml:space="preserve">
-    <value>Permissions for role</value>
-  </data>
-  <data name="Role_Admin" xml:space="preserve">
-    <value>Administrator</value>
-  </data>
-  <data name="Role_User" xml:space="preserve">
-    <value>User</value>
-  </data>
-  <data name="Role_RailTransportManager" xml:space="preserve">
-    <value>Rail Transport Manager</value>
-  </data>
-  <data name="Role_LocomotiveTransportManager" xml:space="preserve">
-    <value>Locomotive Transport Manager</value>
-  </data>
-  <data name="Role_DieselLocomotiveRepairManager" xml:space="preserve">
-    <value>Diesel Locomotive Repair Manager</value>
-  </data>
-  <data name="Role_DieselLocomotiveRepairSupervisor" xml:space="preserve">
-    <value>Diesel Locomotive Repair Supervisor</value>
-  </data>
-  <data name="Role_LocomotivesDriversManager" xml:space="preserve">
-    <value>Drivers Supervisor</value>
-  </data>
-  <data name="Role_Owner" xml:space="preserve">
-    <value>Owner</value>
-  </data>
-  <data name="OwnerPermissionsCannotBeChanged" xml:space="preserve">
-    <value>Owner permissions cannot be changed.</value>
-  </data>
-  <data name="InvalidFormData" xml:space="preserve">
-    <value>Invalid form data.</value>
-  </data>
-  <data name="FailedToAddClaim" xml:space="preserve">
-    <value>Failed to add permission.</value>
-  </data>
-  <data name="FailedToRemoveClaim" xml:space="preserve">
-    <value>Failed to remove permission.</value>
-  </data>
-  <data name="PermissionsUpdatedSuccessfully" xml:space="preserve">
-    <value>Permissions updated successfully.</value>
-  </data>
-  <data name="Roles_Groups_Title" xml:space="preserve">
-    <value>Role Groups</value>
-  </data>
-  <data name="Roles_Edit_Group" xml:space="preserve">
-    <value>Edit Group</value>
-  </data>
-  <data name="Roles_Group_Permissions" xml:space="preserve">
-    <value>Group Permissions</value>
-  </data>
-  <data name="Roles_Select_All" xml:space="preserve">
-    <value>Select all</value>
-  </data>
-  <data name="Roles_Deselect_All" xml:space="preserve">
-    <value>Deselect all</value>
-  </data>
-  <data name="Roles_Back_To_Groups" xml:space="preserve">
-    <value>Back to groups</value>
-  </data>
-  <data name="Roles_Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Roles_Back" xml:space="preserve">
-    <value>Back</value>
-  </data>
-  <data name="Perm_Users_View" xml:space="preserve">
-    <value>View users</value>
-  </data>
-  <data name="Perm_Users_Edit" xml:space="preserve">
-    <value>Manage users</value>
-  </data>
-  <data name="Perm_Roles_View" xml:space="preserve">
-    <value>View roles &amp; permissions</value>
-  </data>
-  <data name="Perm_Roles_Edit" xml:space="preserve">
-    <value>Manage permissions (grant/revoke)</value>
-  </data>
-  <data name="Perm_Repairs_View" xml:space="preserve">
-    <value>View repairs</value>
-  </data>
-  <data name="Perm_Repairs_Add" xml:space="preserve">
-    <value>Add repairs</value>
-  </data>
-  <data name="Perm_Repairs_Edit" xml:space="preserve">
-    <value>Edit repairs</value>
-  </data>
-  <data name="Perm_Expl_View" xml:space="preserve">
-    <value>View exploitation</value>
-  </data>
-  <data name="Perm_Expl_Add" xml:space="preserve">
-    <value>Add exploitation</value>
-  </data>
-  <data name="Perm_Expl_Edit" xml:space="preserve">
-    <value>Edit exploitation</value>
-  </data>
-  <data name="Perm_Loco_View" xml:space="preserve">
-    <value>View locomotives</value>
-  </data>
-  <data name="Perm_Loco_Add" xml:space="preserve">
-    <value>Add locomotive</value>
-  </data>
-  <data name="Perm_Loco_Edit" xml:space="preserve">
-    <value>Edit locomotive</value>
-  </data>
-  <data name="Perm_Loco_Delete" xml:space="preserve">
-    <value>Delete locomotive</value>
-  </data>
-  <data name="Group_Users" xml:space="preserve">
-    <value>Users</value>
-  </data>
-  <data name="Group_Roles" xml:space="preserve">
-    <value>Roles</value>
-  </data>
-  <data name="Group_Locomotives" xml:space="preserve">
-    <value>Locomotives</value>
-  </data>
-  <data name="Group_Exploitation" xml:space="preserve">
-    <value>Exploitation</value>
-  </data>
-  <data name="Group_Repairs" xml:space="preserve">
-    <value>Repairs</value>
-  </data>
-  <data name="Common_Create" xml:space="preserve">
-    <value>Create</value>
-  </data>
-  <data name="Common_Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Common_Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="Common_Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="Common_Back" xml:space="preserve">
-    <value>Back</value>
-  </data>
-  <data name="Common_Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="AXLE" xml:space="preserve">
-    <value>Axles</value>
-  </data>
-  <data name="Create_Locomotive" xml:space="preserve">
-    <value>Create Locomotive</value>
-  </data>
-  <data name="Work" xml:space="preserve">
-    <value>Work</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Role" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+ 
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<!-- UI actions -->
+	<data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+
+	<data name="NoLocomotivesAvailable" xml:space="preserve">
+    <value>No locomotives available.</value>
+  </data>
+
+	<!-- Field aliases used by Details.cshtml -->
+	<data name="LastAxleMeasurementDate" xml:space="preserve">
+    <value>Last axle measurement date</value>
+  </data>
+
+	<data name="InterAxleMeasurementPeriodDays" xml:space="preserve">
+    <value>Inter-axle measurement period (days)</value>
+  </data>
+
+	<data name="LastPlannedRepairType" xml:space="preserve">
+    <value>Last planned repair type</value>
+  </data>
+
+	<data name="LastPlannedRepairDate" xml:space="preserve">
+    <value>Last planned repair date</value>
+  </data>
+
+	<!-- Notifications / TempData -->
+	<data name="Created successfully" xml:space="preserve">
+    <value>Created successfully.</value>
+  </data>
+
+	<data name="Saved successfully" xml:space="preserve">
+    <value>Saved successfully.</value>
+  </data>
+
+	<data name="Deleted successfully" xml:space="preserve">
+    <value>Deleted successfully.</value>
+  </data>
+
+	<data name="Restored successfully" xml:space="preserve">
+    <value>Restored successfully.</value>
+  </data>
+	<!-- ===== Locomotive UI & messages (EN missing) ===== -->
+	<data name="Common_Create" xml:space="preserve"><value>Create</value></data>
+	<data name="Common_Save" xml:space="preserve"><value>Save</value></data>
+	<data name="Common_Edit" xml:space="preserve"><value>Edit</value></data>
+	<data name="Common_Delete" xml:space="preserve"><value>Delete</value></data>
+	<data name="Common_Back" xml:space="preserve"><value>Back</value></data>
+	<data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
+
+	<data name="Details" xml:space="preserve"><value>Details</value></data>
+	<data name="NoLocomotivesAvailable" xml:space="preserve"><value>No locomotives available.</value></data>
+
+	<!-- Section headers from Create -->
+	<data name="AXLE" xml:space="preserve"><value>Axles</value></data>
+	<data name="Work" xml:space="preserve"><value>Work</value></data>
+
+	<!-- Aliases used in Details (short keys) -->
+	<data name="LastAxleMeasurementDate" xml:space="preserve"><value>Last axle measurement date</value></data>
+	<data name="InterAxleMeasurementPeriodDays" xml:space="preserve"><value>Inter-axle measurement period (days)</value></data>
+	<data name="LastPlannedRepairType" xml:space="preserve"><value>Last planned repair type</value></data>
+	<data name="LastPlannedRepairDate" xml:space="preserve"><value>Last planned repair date</value></data>
+
+	<!-- Auth (empty EN in table) -->
+	<data name="Auth_ConfirmNewPassword" xml:space="preserve"><value>Confirm new password</value></data>
+	<data name="Auth_ConfirmPassword" xml:space="preserve"><value>Confirm password</value></data>
+	<!-- ===== Fill missing EN for Auth_* ===== -->
+	<data name="Auth_ConfirmNewPassword" xml:space="preserve"><value>Confirm new password</value></data>
+	<data name="Auth_ConfirmPassword" xml:space="preserve"><value>Confirm password</value></data>
+	<data name="Auth_ConfirmYourEmail" xml:space="preserve"><value>Confirm your email</value></data>
+	<data name="Auth_CurrentPassword" xml:space="preserve"><value>Current password</value></data>
+	<data name="Auth_Login_Title" xml:space="preserve"><value>Log in</value></data>
+	<data name="Auth_NewPassword" xml:space="preserve"><value>New password</value></data>
+	<data name="Auth_PhoneNumber" xml:space="preserve"><value>Phone number</value></data>
+	<data name="Auth_PleaseConfirmByClickingHere" xml:space="preserve"><value>Please confirm your account by clicking here</value></data>
+	<data name="Auth_RememberMe" xml:space="preserve"><value>Remember me</value></data>
+
+	<!-- ===== Fill missing EN for Groups (sidebar/roles) ===== -->
+	<data name="Group_Exploitation" xml:space="preserve"><value>Exploitation</value></data>
+	<data name="Group_Locomotives" xml:space="preserve"><value>Locomotives</value></data>
+	<data name="Group_Repairs" xml:space="preserve"><value>Repairs</value></data>
+	<data name="Group_Roles" xml:space="preserve"><value>Roles</value></data>
+	<data name="Group_Users" xml:space="preserve"><value>Users</value></data>
+	<data name="DeletedOn" xml:space="preserve"><value>Deleted on</value></data>
+	<data name="DeletedBy" xml:space="preserve"><value>Deleted by</value></data>
+
 </root>

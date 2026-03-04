@@ -1,54 +1,67 @@
-﻿@* Views/Locomotives/Index.cshtml *@
-@model List<Loco1.ViewModels.Locomotives.LocoListVm>
+﻿@using Microsoft.AspNetCore.Authorization
 @using GCommon
-@using Microsoft.AspNetCore.Authorization
-@inject Microsoft.AspNetCore.Authorization.IAuthorizationService Authz
+@inject IAuthorizationService Auth
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+@model IEnumerable<Loco1.ViewModels.Locomotives.LocoListVm>
 
-<h2>@L["Locomotives"]</h2>
+@{
+    ViewData["Title"] = L["Locomotives"].Value;
 
-@if ((await Authz.AuthorizeAsync(User, Perm.Loco_Add)).Succeeded)
-{
-    <a class="btn btn-primary" asp-action="Create">@L["Create_Locomotive"]</a>
+    // Rights checks for conditional buttons in Index
+    var canDetails = (await Auth.AuthorizeAsync(User, Perm.Loco_View)).Succeeded;
+    var canCreate = (await Auth.AuthorizeAsync(User, Perm.Loco_Add)).Succeeded;
 }
 
-<table class="table table-striped mt-3">
-    <thead>
-        <tr>
-            <th>@L["Locomotive_Number"]</th>
-            <th>@L["Locomotive_Type"].Value</th>
-            <th>@L["Locomotive_MeasuringUnit"].Value</th>
-            <th>@L["Locomotive_AxleCount"]</th>
-            <th>@L["Locomotive_TotalEngineHours"]</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var x in Model)
-        {
-            <tr>
-                <td>@x.Number</td>
-                <td>@x.Type</td>
-                <td>@x.MeasuringUnit</td>
-                <td>@x.AxleCount</td>
-                <td>@x.TotalEngineHours</td>
-                <td class="text-end">
-                    @if ((await Authz.AuthorizeAsync(User, Perm.Loco_Edit)).Succeeded)
+<h1 class="mb-3">@ViewData["Title"]</h1>
+
+@if (canCreate)
+{
+    <div class="mb-3">
+        <!-- Create button is visible only if user has Loco_Add -->
+        <a asp-controller="Locomotive" asp-action="Create" class="btn btn-success btn-sm">
+            <i class="bi bi-plus-circle"></i> @L["Common_Create"].Value
+        </a>
+    </div>
+}
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">@L["NoLocomotivesAvailable"].Value</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-sm table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>@L["Locomotive_Number"]</th>
+                    @if (canDetails)
                     {
-                        <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@x.Id">
-                            @L["Common_Edit"]
-                        </a>
+                        <th class="text-end">@L["Actions"]</th>
                     }
-                    @if ((await Authz.AuthorizeAsync(User, Perm.Loco_Delete)).Succeeded)
-                    {
-                        <form method="post" asp-action="Delete" asp-route-id="@x.Id" class="d-inline">
-                            <button type="submit" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('@L["AreYouSure"]');">
-                                @L["Common_Delete"]
-                            </button>
-                        </form>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var loco in Model)
+                {
+                    <tr>
+                        <!-- Show only the number to all authenticated users -->
+                        <td class="fw-semibold">@loco.Number</td>
+
+                        @if (canDetails)
+                        {
+                            <td class="text-end">
+                                <!-- Details button is visible only if user has Loco_View -->
+                                <a asp-controller="Locomotive" asp-action="Details" asp-route-id="@loco.Id"
+                                   class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-eye"></i>
+                                    <span class="d-none d-sm-inline">@L["Details"]</span>
+                                </a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

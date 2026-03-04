@@ -112,8 +112,6 @@
                     <i class="bi bi-house-door-fill"></i> @L["Home"]
                 </a>
 
-               
-
                 <!-- Collapsible subsets (MOBILE) -->
                 @{
                     ViewData["AdminCollapseId"] = "adminMenuMobile";
@@ -142,7 +140,7 @@
         </div>
     </div>
 
-    <!-- STATUS MESSAGE -->
+    <!-- STATUS MESSAGE (legacy alert) -->
     @if (TempData["StatusMessage"] is string status && !string.IsNullOrWhiteSpace(status))
     {
         <div class="container mt-3">
@@ -169,20 +167,16 @@
                                 <span>@L["Home"]</span>
                             </a>
 
-                       
-             
                             @{
                                 ViewData["AdminCollapseId"] = "adminMenuDesktop";
                             }
                             @await Html.PartialAsync("_AdminPartial", viewData: ViewData)
 
-                       
                             @{
                                 ViewData["ExplCollapseId"] = "explMenuDesktop";
                             }
                             @await Html.PartialAsync("_ExplPartial", viewData: ViewData)
 
-                             
                             @{
                                 ViewData["RepairsCollapseId"] = "repairsMenuDesktop";
                             }
@@ -223,7 +217,7 @@
     <script src="~/js/header-anim.js?v=1"></script>
 
     <script>
-        // Auto-hide status message after a short delay
+        // Auto-hide legacy status message after a short delay
         setTimeout(() => {
             const el = document.getElementById('status-message');
             if (!el) return;
@@ -231,6 +225,8 @@
             setTimeout(() => el.remove(), 800);
         }, 3000);
     </script>
+
+    @await Html.PartialAsync("_ToastSuccess") @* <-- Toast success partial, added *@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

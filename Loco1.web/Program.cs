@@ -178,6 +178,12 @@ namespace Loco1.Web
             builder.Services.AddHealthChecks()
                 .AddNpgSql(connStr, name: "postgres", timeout: TimeSpan.FromSeconds(3));
 
+
+
+            // Needed for DbContext audit (ApplyAudit uses current user)
+            builder.Services.AddHttpContextAccessor();
+
+
             var app = builder.Build();
 
             // Ensure roles/claims helper (idempotent, driven by Perm.Groups)
