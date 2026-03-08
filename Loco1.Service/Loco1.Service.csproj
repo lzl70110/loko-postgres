@@ -16,6 +16,7 @@
     <ProjectReference Include="..\Loco1.Localizer\Loco1.Localizer.csproj" />
     <ProjectReference Include="..\Loco1.Repositories\Loco1.Repositories.csproj" />
     <ProjectReference Include="..\Loco1.ViewModels\Loco1.ViewModels.csproj" />
+ 
   </ItemGroup>
 
 </Project>
