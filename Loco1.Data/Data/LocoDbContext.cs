@@ -7,13 +7,8 @@ namespace Loco1.Data
     {
     // Note: We type the IdentityDbContext with IdentityUser (optional but clearer)
     
-    public class LocoDbContext : IdentityDbContext<ApplicationUser>
+    public class LocoDbContext(DbContextOptions<LocoDbContext> options) : IdentityDbContext<ApplicationUser>(options)
         {
-       
-        public LocoDbContext(DbContextOptions<LocoDbContext> options)
-            : base(options)
-            {
-            }
 
         // Domain sets
         public DbSet<Locomotive> Locomotives { get; set; } = null!;

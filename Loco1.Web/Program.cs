@@ -13,12 +13,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace Loco1.Web
-    {
+{
     public class Program
-        {
+    {
         public static async Task Main(string[] args)
-            {
-            // EN: Keep legacy timestamp behavior in Npgsql
+        {
+            // Keep legacy timestamp behavior in Npgsql
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             var builder = WebApplication.CreateBuilder(args);
@@ -28,38 +28,43 @@ namespace Loco1.Web
             // ---------------------------------------------------------
             var port = Environment.GetEnvironmentVariable("PORT");
             if (!string.IsNullOrEmpty(port))
-                {
+            {
                 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-                }
+            }
             else if (builder.Environment.IsDevelopment())
-                {
+            {
                 builder.WebHost.UseUrls("http://localhost:5088");
-                }
+            }
 
             // ---------------------------------------------------------
-            //  CONNECTION STRING
+            //  CONNECTION STRING (DevConnection -> DefaultConnection fallback)
             // ---------------------------------------------------------
             var connStr =
-                Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
+                Environment.GetEnvironmentVariable("ConnectionStrings__DevConnection")
+                ?? builder.Configuration.GetConnectionString("DevConnection")
+                ?? Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
                 ?? builder.Configuration.GetConnectionString("DefaultConnection")
-                ?? throw new InvalidOperationException("ConnectionStrings:DefaultConnection not found.");
+                ?? throw new InvalidOperationException("ConnectionStrings:DevConnection/DefaultConnection not found.");
 
+            // Normalize rare 'server=tcp://host:port' patterns
             if (connStr.Contains("tcp://", StringComparison.OrdinalIgnoreCase))
-                {
+            {
                 connStr = Regex.Replace(
                     connStr,
                     @"(?i)server\s*=\s*tcp://([^:;]+):(\d+)",
                     "Host=$1;Port=$2");
-                }
+            }
 
+            // Log sanitized connection string (hide password)
             var sanitized = Regex.Replace(connStr, @"(?i)password\s*=\s*[^;]*", "Password=***");
-            Console.WriteLine($"[CFG] DefaultConnection = {sanitized}");
+            Console.WriteLine($"[CFG] Using connection = {sanitized}");
 
+            // DbContext
             builder.Services.AddDbContext<LocoDbContext>(opt => opt.UseNpgsql(connStr));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             // ---------------------------------------------------------
-            //  MVC + LOCALIZATION
+            //  MVC + LOCALIZATION (SharedResource-only)
             // ---------------------------------------------------------
             builder.Services.AddLocalization();
 
@@ -78,6 +83,7 @@ namespace Loco1.Web
             builder.Services
                 .AddDefaultIdentity<ApplicationUser>(options =>
                 {
+                    // Dev-friendly defaults; adjust for prod as needed
                     options.SignIn.RequireConfirmedAccount = false;
                     options.Password.RequiredLength = 1;
                     options.Password.RequireDigit = false;
@@ -126,25 +132,25 @@ namespace Loco1.Web
             //  MIGRATIONS + DATA SEED
             // ---------------------------------------------------------
             using (var scope = app.Services.CreateScope())
-                {
+            {
                 var services = scope.ServiceProvider;
                 var logger = services.GetRequiredService<ILogger<Program>>();
 
                 try
-                    {
+                {
                     var db = services.GetRequiredService<LocoDbContext>();
                     await db.Database.MigrateAsync();
 
                     await Loco1.Web.Infrastructure.DataSeeder.SeedAsync(services);
 
                     logger.LogInformation("Startup DB migrate/seed completed.");
-                    }
+                }
                 catch (Exception ex)
-                    {
+                {
                     logger.LogCritical(ex, "Startup failure during migrate/seed.");
                     throw;
-                    }
                 }
+            }
 
             // ---------------------------------------------------------
             //  MIDDLEWARE PIPELINE
@@ -155,15 +161,15 @@ namespace Loco1.Web
             app.UseRequestLocalization(locOptions.Value);
 
             if (app.Environment.IsDevelopment())
-                {
+            {
                 app.UseMigrationsEndPoint();
-                }
+            }
             else
-                {
+            {
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
                 app.UseHttpsRedirection();
-                }
+            }
 
             app.UseStaticFiles();
             app.UseRouting();
@@ -180,6 +186,6 @@ namespace Loco1.Web
             app.MapGet("/healthz", () => Results.Ok("OK"));
 
             await app.RunAsync();
-            }
         }
     }
+}
