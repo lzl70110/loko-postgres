@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Loco1.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Pg : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,6 +31,9 @@ namespace Loco1.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
+                    IsDeactivated = table.Column<bool>(type: "boolean", nullable: false),
+                    OriginalEmail = table.Column<string>(type: "text", nullable: true),
+                    OriginalUserName = table.Column<string>(type: "text", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -225,7 +228,7 @@ namespace Loco1.Data.Migrations
                     LocomotiveId = table.Column<int>(type: "integer", nullable: false),
                     ShiftDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Shift = table.Column<int>(type: "integer", nullable: false),
-                    EngineHoursUsed = table.Column<decimal>(type: "numeric(9,2)", nullable: false),
+                    EngineHoursUsed = table.Column<decimal>(type: "numeric", nullable: false),
                     IsAWorkingDay = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
@@ -255,6 +258,10 @@ namespace Loco1.Data.Migrations
                     Action = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
                     EntityName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
                     EntityId = table.Column<int>(type: "integer", nullable: false),
+                    CreatedBy = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    ModifiedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     Timestamp = table.Column<DateTime>(type: "timestamp(3) without time zone", precision: 3, nullable: false, defaultValueSql: "NOW()"),
                     LocomotiveId = table.Column<int>(type: "integer", nullable: true),
                     FuelId = table.Column<int>(type: "integer", nullable: true),
@@ -335,7 +342,8 @@ namespace Loco1.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Fuel_Loco_Date",
                 table: "Fuels",
-                columns: new[] { "LocomotiveId", "RecordedOn" });
+                columns: new[] { "LocomotiveId", "RecordedOn" },
+                descending: new[] { false, true });
 
             migrationBuilder.CreateIndex(
                 name: "UX_Locomotive_Number",

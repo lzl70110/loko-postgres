@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using GCommon
+@inject IAuthorizationService Auth
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Loco1.Localizer.SharedResource> L
+
+@{
+    var isOwner = User.IsInRole("Owner");
+    var canView = isOwner || (await Auth.AuthorizeAsync(User, Perm.Loco_View)).Succeeded;
+}
+
+@if (canView)
+{
+    <a class="list-group-item list-group-item-action d-flex align-items-center gap-2"
+       asp-controller="Locomotive" asp-action="Index">
+        <i class="bi bi-train-front-fill"></i>
+        <span>@L["Group_Locomotives"]</span>
+    </a>
+}

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Loco1.Data.Models;                         // EN: ApplicationUser
+﻿using GCommon;                         // AppRoles
+using Loco1.Data.Models;               // ApplicationUser
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Loco1.Web.Infrastructure
     {
-    // EN: Seed roles and three users (Owner + Admin + User). Idempotent.
     public static class DataSeeder
         {
         public static async Task SeedAsync(IServiceProvider services)
@@ -19,41 +14,58 @@ namespace Loco1.Web.Infrastructure
             var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
             var config = services.GetRequiredService<IConfiguration>();
 
-            // EN: allow overrides from appsettings/ENV (Seed:*), fallback to dev defaults
-            var ownerEmail = config["Seed:Owner:Email"] ?? "lzl70110@gmail.com";
-            var adminEmail = config["Seed:Admin:Email"] ?? "lzl@test.test";
-            var userEmail = config["Seed:User:Email"] ?? "test@test.test";
-            var defaultPwd = config["Seed:DefaultPassword"] ?? "testtest"; // EN: dev only
-
-            // 1) Ensure roles (idempotent)
-            foreach (var roleName in new[] { "Owner", "Admin", "User" })
+            // 1️⃣ Ensure roles
+            foreach (var roleName in AppRoles.All)
                 await EnsureRoleAsync(roleManager, roleName);
 
-            // 2) Ensure users + role assignment (idempotent)
-            var owner = await EnsureUserAsync(userManager, ownerEmail, defaultPwd);
-            await EnsureUserInRoleAsync(userManager, owner, "Owner");
+            // 2️⃣ Seed users from configuration
+            var seedUsers = new[]
+            {
+                new
+                {
+                    Email = config["Seed:Owner:Email"],
+                    FirstName = config["Seed:Owner:FirstName"],
+                    LastName = config["Seed:Owner:LastName"],
+                    Role = AppRoles.Owner
+                },
+                new
+                {
+                    Email = config["Seed:Admin:Email"],
+                    FirstName = config["Seed:Admin:FirstName"],
+                    LastName = config["Seed:Admin:LastName"],
+                    Role = AppRoles.Admin
+                },
+                new
+                {
+                    Email = config["Seed:User:Email"],
+                    FirstName = config["Seed:User:FirstName"],
+                    LastName = config["Seed:User:LastName"],
+                    Role = AppRoles.User
+                }
+            };
 
-            var admin = await EnsureUserAsync(userManager, adminEmail, defaultPwd);
-            await EnsureUserInRoleAsync(userManager, admin, "Admin");
+            var defaultPwd = config["Seed:DefaultPassword"] ?? "testtest"; // dev only
 
-            var basic = await EnsureUserAsync(userManager, userEmail, defaultPwd);
-            await EnsureUserInRoleAsync(userManager, basic, "User");
+            foreach (var u in seedUsers)
+                {
+                if (string.IsNullOrWhiteSpace(u.Email)) continue;
 
-            // 3) (Optional) Self-healing: assign 'User' to accounts with no roles
-            // EN: helpful if older registrations remained with 0 roles
-            var allUsers = userManager.Users.ToList();
+                var user = await EnsureUserAsync(userManager, u.Email, defaultPwd, u.FirstName, u.LastName);
+                await EnsureUserInRoleAsync(userManager, user, u.Role);
+                }
+
+            // 3️⃣ Self-healing: assign 'User' role to accounts without roles
+            var allUsers = await userManager.Users.AsNoTracking().ToListAsync();
             foreach (var u in allUsers)
                 {
                 var roles = await userManager.GetRolesAsync(u);
                 if (roles == null || roles.Count == 0)
-                    await userManager.AddToRoleAsync(u, "User");
+                    await userManager.AddToRoleAsync(u, AppRoles.User);
                 }
 
-            logger.LogInformation("Seed completed. Owner={Owner}, Admin={Admin}, User={User}",
-                ownerEmail, adminEmail, userEmail);
+            logger.LogInformation("Seed completed. Roles ensured: {Roles}", string.Join(", ", AppRoles.All));
             }
 
-        // EN: create role if it doesn't exist
         private static async Task EnsureRoleAsync(RoleManager<IdentityRole> roleManager, string roleName)
             {
             if (!await roleManager.RoleExistsAsync(roleName))
@@ -65,22 +77,28 @@ namespace Loco1.Web.Infrastructure
                 }
             }
 
-        // EN: create user if not exists (dev-friendly defaults)
         private static async Task<ApplicationUser> EnsureUserAsync(
             UserManager<ApplicationUser> userManager,
             string email,
-            string password)
+            string password,
+            string? firstName = null,
+            string? lastName = null)
             {
-            var user = await userManager.FindByEmailAsync(email);
+            var user = await userManager.FindByEmailAsync(email)
+                       ?? await userManager.Users.FirstOrDefaultAsync(u => u.OriginalEmail == email);
+
             if (user is null)
                 {
                 user = new ApplicationUser
                     {
                     UserName = email,
                     Email = email,
-                    EmailConfirmed = true,   // EN: dev: skip email confirmation
-                    IsDeactivated = false   // EN: ApplicationUser flag (if present)
+                    FirstName = firstName,
+                    LastName = lastName,
+                    EmailConfirmed = true,
+                    IsDeactivated = false
                     };
+
                 var create = await userManager.CreateAsync(user, password);
                 if (!create.Succeeded)
                     throw new InvalidOperationException("Failed to create user " + email + ": " +
@@ -88,14 +106,19 @@ namespace Loco1.Web.Infrastructure
                 }
             else
                 {
-                // EN: if the account was soft-deleted previously (email anonymized), keep as-is here;
-                // restore is an explicit admin action, not part of seed.
+                // Ensure flags are sane
+                if (user.IsDeactivated)
+                    {
+                    await userManager.SetLockoutEnabledAsync(user, false);
+                    await userManager.SetLockoutEndDateAsync(user, null);
+                    user.IsDeactivated = false;
+                    await userManager.UpdateAsync(user);
+                    }
                 }
 
             return user;
             }
 
-        // EN: ensure user is in a role
         private static async Task EnsureUserInRoleAsync(
             UserManager<ApplicationUser> userManager,
             ApplicationUser user,

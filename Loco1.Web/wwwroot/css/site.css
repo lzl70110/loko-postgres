@@ -1,49 +1,101 @@
-html {
-  font-size: 14px;
+﻿/* ================= NAVBAR ================= */
+.loco-navbar {
+    min-height: 68px; /* desktop baseline */
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.loco-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 12px;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    .loco-brand img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+    }
+
+.loco-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    white-space: nowrap;
+    margin-right: 16px;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+    .loco-nav-right .btn,
+    .loco-nav-right span,
+    .loco-nav-right form,
+    .loco-nav-right .loco-badge {
+        display: inline-flex; /* keeps inline flow in navbar */
+        align-items: center;
+    }
+
+/* ================= SIDEBAR ================= */
+.sidebar-nav .list-group-item {
+    padding: .45rem .15rem;
+    margin-left: -8px; /* subtle indent for desktop sidebar */
+}
+
+/* ================= PAGE FLEX (footer-safe) ================= */
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
 body {
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* footer stays at bottom */
 }
 
-/* Footer look */
+main {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
 .app-footer {
-    background: #111;
-    color: #ddd;
+    flex-shrink: 0;
 }
 
-    .app-footer strong {
-        color: #fff;
-    }
+/* Optional bottom guard when a page has sticky action bars */
+.page-has-sticky {
+    padding-bottom: 4.5rem;
+}
 
-/* Rotator for Footer */
+/* ================= FOOTER ================= */
+.app-footer {
+    border-top: 1px solid #dee2e6;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    text-align: center;
+    color: #212529;
+}
+
+/* ================= ROTATOR ================= */
 .rotator {
-    display: inline-block;
     position: relative;
-    min-height: 1.4em;
-    white-space: nowrap;
+    width: 100%;
+    min-height: 2em;
+    overflow: hidden;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 12px;
 }
 
 .rotator__item {
     position: absolute;
-    inset: 0;
+    left: 0;
+    width: 100%;
     opacity: 0;
-    animation: rotator-fade 12s infinite;
+    transform: translateY(20px);
+    animation: rotatorFade 9s infinite ease-in-out;
+    white-space: normal;
+    word-break: break-word;
 }
 
     .rotator__item:nth-child(1) {
@@ -51,28 +103,32 @@ body {
     }
 
     .rotator__item:nth-child(2) {
-        animation-delay: 4s;
+        animation-delay: 3s;
     }
 
     .rotator__item:nth-child(3) {
-        animation-delay: 8s;
+        animation-delay: 6s;
     }
 
-@keyframes rotator-fade {
+@keyframes rotatorFade {
     0% {
         opacity: 0;
+        transform: translateY(20px);
     }
 
     8% {
         opacity: 1;
+        transform: translateY(0);
     }
 
     30% {
         opacity: 1;
+        transform: translateY(0);
     }
 
     38% {
         opacity: 0;
+        transform: translateY(-20px);
     }
 
     100% {
@@ -80,12 +136,121 @@ body {
     }
 }
 
-/* Accessibility */
+/* ================= STATUS MESSAGE ================= */
+#status-message {
+    transition: opacity 0.8s ease;
+}
+
+/* ================= ACCESSIBILITY: REDUCE MOTION ================= */
 @media (prefers-reduced-motion: reduce) {
     .rotator__item {
         position: static;
         display: block;
         opacity: 1;
         animation: none;
+        transform: none;
     }
+}
+
+/* ================= iOS SAFE AREAS (NOTCH) ================= */
+@supports (padding: max(0px)) {
+    body {
+        padding-bottom: max(0px, env(safe-area-inset-bottom));
+    }
+
+    .app-footer {
+        padding-bottom: max(16px, env(safe-area-inset-bottom));
+    }
+}
+
+/* ================= MOBILE (<=576px) ================= */
+@media (max-width: 576px) {
+    /* Navbar / header spacing */
+    .loco-navbar {
+        min-height: 56px;
+    }
+
+    .loco-brand img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .loco-nav-right {
+        gap: 10px;
+        margin-right: 8px;
+    }
+
+    /* Lists and buttons (tap-friendly) */
+    .sidebar-nav .list-group-item {
+        padding: .65rem .75rem;
+        margin-left: 0; /* no negative indent on mobile */
+    }
+
+    .offcanvas .list-group-item {
+        padding-top: .7rem;
+        padding-bottom: .7rem;
+    }
+
+    /* Input zoom guard for iOS */
+    input, select, textarea {
+        font-size: 16px;
+    }
+
+    /* Footer spacing and rotator height on narrow screens */
+    .app-footer {
+        padding: 12px 8px;
+    }
+
+    .rotator {
+        min-height: 2.2em;
+        padding: 0 8px; /* narrower side padding */
+    }
+
+    /* Forms with sticky actions (mobile guard) */
+    .page-has-sticky {
+        padding-bottom: 5.5rem;
+    }
+
+    /* Thumb-friendly controls */
+    .btn,
+    .form-control,
+    .form-select {
+        min-height: 44px;
+    }
+
+    .btn-sm {
+        min-height: 38px;
+    }
+}
+
+/* ================= TOASTS (Success notifications) ================= */
+/* Keep toast above offcanvas/navbars and below modals */
+.toast-container {
+    z-index: 1080; /* Bootstrap modal = 1055; keep toast above most UI */
+    margin-top: 0.75rem; /* small offset from the very top */
+}
+
+/* Let long messages wrap nicely */
+.toast .toast-body {
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* Optional: subtle shadow for better contrast */
+.toast.text-bg-success {
+    box-shadow: 0 0.5rem 1rem rgba(25, 135, 84, 0.25); /* success color shadow */
+}
+
+/* Respect user reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .toast {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ================= OFFCANVAS / MOBILE FINE-TUNING   ================= */
+/* Improve tap hit areas and readability inside offcanvas menus */
+.offcanvas .list-group-item i {
+    font-size: 1.05rem; /* slightly larger icon for better visibility */
 }
